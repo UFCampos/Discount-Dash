@@ -1,0 +1,1 @@
+**Aca se crean funciones que modifican el estado global**
