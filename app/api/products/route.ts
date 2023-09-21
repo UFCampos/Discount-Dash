@@ -1,15 +1,19 @@
 import { NextResponse, NextRequest } from "next/server";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs} from "firebase/firestore";
 import { db } from "@/firebase/config";
+import { productByName } from "./productByName";
 
 export const GET = async (req: NextRequest) => {
-    const name = req.nextUrl.searchParams.get("name");
-  
-    const productsSnapshot = await getDocs(query(collection(db, "products"), where("name", ">=", name), where("name", "<=", name + "\uf8ff")));
-    const products = productsSnapshot.docs.map((doc) => doc.data());
-    if (products.length === 0) {
-      return NextResponse.json({ error: "Product not found" }, {status: 404 });
+  const name = req.nextUrl.searchParams.get("name")
+  if (name) {
+    const response = await productByName(name);
+    if (response.error){
+      return NextResponse.json({ error: response.error }, {status: response.status});
     }
-    return NextResponse.json(products);
+    return NextResponse.json(response);
+  };
+  const productsSnapshot = await getDocs(collection(db, "products"));
+  const products = productsSnapshot.docs.map((doc) => doc.data());
+  return NextResponse.json(products);
   }
   
