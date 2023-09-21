@@ -14,7 +14,7 @@ const MenuButton = () => {
   return (
     <div>
       <button onClick={handleToggleMenu} className={styles.menuButton}>
-        {isMenuOpen ? 'Cerrar Menú' : 'Abrir Menú'}
+        {isMenuOpen ? 'Close Menu' : 'Open Menu'}
       </button>
       {isMenuOpen && (
         <div className={styles.menu}>
