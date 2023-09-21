@@ -1,3 +1,4 @@
+import { Providers } from '@/lib/providers'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -9,14 +10,14 @@ export const metadata: Metadata = {
   description: 'Tu app de ofertas',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout(props: React.PropsWithChildren) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body className='red-text'>
+          {props.children}
+        </body>
+      </html>
+    </Providers>
   )
 }

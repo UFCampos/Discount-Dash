@@ -1,0 +1,38 @@
+
+.menuButton {
+    background-color: #1686cc;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    height: 3vh;
+  }
+  
+  .menu {
+    position: absolute;
+    margin-right: 5px;
+    top: 31px; 
+    right: 0;
+    background-color: #188acca9;
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    width: 130px;
+    
+    
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu ul li {
+    margin: 5px 0;
+    cursor: pointer;
+  }
+  
+  .menu-button-container:hover .menu {
+    display: block;
+  }
