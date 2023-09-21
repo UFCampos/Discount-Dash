@@ -8,6 +8,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.1.12",
     "@reduxjs/toolkit": "1.9.5",
+    "autoprefixer": "^10.4.16",
     "firebase": "^10.4.0",
     "firebase-admin": "^11.10.1",
     "framer-motion": "^10.16.4",
