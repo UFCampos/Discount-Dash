@@ -1,4 +1,5 @@
 import Cards from "@/components/cards/cards";
+import { useEffect } from "react";
 
 const Home = () => {
     return (
