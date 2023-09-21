@@ -7,7 +7,7 @@ export const GET = async (req: NextRequest) => {
   const name = req.nextUrl.searchParams.get("name")
   if (name) {
     const response = await productByName(name);
-    if (response.error){
+    if ('error' in response){
       return NextResponse.json({ error: response.error }, {status: response.status});
     }
     return NextResponse.json(response);
