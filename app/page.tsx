@@ -1,8 +1,8 @@
 
 export default function IndexPage() {
   return (
-    <div className='text-center'>
-      <h1>Redux Toolkit</h1>
+    <div className="text-center ">
+      <h1 className="text-red-900 bg-gray-50 ">Redux Toolkit</h1>
     </div>
   )
 }
