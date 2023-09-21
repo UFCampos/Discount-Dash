@@ -1,13 +1,12 @@
 
-
 export default function IndexPage() {
   return (
-    <div>
+    <div className='text-center'>
       <h1>Redux Toolkit</h1>
     </div>
   )
 }
 
 export const metadata = {
-  title: 'Redux Toolkit',
+  title: 'Discount-Dash',
 }
