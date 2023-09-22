@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
-const { NEXT_PUBLIC_BASE_URL} = process.env
+const { VERCEL_URL} = process.env
 
 export const searchBarAPI = createApi({
     reducerPath: 'searchBarAPI',
