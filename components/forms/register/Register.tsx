@@ -1,4 +1,5 @@
 'use client';
+
 import { useDispatch } from "@/lib/redux/hooks";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -13,8 +14,8 @@ const Register = () => {
         password: '',
         confirmPassword: ''
     })
-    
-    const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setNewUser({
             ...newUser,
@@ -23,9 +24,6 @@ const Register = () => {
     }
 
     const handleSubmit = () => {
-        
-        
-
         createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
         .then((userCredential) => {
             // Signed in 
@@ -45,9 +43,6 @@ const Register = () => {
             confirmPassword: ''
         })
     }
-
-
-    
     return(
         <div>
             <h1>Create your account</h1>
