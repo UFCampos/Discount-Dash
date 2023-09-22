@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.1.12",
+    "framer-motion": "^10.16.4",
     "@reduxjs/toolkit": "1.9.5",
     "firebase": "^10.4.0",
     "next": "latest",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "20.3.1",
+    "encoding": "^0.1.13",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "@types/redux-logger": "3.0.9",
