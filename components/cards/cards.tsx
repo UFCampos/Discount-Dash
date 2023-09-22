@@ -9,6 +9,7 @@ const Cards = () => {
         name: string;
         feel: string;
         image: string;
+        price: string;
     }
 
     const data = useSelector((state) => state.items.products)
