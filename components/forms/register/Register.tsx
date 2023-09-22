@@ -27,6 +27,7 @@ const Register = () => {
     }
 
     const handleSubmit = () => {
+
         createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
             .then((userCredential) => {
                 // Signed in 
