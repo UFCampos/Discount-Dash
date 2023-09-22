@@ -5,7 +5,6 @@ import { Image } from "@nextui-org/react";
 const Cards = () => {
   type Item = {
     name: string;
-    feel: string;
     image: string;
     price: string;
   };
