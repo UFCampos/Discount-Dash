@@ -6,12 +6,12 @@ const NavBar = () => {
 
     return (
         <div className={style.navBar}>
-            <Link href="/home"><button className={style.home}>home</button></Link>
+            <Link href="/home" class="text-white"><button className={style.home}>home</button></Link>
             {/* <Link href="/search"><button>asd</button></Link> */}
             <SearchBar />
             {/* <Link href="/cart"><button>asd</button></Link> */}
             <div className={style.buttonsRight}>
-                <Link href="/login"><button className='rounded-full background-blue-500'>asd</button></Link>
+                <Link href="/login" class="text-white"><button>login</button></Link>
                 <MenuButton />
             </div>
         </div>
