@@ -16,8 +16,8 @@ const Register = () => {
         password: '',
         confirmPassword: ''
     })
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    
+    const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setNewUser({
             ...newUser,
