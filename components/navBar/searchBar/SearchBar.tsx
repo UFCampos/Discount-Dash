@@ -23,6 +23,7 @@ const SearchBar = () => {
     useEffect(() => {
         dispatch(loadProducts([]));
         dispatch(loadErrors(isError));
+        if(!isError) dispatch(loadProducts(data));
     }, [isError])
     useEffect(() => {
         dispatch(isLoadingItems(isLoading));
