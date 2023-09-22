@@ -9,6 +9,7 @@ import { signInProvider } from "@/app/utils";
 
 const Register = () => {
 
+
     const [newUser, setNewUser] = useState({
         name: '',
         lastname: '',
@@ -16,8 +17,8 @@ const Register = () => {
         password: '',
         confirmPassword: ''
     })
-    
-    const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setNewUser({
             ...newUser,
