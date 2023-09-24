@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useDispatch } from "@/lib/redux/hooks";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
