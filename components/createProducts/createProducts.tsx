@@ -1,6 +1,9 @@
 'use client'
 import { useState } from "react"
 import { useNewPostMutation } from '@/lib/redux/service/createProductsAPI'
+import { loadProducts } from "@/lib/redux/features/itemsSlice"
+import { useDispatch } from "@/lib/redux/hooks"
+
 
 const CreateProducts = () => {
     const [newProduct, setNewProduct] = useState({
@@ -10,6 +13,8 @@ const CreateProducts = () => {
         stock: '',
         brand: '',
     })
+    const dispatch = useDispatch()
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setNewProduct({
@@ -20,8 +25,8 @@ const CreateProducts = () => {
 
     const [mutate, { data }] = useNewPostMutation()
     
-    const handleSend = () => {
-
+    const handleSend = (event : React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
         mutate({
             name: newProduct.name,
             image: newProduct.image,
@@ -36,11 +41,13 @@ const CreateProducts = () => {
             stock: '',
             brand: '',
         })
+        dispatch(loadProducts([])) 
+        alert('Product created')
     }
 
     return (
         <div>
-            <div>
+            <form onSubmit={handleSend}>
                 <h1>Create Products</h1>
                 <label htmlFor="name">Name: </label>
                 <input type="text" value={newProduct.name} name="name" onChange={handleChange} />
@@ -57,8 +64,8 @@ const CreateProducts = () => {
                 <label htmlFor="brand">Brand: </label>
                 <input type="text" value={newProduct.brand} name="brand" onChange={handleChange} />
                 
-                <button onClick={handleSend}>Send</button>
-            </div>
+                <button type="submit">Send</button>
+            </form>
         </div>
     )
 }
