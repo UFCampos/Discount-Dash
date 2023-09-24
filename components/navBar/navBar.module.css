@@ -1,7 +1,6 @@
 .navBar{
     display: flex;
     background-color: black;
-    height: 3.5vh;
     justify-content: space-between;
     align-items: center;
     padding: 0 6px 0 6px;
@@ -12,14 +11,20 @@
     transform: scale(1.2);
 }
 
-.home{
+/* .home{
     border-radius: 10px;
     transform: scale(1.2);
+} */
+
+.home{
+    background-size: cover;
+    width: 140px;
+    height: 50px;
 }
 
 .buttonsRight{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 8vw;
+    width: 10vw;
 }
