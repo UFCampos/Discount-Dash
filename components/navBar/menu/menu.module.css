@@ -1,6 +1,5 @@
 
 .menuButton {
-    background-color: #1686cc;
     color: #fff;
     border: none;
     display: flex;
@@ -10,6 +9,8 @@
     height: 3vh;
     width: 6.5vw;
   }
+
+
   
   .menu {
     position: absolute;

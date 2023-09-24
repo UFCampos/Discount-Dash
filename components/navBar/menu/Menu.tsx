@@ -2,6 +2,8 @@
 import { useSelector, useDispatch } from '@/lib/redux/hooks';
 import { toggleMenu } from '@/lib/redux/features/menuSlice';
 import styles from './menu.module.css'; 
+import Link from 'next/link';
+import Image from 'next/image';
 
 const MenuButton = () => {
   const dispatch = useDispatch();
@@ -13,14 +15,15 @@ const MenuButton = () => {
 
   return (
     <div>
+      
       <button onClick={handleToggleMenu} className={styles.menuButton}>
-        {isMenuOpen ? 'Close Menu' : 'Open Menu'}
+        <Image className={styles.fotoMenu} src='/menu-abierto.png' width={50} height={50} color='with' alt='menu'></Image>
       </button>
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
+            <Link href="/register"><li>Register</li></Link>
+            <Link href="/addProduct"><li>Create Products</li></Link>
             <li>Item 3</li>
           </ul>
         </div>
