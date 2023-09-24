@@ -5,7 +5,7 @@ const { NEXT_PUBLIC_BASE_URL} = process.env
 export const searchBarAPI = createApi({
     reducerPath: 'searchBarAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl: `${NEXT_PUBLIC_BASE_URL}/api/products`,
+        baseUrl: `/api/products`,
     }),
     endpoints: (builder) => ({
         getResults : builder.query<any, {name : string}>({
