@@ -1,0 +1,22 @@
+.fotoPerfil{
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.name{
+    font-size: 25px;
+}
+
+.email{
+    font-size: 20px;
+}
+.container{
+    border: 1px solid white;
+}
+
+.perfil{
+    display: flex;
+    width: 50vw;
+    height: 50vh;
+    border: 1px solid white;
+}
