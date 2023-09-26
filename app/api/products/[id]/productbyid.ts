@@ -5,15 +5,24 @@ import { db } from "@/firebase/config";
 
 
 export const productById = async (id: string) => {
-console.log("el id llego", db);
+    console.log("++++++++++++++++++++++++++++++++++++++");
     try{
         // creamos referencia al documento con el id que nos pasan
-        const docRef = db.collection("products").doc(id);
+        const docRef = doc(db, "products", id);
         // obtenemos los datos del documento
         const productDoc = await getDoc(docRef);
         // si el documento existe devolvemos los datos
         if (productDoc.exists()) {
-            return productDoc.data();
+            const productData = productDoc.data();
+            const productWithId = {
+                id: productDoc.id,  // Agrega el ID
+                ...productData    // Agrega los datos del documento
+            };
+
+            console.log(productWithId);
+            return productWithId;
+
+            
         } else {
             // si no existe devolvemos un error
             return {error: "Product not found" , status: 404};
@@ -22,6 +31,7 @@ console.log("el id llego", db);
         return {error: "error al obter el producto", status: 500};
     }
 };
+
 
 
 
