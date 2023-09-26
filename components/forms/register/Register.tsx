@@ -1,6 +1,6 @@
 'use client';
-
-import { useDispatch } from "@/lib/redux/hooks";
+import { signInProvider } from "@/app/utils";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
@@ -57,6 +57,12 @@ const Register = () => {
             <label htmlFor="">Confirm Password: </label>
             <input type="text" value={newUser.confirmPassword} name="confirmPassword" onChange={handleChange}/>
             <button onClick={handleSubmit}>Create</button>
+            <div>
+                <button onClick={signInProvider} value={"google"}>Sign in with Google</button>
+            </div>
+            <div>
+                <button onClick={signInProvider} value={"facebook"} >Sign in with Facebook</button>
+            </div>
         </div>
     )
 }
