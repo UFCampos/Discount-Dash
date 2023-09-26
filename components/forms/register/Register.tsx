@@ -1,6 +1,6 @@
 'use client';
-
-import { useDispatch } from "@/lib/redux/hooks";
+import { signInProvider } from "@/app/utils";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
