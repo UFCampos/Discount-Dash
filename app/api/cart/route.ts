@@ -3,6 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { NextResponse } from "next/server";
 
 export const getCart = async () => {
+    //FALTA LA REFERENCIA A USER
     const cartSnapshot = await getDocs(collection(db, "cart"));
     const cart = cartSnapshot.docs.map((doc) => doc.data());
     return NextResponse.json(cart);
