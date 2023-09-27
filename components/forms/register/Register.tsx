@@ -1,6 +1,6 @@
 'use client';
-
-import { useDispatch } from "@/lib/redux/hooks";
+import { signInProvider } from "@/app/utils";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
@@ -45,8 +45,7 @@ const Register = () => {
             confirmPassword: ''
         })
     }
-    
-    return (
+    return(
         <div>
             <h1>Create your account</h1>
             <label htmlFor="">Name: </label>

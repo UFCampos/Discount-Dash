@@ -4,6 +4,7 @@ import { useNewPostMutation } from '@/lib/redux/service/createProductsAPI'
 import { refreshProducts } from "@/lib/redux/features/itemsSlice"
 import { useDispatch } from "@/lib/redux/hooks"
 
+
 const CreateProducts = () => {
     const dispatch = useDispatch()
     const [newProduct, setNewProduct] = useState({
@@ -13,8 +14,6 @@ const CreateProducts = () => {
         stock: '',
         brand: '',
     })
-
-    const dispatch = useDispatch()
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -26,11 +25,8 @@ const CreateProducts = () => {
 
     const [mutate, { data }] = useNewPostMutation()
     
-    const handleSend = (event : React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-
     const handleSend = () => {
-        const dataRefresh = {
+        const dataRefresh={
             name: newProduct.name,
             image: newProduct.image,
             price: newProduct.price,
@@ -54,7 +50,7 @@ const CreateProducts = () => {
             stock: '',
             brand: '',
         })
-        dispatch(loadProducts([])) 
+
         alert('Product created')
     }
 

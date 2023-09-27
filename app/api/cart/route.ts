@@ -4,23 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req : NextRequest) => {
     const userId : any = req.nextUrl.searchParams.get("id");
-    const itemSnapshot = await getDocs(collection(db, "users", userId, "cart"));
- 
+    const cartRef = doc(collection(db, "users", userId, "cart"));
+    const {id} = await getDoc(cartRef);
+
+    console.log(id);
+    
+    const itemSnapshot = await getDocs(collection(db, "users", userId, "cart", "49fyGk4egg8Q0rqossyn", "items"));
+
     //get all items from the items collection
-    const items = itemSnapshot.docs.map((doc) => {
-        return {
-            ...doc.data(),
-            id: doc.id
-        }
-    });
+    const items = itemSnapshot.docs.map((doc) => doc.data());
     
     return NextResponse.json(items);
-}
-import { collection, getDocs } from "firebase/firestore";
-import { NextResponse } from "next/server";
-
-export const getCart = async () => {
-    const cartSnapshot = await getDocs(collection(db, "cart"));
-    const cart = cartSnapshot.docs.map((doc) => doc.data());
-    return NextResponse.json(cart);
 }
