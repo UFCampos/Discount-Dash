@@ -13,7 +13,6 @@ const CreateProducts = () => {
         stock: '',
         brand: '',
     })
-    const dispatch = useDispatch()
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
