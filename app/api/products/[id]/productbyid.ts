@@ -1,11 +1,7 @@
-import { Firestore } from "firebase/firestore";
-import { collection, doc,getDoc } from "firebase/firestore";
+import { doc,getDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
 
-
-
 export const productById = async (id: string) => {
-    console.log("++++++++++++++++++++++++++++++++++++++");
     try{
         // creamos referencia al documento con el id que nos pasan
         const docRef = doc(db, "products", id);
@@ -18,11 +14,7 @@ export const productById = async (id: string) => {
                 id: productDoc.id,  // Agrega el ID
                 ...productData    // Agrega los datos del documento
             };
-
-            console.log(productWithId);
             return productWithId;
-
-            
         } else {
             // si no existe devolvemos un error
             return {error: "Product not found" , status: 404};
