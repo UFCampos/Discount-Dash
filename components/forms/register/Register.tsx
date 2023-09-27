@@ -45,12 +45,8 @@ const Register = () => {
             confirmPassword: ''
         })
     }
-<<<<<<< HEAD
     
     return (
-=======
-    return(
->>>>>>> a307bcc779d67689647f7e3816cabd09947af7ca
         <div>
             <h1>Create your account</h1>
             <label htmlFor="">Name: </label>

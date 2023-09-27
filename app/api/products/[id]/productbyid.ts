@@ -11,7 +11,7 @@ export const productById = async (id: string) => {
         if (productDoc.exists()) {
             const productData = productDoc.data();
             const productWithId = {
-                id: productDoc.id,  // Agrega el ID
+                id,  // Agrega el ID
                 ...productData    // Agrega los datos del documento
             };
             return productWithId;
