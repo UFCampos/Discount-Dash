@@ -8,7 +8,6 @@ export const POST = async (req: NextRequest, {params}: {params: {id: string}}) =
 
     const cartId = params.id;
 
-    console.log(cartId);
     
     if (userId && cartId) {
         const cartRef = doc(db, "users/" + userId + "/cart/" + cartId);
