@@ -5,7 +5,10 @@ import { Image } from "@nextui-org/react";
 const Cards = () => {
   type Item = {
     name: string;
+<<<<<<< HEAD
+=======
     brand: string;
+>>>>>>> a307bcc779d67689647f7e3816cabd09947af7ca
     image: string;
     price: string;
   };
