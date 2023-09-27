@@ -26,6 +26,8 @@ const CreateProducts = () => {
     
     const handleSend = (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+    const handleSend = (event : React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
         mutate({
             name: newProduct.name,
             image: newProduct.image,
@@ -43,6 +45,8 @@ const CreateProducts = () => {
             stock: '',
             brand: '',
         })
+        dispatch(loadProducts([])) 
+        alert('Product created')
         dispatch(loadProducts([])) 
         alert('Product created')
     }
