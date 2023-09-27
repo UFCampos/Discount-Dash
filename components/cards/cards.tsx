@@ -5,6 +5,10 @@ import { Image } from "@nextui-org/react";
 const Cards = () => {
   type Item = {
     name: string;
+<<<<<<< HEAD
+=======
+    brand: string;
+>>>>>>> a307bcc779d67689647f7e3816cabd09947af7ca
     image: string;
     price: string;
   };
@@ -12,6 +16,7 @@ const Cards = () => {
   const data = useSelector((state) => state.items.products);
   const error = useSelector((state) => state.items.errorsItems);
   const loading = useSelector((state) => state.items.isLoadItems);
+
 
   return (
     <div>
@@ -60,3 +65,4 @@ const Cards = () => {
 };
 
 export default Cards;
+

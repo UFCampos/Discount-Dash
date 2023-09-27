@@ -7,10 +7,15 @@ export const POST = async (req: NextRequest) => {
     if (!name || !lastname || !email) {
         return NextResponse.json({ error: "Insufficient data" }, {status: 400 });
     }
+<<<<<<< HEAD
     
 
     await controller(name, lastname, email);
     
+=======
+
+    await controller(name, lastname, email);
+>>>>>>> a307bcc779d67689647f7e3816cabd09947af7ca
 
     return NextResponse.json({message: 'User added'});
 }

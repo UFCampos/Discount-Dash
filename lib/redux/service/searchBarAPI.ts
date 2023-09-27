@@ -1,6 +1,9 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a307bcc779d67689647f7e3816cabd09947af7ca
 export const searchBarAPI = createApi({
     reducerPath: 'searchBarAPI',
     baseQuery: fetchBaseQuery({

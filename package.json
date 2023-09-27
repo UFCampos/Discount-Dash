@@ -12,15 +12,22 @@
     "firebase-admin": "^11.10.1",
     "framer-motion": "^10.16.4",
     "next": "latest",
+<<<<<<< HEAD
     "postcss": "8.4.30",
+=======
+>>>>>>> a307bcc779d67689647f7e3816cabd09947af7ca
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "8.1.0",
     "tailwindcss": "3.3.3",
     "autoprefixer": "10.4.16",
     "eslint": "8.49.0",
+<<<<<<< HEAD
     "eslint-config-next": "13.5.2",
     "sass": "^1.68.0"
+=======
+    "eslint-config-next": "13.5.2"
+>>>>>>> a307bcc779d67689647f7e3816cabd09947af7ca
   },
   "devDependencies": {
     "@types/node": "20.3.1",
