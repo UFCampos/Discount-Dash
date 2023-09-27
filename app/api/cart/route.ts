@@ -1,12 +1,25 @@
 import { db } from "@/firebase/config";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { NextRequest, NextResponse } from "next/server";
+
+export const GET = async (req : NextRequest) => {
+    const userId : any = req.nextUrl.searchParams.get("id");
+    const itemSnapshot = await getDocs(collection(db, "users", userId, "cart"));
+ 
+    //get all items from the items collection
+    const items = itemSnapshot.docs.map((doc) => {
+        return {
+            ...doc.data(),
+            id: doc.id
+        }
+    });
+    
+    return NextResponse.json(items);
+}
 import { collection, getDocs } from "firebase/firestore";
 import { NextResponse } from "next/server";
 
 export const getCart = async () => {
-<<<<<<< HEAD
-    //FALTA LA REFERENCIA A USER
-=======
->>>>>>> a307bcc779d67689647f7e3816cabd09947af7ca
     const cartSnapshot = await getDocs(collection(db, "cart"));
     const cart = cartSnapshot.docs.map((doc) => doc.data());
     return NextResponse.json(cart);
