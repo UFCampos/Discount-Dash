@@ -5,7 +5,7 @@ import { refreshProducts } from "@/lib/redux/features/itemsSlice"
 import { useDispatch } from "@/lib/redux/hooks"
 
 const CreateProducts = () => {
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const [newProduct, setNewProduct] = useState({
         name: '',
         image: '',
@@ -25,7 +25,7 @@ const CreateProducts = () => {
     const [mutate, { data }] = useNewPostMutation()
     
     const handleSend = () => {
-        const dataRefresh={
+        const dataRefresh = {
             name: newProduct.name,
             image: newProduct.image,
             price: newProduct.price,

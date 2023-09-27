@@ -16,8 +16,8 @@ const Register = () => {
         password: '',
         confirmPassword: ''
     })
-    
-    const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setNewUser({
             ...newUser,
@@ -45,8 +45,7 @@ const Register = () => {
             confirmPassword: ''
         })
     }
-    
-    return (
+    return(
         <div>
             <h1>Create your account</h1>
             <label htmlFor="">Name: </label>
