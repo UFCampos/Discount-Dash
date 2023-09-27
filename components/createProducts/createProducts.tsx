@@ -1,8 +1,10 @@
 'use client'
 import { useState } from "react"
 import { useNewPostMutation } from '@/lib/redux/service/createProductsAPI'
-
+import { refreshProducts } from "@/lib/redux/features/itemsSlice"
+import { useDispatch } from "@/lib/redux/hooks"
 const CreateProducts = () => {
+    const dispatch=useDispatch()
     const [newProduct, setNewProduct] = useState({
         name: '',
         image: '',
@@ -21,14 +23,23 @@ const CreateProducts = () => {
     const [mutate, { data }] = useNewPostMutation()
     
     const handleSend = () => {
-
+        const dataRefresh={
+            name: newProduct.name,
+            image: newProduct.image,
+            price: newProduct.price,
+            stock: newProduct.stock,
+            brand: newProduct.brand
+        }
         mutate({
             name: newProduct.name,
             image: newProduct.image,
             price: newProduct.price,
             stock: newProduct.stock,
             brand: newProduct.brand
-        })
+        }),
+
+        dispatch(refreshProducts(dataRefresh))
+        
         setNewProduct({
             name: '',
             image: '',
