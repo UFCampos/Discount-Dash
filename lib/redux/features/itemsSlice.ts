@@ -22,8 +22,8 @@ export const itemsSlice = createSlice({
         },
         refreshProducts:(state, {payload})=>
         {
-            const totalProducts=state.products.concat(payload)
-            state.products=totalProducts
+            const totalProducts = state.products.concat(payload)
+            state.products = totalProducts
         }
     },
 })
