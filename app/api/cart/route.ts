@@ -14,5 +14,5 @@ export const GET = async (req : NextRequest) => {
     //get all items from the items collection
     const items = itemSnapshot.docs.map((doc) => doc.data());
     
-    return NextResponse.json({cart: items});
+    return NextResponse.json(items);
 }
