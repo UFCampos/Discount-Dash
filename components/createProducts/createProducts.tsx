@@ -13,6 +13,8 @@ const CreateProducts = () => {
         stock: '',
         brand: '',
     })
+
+    const dispatch = useDispatch()
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -26,6 +28,15 @@ const CreateProducts = () => {
     
     const handleSend = (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+
+    const handleSend = () => {
+        const dataRefresh = {
+            name: newProduct.name,
+            image: newProduct.image,
+            price: newProduct.price,
+            stock: newProduct.stock,
+            brand: newProduct.brand
+        }
         mutate({
             name: newProduct.name,
             image: newProduct.image,
