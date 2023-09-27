@@ -4,16 +4,17 @@ export const cartProductsAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "/api",
   }),
+  reducerPath: "cartProductsAPI",
   endpoints: (build) => ({
     addProductCart: build.mutation({
       query: (body) => ({
-        url: `/cart/add/${body.id}`,
+        url: `/cart/add`,
         method: "POST",
         body,
       }),
     }),
-    getProductsCart: build.query({
-      query: ({id}) => `/cart?userId=${id}`,
+    getProductsCart: build.query<any,{ id: string}>({
+      query: ({id}) => `/cart?id=${id}`,
     }),
     putPrudctCart: build.mutation({
       query: (body) => ({
