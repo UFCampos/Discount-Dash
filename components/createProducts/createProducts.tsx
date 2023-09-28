@@ -40,8 +40,6 @@ const CreateProducts = () => {
             stock: newProduct.stock,
             brand: newProduct.brand
         }),
-
-        dispatch(refreshProducts(dataRefresh))
         
         setNewProduct({
             name: '',
@@ -50,10 +48,7 @@ const CreateProducts = () => {
             stock: '',
             brand: '',
         })
-
-        alert('Product created')
     }
-
     return (
         <div>
             <form onSubmit={handleSend}>
