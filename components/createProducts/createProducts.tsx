@@ -1,16 +1,17 @@
 'use client'
 import { useState } from "react"
 import { useNewPostMutation } from '@/lib/redux/service/productsAPI'
+import { uploadFile } from "@/firebase/config"
 import "./createProducts.css"
+
 const CreateProducts = () => {
     const [newProduct, setNewProduct] = useState({
         name: '',
-        image: '',
         price: '',
         stock: '',
         brand: '',
     })
-    
+    const [file, setFile]=useState(null)
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setNewProduct({
@@ -18,26 +19,32 @@ const CreateProducts = () => {
             [name]: value
         });
     }
-
+    const handleFileChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
+        setFile(event.target.files[0])
+    }
     const [mutate, { data }] = useNewPostMutation()
     
-    const handleSend = () => {
+    const handleSend = async (event:any) => {
+        event.preventDefault()
+        const urlImage=await uploadFile(file)
+        console.log(urlImage)
         mutate({
             name: newProduct.name,
-            image: newProduct.image,
             price: newProduct.price,
+            image: urlImage,
             stock: newProduct.stock,
-            brand: newProduct.brand
+            brand: newProduct.brand,
+            
         }),
 
         
         setNewProduct({
             name: '',
-            image: '',
             price: '',
             stock: '',
             brand: '',
         })
+        setFile(null)
     }
     return (
         <div className="form-product-cont">
@@ -47,7 +54,7 @@ const CreateProducts = () => {
                 <input type="text" value={newProduct.name} name="name" onChange={handleChange} />
 
                 <label htmlFor="image">Image </label>
-                <input type="file" name="image" value={newProduct.image} onChange={handleChange} />
+                <input type="file" name="image" onChange={handleFileChange} />
 
                 <label htmlFor="price">Price: </label>
                 <input type="text" value={newProduct.price} name="price" onChange={handleChange} />

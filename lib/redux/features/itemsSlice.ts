@@ -23,4 +23,4 @@ export const itemsSlice = createSlice({
     },
 })
 
-export const { loadProducts, loadErrors, isLoadingItems, refreshProducts} = itemsSlice.actions
+export const { loadProducts, loadErrors, isLoadingItems } = itemsSlice.actions

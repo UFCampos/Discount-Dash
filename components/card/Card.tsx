@@ -11,7 +11,7 @@ export const Card:React.FC<props>=({name, brand, image, price})=>{
     return (
         <div className="card flex flex-col">
             <div className="card-img flex justify-center items-center">
-                <img src="https://i.postimg.cc/ncMRHrBk/pizza-jamon-champinones-aceitunas.jpg"/>
+                <img src={image}/>
                 <p>vence en 5 dias</p>
             </div>
             <div className="card-info flex flex-col">
