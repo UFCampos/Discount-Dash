@@ -26,8 +26,12 @@ export const Card:React.FC<props>=({name, brand, image, price})=>{
                 </div>
             </div>
             <div className="card-buy flex flex-row justify-evenly items-center">
-                <p>Buy</p>
-                <p><img src="https://i.postimg.cc/sfkHKytD/shopping-cart.png"/></p>
+                <div className="buy">
+                    <p>Buy</p>
+                </div>
+                <div className="cart">
+                    <img src="https://i.postimg.cc/sfkHKytD/shopping-cart.png"/>
+                </div>
             </div>
         </div>
     )
