@@ -35,21 +35,23 @@ const SearchBar = () => {
     }
   }, [isLoading]);
 
-  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(event.key);
+
     if (event.key === "Enter") {
       dispatch(isLoadingItems(isLoading));
       dispatch(loadProducts(data));
       dispatch(loadErrors(isError));
     }
   };
-  console.log(data)
+  console.log(data);
   return (
     <div>
       <input
         className={style.input}
         type="text"
         placeholder="Search"
-        onKeyUp={handleKeyUp}
+        onKeyDown={handleKeyDown}
         onChange={handleChange}
       />
     </div>
