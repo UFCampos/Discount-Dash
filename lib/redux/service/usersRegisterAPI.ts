@@ -15,10 +15,10 @@ export const userApi=createApi({
     endpoints:(builder)=>(
         {
             postUser:builder.mutation<User, null>({
-                query:(user)=>({
+                query:(body)=>({
                     url:"/register",
                     method:"POST",
-                    body:user
+                    body
                 })
             })
         }
