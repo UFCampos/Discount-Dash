@@ -5,8 +5,6 @@ import { uploadFile } from "@/firebase/config"
 import "./createProducts.css"
 
 const CreateProducts = () => {
-
-
     const [newProduct, setNewProduct] = useState({
         name: '',
         price: '',
