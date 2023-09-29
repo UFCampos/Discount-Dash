@@ -1,10 +1,7 @@
 'use client'
 import { useState } from "react"
-import { useNewPostMutation } from '@/lib/redux/service/createProductsAPI'
-import { refreshProducts } from "@/lib/redux/features/itemsSlice"
-import { useDispatch } from "@/lib/redux/hooks"
-
-
+import { useNewPostMutation } from '@/lib/redux/service/productsAPI'
+import "./createProducts.css"
 const CreateProducts = () => {
     const [newProduct, setNewProduct] = useState({
         name: '',
@@ -41,8 +38,6 @@ const CreateProducts = () => {
             stock: '',
             brand: '',
         })
-
-        alert('Product created')
     }
     return (
         <div className="form-product-cont">
