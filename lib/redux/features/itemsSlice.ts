@@ -19,8 +19,8 @@ export const itemsSlice = createSlice({
         isLoadingItems: (state, {payload}) =>
         {
             state.isLoadItems = payload
-        },
+        }
     },
 })
 
-export const { loadProducts, loadErrors, isLoadingItems} = itemsSlice.actions
+export const { loadProducts, loadErrors, isLoadingItems, refreshProducts} = itemsSlice.actions

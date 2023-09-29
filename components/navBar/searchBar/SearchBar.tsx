@@ -1,5 +1,5 @@
 "use client";
-import { useGetResultsQuery } from "@/lib/redux/service/searchBarAPI";
+import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
 import { useDispatch } from "@/lib/redux/hooks";
 import {
   loadProducts,
@@ -42,7 +42,7 @@ const SearchBar = () => {
       dispatch(loadErrors(isError));
     }
   };
-
+  console.log(data)
   return (
     <div>
       <input
