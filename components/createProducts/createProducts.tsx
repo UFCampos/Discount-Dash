@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useNewPostMutation } from '@/lib/redux/service/productsAPI'
 import "./createProducts.css"
 const CreateProducts = () => {
+    const dispatch=useDispatch()
     const [newProduct, setNewProduct] = useState({
         name: '',
         image: '',
