@@ -6,8 +6,7 @@ export const POST = async (req: NextRequest) => {
 
     if (!name || !lastname || !email) {
         return NextResponse.json({ error: "Insufficient data" }, {status: 400 });
-    }
-    
+    }  
 
     await controller(name, lastname, email);
     

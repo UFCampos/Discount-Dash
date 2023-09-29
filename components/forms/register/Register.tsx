@@ -1,6 +1,7 @@
 'use client';
 import { signInProvider } from "@/app/utils";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "@/lib/redux/hooks";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
@@ -26,6 +27,7 @@ const Register = () => {
     }
 
     const handleSubmit = () => {
+
         createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
             .then((userCredential) => {
                 // Signed in 
@@ -45,7 +47,8 @@ const Register = () => {
             confirmPassword: ''
         })
     }
-    return(
+    
+    return (
         <div>
             <h1>Create your account</h1>
             <label htmlFor="">Name: </label>
