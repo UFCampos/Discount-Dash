@@ -3,7 +3,6 @@ import { useState } from "react"
 import { useNewPostMutation } from '@/lib/redux/service/productsAPI'
 import "./createProducts.css"
 const CreateProducts = () => {
-    const dispatch=useDispatch()
     const [newProduct, setNewProduct] = useState({
         name: '',
         image: '',
@@ -14,7 +13,6 @@ const CreateProducts = () => {
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-    
         setNewProduct({
             ...newProduct,
             [name]: value
