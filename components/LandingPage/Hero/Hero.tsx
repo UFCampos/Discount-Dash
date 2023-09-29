@@ -40,7 +40,7 @@ const Hero = () => {
 
   return (
     <div >
-      <section className="text-gray-400 bg-gray-900 body-font py-10 text-center">
+      <section className="text-gray-400 bg-gray-900 body-font py-10 text-center overflow-x-hidden">
         <div className={styles.slider}>
           <ul className={styles.imageList}>
             {imagen.map((product, index) => (
