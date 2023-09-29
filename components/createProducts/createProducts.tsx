@@ -49,6 +49,8 @@ const CreateProducts = () => {
             stock: '',
             brand: '',
         })
+        dispatch(loadProducts([])) 
+        alert('Product created')
     }
 
     return (

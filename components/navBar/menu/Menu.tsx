@@ -8,10 +8,11 @@ import Image from 'next/image';
 const MenuButton = () => {
   const dispatch = useDispatch();
   const isMenuOpen = useSelector((state) => state.menu.isOpen);
-
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
+
+  const { id, name } = useSelector((state) => state.userProfile);
 
   return (
     <div>
@@ -24,7 +25,7 @@ const MenuButton = () => {
           <ul>
             <Link href="/register"><li>Register</li></Link>
             <Link href="/addProduct"><li>Create Products</li></Link>
-            <li>Item 3</li>
+            <Link href={`/users/profile/${id}`}><li>perfil: {name}</li></Link>
           </ul>
         </div>
       )}
