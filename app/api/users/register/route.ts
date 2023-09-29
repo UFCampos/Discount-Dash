@@ -9,6 +9,7 @@ export const POST = async (req: NextRequest) => {
     }  
 
     await controller(name, lastname, email);
+    
 
     return NextResponse.json({message: 'User added'});
 }

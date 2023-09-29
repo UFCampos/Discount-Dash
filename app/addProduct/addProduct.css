@@ -1,0 +1,14 @@
+.main-create{
+    width: 100vw;
+    height: 90vh;
+}
+.img-form-product{
+    width: 50%;
+    height: 100%;
+    background: black;
+}
+.form-cont{
+    height: 100%;
+    width: 50%;
+    background: antiquewhite;
+}

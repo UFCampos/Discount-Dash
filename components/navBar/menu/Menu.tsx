@@ -1,17 +1,43 @@
 'use client'
 import { useSelector, useDispatch } from '@/lib/redux/hooks';
 import { toggleMenu } from '@/lib/redux/features/menuSlice';
+import { setUser } from '@/lib/redux/features/userProfile';
 import styles from './menu.module.css'; 
 import Link from 'next/link';
 import Image from 'next/image';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/firebase/config';
+import { useEffect } from 'react';
+import { button } from '@nextui-org/react';
 
 const MenuButton = () => {
   const dispatch = useDispatch();
   const isMenuOpen = useSelector((state) => state.menu.isOpen);
-
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
+
+  const user = useSelector((state) => state.userProfile);
+
+  useEffect(() => {
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        let mappedUser = {};
+        user.providerData.forEach((profile) => {
+          mappedUser = {
+            id: profile.uid,
+            email: profile.email,
+            photoUrl: profile.photoURL,
+            name: profile.displayName
+          }
+        })
+        dispatch(setUser(mappedUser));
+      }
+    })
+  },[user, dispatch])
+
+  const { id, name } = useSelector((state) => state.userProfile);
 
   return (
     <div>
@@ -24,7 +50,7 @@ const MenuButton = () => {
           <ul>
             <Link href="/register"><li>Register</li></Link>
             <Link href="/addProduct"><li>Create Products</li></Link>
-            <li>Item 3</li>
+            <Link href={`/users/profile/${id}`}><li>perfil: {name}</li></Link>
           </ul>
         </div>
       )}
