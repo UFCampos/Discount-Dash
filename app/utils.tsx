@@ -17,3 +17,13 @@ export const signInProvider = (event: React.MouseEvent<HTMLButtonElement>) => {
 
         )
 } 
+
+export interface Product {
+    name: string;
+    price: number;
+    stock: number;
+    brand: string;
+    category: string;
+    image: string;
+
+  }
