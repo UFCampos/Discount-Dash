@@ -4,6 +4,7 @@ export const createProductsAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: `/api/products`,
     }),
+    reducerPath: "createProductsAPI",
     tagTypes: ['Post'],
     endpoints: (build) => ({
         newPost: build.mutation({
