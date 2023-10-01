@@ -2,11 +2,13 @@
 import { useSelector } from "@/lib/redux/hooks";
 import {Card} from "../card/Card"
 import "./cards.css"
+import { Image } from "@nextui-org/react";
 const Cards = () => {
   type Item = {
     name: string;
     image: string;
     price: string;
+    brand: string
   };
 
   const data = useSelector((state) => state.items.products);
@@ -20,7 +22,7 @@ const Cards = () => {
       {
         loading ? (
           <div className="">
-            <img src="https://cdn.discordapp.com/attachments/1149956577432969296/1156317467535228968/loading.gif?ex=6514880f&is=6513368f&hm=5661d01e20f1acc0d366a706ce07bbf9fca96f42eb563b4eacf41b9814b496d2&"/>
+            <Image src="./loading.gif" alt="Loading"/>
           </div>
       )
       :

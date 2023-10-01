@@ -1,50 +1,33 @@
 import { db } from "@/firebase/config";
-import { collection, query, orderBy, where, getDocs } from "firebase/firestore";
-import { Categories } from "@/utils/types";
-export const filters = async (
-  categories: Categories,
-  order: string,
-  establecimiento: string,
-  price: string,
-  category: string
-) => {
-  let filteredQuery = query(collection(db, "products"));
+import { collection, query, orderBy, where, getDocs, CollectionReference } from "firebase/firestore";
+import { NextRequest, NextResponse } from "next/server";
+import { filters } from "./filterProduct";
+import { Product } from "@/utils/types";
 
-  if (category) {
-    filteredQuery = query(filteredQuery, where("category", "==", category));
-  }
+export const GET = async (req: NextRequest) => {
+  
+  let name = req.nextUrl.searchParams.get("name") || "";
+  let price = req.nextUrl.searchParams.get("price") || "";
+  let category = req.nextUrl.searchParams.get("category") || "";
+  let order = req.nextUrl.searchParams.get("order") || "";
+  let storeType = req.nextUrl.searchParams.get("storeType") || "";
+  
+  let queryRef: CollectionReference = collection(db, "products");
 
-  if (establecimiento) {
-    filteredQuery = query(
-      filteredQuery,
-      where("establecimiento", "==", establecimiento)
-    );
-  }
-  if (price) {
-    const numbers = price.split("-");
-    const min = parseInt(numbers[0]);
-    const max = parseInt(numbers[1]);
-    filteredQuery = query(
-      filteredQuery,
-      where("price", ">=", min),
-      where("price", "<=", max)
-    );
+  let productsQuery = query(queryRef);
+
+  if(price || category || storeType || order || name) {
+    productsQuery = await filters(name, order, storeType, price, category);
   }
 
-  switch (order) {
-    case "higher":
-      filteredQuery = query(filteredQuery, orderBy("price", "desc"));
-      break;
-    case "lower":
-      filteredQuery = query(filteredQuery, orderBy("price", "asc"));
-      break;
-    case "asc":
-    case "desc":
-      filteredQuery = query(filteredQuery, orderBy("name", order));
-      break;
-    default:
-      filteredQuery;
+  if (productsQuery.type) {
+    const productsSnapshot = await getDocs(productsQuery);
+
+    const products: Product[] = productsSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Product),
+    }))
+
+    return NextResponse.json(products);
   }
-  await getDocs(filteredQuery);
-  return filteredQuery;
 };
