@@ -6,7 +6,7 @@ import {
   loadErrors,
   isLoadingItems
 } from "@/lib/redux/features/itemsSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./searchBar.module.css";
 
 const SearchBar = () => {
@@ -27,12 +27,12 @@ const SearchBar = () => {
 
   const { data, isLoading, isError } = useGetResultsQuery({ name: value });
 
-  // useEffect(() => {
-  //   dispatch(isLoadingItems(isLoading));
-  //   if (isLoading === false && isError === false) {
-  //     dispatch(loadProducts(data));
-  //   }
-  // }, [isLoading]);
+  useEffect(() => {
+     dispatch(isLoadingItems(isLoading));
+     if (isLoading === false && isError === false) {
+       dispatch(loadProducts(data));
+     }
+  }, [isLoading]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter" ) {
