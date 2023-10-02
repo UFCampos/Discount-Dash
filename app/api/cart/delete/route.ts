@@ -9,8 +9,8 @@ export const DELETE = async (req: NextRequest) => {
       await controller(userId, cartItemId);
 
       return NextResponse.json({ message: 'Item deleted' });
-    } catch (error) {
-      return NextResponse.error();
+    } catch (error: any) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
     }
   
 };
