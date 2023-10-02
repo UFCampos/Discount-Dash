@@ -12,7 +12,7 @@ export const PUT = async (req: NextRequest) => {
     await updateStock(userId, cartItemId, value);
 
     return NextResponse.json({ message: "Item updated" });
-  } catch (error) {
-    NextResponse.error();
+  } catch (error: any) {
+    NextResponse.json({ error: error.message }, { status: 400 });
   }
 };
