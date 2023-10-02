@@ -1,5 +1,5 @@
 import { db } from "@/firebase/config";
-import { collection, query, orderBy, where, getDocs, CollectionReference, DocumentData, Query } from "firebase/firestore";
+import { collection, query, orderBy, where, getDocs, CollectionReference } from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 import { filters } from "./filterProduct";
 import { Product } from "@/utils/types";
