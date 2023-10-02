@@ -9,6 +9,7 @@ import { addProductCartSlice } from "./features/addProductCartSlice";
 import { productsApi } from "./service/productsAPI";
 import { userApi } from "./service/usersRegisterAPI";
 import { filters } from "./service/filtersAPI";
+import { filterSlice } from "./features/filterSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     menu: menuSlice.reducer,
     userProfile: userProfileSlice.reducer,
     addProductCart: addProductCartSlice.reducer,
+    filter: filterSlice.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
     [searchProfileAPI.reducerPath]: searchProfileAPI.reducer,
     [userApi.reducerPath]: userApi.reducer,

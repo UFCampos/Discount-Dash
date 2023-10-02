@@ -2,17 +2,12 @@ import { db } from "@/firebase/config";
 import { collection, query, orderBy, where, getDocs } from "firebase/firestore";
 import { Categories } from "@/utils/types";
 export const filters = async (
-    name: string,
     order: string,
     storeType: string,
     price: string,
     category: string
 ) => {
   let filteredQuery = query(collection(db, "products"));
-
-  if (name !== "") {
-    filteredQuery = query(filteredQuery, where("nameToLowerCase", ">=", name.toLowerCase()), where("nameToLowerCase", "<=", name.toLowerCase() + "\uf8ff"));
-  }
 
   if (category !== "") {
     filteredQuery = query(filteredQuery, where("category", "==", category));
@@ -21,7 +16,7 @@ export const filters = async (
   if (storeType !== "") {
     filteredQuery = query(
       filteredQuery,
-      where("establecimiento", "==", storeType)
+      where("store", "==", storeType)
     );
   }
   if (price !== "") {
@@ -41,10 +36,6 @@ export const filters = async (
       break;
     case "lower":
       filteredQuery = query(filteredQuery, orderBy("price", "asc"));
-      break;
-    case "asc":
-    case "desc":
-      filteredQuery = query(filteredQuery, orderBy("price", "asc"), orderBy("nameToLowerCase", order));
       break;
     default:
       filteredQuery;
