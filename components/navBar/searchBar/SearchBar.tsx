@@ -21,16 +21,23 @@ const SearchBar = () => {
   };
 
   const product = useSelector((state) => state.items.products);
-  console.log(product);
 
   const { data, isLoading, isError } = useGetResultsQuery({ name: value });
 
-  // useEffect(() => {
-  //   dispatch(isLoadingItems(isLoading));
-  //   if (isLoading === false && isError === false) {
-  //     dispatch(loadProducts(data));
-  //   }
-  // }, [isLoading]);
+  useEffect(() => {
+    if(value === ""){
+      dispatch(loadErrors(isError));
+      dispatch(isLoadingItems(isLoading));
+    }
+
+  },[value]);
+
+  useEffect(() => {
+    dispatch(isLoadingItems(isLoading));
+    if (isLoading === false && isError === false) {
+      dispatch(loadProducts(data));
+    }
+  }, [isLoading]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter" ) {
