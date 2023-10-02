@@ -27,7 +27,7 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({ error: "No products found" }, { status: 404 });
   }
 
-  const products: Product[] = productsSnapshot.docs.map((doc) => ({
+  let products: Product[] = productsSnapshot.docs.map((doc) => ({
     id: doc.id,
     ...(doc.data() as Product),
   }))
@@ -36,6 +36,7 @@ export const GET = async (req: NextRequest) => {
   if (name !== "") {
     let newProducts = products.filter(product => product.name.toLowerCase().startsWith(name.toLowerCase()));
     if (nameSort !== "") {
+      console.log(nameSort);
       switch (nameSort) {
 
         case "name_asc":
@@ -58,7 +59,23 @@ export const GET = async (req: NextRequest) => {
   }
 
   if (nameSort !== "") {
+    switch (nameSort) {
+
+      case "name_asc":
+        products = products.sort((a, b) => {
+          return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        })
+        break;
+
+      case "name_desc":
+        products = products.sort((a, b) => {
+            return b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+          })
+        break;
     
+      default:
+        break;
+    }
   }
 
   return NextResponse.json(products);
