@@ -7,8 +7,10 @@ export const PUT = async (req: NextRequest) => {
       return NextResponse.json({ error: "Insufficient data" }, { status: 400 });
     }
 
-    controller(name, brand, price, stock, image, productId);
-  } catch (error) {
-    NextResponse.error();
+    await controller(name, brand, price, stock, image, productId);
+
+    return NextResponse.json({ message: "Product updated" });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 };

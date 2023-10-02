@@ -1,6 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-const { NEXT_PUBLIC_BASE_URL } = process.env;
 type Product={
   name:string,
   image:string,
@@ -12,11 +10,14 @@ type Product={
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${NEXT_PUBLIC_BASE_URL}/api/products`,
+    baseUrl: `/api/products`,
   }),
   endpoints: (build) => ({
     getResults: build.query<Product[], { name: string }>({
       query: ({ name }) => `?name=${name}`
+    }),
+    getProduct: build.query<Product, { id: string }>({
+      query: ({ id }) => `/${id}`,
     }),
     newPost: build.mutation({
       query: (body) => ({
@@ -28,4 +29,4 @@ export const productsApi = createApi({
   }),
 });
 
-export const { useNewPostMutation, useGetResultsQuery } = productsApi;
+export const { useNewPostMutation, useGetResultsQuery, useGetProductQuery } = productsApi;
