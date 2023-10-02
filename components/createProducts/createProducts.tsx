@@ -11,7 +11,7 @@ const CreateProducts = () => {
         stock: '',
         brand: '',
     })
-    const [file, setFile]=useState(null)
+    const [file, setFile]=useState<File | null>(null)
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setNewProduct({
@@ -20,6 +20,7 @@ const CreateProducts = () => {
         });
     }
     const handleFileChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
+        if (!event.target.files) return;
         setFile(event.target.files[0])
     }
     const [mutate, { data }] = useNewPostMutation()
