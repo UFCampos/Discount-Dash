@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { signInProvider } from "@/app/utils";
 import { setUser } from "@/lib/redux/features/userProfile";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import Link from "next/link";
 
 const Login = () => {
   // const [user, newSetUser] = useState(null)
@@ -71,7 +72,9 @@ const Login = () => {
         </button>
       </div>
       <div>
-        <a>Olvide mi contraseña</a>
+        <Link href={`resetPassword`}>
+          <h3>Olvide mi contraseña</h3>
+        </Link>
       </div>
     </div>
   );
