@@ -28,7 +28,6 @@ const CreateProducts = () => {
     const handleSend = async (event:any) => {
         event.preventDefault()
         const urlImage=await uploadFile(file)
-        console.log(urlImage)
         mutate({
             name: newProduct.name,
             price: newProduct.price,

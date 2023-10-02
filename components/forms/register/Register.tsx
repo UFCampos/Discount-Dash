@@ -30,7 +30,6 @@ const Register = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.log(userCredential)
             })
             .catch((error) => {
                 const errorCode = error.code;

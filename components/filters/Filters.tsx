@@ -22,8 +22,6 @@ const Filters = () => {
     minPrice: 0,
     maxPrice: 0
   });
-  console.log(valueState);
-  
 
   const onChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;

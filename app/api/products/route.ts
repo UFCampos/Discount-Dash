@@ -25,8 +25,6 @@ export const GET = async (req: NextRequest) => {
   const first = query(productsRef, orderBy("nameToLowerCase"), limit(pageSize));
   let documentSnapshots = await getDocs(first);
   let lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-  console.log(documentSnapshots.docs[documentSnapshots.docs.length - 1], "AAAAAA");
-  console.log('aaaaaaaaaaaaaaaaaaaa');
 
   if (page > 1) {
     const next = query(

@@ -36,7 +36,6 @@ const SearchBar = () => {
   }, [isLoading]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(event.key);
 
     if (event.key === "Enter") {
       dispatch(isLoadingItems(isLoading));
@@ -44,7 +43,7 @@ const SearchBar = () => {
       dispatch(loadErrors(isError));
     }
   };
-  console.log(data);
+  
   return (
     <div>
       <input
