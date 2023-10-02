@@ -1,30 +1,25 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const { NEXT_PUBLIC_BASE_URL } = process.env
-type Product={
-    name:string,
-    brand:string,
-    stock:string,
-    image:string,
-    price:string
-}
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${NEXT_PUBLIC_BASE_URL}/api/products`,
+    baseUrl: `/api/products`,
   }),
   endpoints: (build) => ({
     getResults: build.query<any, { name: string }>({
       query: ({ name }) => `?name=${name}`,
     }),
+    getProduct: build.query<any, { id: string }>({
+      query: ({ id }) => `/${id}`,
+    }),
     newPost: build.mutation({
       query: (body) => ({
         url: '/postProduct',
         method: 'POST',
-        body
+        body,
       }),
     }),
   }),
-})
+});
 
-export const { useNewPostMutation, useGetResultsQuery } = productsApi;
+export const { useNewPostMutation, useGetResultsQuery, useGetProductQuery } = productsApi;

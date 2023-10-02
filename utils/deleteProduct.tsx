@@ -1,7 +1,7 @@
 "use client";
 import { useDelProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
 
-const deleteProduct = (id: string) => {
+const DeleteProduct = (id: string) => {
   const [delProductCart, { isLoading }] = useDelProductCartMutation();
 
   const handleDelete = async () => {
@@ -19,4 +19,4 @@ const deleteProduct = (id: string) => {
   );
 };
 
-export default deleteProduct;
+export default DeleteProduct;
