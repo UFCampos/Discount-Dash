@@ -3,8 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 type Query = {
   name: string;
   category: string;
-  minPrice: number;
-  maxPrice: number;
+  minPrice: string;
+  maxPrice: string;
   sort: string;
 };
 
@@ -17,7 +17,7 @@ export const filters = createApi({
   endpoints: (build) => ({
     filtersQuery: build.query<any, Query>({
       query: ({ category, minPrice, maxPrice, sort, name }) =>
-        `/filter?category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&sort=${sort}&name=${name}`,
+        `/products/filter?category=${category}&price=${minPrice}-${maxPrice}&order=${sort}`,
     }),
   }),
 });

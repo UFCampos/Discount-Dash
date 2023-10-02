@@ -9,7 +9,7 @@ type FiltersCategoriesProps = {
   }
 
 const FiltersCategories: React.FC<FiltersCategoriesProps> = ({ valueState, onChange }) => {
-  const category = ["cafeteria", "heladeria", "pizzeria", "restaurante"].map(
+  const category = [ "breakfast", "beverages", "snacks", "dairy"].map(
     (item) => <option key={item} value={item}>{item}</option>
   );
 

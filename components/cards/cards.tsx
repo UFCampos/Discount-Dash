@@ -8,7 +8,8 @@ const Cards = () => {
     name: string;
     image: string;
     price: string;
-    brand: string
+    brand: string;
+    id: string;
   };
 
   const data = useSelector((state) => state.items.products);
@@ -32,7 +33,7 @@ const Cards = () => {
         ) : (
           data?.map((item: Item, index) => {
             return (
-              <Card key={index} name={item.name} image={item.image} price={item.price} brand={item.brand} />
+              <Card key={index} id={item.id} name={item.name} image={item.image} price={item.price} brand={item.brand} />
             );
           })
         )}

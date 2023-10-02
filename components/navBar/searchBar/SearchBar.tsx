@@ -1,6 +1,6 @@
 "use client";
 import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
-import { useDispatch } from "@/lib/redux/hooks";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import {
   loadProducts,
   loadErrors,
@@ -17,33 +17,36 @@ const SearchBar = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setValue(value);
+    
   };
+
+  const product = useSelector((state) => state.items.products);
 
   const { data, isLoading, isError } = useGetResultsQuery({ name: value });
 
   useEffect(() => {
-    if (value === "") {
-      dispatch(loadProducts(data));
+    if(value === ""){
       dispatch(loadErrors(isError));
+      dispatch(isLoadingItems(isLoading));
     }
-  }, [value]);
+
+  },[value]);
 
   useEffect(() => {
     dispatch(isLoadingItems(isLoading));
-    if (isLoading === false) {
+    if (isLoading === false && isError === false) {
       dispatch(loadProducts(data));
     }
   }, [isLoading]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-
-    if (event.key === "Enter") {
-      dispatch(isLoadingItems(isLoading));
-      dispatch(loadProducts(data));
-      dispatch(loadErrors(isError));
-    }
+      if (event.key === "Enter" ) {
+          dispatch(loadErrors(isError));
+          dispatch(isLoadingItems(isLoading));
+          dispatch(loadProducts(data));
+      }
   };
-  
+
   return (
     <div>
       <input
