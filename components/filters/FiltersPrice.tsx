@@ -3,8 +3,8 @@ import { ChangeEvent } from "react";
 
 type FiltersPriceProps = {
     valueState: {
-        minPrice: number; //revisar que funcione bien asi o si va con str
-        maxPrice: number;
+        minPrice: string; 
+        maxPrice: string;
     };
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
