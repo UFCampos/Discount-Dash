@@ -1,19 +1,21 @@
 "use client";
 import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
-import { useDispatch } from "@/lib/redux/hooks";
+import { useDispatch} from "@/lib/redux/hooks";
 import {
   loadProducts,
   loadErrors,
-  isLoadingItems,
+  isLoadingItems
 } from "@/lib/redux/features/itemsSlice";
 import { useState, useEffect } from "react";
 import style from "./searchBar.module.css";
 
 const SearchBar = () => {
+
   const [value, setValue] = useState("");
 
   const dispatch = useDispatch();
 
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setValue(value);

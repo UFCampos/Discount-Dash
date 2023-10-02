@@ -17,7 +17,7 @@ export const Card:React.FC<props>=({name, brand, image, price})=>{
             <div className="card-info flex flex-col">
                 <h3 className="text-center">{name}</h3>
                 <div className="rate flex flex-row justify-center gap-4 items-center">
-                    <p>☆ 4.5</p>
+                    <p> ⭐ 4.5</p>
                     <p>{brand}</p>
                 </div>
                 <div className="price flex flex-row justify-center items-center gap-4">
@@ -29,8 +29,8 @@ export const Card:React.FC<props>=({name, brand, image, price})=>{
                 <div className="buy">
                     <p>Buy</p>
                 </div>
-                <div className="cart">
-                    <img src="https://i.postimg.cc/sfkHKytD/shopping-cart.png"/>
+                <div className="cart flex flex-col justify-center items-center">
+                    <span className="material-symbols-outlined text-center">shopping_cart</span>
                 </div>
             </div>
         </div>

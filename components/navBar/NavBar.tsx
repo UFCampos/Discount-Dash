@@ -7,7 +7,11 @@ import { Image } from "@nextui-org/react"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { useState } from "react"
 import { auth } from "@/firebase/config"
+import { useDispatch } from "@/lib/redux/hooks"
+
 const NavBar = () => {
+    const dispatch=useDispatch()
+
     const [user, setUser] = useState(false)
     const userUpdate = () => {
         location.reload()
@@ -21,9 +25,7 @@ const NavBar = () => {
     return (
         <div className={style.navBar}>
             <Link href="/home" className="text-white"><Image src="/logopanda.svg" width={140} height={50} alt="Logo Panda"/></Link>
-            {/* <Link href="/search"><button>asd</button></Link> */}
-            <SearchBar />
-            {/* <Link href="/cart"><button>asd</button></Link> */}
+            <SearchBar/>
             <div className={style.buttonsRight}>
                 {user ? 
                 <Link href="/login" className="text-white"><button>login</button></Link> :

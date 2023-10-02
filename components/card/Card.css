@@ -2,14 +2,18 @@
 .card{
     height: 260px;
     width: 200px;
-    border: 1px solid black;
+    border: 1px solid #dedede;
     font-family: 'Montserrat', sans-serif;
+    padding: 5px;
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
 }
 
 .card-img{
     position: relative;
     height: 50%;
     width: 100%;
+    background: #dedede;
 }
 .card-img img{
     height: 90%;
@@ -19,6 +23,7 @@
     background: red;
     color: white;
     font-size: 10px;
+    padding: 1px;
     font-weight: bold;
     top:0;
     right: 0;
@@ -29,7 +34,7 @@
     width: 100%;
 }
 .card-info h3{
-    font-weight: bold;
+    font-size: 11px;
 }
 .rate{
 
@@ -45,14 +50,17 @@
     text-decoration: line-through;
 }
 .card-buy{
-    border-top: 1px solid black;
+    border-top: 1px solid #dedede;
     height: 15%;
-    color: white;
-    background: black;
+    color: black ;
+    font-weight: bold;
 }
+
+
 .card-buy p{
     font-size: 16px;
     cursor: pointer;
+    color: green;
 }
 
 .card-buy img{
@@ -69,5 +77,10 @@
 }
 
 .cart{
-    border-left: 1px solid white;
+    border-left: 1px solid #dedede;
+}
+
+.cart span{
+    cursor: pointer;
+    color:black
 }

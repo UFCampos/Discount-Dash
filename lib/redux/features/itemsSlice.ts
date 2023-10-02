@@ -4,6 +4,7 @@ export const itemsSlice = createSlice({
     name: "items",
     initialState: {
         products: [],
+        newProduct:false,
         errorsItems: false,
         isLoadItems: false,
     },
@@ -23,4 +24,4 @@ export const itemsSlice = createSlice({
     },
 })
 
-export const { loadProducts, loadErrors, isLoadingItems, refreshProducts} = itemsSlice.actions
+export const { loadProducts, loadErrors, isLoadingItems} = itemsSlice.actions
