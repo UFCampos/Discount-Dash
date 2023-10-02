@@ -26,10 +26,11 @@ const Login = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    signInWithEmailAndPassword(auth, formData.email, formData.password)
-      .catch((error) => {
+    signInWithEmailAndPassword(auth, formData.email, formData.password).catch(
+      (error) => {
         alert(error.message);
-      });
+      }
+    );
   };
 
   return (
@@ -68,6 +69,9 @@ const Login = () => {
         <button onClick={(e) => signInProvider(e)} value={"facebook"}>
           Sign in with Facebook
         </button>
+      </div>
+      <div>
+        <a>Olvide mi contraseña</a>
       </div>
     </div>
   );
