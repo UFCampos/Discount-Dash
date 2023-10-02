@@ -5,8 +5,6 @@ import { useDispatch } from "@/lib/redux/hooks";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
-import { signInProvider } from "@/app/utils";
-
 
 const Register = () => {
 
@@ -32,7 +30,6 @@ const Register = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.log(userCredential)
             })
             .catch((error) => {
                 const errorCode = error.code;
