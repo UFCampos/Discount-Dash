@@ -1,7 +1,8 @@
 "use client";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import  postProductCart  from "@/utils/postProductcart";
-const pruebaCart = () => {
+import { CartProduct } from "@/utils/types";
+const PruebaCart = () => {
     const id = '6Ks3wWaq8zPnkqGZUhqK'
     const itemId = "nMIJrCXawWzl0yNx2Wz"
     const body = {
@@ -13,7 +14,7 @@ const pruebaCart = () => {
     return (
         <div>
             {isLoading && <p>Loading...</p>}
-            {data && data?.map((product) => (
+            {data && data?.map((product: CartProduct) => (
               <div key={product.name}>
                 <p>{product?.image}</p>
                 <p>{product?.name}</p>
@@ -28,4 +29,4 @@ const pruebaCart = () => {
     );
 }
 
-export default pruebaCart;
+export default PruebaCart;
