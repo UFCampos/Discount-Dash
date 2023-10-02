@@ -1,9 +1,9 @@
-import { Providers } from "@/lib/providers";
-import "./globals.css";
-import type { Metadata } from "next";
-import NavBar from "@/components/navBar/NavBar";
-import { Suspense } from "react";
-import Loading from "@/components/loading/Loading";
+
+import { Providers } from '@/lib/providers'
+import './globals.css'
+import type { Metadata } from 'next'
+import NavBar from '@/components/navBar/NavBar'
+
 
 export const metadata: Metadata = {
   title: "Discount Dash",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout(props: React.PropsWithChildren) {
-  return (
+   return (
     <Providers>
       <html lang="en">
         <head>

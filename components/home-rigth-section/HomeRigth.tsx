@@ -1,8 +1,9 @@
 import "./HomeRigth.css"
+import Cart from "../Cart/Cart"
 const HomeRigth=()=>{
     return(
-        <section className="home-rigth-cont flex flex-col justify-center items-center">
-            <h2>shopping cart</h2>
+        <section>
+            <h2><Cart/></h2>
         </section>
     )
 }

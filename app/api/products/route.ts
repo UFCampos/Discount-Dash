@@ -6,8 +6,6 @@ import { Product } from "@/utils/types";
 
 export const GET = async (req: NextRequest) => {
   const name = req.nextUrl.searchParams.get("name") || "";
-  const page = parseInt(req.nextUrl.searchParams.get("page") || "1");
-  const pageSize = parseInt(req.nextUrl.searchParams.get("limit") || "10");
 
   if (name !== "") {
     const response = await productByName(name);
@@ -22,21 +20,10 @@ export const GET = async (req: NextRequest) => {
   }
 
   const productsRef = collection(db, "products");
-  const first = query(productsRef, orderBy("nameToLowerCase"), limit(pageSize));
-  let documentSnapshots = await getDocs(first);
-  let lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
 
-  if (page > 1) {
-    const next = query(
-      productsRef,
-      orderBy("nameToLowerCase"),
-      startAfter(documentSnapshots.docs[documentSnapshots.docs.length - 1]),
-      limit(pageSize)
-    );
-    documentSnapshots = await getDocs(next);
-  }
+  let documentSnapshots = await getDocs(productsRef);
 
-  const products: Product[] = documentSnapshots.docs.map((doc) => ({
+  let products: Product[] = documentSnapshots.docs.map((doc) => ({
     id: doc.id,
     ...(doc.data() as Product),
   }));

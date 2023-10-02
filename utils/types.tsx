@@ -4,7 +4,17 @@ export interface Product {
     stock: number;
     image: string;
     brand: string;
-    category: string;   
+    category: string;
+    nameToLowerCase: string;
+}
+
+export interface CartProduct {
+    name: string;
+    price: number;
+    stock: number;
+    image: string;
+    category: string;
+    quantity: number;   
 }
 
 export interface CartProduct {
