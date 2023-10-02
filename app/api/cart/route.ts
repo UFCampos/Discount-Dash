@@ -14,5 +14,5 @@ export const GET = async (req : NextRequest) => {
         }
     });
     
-    return NextResponse.json({cart: items});
+    return NextResponse.json(items);
 }
