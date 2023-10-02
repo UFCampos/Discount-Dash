@@ -8,6 +8,7 @@ import {
 } from "@/lib/redux/features/itemsSlice";
 import { useState, useEffect } from "react";
 import style from "./searchBar.module.css";
+import { setName } from "@/lib/redux/features/filterSlice";
 
 const SearchBar = () => {
   const [value, setValue] = useState("");
@@ -20,7 +21,6 @@ const SearchBar = () => {
     
   };
 
-  const product = useSelector((state) => state.items.products);
 
   const { data, isLoading, isError } = useGetResultsQuery({ name: value });
 
@@ -28,6 +28,7 @@ const SearchBar = () => {
     if(value === ""){
       dispatch(loadErrors(isError));
       dispatch(isLoadingItems(isLoading));
+      dispatch(loadProducts(data));
     }
 
   },[value]);
@@ -41,9 +42,7 @@ const SearchBar = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter" ) {
-          dispatch(loadErrors(isError));
-          dispatch(isLoadingItems(isLoading));
-          dispatch(loadProducts(data));
+          dispatch(setName(value));
       }
   };
 

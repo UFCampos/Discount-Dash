@@ -6,6 +6,7 @@ type Query = {
   minPrice: string;
   maxPrice: string;
   sort: string;
+  order: string;
 };
 
 export const filters = createApi({
@@ -16,8 +17,8 @@ export const filters = createApi({
   tagTypes: ["Filter"],
   endpoints: (build) => ({
     filtersQuery: build.query<any, Query>({
-      query: ({ category, minPrice, maxPrice, sort, name }) =>
-        `/products/filter?category=${category}&price=${minPrice}-${maxPrice}&order=${sort}`,
+      query: ({ category, minPrice, maxPrice, order, sort, name }) =>
+        `/products/filter?category=${category}&price=${minPrice}-${maxPrice}&order=${order}&sort=${sort}&name=${name}`,
     }),
   }),
 });

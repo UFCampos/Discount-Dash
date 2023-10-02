@@ -6,7 +6,7 @@ import FiltersPrice from "./FiltersPrice";
 import FiltersSort from "./FilterSort";
 import FiltersCategories from "./FiltersCategories";
 import { loadProducts, loadErrors } from "@/lib/redux/features/itemsSlice";
-import { useDispatch } from "@/lib/redux/hooks";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
 
 type FiltersState = {
   category: string;
@@ -14,17 +14,29 @@ type FiltersState = {
   name: string;
   minPrice: string;
   maxPrice: string;
+  order: string;
 };
 
 const Filters = () => {
+  const nameSearch = useSelector((state) => state.filter.name);
   const [valueState, setValueState] = useState<FiltersState>({
     category: "",
-    sort: "",
-    name: "",
+    order: "",
+    name: '',
     minPrice: '',
     maxPrice: '',
+    sort: '',
   });
   console.log(valueState);
+  console.log(nameSearch);
+
+  useEffect(() => {
+    setValueState({
+      ...valueState,
+      name: nameSearch
+    })
+  },[nameSearch])
+  
 
   const dispatch = useDispatch();
 
@@ -43,7 +55,8 @@ const Filters = () => {
     minPrice: valueState.minPrice === '' ? "0" : valueState.minPrice,
     maxPrice: valueState.maxPrice === '' ? "10000000" : valueState.maxPrice,
     sort: valueState.sort,
-    name: valueState.sort,
+    order: valueState.order,
+    name: valueState.name,
   });
 
   useEffect(() => {
@@ -56,14 +69,6 @@ const Filters = () => {
     dispatch(loadErrors(isError));
   };
 
-  // const handleKeyDown = (event) => {
-  //   if (event.key === "Enter") {
-  //     dispatch(loadProducts(data));
-  //     dispatch(loadErrors(isError));
-  //   }
-  // };
-
-  console.log(data);
 
   return (
     <div>
