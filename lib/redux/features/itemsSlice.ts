@@ -4,6 +4,7 @@ export const itemsSlice = createSlice({
     name: "items",
     initialState: {
         products: [],
+        newProduct:false,
         errorsItems: false,
         isLoadItems: false,
     },

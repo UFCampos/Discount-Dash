@@ -1,16 +1,14 @@
 "use client";
 import { auth } from "@/firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { signInProvider } from "@/app/utils";
+import { useDispatch } from "@/lib/redux/hooks";
 import { setUser } from "@/lib/redux/features/userProfile";
-import { useDispatch, useSelector } from "@/lib/redux/hooks";
 
 const Login = () => {
-  // const [user, newSetUser] = useState(null)
-  const user = useSelector((state) => state.userProfile);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -27,9 +25,14 @@ const Login = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, formData.email, formData.password)
-      .catch((error) => {
-        alert(error.message);
-      });
+    .then((userCredential) => {
+      const user = userCredential.user;
+      const uid = user.uid; // Aquí obtienes el UID del usuario
+      console.log(uid); 
+    })
+    .catch((error) => {
+      console.error("Error de inicio de sesión:", error);
+    });
   };
 
   return (
