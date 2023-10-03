@@ -22,10 +22,10 @@ const Filters = () => {
   const [valueState, setValueState] = useState<FiltersState>({
     category: "",
     order: "",
-    name: '',
-    minPrice: '',
-    maxPrice: '',
-    sort: '',
+    name: "",
+    minPrice: "",
+    maxPrice: "",
+    sort: "",
   });
   console.log(valueState);
   console.log(nameSearch);
@@ -33,10 +33,9 @@ const Filters = () => {
   useEffect(() => {
     setValueState({
       ...valueState,
-      name: nameSearch
-    })
-  },[nameSearch])
-  
+      name: nameSearch,
+    });
+  }, [nameSearch]);
 
   const dispatch = useDispatch();
 
@@ -52,23 +51,26 @@ const Filters = () => {
 
   const { data, isError } = useFiltersQueryQuery({
     category: valueState.category,
-    minPrice: valueState.minPrice === '' ? "0" : valueState.minPrice,
-    maxPrice: valueState.maxPrice === '' ? "10000000" : valueState.maxPrice,
+    minPrice: valueState.minPrice === "" ? "0" : valueState.minPrice,
+    maxPrice: valueState.maxPrice === "" ? "10000000" : valueState.maxPrice,
     sort: valueState.sort,
     order: valueState.order,
     name: valueState.name,
   });
 
-  useEffect(() => {
-
-  }, [valueState]);
+  useEffect(() => {}, [valueState]);
 
   const handleFilters = () => {
-    
     dispatch(loadProducts(data));
     dispatch(loadErrors(isError));
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      dispatch(loadProducts(data));
+      dispatch(loadErrors(isError));
+    }
+  };
 
   return (
     <div>
@@ -76,7 +78,9 @@ const Filters = () => {
       <FiltersCategories valueState={valueState} onChange={onChange} />
       <FiltersPrice valueState={valueState} onChange={onChange} />
       <FiltersSort valueState={valueState} onChange={onChange} />
-      <button onClick={handleFilters}>Apply filter</button>
+      <button onClick={handleFilters}>
+        Apply filter
+      </button>
     </div>
   );
 };

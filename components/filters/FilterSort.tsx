@@ -19,8 +19,6 @@ const FiltersSort: React.FC<FiltersSortProps> = ({ valueState, onChange }) => {
           <option value="">None</option>
           <option value="lower">Price (Low to High)</option>
           <option value="higher">Price (High to Low)</option>
-        </select>
-        <select name="sort" value={valueState.sort} onChange={onChange}>
           <option value="name_asc">Name (A to Z)</option>
           <option value="name_desc">Name (Z to A)</option>
         </select>
