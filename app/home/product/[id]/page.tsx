@@ -1,8 +1,9 @@
 import Detail from "@/components/product/detail/Detail";
+import "./detailHome.css"
 const DetailProduct = ({params} : {params: {id: string}}) => {
     const id = params.id;
     return (
-        <div>
+        <div className="detail-cont flex flex-col justify-center items-center">
             <Detail id={id}/>
         </div>
     );
