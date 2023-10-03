@@ -22,6 +22,7 @@
     padding: 10px;
     width: 126px;
     align-items: center;
+    z-index: 10;
     
     
   }

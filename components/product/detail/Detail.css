@@ -1,0 +1,15 @@
+.main-detail{
+    width: 70%;
+    height: 90%;
+    border: 1px solid #dedede;
+    border-radius: 20px;
+}
+
+.img-detail{
+    width: 50%;
+    height: 100%;
+}
+.info-detail{
+    width: 50%;
+    height: 100%;
+}
