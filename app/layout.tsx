@@ -1,9 +1,9 @@
-
 import { Providers } from '@/lib/providers'
 import './globals.css'
 import type { Metadata } from 'next'
 import NavBar from '@/components/navBar/NavBar'
 import { Suspense } from 'react'
+import  Loading  from '../components/loading/Loading'
 
 export const metadata: Metadata = {
   title: "Discount Dash",
