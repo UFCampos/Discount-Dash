@@ -3,7 +3,7 @@ import { Providers } from '@/lib/providers'
 import './globals.css'
 import type { Metadata } from 'next'
 import NavBar from '@/components/navBar/NavBar'
-
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: "Discount Dash",
@@ -19,7 +19,7 @@ export default function RootLayout(props: React.PropsWithChildren) {
         </head>
         <body>
           <NavBar />
-          <Suspense fallback={<Loading />}>{props.children}</Suspense>
+          {props.children}
         </body>
       </html>
     </Providers>
