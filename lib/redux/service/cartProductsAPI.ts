@@ -18,15 +18,16 @@ export const cartProductsAPI = createApi({
     }),
     putPrudctCart: build.mutation({
       query: (body) => ({
-        url: `/cart/${body.id}`,
+        url: `/cart/update`,
         method: "PUT",
         body,
       }),
     }),
     delProductCart: build.mutation({
-      query: (id) => ({
-        url: `/cart/${id}`,
+      query: (body) => ({
+        url: `/cart/delete`,
         method: "DELETE",
+        body,
       }),
     }),
   }),
