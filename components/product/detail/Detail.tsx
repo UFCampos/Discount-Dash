@@ -1,6 +1,8 @@
 "use client";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { Image } from "@nextui-org/react";
+import "./Detail.css"
+
 const Detail = ({ id } : {id: string}) => {
   const { data, isLoading } = useGetProductQuery({ id });
   console.log(data);
