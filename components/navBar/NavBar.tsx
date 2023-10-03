@@ -28,7 +28,7 @@ const NavBar = () => {
     },[user])
     return (
       <div className={style.navBar}>
-        <Link href="/home" className="text-white">
+        <Link href="/" className="text-white">
           <Image
             src="/logopanda.svg"
             width={140}
@@ -40,16 +40,6 @@ const NavBar = () => {
         <SearchBar />
 
         <div className={style.buttonsRight}>
-          {!flag && (
-            <Link href="/login" className="text-white">
-              <button>login</button>
-            </Link>
-          )}
-          {flag && (
-            <Link href="/" className="text-white" onClick={logOut}>
-              <button>logout</button>
-            </Link>
-          )}
           <MenuButton />
         </div>
       </div>

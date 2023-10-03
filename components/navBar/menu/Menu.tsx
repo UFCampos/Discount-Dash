@@ -2,17 +2,15 @@
 import { useSelector, useDispatch } from '@/lib/redux/hooks';
 import { toggleMenu } from '@/lib/redux/features/menuSlice';
 import { setUser } from '@/lib/redux/features/userProfile';
-import styles from './menu.module.css'; 
 import Link from 'next/link';
 import Image from 'next/image';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase/config';
 import { useEffect } from 'react';
 import { button } from '@nextui-org/react';
-
+import "./Menu.css"
 const MenuButton = () => {
   const dispatch = useDispatch();
-  const isMenuOpen = useSelector((state) => state.menu.isOpen);
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
@@ -37,23 +35,15 @@ const MenuButton = () => {
     })
   },[user, dispatch])
 
-  const { id, name } = useSelector((state) => state.userProfile);
 
   return (
     <div>
-      
-      <button onClick={handleToggleMenu} className={styles.menuButton}>
-        <Image className={styles.fotoMenu} src='/menu-abierto.png' width={50} height={50} color='with' alt='menu'></Image>
-      </button>
-      {isMenuOpen && (
-        <div className={styles.menu}>
-          <ul>
-            <Link href="/register"><li>Register</li></Link>
-            <Link href="/addProduct"><li>Create Products</li></Link>
-            <Link href={`/users/profile/${id}`}><li>perfil: {name}</li></Link>
-          </ul>
-        </div>
-      )}
+    <input type="checkbox" id="checkbox" onClick={handleToggleMenu}/>
+    <label htmlFor="checkbox" className="toggle">
+        <div className="bars" id="bar1"></div>
+        <div className="bars" id="bar2"></div>
+        <div className="bars" id="bar3"></div>
+    </label>
     </div>
   );
 };
