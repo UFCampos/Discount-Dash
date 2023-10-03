@@ -2,27 +2,29 @@
 import { Image } from "@nextui-org/react";
 import style from "./Carts.module.css";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
-import { useDispatch } from "@/lib/redux/hooks";
-import { useDelProductCartMutation, useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { useDelProductCartMutation, usePutPrudctCartMutation } from "@/lib/redux/service/cartProductsAPI";
 const Cart = () => {
   // const id = useSelector((state) => state.userProfile.id);
+
+  
   const id = "6Ks3wWaq8zPnkqGZUhqK";
   const { data, isLoading } = useGetProductsCartQuery({ id });
-  console.log(data);
 
+  const [mutate1] = useDelProductCartMutation();
   const handleDelete = (productId: string) => {
-    const [mutate] = useDelProductCartMutation();
-    mutate({
+    mutate1({
       cartItemId: productId,
       userId: id,
     });
   };
 
-  const handleAddCart = (productId: string) => {
-    const [mutate] = useAddProductCartMutation();
+  const [mutate] = usePutPrudctCartMutation();
+  const handleAddCart = (productId: string, value: string ) => {
     mutate({
       cartItemId: productId,
       userId: id,
+      value
     })
   }
 
@@ -32,12 +34,14 @@ const Cart = () => {
         {isLoading ? (
           <h1>Is loading...</h1>
         ) : (
-          data?.map((product, index) => {
+          data?.map((product, index) => { console.log(product);
+          {
             return (
               <div
                 key={product.id}
                 className="flex items-center p-2 mr-2 my-2 ml-2 border border-black rounded shadow backdrop-blur-md bg-gray-50 "
               >
+                
                 <div className="border border-gray-300 rounded mr-2 ">
                   <Image
                     src={product.image}
@@ -46,6 +50,7 @@ const Cart = () => {
                     width={80}
                   />
                 </div>
+                <button onClick={() => handleDelete(product.id)}>x</button>
                 <div
                   className="ml-2 border-black
                  5"
@@ -57,7 +62,7 @@ const Cart = () => {
                   <div className="mt-1">
                     <button
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
-                      onClick={() => handleDelete(product.id)}
+                      onClick={() => handleAddCart(product.id, 'decrement')}
                     >
                       <Image
                         src="/menos3.png"
@@ -67,10 +72,10 @@ const Cart = () => {
                       />
                     </button>
                     <h2 className="inline-block bg-gray-200 rounded px-2 py-1 text-xs font-semibold text-gray-700 mr-1">
-                      Quantity: {product?.quantity}
+                      {product?.quantity}
                     </h2>
                     <button
-                      onClick={() => handleAddCart(product.id)}
+                      onClick={() => handleAddCart(product.id, 'add')}
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
                     >
                       <Image
@@ -93,7 +98,7 @@ const Cart = () => {
                 )}
               </div>
             );
-          })
+          }})
         )}
       </div>
     </div>

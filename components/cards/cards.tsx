@@ -1,6 +1,6 @@
 "use client";
 import { useSelector } from "@/lib/redux/hooks";
-import { Card } from "../card/Card";
+import Card from "../card/Card";
 import "./cards.css";
 import { Image } from "@nextui-org/react";
 const Cards = () => {
@@ -28,18 +28,19 @@ const Cards = () => {
           {error ? (
             <p>Not found</p>
           ) : (
-            data?.map((item: Item, index) => {
+            data?.map((item: Item, index) => {console.log(item.id);
+            {
               return (
                 <Card
                   key={index}
-                  id={item.id}
+                  itemId={item.id}
                   name={item.name}
                   image={item.image}
                   price={item.price}
                   brand={item.brand}
                 />
               );
-            })
+            }})
           )}
         </div>
       )}

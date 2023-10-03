@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "@/lib/redux/hooks";
 
 type FiltersState = {
   category: string;
-  sort: string;
   name: string;
   minPrice: string;
   maxPrice: string;
@@ -24,8 +23,7 @@ const Filters = () => {
     order: "",
     name: "",
     minPrice: "",
-    maxPrice: "",
-    sort: "",
+    maxPrice: ""
   });
   console.log(valueState);
   console.log(nameSearch);
@@ -53,7 +51,6 @@ const Filters = () => {
     category: valueState.category,
     minPrice: valueState.minPrice === "" ? "0" : valueState.minPrice,
     maxPrice: valueState.maxPrice === "" ? "10000000" : valueState.maxPrice,
-    sort: valueState.sort,
     order: valueState.order,
     name: valueState.name,
   });
@@ -78,7 +75,7 @@ const Filters = () => {
       <FiltersCategories valueState={valueState} onChange={onChange} />
       <FiltersPrice valueState={valueState} onChange={onChange} />
       <FiltersSort valueState={valueState} onChange={onChange} />
-      <button onClick={handleFilters}>
+      <button onClick={handleFilters} onKeyDown={handleKeyDown}>
         Apply filter
       </button>
     </div>

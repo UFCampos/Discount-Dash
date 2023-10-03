@@ -3,7 +3,6 @@ import { ChangeEvent } from "react";
 
 type FiltersSortProps = {
   valueState: {
-    sort: string;
     order: string;
   };
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
