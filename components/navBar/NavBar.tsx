@@ -7,6 +7,7 @@ import { Image } from "@nextui-org/react"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { useState, useEffect } from "react"
 import { auth } from "@/firebase/config"
+
 const NavBar = () => {
     const [flag, setFlag] = useState(false)
     const user = auth.currentUser

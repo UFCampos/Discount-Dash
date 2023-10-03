@@ -1,4 +1,4 @@
-import Header from "./Header/header"
+
 import Footer from "./Footer/footer"
 import Hero from "./Hero/Hero"
 
@@ -8,7 +8,6 @@ const LandingPage = () =>{
             }
     return(
         <div className="h-screen">
-            <Header/>
             <Hero/>
             <Footer/>
         </div>
