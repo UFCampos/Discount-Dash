@@ -1,4 +1,3 @@
-
 import { Providers } from '@/lib/providers'
 import './globals.css'
 import type { Metadata } from 'next'

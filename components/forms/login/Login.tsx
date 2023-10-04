@@ -2,7 +2,7 @@
 import { auth } from "@/firebase/config";
 import { toggleMenu } from "@/lib/redux/features/menuSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { signInProvider } from "@/app/utils";
 import Link from "next/link";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
