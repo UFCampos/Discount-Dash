@@ -19,6 +19,7 @@ export const filters = createApi({
       query: ({ category, minPrice, maxPrice, order, name }) =>
         `/products/filter?category=${category}&price=${minPrice}-${maxPrice}&order=${order}&name=${name}`,
     }),
+    
   }),
 });
 
