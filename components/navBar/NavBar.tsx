@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { useSelector } from "@/lib/redux/hooks";
 import { useDispatch } from "@/lib/redux/hooks";
 import { useEffect } from "react";
+
 const NavBar = () => {
 
   const dispatch=useDispatch()
@@ -17,7 +18,6 @@ const NavBar = () => {
   const user=useSelector((state)=>state.userProfile)
 
   const {name, photoUrl}=user
-
 
   const pathname = usePathname();
 

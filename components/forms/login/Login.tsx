@@ -1,7 +1,9 @@
 "use client";
 import { auth } from "@/firebase/config";
 import { toggleMenu } from "@/lib/redux/features/menuSlice";
+import { toggleMenu } from "@/lib/redux/features/menuSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useState, useEffect} from "react";
 import { useState, useEffect} from "react";
 import { signInProvider } from "@/app/utils";
 import Link from "next/link";
@@ -9,8 +11,20 @@ import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import style from "./login.module.css";
 import { useRouter } from "next/navigation";
 
+import Link from "next/link";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import style from "./login.module.css";
+import { useRouter } from "next/navigation";
+
 
 const Login = () => {
+
+  const router=useRouter()
+
+  const dispatch=useDispatch()
+
+  const isOpen=useSelector((state)=>state.menu.isOpen)
+
 
   const router=useRouter()
 
