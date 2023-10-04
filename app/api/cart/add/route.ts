@@ -15,7 +15,7 @@ export const POST = async (req: NextRequest, {params}: {params: {id: string}}) =
             ...product.data(),
             quantity: 1
         });
-        console.log(item);
+        
         return NextResponse.json({message: "Producto añadido con éxito al carrito"},{status: 201});
     }
 
