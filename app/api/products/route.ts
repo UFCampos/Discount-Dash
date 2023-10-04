@@ -11,6 +11,8 @@ export const GET = async (req: NextRequest) => {
   
   const offset = req.nextUrl.searchParams.get("offset") || "";
   
+  const totalProducts= req.nextUrl.searchParams.get("total") || "";
+  
   if (name !== "") {
     const response = await productByName(name);
 
@@ -28,11 +30,11 @@ export const GET = async (req: NextRequest) => {
     if (limit !== "") {
     let productsQuery = query(productsRef, orderBy("name"), limit(limit))
       if (offset !== "") {
-        productsQuery = query(productsQuery, startAfter(offset))
+        productsQuery = query(productsQuery, startAfter(totalProducts - offset), endAt(offset))
       }
   }
 
-  let productsSnapshots = await getDocs(productsRef);
+  let productsSnapshots = await getDocs(productsQuery ?? productsRef);
 
   let products: Product[] = documentSnapshots.docs.map((doc) => ({
     id: doc.id,
