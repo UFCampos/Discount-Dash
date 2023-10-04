@@ -3,10 +3,17 @@ import Link from "next/link";
 import SearchBar from "./searchBar/SearchBar";
 import style from "./navBar.module.css";
 import MenuButton from "./menu/Menu";
+import { useGetCategoriesQuery } from "@/lib/redux/service/categoriesAPI";
+import { setCategories } from "@/lib/redux/features/filterSlice";
 import { Image } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { useSelector } from "@/lib/redux/hooks";
+import { useDispatch } from "@/lib/redux/hooks";
+import { useEffect } from "react";
+
 const NavBar = () => {
+
+  const dispatch=useDispatch()
 
   const user=useSelector((state)=>state.userProfile)
 
@@ -14,9 +21,15 @@ const NavBar = () => {
 
   const pathname = usePathname();
 
+  const {data}=useGetCategoriesQuery(null)
 
+
+  useEffect(()=>{
+    setCategories(data)
+  }, [])
+  
   return (
-    pathname !== "/login" ? (
+    pathname !== "/login" && pathname!== "/addProduct" && pathname!=="" ? (
       <div className={style.navBar} id="inactive">
         <Link href="/" className="text-white">
           <Image
