@@ -1,7 +1,5 @@
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { db } from "@/firebase/config";
 
 export const controller = (
   name: string,
