@@ -1,33 +1,23 @@
-'use client'
-import Link from "next/link"
-import SearchBar from "./searchBar/SearchBar"
-import style from "./navBar.module.css"
-import MenuButton from "./menu/Menu"
-import { Image } from "@nextui-org/react"
-import { onAuthStateChanged, signOut } from "firebase/auth"
-import { useState, useEffect } from "react"
-import { auth } from "@/firebase/config"
-
+"use client"
+import Link from "next/link";
+import SearchBar from "./searchBar/SearchBar";
+import style from "./navBar.module.css";
+import MenuButton from "./menu/Menu";
+import { Image } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
+import { useSelector } from "@/lib/redux/hooks";
 const NavBar = () => {
-    const [flag, setFlag] = useState(false)
-    const user = auth.currentUser
-    const logOut = () => {
-        location.reload()
-        signOut(auth)
-        setFlag(false)
-    }
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setFlag(true)
-            } else {
-                false
-            }
-        })
-    },[user])
-    return (
-      <div className={style.navBar}>
+  const user=useSelector((state)=>state.userProfile)
+
+  const {name, photoUrl}=user
+
+  const pathname = usePathname();
+
+
+  return (
+    pathname !== "/login" ? (
+      <div className={style.navBar} id="inactive">
         <Link href="/" className="text-white">
           <Image
             src="/logopanda.svg"
@@ -40,10 +30,15 @@ const NavBar = () => {
         <SearchBar />
 
         <div className={style.buttonsRight}>
+          <p>{name}</p>
           <MenuButton />
         </div>
       </div>
-    );
-}
+    ) 
+    : 
+    ""
+    )
+    ;
+};
 
-export default NavBar
+export default NavBar;

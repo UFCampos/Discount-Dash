@@ -1,12 +1,14 @@
 "use client"
 import Link from "next/link"
 import "./menuDropdown.css"
-import { useSelector } from "@/lib/redux/hooks"
+import { useSelector, useDispatch } from "@/lib/redux/hooks"
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from "react"
 import { auth } from "@/firebase/config"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 const MenuDropdown=()=>{
+
+    const dispatch=useDispatch()
 
     const [flag, setFlag] = useState(false)
     const user = auth.currentUser
@@ -15,7 +17,7 @@ const MenuDropdown=()=>{
         signOut(auth)
         setFlag(false)
     }
-
+    
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
