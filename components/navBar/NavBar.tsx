@@ -30,7 +30,6 @@ const NavBar = () => {
         <SearchBar />
 
         <div className={style.buttonsRight}>
-          <p>{name}</p>
           <MenuButton />
         </div>
       </div>
