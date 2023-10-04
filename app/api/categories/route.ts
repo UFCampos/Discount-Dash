@@ -11,6 +11,6 @@ export const GET = async () => {
     }));
     return NextResponse.json(categories);
   } catch (error) {
-    NextResponse.json({ error: "Category not found" }, { status: 400 });
+    return NextResponse.json({ error: "Category not found" }, { status: 400 });
   }
 };
