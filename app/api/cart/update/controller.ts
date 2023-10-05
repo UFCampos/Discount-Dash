@@ -9,11 +9,11 @@ export const controller = async (
   const docRef = doc(db, "users", userId, "cart", cartItemId);
   if (value === "add")
     await updateDoc(docRef, {
-      stock: increment(1),
+      quantity: increment(1),
     });
   else {
     await updateDoc(docRef, {
-      stock: increment(-1),
+      quantity: increment(-1),
     });
   }
 };
