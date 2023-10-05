@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { collection, query, orderBy, startAfter, limit, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, startAfter, limit, getDocs, doc } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { productByName } from "./productByName";
 import { Product } from "@/utils/types";
@@ -7,12 +7,20 @@ import { Product } from "@/utils/types";
 export const GET = async (req: NextRequest) => {
   const name = req.nextUrl.searchParams.get("name") || "";
 
-  const limit = req.nextUrl.searchParams.get("limit") || "";
+  // Parsing limit query to integer
+  const pageLimitString = req.nextUrl.searchParams.get("limit") || "";
+  const pageLimit = parseInt(pageLimitString)
   
-  const offset = req.nextUrl.searchParams.get("offset") || "";
+  //Getting last visible document--------------
+  const lastVisibleId= req.nextUrl.searchParams.get("lastVisibleId") || "";
+  
+  const productsRef = collection(db, "products");
+  
+  const lastVisibleRef = lastVisibleId ?? doc(productsRef, lastVisibleId)
+  //--------------------------------------------
   
   const totalProducts= req.nextUrl.searchParams.get("total") || "";
-  
+
   if (name !== "") {
     const response = await productByName(name);
 
@@ -24,13 +32,12 @@ export const GET = async (req: NextRequest) => {
     }
     return NextResponse.json(response);
   }
-  let productsQuery 
-  const productsRef = collection(db, "products");
+  let productsQuery = query(productsRef, orderBy("name"))
   
-    if (limit !== "") {
-    let productsQuery = query(productsRef, orderBy("name"), limit(limit))
-      if (offset !== "") {
-        productsQuery = query(productsQuery, startAfter(totalProducts - offset), endAt(offset))
+    if (!isNaN(pageLimit)) {
+    productsQuery = query(productsQuery, limit(pageLimit))
+      if (lastVisibleId !== "") {
+        productsQuery = query(productsQuery, startAfter(lastVisibleRef))
       }
   }
 
