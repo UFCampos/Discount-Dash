@@ -6,7 +6,7 @@ const Hero = () => {
 
   return (
     <div>
-      <section className="text-gray-400 bg-gray-200 body-font py-1 text-center overflow-x-hidden overflow-auto">
+      <section className="text-gray-200  body-font py-1 text-center overflow-x-hidden overflow-auto">
         <div className='-my-1 mb-10' >
          <Carrucel/>
         </div>
