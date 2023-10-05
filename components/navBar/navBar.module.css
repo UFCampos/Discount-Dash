@@ -27,6 +27,11 @@
 .buttonsRight{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
+    margin-right: 10px;
     width: 10vw;
+}
+
+#inactive{
+    border: 10px solid aqua;
 }
