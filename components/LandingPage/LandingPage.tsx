@@ -7,7 +7,7 @@ const LandingPage = () =>{
         image: string
             }
     return(
-        <div className="h-screen">
+        <div className="overflow-hidden">
             <Hero/>
             <Footer/>
         </div>
