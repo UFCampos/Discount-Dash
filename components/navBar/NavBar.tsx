@@ -11,6 +11,7 @@ import { useSelector } from "@/lib/redux/hooks";
 import { useDispatch } from "@/lib/redux/hooks";
 import { useEffect } from "react";
 
+
 const NavBar = () => {
 
   const dispatch=useDispatch()
