@@ -8,7 +8,7 @@ export const POST = async (req: NextRequest) => {
     price,
     stock,
     image,
-    userId,
+    shopId,
     normalPrice,
     expiration,
     description,
@@ -19,7 +19,7 @@ export const POST = async (req: NextRequest) => {
     !price ||
     !stock ||
     !image ||
-    !userId ||
+    !shopId ||
     !normalPrice ||
     !expiration
   ) {
@@ -31,7 +31,7 @@ export const POST = async (req: NextRequest) => {
     price,
     stock,
     image,
-    userId,
+    shopId,
     normalPrice,
     expiration,
     description
