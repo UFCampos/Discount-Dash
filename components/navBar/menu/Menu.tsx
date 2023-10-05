@@ -8,44 +8,31 @@ import Image from "next/image";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { useEffect } from "react";
+import "./Menu.css"
 
 const MenuButton = () => {
   const dispatch = useDispatch();
-  const isMenuOpen = useSelector((state) => state.menu.isOpen);
+
+  const isOPen=useSelector((state)=>state.menu.isOpen)
+
   const handleToggleMenu = () => {
-    dispatch(toggleMenu());
+
+        dispatch(toggleMenu()); 
+
   };
+  
 
   const user = useSelector((state) => state.userProfile);
 
 
   return (
     <div>
-      <button onClick={handleToggleMenu} className={styles.menuButton}>
-        <Image
-          className={styles.fotoMenu}
-          src="/menu-abierto.png"
-          width={50}
-          height={50}
-          color="with"
-          alt="menu"
-        ></Image>
-      </button>
-      {isMenuOpen && (
-        <div className={styles.menu}>
-          <ul>
-            <Link href="/register">
-              <li>Register</li>
-            </Link>
-            <Link href="/addProduct">
-              <li>Create Products</li>
-            </Link>
-            <Link href={`/users/profile/${user?.id}`}>
-              <li>perfil: no hay</li>
-            </Link>
-          </ul>
-        </div>
-      )}
+      <input type="checkbox" checked={isOPen} id="checkbox" onClick={handleToggleMenu} />
+      <label htmlFor="checkbox" className="toggle">
+        <div className="bars" id="bar1"></div>
+        <div className="bars" id="bar2"></div>
+        <div className="bars" id="bar3"></div>
+      </label>
     </div>
   );
 };

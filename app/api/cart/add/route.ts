@@ -13,8 +13,9 @@ export const POST = async (req: NextRequest, {params}: {params: {id: string}}) =
 
         const item = await setDoc(doc(cartItemCollection, itemId), {
             ...product.data(),
+            quantity: 1
         });
-
+        
         return NextResponse.json({message: "Producto añadido con éxito al carrito"},{status: 201});
     }
 

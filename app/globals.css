@@ -14,4 +14,9 @@ body {
   color: rgb(var(--foreground-rgb));
   background-color: white;
   margin: 0;
+  overflow: hidden;
+}
+
+.global-cont{
+  position: relative;
 }
