@@ -1,9 +1,7 @@
 "use client";
 import { auth } from "@/firebase/config";
 import { toggleMenu } from "@/lib/redux/features/menuSlice";
-import { toggleMenu } from "@/lib/redux/features/menuSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useState, useEffect} from "react";
 import { useState, useEffect} from "react";
 import { signInProvider } from "@/app/utils";
 import Link from "next/link";
@@ -11,10 +9,6 @@ import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import style from "./login.module.css";
 import { useRouter } from "next/navigation";
 
-import Link from "next/link";
-import { useDispatch, useSelector } from "@/lib/redux/hooks";
-import style from "./login.module.css";
-import { useRouter } from "next/navigation";
 
 
 const Login = () => {
@@ -25,12 +19,6 @@ const Login = () => {
 
   const isOpen=useSelector((state)=>state.menu.isOpen)
 
-
-  const router=useRouter()
-
-  const dispatch=useDispatch()
-
-  const isOpen=useSelector((state)=>state.menu.isOpen)
 
 
   const [formData, setFormData] = useState({
@@ -67,8 +55,9 @@ const Login = () => {
 
   return (
     <main className={style.mainLogin}>
-      <h1 className={style.logTitle}>Log in</h1>
+      
       <form className={style.form} onSubmit={handleSubmit}>
+        <p className="title text-center">Login</p>
         <div className={style.flexColumn}>
           <label>Email </label>
         </div>
@@ -103,8 +92,60 @@ const Login = () => {
         <p className={style.p}>Not acount?<span className={style.span}><Link href={"/register"}>Sign Up</Link></span></p>
         <p className={style.p}>Or With</p>
         <div className={style.flexRow}>
-          <button className={style.btn} onClick={(e) => signInProvider(e)} value={"google"}>Google</button>
-          <button className={style.btn} onClick={(e) => signInProvider(e)} value={"facebook"}>Facebook</button>
+          <button className={style.btn} onClick={(e) => signInProvider(e)} value={"google"}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
+              width="20"
+              id="Layer_1"
+              x="0px"
+              y="0px"
+              xmlSpace="preserve"
+            >
+              <path
+                d="M113.47,309.408L95.648,375.94l-65.139,1.378C11.042,341.211,0,299.9,0,256
+                  c0-42.451,10.324-82.483,28.624-117.732h0.014l57.992,10.632l25.404,57.644c-5.317,15.501-8.215,32.141-8.215,49.456
+                  C103.821,274.792,107.225,292.797,113.47,309.408z"
+                style={{ fill: '#FBBB00' }}
+              />
+              <path
+                d="M507.527,208.176C510.467,223.662,512,239.655,512,256c0,18.328-1.927,36.206-5.598,53.451
+                  c-12.462,58.683-45.025,109.925-90.134,146.187l-0.014-0.014l-73.044-3.727l-10.338-64.535
+                  c29.932-17.554,53.324-45.025,65.646-77.911h-136.89V208.176h138.887L507.527,208.176L507.527,208.176z"
+                style={{ fill: '#518EF8' }}
+              />
+              <path
+                d="M416.253,455.624l0.014,0.014C372.396,490.901,316.666,512,256,512
+                  c-97.491,0-182.252-54.491-225.491-134.681l82.961-67.91c21.619,57.698,77.278,98.771,142.53,98.771
+                  c28.047,0,54.323-7.582,76.87-20.818L416.253,455.624z"
+                style={{ fill: '#28B446' }}
+              />
+              <path
+                d="M419.404,58.936l-82.933,67.896c-23.335-14.586-50.919-23.012-80.471-23.012
+                  c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0
+                  C318.115,0,375.068,22.126,419.404,58.936z"
+                style={{ fill: '#F14336' }}
+              />
+            </svg> Google
+          </button>
+
+          <button className={style.btn} onClick={(e) => signInProvider(e)} value={"facebook"}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              height="20"
+              width="20"
+              viewBox="0 0 408.788 408.788"
+            >
+            <g>
+              <path
+                fill="#475993"
+                d="M353.701 0H55.087C24.665 0 .002 24.662.002 55.085v298.616c0 30.423 24.662 55.085 55.085 55.085h147.275l.251-146.078h-37.951a8.954 8.954 0 0 1-8.954-8.92l-.182-47.087a8.955 8.955 0 0 1 8.955-8.989h37.882v-45.498c0-52.8 32.247-81.55 79.348-81.55h38.65a8.955 8.955 0 0 1 8.955 8.955v39.704a8.955 8.955 0 0 1-8.95 8.955l-23.719.011c-25.615 0-30.575 12.172-30.575 30.035v39.389h56.285c5.363 0 9.524 4.683 8.892 10.009l-5.581 47.087a8.955 8.955 0 0 1-8.892 7.901h-50.453l-.251 146.078h87.631c30.422 0 55.084-24.662 55.084-55.084V55.085C408.786 24.662 384.124 0 353.701 0z"
+              ></path>
+            </g>
+          </svg> Facebook
+        </button>
         </div>
       </form>
       <div className={style.back}>
