@@ -1,20 +1,16 @@
 "use client";
-import { useDispatch } from "@/lib/redux/hooks";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
-import { setUser } from "@/lib/redux/features/userProfile";
 import { usePostProfileMutation } from "@/lib/redux/service/searchProfileAPI";
 
 const Register = () => {
-  const dispatch = useDispatch();
   const [newUser, setNewUser] = useState({
     name: "",
     lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
-    id: "",
   });
   console.log(newUser);
 
@@ -25,17 +21,13 @@ const Register = () => {
       [name]: value,
     });
   };
+  const [mutate, { data }] = usePostProfileMutation();
 
   const handleSubmit = () => {
     createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
       .then((userCredential) => {
         const user = userCredential.user;
         const uid = user.uid; // Aquí obtienes el UID del usuario
-        setNewUser({
-          ...newUser,
-          id: uid,
-        });
-        const [mutate, { data }] = usePostProfileMutation();
         mutate({
           name: newUser.name,
           lastname: newUser.lastname,
@@ -53,8 +45,7 @@ const Register = () => {
       lastname: "",
       email: "",
       password: "",
-      confirmPassword: "",
-      id: "",
+      confirmPassword: ""
     });
   };
 

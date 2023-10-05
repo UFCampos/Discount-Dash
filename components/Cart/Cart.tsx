@@ -2,13 +2,11 @@
 import { Image } from "@nextui-org/react";
 import style from "./Carts.module.css";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
-import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { useDelProductCartMutation, usePutPrudctCartMutation } from "@/lib/redux/service/cartProductsAPI";
+import { useSelector } from "@/lib/redux/hooks";
 const Cart = () => {
-  // const id = useSelector((state) => state.userProfile.id);
 
-  
-  const id = "6Ks3wWaq8zPnkqGZUhqK";
+  const { id } = useSelector((state) => state.userProfile);
   const { data, isLoading } = useGetProductsCartQuery({ id });
 
   const [mutate1] = useDelProductCartMutation();
@@ -34,7 +32,7 @@ const Cart = () => {
         {isLoading ? (
           <h1>Is loading...</h1>
         ) : (
-          data?.map((product, index) => { console.log(product);
+          data?.map((product, index) => {
           {
             return (
               <div
