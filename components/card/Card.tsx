@@ -2,6 +2,11 @@
 import "./Card.css";
 import Link from "next/link";
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
+import { useState } from "react";
+import { useDispatch } from "@/lib/redux/hooks";
+import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { strict } from "assert";
 import { useSelector } from "@/lib/redux/hooks";
 
 interface props {
@@ -10,16 +15,60 @@ interface props {
   brand: string;
   image: string;
   price: string;
+  stock: string;
 }
 
-const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
-    const [mutate] = useAddProductCartMutation();
-    const { id } = useSelector((state) => state.userProfile);
+const Card: React.FC<props> = ({
+  itemId,
+  name,
+  brand,
+  image,
+  price,
+  stock,
+}) => {
+  const [preferenceId, setPreferenceId] = useState("");
+
+  initMercadoPago("TEST-6199811d-11fc-405c-928d-7b8f1a95521a");
+
+  const [mutate] = useAddProductCartMutation();
+  const { id } = useSelector((state) => state.userProfile);
   const handleAddCart = () => {
     mutate({
       itemId,
       userId: id,
     });
+  };
+
+  const createPreference = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/products/buyProduct",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([
+            {
+              itemId,
+              name,
+              price,
+              quantity: 1, // Debido a que es una compra rapida, se compra solo 1
+              stock,
+            },
+          ]),
+        }
+      );
+
+      return await response.json();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const handlerBuy = async () => {
+    const { id } = await createPreference();
+    setPreferenceId(id);
   };
 
   return (
@@ -43,7 +92,8 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
       </div>
       <div className="card-buy flex flex-row justify-evenly items-center">
         <div className="buy">
-          <p>Buy</p>
+          <button onClick={handlerBuy}>Buy</button>
+          {preferenceId && <Wallet initialization={{ preferenceId }} />}
         </div>
         <div className="cart flex flex-col justify-center items-center">
           <button

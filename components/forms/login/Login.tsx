@@ -105,7 +105,11 @@ const Login = () => {
             <input type="radio" />
             <label>Remember me </label>
           </div>
-          <span className={style.span}>Forgot password?</span>
+          <span className={style.span}>
+            <Link href={"/resetPassword"}>
+              <h3>Forgot your password?</h3>
+            </Link>
+          </span>
         </div>
         <button className={style.buttonSubmit} type="submit">Sign In</button>
         <p className={style.p}>Not acount?<span className={style.span}><Link href={"/register"}>Sign Up</Link></span></p>
