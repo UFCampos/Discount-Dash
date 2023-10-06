@@ -4,10 +4,10 @@ import { Wallet } from '@mercadopago/sdk-react'
 import { useSelector, useDispatch } from '@/lib/redux/hooks'
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { productPayment, productPaymentId } from '@/lib/redux/features/paymentSlice';
-import Image from 'next/image';
+
 const PaymentModal = () => {
 
-  initMercadoPago("APP_USR-02de60df-91f7-40f2-9913-fb7b861b9937")
+  initMercadoPago("TEST-38478520-c489-47d5-9e53-f2333cb4ff9b")
 
   const dispatch=useDispatch()
 
