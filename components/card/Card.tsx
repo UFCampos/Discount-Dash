@@ -1,10 +1,13 @@
 "use client";
 import "./Card.css";
 import Link from "next/link";
+import axios from "axios"
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
-import { useDispatch } from "@/lib/redux/hooks";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
 import { useState } from "react";
+import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
+
 
 interface props {
   itemId: string;
@@ -15,7 +18,18 @@ interface props {
 }
 
 const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
-    const [mutate] = useAddProductCartMutation();
+
+  const dispatch=useDispatch()
+  
+  const product=useSelector((state)=>state.payments.productPayment)
+
+  const paymentId=useSelector((state)=>state.payments.paymentId)
+
+  console.log("producto a pagar:", product)
+
+  console.log("id de la compra", paymentId)
+
+  const [mutate] = useAddProductCartMutation();
   const handleAddCart = () => {
 
     mutate({
@@ -23,6 +37,38 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
       userId: "6Ks3wWaq8zPnkqGZUhqK",
     });
   };
+
+  const createPreference=async()=>{
+    try {
+      const response=await axios.post("http://localhost:3000/create_preference", {
+        description: name,
+        price:price,
+        quantity:1
+      })
+      const {id}=response.data
+      return id
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleBuy=async()=>{
+
+    const id=await createPreference()
+    
+    if(id){
+      dispatch(productPayment({
+        image:image,
+        name:name,
+        price:price,
+        brand:brand
+      }))
+
+      dispatch(productPaymentId(id))
+    }
+    
+
+  }
   return (
     <div className="card flex flex-col">
       <div className="card-img flex justify-center items-center">
@@ -43,7 +89,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
         </div>
       </div>
       <div className="card-buy flex flex-row justify-evenly items-center">
-        <div className="buy">
+        <div className="buy" onClick={handleBuy}>
           <p>Buy</p>
         </div>
         <div className="cart flex flex-col justify-center items-center">
