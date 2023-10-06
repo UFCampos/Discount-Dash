@@ -15,6 +15,7 @@ const Cards = () => {
     price: string;
     brand: string;
     id: string;
+    stock: string;
   };
 
   const data = useSelector((state) => state.items.products);
@@ -34,18 +35,21 @@ const Cards = () => {
             <p>Not found</p>
           ) : (
             data?.map((item: Item, index) => {
-            {
-              return (
-                <Card
-                  key={index}
-                  itemId={item.id}
-                  name={item.name}
-                  image={item.image}
-                  price={item.price}
-                  brand={item.brand}
-                />
-              );
-            }})
+              console.log(item);
+              {
+                return (
+                  <Card
+                    key={index}
+                    itemId={item.id}
+                    name={item.name}
+                    image={item.image}
+                    price={item.price}
+                    brand={item.brand}
+                    stock={item.stock}
+                  />
+                );
+              }
+            })
           )}
         </div>
       )}

@@ -30,6 +30,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
   console.log("id de la compra", paymentId)
 
   const [mutate] = useAddProductCartMutation();
+  const { id } = useSelector((state) => state.userProfile);
   const handleAddCart = () => {
     mutate({
       itemId,
