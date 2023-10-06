@@ -1,5 +1,6 @@
 "use client";
 import { ChangeEvent } from "react";
+import style from "./Filters.module.css"
 
 type FiltersPriceProps = {
     valueState: {
@@ -12,27 +13,29 @@ type FiltersPriceProps = {
 const FiltersPrice: React.FC<FiltersPriceProps> = ({valueState, onChange}) => {
   return (
     <div>
-      <h1>Price</h1>
-
-      <div>
-        <label htmlFor="minPrice">Min Price:</label>
-        <input
-          type="number"
-          id="minPrice"
-          name="minPrice"
-          value={valueState.minPrice}
-          onChange={onChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="maxPrice">Max Price:</label>
-        <input
-          type="number"
-          id="maxPrice"
-          name="maxPrice"
-          value={valueState.maxPrice}
-          onChange={onChange}
-        />
+      <p className={style.titlePrice}>Price</p>
+        <div className={style.priceCont}>
+          <div className={style.divPrice}>
+            <input className={style.price}
+              placeholder="min"
+              type="number"
+              id="minPrice"
+              name="minPrice"
+              value={valueState.minPrice}
+              onChange={onChange}
+            />
+          </div>
+          <div className={style.separation}></div>
+          <div className={style.divPrice}>
+            <input className={style.price}
+              placeholder="max"
+              type="number"
+              id="maxPrice"
+              name="maxPrice"
+              value={valueState.maxPrice}
+              onChange={onChange}
+            />
+          </div>
       </div>
     </div>
   );

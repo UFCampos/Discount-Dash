@@ -1,5 +1,6 @@
 "use client";
 import { ChangeEvent } from "react";
+import style from "./Filters.module.css"
 
 type FiltersCategoriesProps = {
     valueState: {
@@ -14,8 +15,9 @@ const FiltersCategories: React.FC<FiltersCategoriesProps> = ({ valueState, onCha
   );
 
   return (
-    <div>
-      <select name="category" value={valueState.category} onChange={onChange}>
+    <div className={style.catCont}>
+      <label htmlFor="category" className={style.catTitle}>Categories</label>
+      <select name="category" value={valueState.category} onChange={onChange} className={style.selectCat}>
         <option value="">Select a category</option>
         {category}
       </select>
