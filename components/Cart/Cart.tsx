@@ -4,6 +4,7 @@ import style from "./Carts.module.css";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useDelProductCartMutation, usePutPrudctCartMutation } from "@/lib/redux/service/cartProductsAPI";
 import { useSelector } from "@/lib/redux/hooks";
+import { CartProduct } from "@/utils/types";
 const Cart = () => {
 
   const { id } = useSelector((state) => state.userProfile);
@@ -32,7 +33,7 @@ const Cart = () => {
         {isLoading ? (
           <h1>Is loading...</h1>
         ) : (
-          data?.map((product, index) => {
+          data?.map((product: CartProduct, index: number) => {
           {
             return (
               <div
@@ -42,7 +43,7 @@ const Cart = () => {
                 
                 <div className="border border-gray-300 rounded mr-2 ">
                   <Image
-                    src={product.image}
+                    src={product?.image}
                     alt="Product Image"
                     height={80}
                     width={80}
@@ -56,7 +57,7 @@ const Cart = () => {
                   <h1 className="text-lg font-bold text-gray-950">
                     {product?.name}
                   </h1>
-                  <p className="text-gray-950">${product.price}</p>
+                  <p className="text-gray-950">${product?.price}</p>
                   <div className="mt-1">
                     <button
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
@@ -86,7 +87,7 @@ const Cart = () => {
                     <h5 className="text-black text-lg">
                       Total:{" "}
                       <h1 className="font-bold text-lg">
-                        ${product.quantity * product.price}
+                        ${product?.quantity * product?.price}
                       </h1>
                     </h5>
                   </div>
