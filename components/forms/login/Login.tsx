@@ -6,8 +6,7 @@ import { useState, useEffect} from "react";
 import { signInProvider } from "@/app/utils";
 import Link from "next/link";
 import style from "./login.module.css";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "@/lib/redux/hooks";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { setUser } from "@/lib/redux/features/userProfile";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -37,11 +36,14 @@ const Login = () => {
         const user = userCredential.user;
         const uid = user.uid; // Aquí obtienes el UID del usuario
         setUid(uid);
+        dispatch(setUser(uid));
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  const isOpen = useSelector((state) => state.menu.isOpen);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -50,17 +52,22 @@ const Login = () => {
         let mappedUser = {};
         user.providerData.forEach((profile) => {
           mappedUser = {
-            id: uid, // Usar el uid del estado
+            id: uid ? uid : profile.uid, // Usar el uid del estado
             email: profile.email,
             photoUrl: profile.photoURL,
             name: profile.displayName,
           };
         });
-        // Dispatch de setUser con mappedUser
         dispatch(setUser(mappedUser));
       }
+      if(isOpen){
+        dispatch(toggleMenu())
+      }
+      
     });
   }, [uid, dispatch]);
+  console.log(uid);
+  
 
   return (
     <main className={style.mainLogin}>
