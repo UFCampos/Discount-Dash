@@ -28,7 +28,7 @@ const Cards = () => {
           {error ? (
             <p>Not found</p>
           ) : (
-            data?.map((item: Item, index) => {console.log(item.id);
+            data?.map((item: Item, index) => {
             {
               return (
                 <Card

@@ -23,7 +23,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    id: "",
+    id: ""
   });
   console.log(newUser);
 
@@ -34,7 +34,6 @@ const Register = () => {
       [name]: value,
     });
   };
-
   const [mutate, { data }] = usePostProfileMutation();
 
   const handleSubmit = () => {
@@ -65,7 +64,7 @@ const Register = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      id: "",
+      id: ""
     });
 
     setTimeout(()=>{router.push("/home")}, 2000)

@@ -5,19 +5,16 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState, useEffect} from "react";
 import { signInProvider } from "@/app/utils";
 import Link from "next/link";
-import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import style from "./login.module.css";
-import { useRouter } from "next/navigation";
-
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { setUser } from "@/lib/redux/features/userProfile";
+import { onAuthStateChanged } from "firebase/auth";
 
 
 const Login = () => {
-
-  const router=useRouter()
+  const [uid, setUid] = useState("");
 
   const dispatch=useDispatch()
-
-  const isOpen=useSelector((state)=>state.menu.isOpen)
 
 
 
@@ -37,21 +34,43 @@ const Login = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, formData.email, formData.password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      const uid = user.uid; 
-    })  
-    .catch((error) => {
-        alert(error.message);
+      .then((userCredential) => {
+        const user = userCredential.user;
+        const uid = user.uid; // Aquí obtienes el UID del usuario
+        setUid(uid);
+        dispatch(setUser(uid));
+      })
+      .catch((error) => {
+        console.error(error);
       });
     
   };
 
-  useEffect(()=>{
+  const isOpen = useSelector((state) => state.menu.isOpen);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Utiliza el uid almacenado en el estado
+        let mappedUser = {};
+        user.providerData.forEach((profile) => {
+          mappedUser = {
+            id: uid ? uid : profile.uid, // Usar el uid del estado
+            email: profile.email,
+            photoUrl: profile.photoURL,
+            name: profile.displayName,
+          };
+        });
+        dispatch(setUser(mappedUser));
+      }
       if(isOpen){
         dispatch(toggleMenu())
       }
-  }, [])
+      
+    });
+  }, [uid, dispatch]);
+  console.log(uid);
+  
 
   return (
     <main className={style.mainLogin}>
@@ -155,4 +174,4 @@ const Login = () => {
   );
 };
 
-export default Login 
+export default Login;
