@@ -4,17 +4,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 6px 0 6px;
+    height: 10vh;
+    width: 100vw;
 }
 
 .login{
     border-radius: 10px;
     transform: scale(1.2);
 }
-
-/* .home{
-    border-radius: 10px;
-    transform: scale(1.2);
-} */
 
 .home{
     background-size: cover;
@@ -25,6 +22,11 @@
 .buttonsRight{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
+    margin-right: 10px;
     width: 10vw;
+}
+
+#inactive{
+    border: 10px solid aqua;
 }

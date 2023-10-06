@@ -1,13 +1,12 @@
-'use client'
-import { useSelector, useDispatch } from '@/lib/redux/hooks';
-import { toggleMenu } from '@/lib/redux/features/menuSlice';
-import styles from './menu.module.css'; 
-import Link from 'next/link';
-import Image from 'next/image';
+"use client";
+import { useSelector, useDispatch } from "@/lib/redux/hooks";
+import { toggleMenu } from "@/lib/redux/features/menuSlice";
+import "./Menu.css";
 
 const MenuButton = () => {
   const dispatch = useDispatch();
-  const isMenuOpen = useSelector((state) => state.menu.isOpen);
+
+  const isOPen = useSelector((state) => state.menu.isOpen);
 
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
@@ -15,19 +14,17 @@ const MenuButton = () => {
 
   return (
     <div>
-      
-      <button onClick={handleToggleMenu} className={styles.menuButton}>
-        <Image className={styles.fotoMenu} src='/menu-abierto.png' width={50} height={50} color='with' alt='menu'></Image>
-      </button>
-      {isMenuOpen && (
-        <div className={styles.menu}>
-          <ul>
-            <Link href="/register"><li>Register</li></Link>
-            <Link href="/addProduct"><li>Create Products</li></Link>
-            <li>Item 3</li>
-          </ul>
-        </div>
-      )}
+      <input
+        type="checkbox"
+        checked={isOPen}
+        id="checkbox"
+        onClick={handleToggleMenu}
+      />
+      <label htmlFor="checkbox" className="toggle">
+        <div className="bars" id="bar1"></div>
+        <div className="bars" id="bar2"></div>
+        <div className="bars" id="bar3"></div>
+      </label>
     </div>
   );
 };

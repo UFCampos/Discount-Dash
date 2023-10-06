@@ -1,12 +1,11 @@
+import LandingPage from "@/components/LandingPage/LandingPage"
 
-export default function IndexPage() {
+const home =()=>{
   return (
-    <div className="text-center ">
-      <h1>Discount-Dash</h1>
-    </div>
+      <div>
+      <LandingPage/>
+      </div>
   )
 }
 
-export const metadata = {
-  title: 'Discount-Dash',
-}
+export default home

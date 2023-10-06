@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+.card{
+    height: 260px;
+    width: 200px;
+    border: 1px solid #dedede;
+    font-family: 'Montserrat', sans-serif;
+    padding: 5px;
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+}
+
+.card-img{
+    position: relative;
+    height: 50%;
+    width: 100%;
+    background: #dedede;
+}
+.card-img img{
+    height: 90%;
+}
+.card-img p{
+    position: absolute;
+    background: red;
+    color: white;
+    font-size: 10px;
+    padding: 1px;
+    font-weight: bold;
+    top:0;
+    right: 0;
+}
+.card-info{
+    position: relative;
+    height: 35%;
+    width: 100%;
+}
+.card-info h3{
+    font-size: 11px;
+}
+.rate{
+
+    font-size: 12px;
+}
+.price{
+    margin-top: 10px;
+    color: green;
+}
+.price .total{
+    color: gray;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+.card-buy{
+    border-top: 1px solid #dedede;
+    height: 15%;
+    color: black ;
+    font-weight: bold;
+}
+
+
+.card-buy p{
+    font-size: 16px;
+    cursor: pointer;
+    color: green;
+}
+
+.card-buy img{
+    height: 20px;
+    cursor:pointer;
+}
+.buy, .cart{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart{
+    border-left: 1px solid #dedede;
+}
+
+.cart span{
+    cursor: pointer;
+    color:black
+}
