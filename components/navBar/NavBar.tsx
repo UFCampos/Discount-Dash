@@ -11,6 +11,7 @@ import { useSelector } from "@/lib/redux/hooks";
 import { useDispatch } from "@/lib/redux/hooks";
 import { useEffect } from "react";
 
+
 const NavBar = () => {
 
   const dispatch=useDispatch()
@@ -29,7 +30,7 @@ const NavBar = () => {
   }, [])
   
   return (
-    pathname !== "/login" && pathname!== "/addProduct" && pathname!=="" ? (
+    pathname !== "/login" && pathname!== "/addProduct" && pathname!=="" &&pathname!=="/register" ? (
       <div className={style.navBar} id="inactive">
         <Link href="/" className="text-white">
           <Image
