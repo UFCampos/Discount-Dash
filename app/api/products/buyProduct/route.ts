@@ -19,9 +19,9 @@ export const POST = async (req: NextRequest) => {
     ],
 
     back_urls: {
-      success: `/paid/${itemId}/${Number(stock)}`,
-      failure: "/home",
-      pending: "/home",
+      success: `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/paid/${itemId}/${Number(stock)}`,
+      failure: `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/home`,
+      pending: `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/home`,
     },
     auto_return: "approved",
   };
