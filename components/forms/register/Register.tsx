@@ -23,6 +23,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    id: ""
   });
   console.log(newUser);
 
@@ -62,7 +63,8 @@ const Register = () => {
       lastname: "",
       email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      id: ""
     });
 
     setTimeout(()=>{router.push("/home")}, 2000)
