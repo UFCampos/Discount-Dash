@@ -1,24 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 const mercadopago = require("mercadopago");
 
-//! ESTA RUTA ESTA HECHA PARA CUANDO RECIBE 1 SOLO PRODUCTO. POR EL MOMENTO...
-
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
-    access_token: "ACCESS_TOKEN",
+    access_token:
+      "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469",
   });
-  const { itemId, description, price, quantity } = await req.json();
+  const { itemId, description, price, quantity, stock } = await req.json();
 
   let preference = {
     items: [
       {
+        id: itemId,
         title: description,
         unit_price: Number(price),
         quantity: Number(quantity),
       },
     ],
+
     back_urls: {
-      success: "http://localhost:3000/home",
+      success: `http://localhost:3000/paid/${itemId}/${Number(stock)}`,
       failure: "http://localhost:3000/home",
       pending: "http://localhost:3000/home",
     },

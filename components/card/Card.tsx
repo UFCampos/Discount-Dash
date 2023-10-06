@@ -14,12 +14,20 @@ interface props {
   brand: string;
   image: string;
   price: string;
+  stock: string;
 }
 
-const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
+const Card: React.FC<props> = ({
+  itemId,
+  name,
+  brand,
+  image,
+  price,
+  stock,
+}) => {
   const [preferenceId, setPreferenceId] = useState("");
 
-  initMercadoPago("PUBLIC_ID");
+  initMercadoPago("TEST-6199811d-11fc-405c-928d-7b8f1a95521a");
 
   const [mutate] = useAddProductCartMutation();
   const handleAddCart = () => {
@@ -38,11 +46,15 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            name,
-            price,
-            quantity: 1, // Debido a que es una compra rapida, se compra solo 1
-          }),
+          body: JSON.stringify([
+            {
+              itemId,
+              name,
+              price,
+              quantity: 1, // Debido a que es una compra rapida, se compra solo 1
+              stock,
+            },
+          ]),
         }
       );
 
