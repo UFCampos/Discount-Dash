@@ -4,41 +4,36 @@ import { useDispatch } from "@/lib/redux/hooks";
 import {
   loadProducts,
   loadErrors,
-  isLoadingItems
+  isLoadingItems,
 } from "@/lib/redux/features/itemsSlice";
 import { useState, useEffect } from "react";
 import style from "./searchBar.module.css";
 import { setName } from "@/lib/redux/features/filterSlice";
 
 const SearchBar = () => {
-
   const [value, setValue] = useState("");
 
   const dispatch = useDispatch();
 
-  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setValue(value);
-    
   };
-
 
   const { data, isLoading, isError } = useGetResultsQuery({ name: value });
 
   useEffect(() => {
-    if(value === ""){
+    if (value === "") {
       dispatch(setName(value));
       dispatch(loadErrors(isError));
       dispatch(isLoadingItems(isLoading));
       dispatch(loadProducts(data));
     }
-
-  },[value]);
+  }, [value]);
 
   useEffect(() => {
     dispatch(setName(value));
-  },[value])
+  }, [value]);
 
   useEffect(() => {
     dispatch(isLoadingItems(isLoading));
@@ -48,9 +43,10 @@ const SearchBar = () => {
   }, [isLoading]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === "Enter" ) {
-          dispatch(setName(value));
-      }
+    if (event.key === "Enter") {
+      dispatch(setName(value));
+      dispatch(loadProducts(data));
+    }
   };
 
   return (

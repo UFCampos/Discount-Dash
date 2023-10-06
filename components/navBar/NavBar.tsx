@@ -26,15 +26,17 @@ const NavBar = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setFlag(true);
+        // Utiliza el uid almacenado en el estado
         let mappedUser = {};
-        mappedUser = {
-          id: user.uid, 
-          email: user.email,
-          photoUrl: user.photoURL,
-          name: user.displayName,
-        };
-        uid = user.uid
+        user.providerData.forEach((profile) => {
+          uid = user.uid
+          mappedUser = {
+            id: uid ? uid : profile.uid, // Usar el uid del estado
+            email: profile.email,
+            photoUrl: profile.photoURL,
+            name: profile.displayName,
+          };
+        });
         dispatch(setUser(mappedUser));
         console.log(user);
         
