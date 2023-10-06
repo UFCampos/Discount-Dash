@@ -1,0 +1,9 @@
+.line-horizontal {
+  position: relative; /* Fijar la posición para que se mantenga en la parte superior */
+  width: 100%; /* Ancho del 100% para que cubra toda la pantalla */
+  height: 2px; /* Altura de la línea */
+  background-color: #000; /* Color de la línea, puedes cambiarlo */
+  top: 50%; /* Colocar en la mitad de la pantalla verticalmente */
+  transform: translateY(-50%); /* Alinear verticalmente en el centro */
+  z-index: 999; /* Asegura que la línea esté sobre otros elementos */
+}

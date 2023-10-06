@@ -1,4 +1,4 @@
-import { doc, deleteDoc, getDoc, collection} from "firebase/firestore";
+import { doc, deleteDoc} from "firebase/firestore";
 import { db } from "@/firebase/config";
 
 export const controller = async (userId: string, cartItemId: string) => {
