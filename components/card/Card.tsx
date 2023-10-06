@@ -2,9 +2,14 @@
 import "./Card.css";
 import Link from "next/link";
 import axios from "axios"
+import axios from "axios"
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
+import { useState } from "react";
+import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
+
 import { useState } from "react";
 import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
 
@@ -25,11 +30,8 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
   const paymentId=useSelector((state)=>state.payments.paymentId)
 
-  console.log("producto a pagar:", product)
-
-  console.log("id de la compra", paymentId)
-
   const [mutate] = useAddProductCartMutation();
+  
   const { id } = useSelector((state) => state.userProfile);
   const handleAddCart = () => {
     mutate({
@@ -40,7 +42,8 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
   const createPreference=async()=>{
     try {
-      const response=await axios.post("http://localhost:3000/create_preference", {
+      const response=await axios.post("http://localhost:3000/api/products/buyProduct", {
+        itemId:itemId,
         description: name,
         price:price,
         quantity:1
