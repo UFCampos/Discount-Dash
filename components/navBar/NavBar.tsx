@@ -14,7 +14,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
 
 
-
 const NavBar = () => {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);

@@ -40,8 +40,6 @@ const Register = () => {
     });
   };
 
-  const [mutate, { data }] = usePostProfileMutation();
-
   const handleSubmit = () => {
     createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
       .then((userCredential) => {

@@ -11,12 +11,10 @@ import { setUser } from "@/lib/redux/features/userProfile";
 import { onAuthStateChanged } from "firebase/auth";
 
 
-
 const Login = () => {
   const [uid, setUid] = useState("");
 
   const dispatch=useDispatch()
-
 
 
 
