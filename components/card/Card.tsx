@@ -2,9 +2,7 @@
 import "./Card.css";
 import Link from "next/link";
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
-import { useDispatch } from "@/lib/redux/hooks";
-import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
-import { useState } from "react";
+import { useSelector } from "@/lib/redux/hooks";
 
 interface props {
   itemId: string;
@@ -16,13 +14,14 @@ interface props {
 
 const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
     const [mutate] = useAddProductCartMutation();
+    const { id } = useSelector((state) => state.userProfile);
   const handleAddCart = () => {
-
     mutate({
       itemId,
-      userId: "6Ks3wWaq8zPnkqGZUhqK",
+      userId: id,
     });
   };
+
   return (
     <div className="card flex flex-col">
       <div className="card-img flex justify-center items-center">
