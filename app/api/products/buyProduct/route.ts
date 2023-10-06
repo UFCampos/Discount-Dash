@@ -19,9 +19,9 @@ export const POST = async (req: NextRequest) => {
     ],
 
     back_urls: {
-      success: `http://localhost:3000/paid/${itemId}/${Number(stock)}`,
-      failure: "http://localhost:3000/home",
-      pending: "http://localhost:3000/home",
+      success: `/paid/${itemId}/${Number(stock)}`,
+      failure: "/home",
+      pending: "/home",
     },
     auto_return: "approved",
   };
