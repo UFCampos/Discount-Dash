@@ -7,6 +7,7 @@ import { useDispatch } from "@/lib/redux/hooks";
 import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { strict } from "assert";
+import { useSelector } from "@/lib/redux/hooks";
 
 interface props {
   itemId: string;
@@ -30,10 +31,11 @@ const Card: React.FC<props> = ({
   initMercadoPago("TEST-6199811d-11fc-405c-928d-7b8f1a95521a");
 
   const [mutate] = useAddProductCartMutation();
+  const { id } = useSelector((state) => state.userProfile);
   const handleAddCart = () => {
     mutate({
       itemId,
-      userId: "6Ks3wWaq8zPnkqGZUhqK",
+      userId: id,
     });
   };
 
