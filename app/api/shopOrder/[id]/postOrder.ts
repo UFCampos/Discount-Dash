@@ -18,7 +18,7 @@ export const controller = async (id: string) => {
     const cartItemData = doc.data();
     totalPrice += cartItemData.quantity * cartItemData.price;
     shopId = cartItemData.shopId;
-
+console.log(cartItemData.shopId)
     products[cartItemData.name] = {
       productId: doc.id,
       name: cartItemData.name,
@@ -36,7 +36,7 @@ export const controller = async (id: string) => {
     userId: id,
     shopId,
     totalPrice,
-    orderStatus: "Order placed",
+    orderStatus: "order placed",
   };
 
   await addDoc(ordersRef, orderData);
