@@ -2,7 +2,7 @@
     width: 20vw;
     height: 88vh;
     overflow-y:scroll;
-    background-color: rgb(211, 211, 211);
+    background-color: rgb(255, 255, 255);
 }
 .homeRigthCont::-webkit-scrollbar {
     width: 8px;

@@ -1,6 +1,6 @@
 "use client";
 import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
-import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { useDispatch } from "@/lib/redux/hooks";
 import {
   loadProducts,
   loadErrors,
@@ -28,12 +28,17 @@ const SearchBar = () => {
 
   useEffect(() => {
     if(value === ""){
+      dispatch(setName(value));
       dispatch(loadErrors(isError));
       dispatch(isLoadingItems(isLoading));
       dispatch(loadProducts(data));
     }
 
   },[value]);
+
+  useEffect(() => {
+    dispatch(setName(value));
+  },[value])
 
   useEffect(() => {
     dispatch(isLoadingItems(isLoading));

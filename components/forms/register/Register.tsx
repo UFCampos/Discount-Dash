@@ -1,20 +1,29 @@
 "use client";
-import { useDispatch } from "@/lib/redux/hooks";
-import { useState } from "react";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { useEffect, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { setUser } from "@/lib/redux/features/userProfile";
+import Link from "next/link";
 import { usePostProfileMutation } from "@/lib/redux/service/searchProfileAPI";
-
+import { useRouter } from "next/navigation";
+import "./register.css"
+import { toggleMenu } from "@/lib/redux/features/menuSlice";
 const Register = () => {
+
+  const router=useRouter()
+
   const dispatch = useDispatch();
+
+  const isOpen=useSelector((state)=>state.menu.isOpen)
+
   const [newUser, setNewUser] = useState({
     name: "",
     lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
-    id: "",
+    id: ""
   });
   console.log(newUser);
 
@@ -25,6 +34,7 @@ const Register = () => {
       [name]: value,
     });
   };
+  const [mutate, { data }] = usePostProfileMutation();
 
   const handleSubmit = () => {
     createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
@@ -35,7 +45,7 @@ const Register = () => {
           ...newUser,
           id: uid,
         });
-        const [mutate, { data }] = usePostProfileMutation();
+        
         mutate({
           name: newUser.name,
           lastname: newUser.lastname,
@@ -54,50 +64,90 @@ const Register = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      id: "",
+      id: ""
     });
+
+    setTimeout(()=>{router.push("/home")}, 2000)
   };
 
+  useEffect(()=>{
+    if(isOpen){
+      dispatch(toggleMenu())
+    }
+  }, [])
   return (
-    <div>
-      <h1>Create your account</h1>
-      <label htmlFor="">Name: </label>
-      <input
-        type="text"
-        value={newUser.name}
-        name="name"
-        onChange={handleChange}
-      />
-      <label htmlFor="">lastname</label>
-      <input
-        type="text"
-        value={newUser.lastname}
-        name="lastname"
-        onChange={handleChange}
-      />
-      <label htmlFor="">Email: </label>
-      <input
-        type="text"
+    <form className="form" onSubmit={handleSubmit}>
+    <p className="title">Register </p>
+    <p className="message">Signup now and get full access to our app. </p>
+        <div className="flex">
+        <label>
+            <input 
+            required 
+            value={newUser.name}
+            name="name"
+            onChange={handleChange}
+            placeholder="" 
+            type="text" 
+            className="input"
+            />
+            <span>Firstname</span>
+        </label>
+
+        <label>
+            <input 
+            required 
+            placeholder="" 
+            type="text" 
+            className="input"
+            value={newUser.lastname}
+            name="lastname"
+            onChange={handleChange}
+            
+            />
+            <span>Lastname</span>
+        </label>
+    </div>  
+            
+    <label>
+        <input 
+        required 
+        placeholder="" 
+        type="email" 
+        className="input"
         value={newUser.email}
         name="email"
         onChange={handleChange}
-      />
-      <label htmlFor="">Password: </label>
-      <input
-        type="text"
+        />
+        <span>Email</span>
+    </label> 
+        
+    <label>
+        <input 
+        required 
+        placeholder="" 
+        type="password" 
+        className="input"
         value={newUser.password}
         name="password"
         onChange={handleChange}
-      />
-      <label htmlFor="">Confirm Password: </label>
-      <input
-        type="text"
+        />
+        <span>Password</span>
+    </label>
+    <label>
+        <input 
+        required 
+        placeholder="" 
+        type="password" 
+        className="input"
         value={newUser.confirmPassword}
         name="confirmPassword"
         onChange={handleChange}
-      />
-      <button onClick={handleSubmit}>Create</button>
-    </div>
+        />
+        <span>Confirm password</span>
+    </label>
+    <button className="submit">Submit</button>
+    <p className="signin">Already have an acount ? <Link href="/login">Log in</Link> </p>
+</form>
   );
 };
 
