@@ -14,6 +14,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
 
 
+
 const NavBar = () => {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
@@ -59,11 +60,12 @@ const NavBar = () => {
 
       <SearchBar />
 
-      <div className={style.buttonsRight}>
-        <MenuButton />
+        <div className={style.buttonsRight}>
+          <MenuButton />
+        </div>
       </div>
-    </div>
-  ) : (
+    ) 
+    : (
     ""
   );
 };

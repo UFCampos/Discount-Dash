@@ -39,6 +39,7 @@ const Register = () => {
       [name]: value,
     });
   };
+
   const [mutate, { data }] = usePostProfileMutation();
 
   const handleSubmit = () => {
