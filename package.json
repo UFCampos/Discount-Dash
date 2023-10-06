@@ -6,7 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.1.12",
+    "@nextui-org/react": "^2.1.13",
     "@reduxjs/toolkit": "1.9.5",
     "autoprefixer": "^10.4.16",
     "eslint": "8.49.0",
@@ -14,11 +14,12 @@
     "firebase": "^10.4.0",
     "firebase-admin": "^11.10.1",
     "framer-motion": "^10.16.4",
-    "next": "latest",
+    "next": "^13.5.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "8.1.0",
     "sass": "^1.68.0",
+    "swiper": "^10.3.1",
     "tailwindcss": "3.3.3",
     "uuid": "^9.0.1"
   },

@@ -7,10 +7,17 @@ export const searchProfileAPI = createApi({
         baseUrl: `/api`
     }),
     endpoints: (builder) => ({
-        getProfile: builder.query<any, {id : Number}>({
+        getProfile: builder.query<any, {id : string}>({
             query: ({id}) => `/users/${id}`
+        }),
+        postProfile: builder.mutation({
+            query: (body) => ({
+                url: `/users/register`,
+                method: "POST",
+                body
+            })
         })
     })
 })
 
-export const { useGetProfileQuery } = searchProfileAPI
+export const { useGetProfileQuery, usePostProfileMutation } = searchProfileAPI
