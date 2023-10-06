@@ -31,10 +31,9 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
   const [mutate] = useAddProductCartMutation();
   const handleAddCart = () => {
-
     mutate({
       itemId,
-      userId: "6Ks3wWaq8zPnkqGZUhqK",
+      userId: id,
     });
   };
 

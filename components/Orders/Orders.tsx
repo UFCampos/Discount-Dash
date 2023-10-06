@@ -62,8 +62,8 @@ console.log(status);
     
     const handleStatusChange =()=> {
         if (status === "preparation")
-          setStatus("On the wat")
-      if (status === "On the wat") 
+          setStatus("On the wait")
+      if (status === "On the wait") 
        setStatus("Delivered")
     }
 
@@ -106,7 +106,7 @@ console.log(status);
     </div>
   </div>
 )}
-              {status === "On the wat" && (
+              {status === "On the wait" && (
               <div className="flex justify-center top">
               <div className="flex flex-col items-center icon-content">
                 <Image className="w-14 h-14 mr-3 rounded-full bg-green-400 " src="/canasto1.svg" alt="" width={300} height={300} />

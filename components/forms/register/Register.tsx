@@ -1,6 +1,11 @@
 "use client";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { useEffect, useState } from "react";
+import { signInProvider } from "@/app/utils";
+import {
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { setUser } from "@/lib/redux/features/userProfile";
@@ -23,7 +28,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    id: "",
+    id: ""
   });
   console.log(newUser);
 
@@ -34,7 +39,6 @@ const Register = () => {
       [name]: value,
     });
   };
-
   const [mutate, { data }] = usePostProfileMutation();
 
   const handleSubmit = () => {
@@ -42,6 +46,7 @@ const Register = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         const uid = user.uid; // Aquí obtienes el UID del usuario
+        sendEmailVerification(user); // Correo de validación del email
         setNewUser({
           ...newUser,
           id: uid,
@@ -65,7 +70,7 @@ const Register = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      id: "",
+      id: ""
     });
 
     setTimeout(()=>{router.push("/home")}, 2000)

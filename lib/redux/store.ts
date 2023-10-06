@@ -32,6 +32,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
+      searchProfileAPI.middleware,
       productsApi.middleware,
       filters.middleware,
       userApi.middleware,
