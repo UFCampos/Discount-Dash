@@ -25,11 +25,8 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
   const paymentId=useSelector((state)=>state.payments.paymentId)
 
-  console.log("producto a pagar:", product)
-
-  console.log("id de la compra", paymentId)
-
   const [mutate] = useAddProductCartMutation();
+  
   const { id } = useSelector((state) => state.userProfile);
   const handleAddCart = () => {
     mutate({
@@ -40,7 +37,8 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
   const createPreference=async()=>{
     try {
-      const response=await axios.post("http://localhost:3000/create_preference", {
+      const response=await axios.post("http://localhost:3000/api/products/buyProduct", {
+        itemId:itemId,
         description: name,
         price:price,
         quantity:1

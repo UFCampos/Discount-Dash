@@ -4,9 +4,9 @@ const mercadopago = require("mercadopago");
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
     access_token:
-      "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469",
+      "TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541",
   });
-  const { itemId, description, price, quantity, stock } = await req.json();
+  const { itemId, description, price, quantity } = await req.json();
 
   let preference = {
     items: [
@@ -19,9 +19,9 @@ export const POST = async (req: NextRequest) => {
     ],
 
     back_urls: {
-      success: `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/paid/${itemId}/${Number(stock)}`,
-      failure: `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/home`,
-      pending: `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/home`,
+      success: `${process.env.SUCCES_ROUTE}`,
+      failure: `${process.env.SUCCES_ROUTE}`,
+      pending: `${process.env.SUCCES_ROUTE}`,
     },
     auto_return: "approved",
   };
