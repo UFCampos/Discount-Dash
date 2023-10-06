@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mercadopago/sdk-react": "^0.0.15",
     "@nextui-org/react": "^2.1.13",
     "@reduxjs/toolkit": "1.9.5",
     "autoprefixer": "^10.4.16",
@@ -14,6 +15,7 @@
     "firebase": "^10.4.0",
     "firebase-admin": "^11.10.1",
     "framer-motion": "^10.16.4",
+    "mercadopago": "^1.5.7",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
