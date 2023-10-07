@@ -13,7 +13,6 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
   const user = useSelector((state) => state.userProfile);
 
   if (isError) {
-    // Renderizar en caso de error
     return (
         <div className="flex flex-col items-center justify-center border-black">
           <h1>Profile</h1>

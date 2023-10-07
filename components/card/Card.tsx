@@ -3,6 +3,10 @@ import "./Card.css";
 import Link from "next/link";
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
 import { useSelector } from "@/lib/redux/hooks";
+import { useDispatch } from "@/lib/redux/hooks";
+import { addCart } from "@/lib/redux/features/cartItemsSlice";
+import { useEffect, useState } from "react";
+import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 
 interface props {
   itemId: string;
@@ -13,13 +17,30 @@ interface props {
 }
 
 const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
-    const [mutate] = useAddProductCartMutation();
-    const { id } = useSelector((state) => state.userProfile);
+  const [flag, setFlag] = useState(false);
+  const dispatch = useDispatch();
+  const [mutate] = useAddProductCartMutation();
+  const { id } = useSelector((state) => state.userProfile);
+  // const { data, isLoading } = useGetProductsCartQuery({ id });
+  const { cartItems } = useSelector((state) => state.cartItems);
+  useEffect(() => {
+    fetch(`api/cart/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(addCart(data));
+      });
+  }, [flag]);
   const handleAddCart = () => {
+    console.log("aniadi");
+
     mutate({
       itemId,
       userId: id,
+    }).then(() => {
+      dispatch(addCart(cartItems));
     });
+
+    setFlag(!flag);
   };
 
   return (
@@ -47,7 +68,10 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
         </div>
         <div className="cart flex flex-col justify-center items-center">
           <button
-            onClick={() => handleAddCart()}
+            onClick={() => {
+              console.log("BOTON");
+              handleAddCart();
+            }}
             className="material-symbols-outlined text-center"
           >
             shopping_cart

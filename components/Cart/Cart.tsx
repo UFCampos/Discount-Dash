@@ -2,45 +2,69 @@
 import { Image } from "@nextui-org/react";
 import style from "./Carts.module.css";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
-import { useDelProductCartMutation, usePutPrudctCartMutation } from "@/lib/redux/service/cartProductsAPI";
+import {
+  useDelProductCartMutation,
+  usePutPrudctCartMutation,
+} from "@/lib/redux/service/cartProductsAPI";
 import { useSelector } from "@/lib/redux/hooks";
 import { CartProduct } from "@/utils/types";
+import { useEffect, useState } from "react";
+import { useDispatch } from "@/lib/redux/hooks";
+import { addCart } from "@/lib/redux/features/cartItemsSlice";
 const Cart = () => {
-
+  const dispatch = useDispatch();
+  console.log("ME RENDERICE");
   const { id } = useSelector((state) => state.userProfile);
-  const { data, isLoading } = useGetProductsCartQuery({ id });
+  // const { data, isLoading } = useGetProductsCartQuery({ id });
+  const { cartItems } = useSelector((state) => state.cartItems);
+  
+  console.log("Estado del carrito antes de la actualización:", cartItems);
+  // console.log(isLoading);
+  
+  // useEffect(() => {
+    //   dispatch(addCart(cartItems));
+  // }, [cartItems]);
 
   const [mutate1] = useDelProductCartMutation();
   const handleDelete = (productId: string) => {
     mutate1({
       cartItemId: productId,
       userId: id,
+    }).then(() => {
+      dispatch(addCart(cartItems));
     });
   };
-
+  
   const [mutate] = usePutPrudctCartMutation();
-  const handleAddCart = (productId: string, value: string ) => {
+  const handleAddCart = (productId: string, value: string) => {
     mutate({
       cartItemId: productId,
       userId: id,
-      value
-    })
-  }
+      value,
+    });
+  };
+  useEffect(() => {
+    fetch(`api/cart/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(addCart(data));
+      });
+  },[id, cartItems, handleAddCart, handleDelete]);
+  // useEffect(() => {
+  //   dispatch(addCart(cartItems));
+  // }, [cartItems, handleAddCart, handleDelete]);
 
+  console.log("Estado del carrito después de la actualización:", cartItems);
   return (
     <div className={style.homeRigthCont}>
       <div className="max-w-md mx-auto overflow-y-auto overflow-hidden">
-        {isLoading ? (
-          <h1>Is loading...</h1>
-        ) : (
-          data?.map((product: CartProduct, index: number) => {
+        {cartItems?.map((product: CartProduct, index: number) => {
           {
             return (
               <div
                 key={product.id}
                 className="flex items-center p-2 mr-2 my-2 ml-2 border border-black rounded shadow backdrop-blur-md bg-gray-50 "
               >
-                
                 <div className="border border-gray-300 rounded mr-2 ">
                   <Image
                     src={product?.image}
@@ -61,7 +85,7 @@ const Cart = () => {
                   <div className="mt-1">
                     <button
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
-                      onClick={() => handleAddCart(product.id, 'decrement')}
+                      onClick={() => handleAddCart(product.id, "decrement")}
                     >
                       <Image
                         src="/menos3.png"
@@ -74,7 +98,7 @@ const Cart = () => {
                       {product?.quantity}
                     </h2>
                     <button
-                      onClick={() => handleAddCart(product.id, 'add')}
+                      onClick={() => handleAddCart(product.id, "add")}
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
                     >
                       <Image
@@ -92,13 +116,13 @@ const Cart = () => {
                     </h5>
                   </div>
                 </div>
-                {index < data.length - 1 && (
+                {index < cartItems.length - 1 && (
                   <hr className="border-gray-300 mx-2" /> // Línea divisoria
                 )}
               </div>
             );
-          }})
-        )}
+          }
+        })}
       </div>
     </div>
   );
