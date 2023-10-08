@@ -2,9 +2,14 @@
 import "./Card.css";
 import Link from "next/link";
 import axios from "axios"
+import axios from "axios"
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
+import { useState } from "react";
+import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
+
 import { useState } from "react";
 import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
 
