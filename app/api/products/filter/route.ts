@@ -34,9 +34,8 @@ export const GET = async (req: NextRequest) => {
   console.log(products);
 
   if (name !== "") {
-    let newProducts = products.filter(product => product.name.toLowerCase().startsWith(name.toLowerCase()));
+    let newProducts = products.filter(product => product.name.toLowerCase().includes(name.toLowerCase()));
     if (nameSort !== "") {
-      console.log(nameSort);
       switch (nameSort) {
 
         case "name_asc":
