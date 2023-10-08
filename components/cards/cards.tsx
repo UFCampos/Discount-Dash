@@ -21,7 +21,7 @@ const Cards = () => {
       {/* Animacion de carga para el componente Cards */}
       {loading ? (
         <div className="">
-          <Image src="./loading.gif" alt="Loading" />
+          <Image src="/loading.gif" alt="Loading" />
         </div>
       ) : (
         <div className="cards-cont flex flex-wrap justify-center items-center gap-4 p-4">

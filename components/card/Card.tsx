@@ -7,6 +7,7 @@ import { useDispatch } from "@/lib/redux/hooks";
 import { addCart } from "@/lib/redux/features/cartItemsSlice";
 import { useEffect, useState } from "react";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
+import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 
 interface props {
   itemId: string;
@@ -21,24 +22,18 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
   const dispatch = useDispatch();
   const [mutate] = useAddProductCartMutation();
   const { id } = useSelector((state) => state.userProfile);
-  // const { data, isLoading } = useGetProductsCartQuery({ id });
-  const { cartItems } = useSelector((state) => state.cartItems);
-  useEffect(() => {
-    fetch(`api/cart/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(addCart(data));
-      });
-  }, [flag]);
-  const handleAddCart = () => {
-    console.log("aniadi");
 
+  const { data: product, isLoading, isError } = useGetProductQuery(
+    { id: itemId },
+  )
+
+  const handleAddCart = (productId: string) => {
     mutate({
       itemId,
       userId: id,
-    }).then(() => {
-      dispatch(addCart(cartItems));
-    });
+    })
+
+    dispatch(addCart(product));
 
     setFlag(!flag);
   };
@@ -68,10 +63,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
         </div>
         <div className="cart flex flex-col justify-center items-center">
           <button
-            onClick={() => {
-              console.log("BOTON");
-              handleAddCart();
-            }}
+            onClick={() => handleAddCart(itemId)}
             className="material-symbols-outlined text-center"
           >
             shopping_cart

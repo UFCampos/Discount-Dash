@@ -1,6 +1,7 @@
 "use client";
 import { Image } from "@nextui-org/react";
 import style from "./Carts.module.css";
+import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import {
   useDelProductCartMutation,
@@ -10,51 +11,51 @@ import { useSelector } from "@/lib/redux/hooks";
 import { CartProduct } from "@/utils/types";
 import { useEffect, useState } from "react";
 import { useDispatch } from "@/lib/redux/hooks";
-import { addCart } from "@/lib/redux/features/cartItemsSlice";
+import { addCart, addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 const Cart = () => {
+  const [productId, setProductId] = useState("");
   const dispatch = useDispatch();
-  console.log("ME RENDERICE");
-  const { id } = useSelector((state) => state.userProfile);
-  // const { data, isLoading } = useGetProductsCartQuery({ id });
+  const userId = useSelector((state) => state.userProfile.id);
   const { cartItems } = useSelector((state) => state.cartItems);
-  
-  console.log("Estado del carrito antes de la actualización:", cartItems);
-  // console.log(isLoading);
-  
-  // useEffect(() => {
-    //   dispatch(addCart(cartItems));
-  // }, [cartItems]);
+
+  const { data } = useGetProductsCartQuery({ id: userId });
+
+  const { data: product, isLoading, isError } = useGetProductQuery(
+    { id: productId },
+  )
 
   const [mutate1] = useDelProductCartMutation();
   const handleDelete = (productId: string) => {
+    setProductId(productId);
     mutate1({
       cartItemId: productId,
-      userId: id,
-    }).then(() => {
-      dispatch(addCart(cartItems));
-    });
+      userId,
+    })
   };
-  
+
   const [mutate] = usePutPrudctCartMutation();
   const handleAddCart = (productId: string, value: string) => {
+    setProductId(productId);
     mutate({
       cartItemId: productId,
-      userId: id,
+      userId,
       value,
     });
   };
   useEffect(() => {
-    fetch(`api/cart/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(addCart(data));
-      });
-  },[id, cartItems, handleAddCart, handleDelete]);
-  // useEffect(() => {
-  //   dispatch(addCart(cartItems));
-  // }, [cartItems, handleAddCart, handleDelete]);
+    if (data?.length) {
+      dispatch(addTotalCart(data));
+    }
+    console.log("UserId cambió a: " + userId + ", pero el length es undefined? Length:", data?.length);
+    
+  }, [data]);
 
-  console.log("Estado del carrito después de la actualización:", cartItems);
+  useEffect(() => {
+    if (product) {
+      dispatch(addCart(product))
+    }
+  }, [productId])
+
   return (
     <div className={style.homeRigthCont}>
       <div className="max-w-md mx-auto overflow-y-auto overflow-hidden">
