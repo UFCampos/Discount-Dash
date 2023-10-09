@@ -22,15 +22,15 @@ export const store = configureStore({
     userProfile: userProfileSlice.reducer,
     addProductCart: addProductCartSlice.reducer,
     filter: filterSlice.reducer,
-    OrderProduct:OrderProduct.reducer,
-    payments:paymentSlice.reducer,
+    OrderProduct: OrderProduct.reducer,
+    payments: paymentSlice.reducer,
     cartItems: cartItemsSlice.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
     [searchProfileAPI.reducerPath]: searchProfileAPI.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [cartProductsAPI.reducerPath]: cartProductsAPI.reducer,
     [filters.reducerPath]: filters.reducer,
-    [categoriesAPI.reducerPath]:categoriesAPI.reducer
+    [categoriesAPI.reducerPath]: categoriesAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

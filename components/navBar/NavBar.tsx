@@ -61,11 +61,12 @@ const NavBar = () => {
 
       <SearchBar />
 
-      <div className={style.buttonsRight}>
-        <MenuButton />
+        <div className={style.buttonsRight}>
+          <MenuButton />
+        </div>
       </div>
-    </div>
-  ) : (
+    ) 
+    : (
     ""
   );
 };
