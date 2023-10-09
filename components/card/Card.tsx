@@ -38,19 +38,22 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/products/buyProduct",
-        [
-          {
-            id: itemId,
-            title: name,
-            unit_price: price,
-            quantity: 1,
-            /* currency_id: 'ARS' */
-          },
-        ]
+      const response = await fetch(
+        "https://428c-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app/api/products/buyProduct",
+        {
+          method: "post",
+          body: JSON.stringify([
+            {
+              id: itemId,
+              title: name,
+              unit_price: price,
+              quantity: 1,
+              /* currency_id: 'ARS' */
+            },
+          ]),
+        }
       );
-      const { id } = response.data;
+      const { id } = await response.json();
       return id;
     } catch (error) {
       alert(error);

@@ -4,7 +4,7 @@ const mercadopago = require("mercadopago");
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
     access_token:
-      "TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541",
+      "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469",
   });
   const productsReceived = await req.json();
 
@@ -12,9 +12,9 @@ export const POST = async (req: NextRequest) => {
     items: productsReceived,
 
     back_urls: {
-      success: `${process.env.SUCCES_ROUTE}`,
-      failure: `${process.env.SUCCES_ROUTE}`,
-      pending: `${process.env.SUCCES_ROUTE}`,
+      success: "/notifications/success",
+      failure: "/notifications/success",
+      pending: "/notifications/success",
     },
     auto_return: "approved",
   };
