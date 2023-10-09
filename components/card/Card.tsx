@@ -48,7 +48,10 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price, stock }) => 
 
   const createPreference=async()=>{
     try {
-      const response=await axios.post("http://localhost:3000/api/products/buyProduct", {
+      const URL = `https://discount-dash-53vw-git-dev-juanuri-ufcampos.vercel.app`
+      console.log(URL);
+      
+      const response=await axios.post(`${URL}/api/products/buyProduct`, {
         itemId:itemId,
         description: name,
         price:price,
