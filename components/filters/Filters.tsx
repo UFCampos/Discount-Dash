@@ -6,7 +6,7 @@ import FiltersSort from "./FilterSort";
 import FiltersCategories from "./FiltersCategories";
 import { loadProducts, loadErrors } from "@/lib/redux/features/itemsSlice";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
-
+import style from "./Filters.module.css"
 type FiltersState = {
   category: string;
   name: string;
@@ -60,13 +60,12 @@ const Filters = () => {
   };
 
   return (
-    <div>
-      <h1>Filters</h1>
+    <div className={style.filterCont}>
       <FiltersCategories valueState={valueState} onChange={onChange} />
       <FiltersPrice valueState={valueState} onChange={onChange} />
       <FiltersSort valueState={valueState} onChange={onChange} />
-      <button onClick={handleFilters}>
-        Apply filter
+      <button onClick={handleFilters} className={style.apply}>
+        Apply
       </button>
     </div>
   );

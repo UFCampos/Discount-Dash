@@ -1,6 +1,11 @@
 "use client";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { useEffect, useState } from "react";
+import { signInProvider } from "@/app/utils";
+import {
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { setUser } from "@/lib/redux/features/userProfile";
@@ -24,6 +29,7 @@ const Register = () => {
     password: "",
     confirmPassword: "",
     id: ""
+    id: ""
   });
   console.log(newUser);
 
@@ -41,6 +47,7 @@ const Register = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         const uid = user.uid; // Aquí obtienes el UID del usuario
+        sendEmailVerification(user); // Correo de validación del email
         setNewUser({
           ...newUser,
           id: uid,

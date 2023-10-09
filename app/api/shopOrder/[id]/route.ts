@@ -7,10 +7,11 @@ export const POST = async (
 ) => {
   try {
     const { id } = params;
+   
 
     await controller(id);
     return NextResponse.json({ message: "Order placed" });
-  } catch (error) {
-    return NextResponse.json({ error: "Not found" }, { status: 400 });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 };

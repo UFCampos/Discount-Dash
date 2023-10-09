@@ -112,6 +112,7 @@ const Cart = () => {
                     {product?.name}
                   </h1>
                   <p className="text-gray-950">${product?.price}</p>
+                  <p className="text-gray-950">${product?.price}</p>
                   <div className="mt-1">
                     <button
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
