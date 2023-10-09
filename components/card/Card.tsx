@@ -17,9 +17,10 @@ interface props {
   brand: string;
   image: string;
   price: string;
+  stock: string;
 }
 
-const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
+const Card: React.FC<props> = ({ itemId, name, brand, image, price, stock }) => {
 
   const dispatch=useDispatch()
   
