@@ -12,10 +12,13 @@ export const GET = async (req: NextRequest) => {
     }
 
     if (!shopId) {
-      await userHistory(userId);
+      let orders = await userHistory(userId);
+      return NextResponse.json(orders);
     }
 
-    await shopHistory(shopId);
+    let orders = await shopHistory(shopId);
+
+    return NextResponse.json(orders);
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });
   }
