@@ -20,9 +20,9 @@ export const POST = async (req: NextRequest) => {
     ],
 
     back_urls: {
-      success: `https://discount-dash-53vw-lcuojigzb-ufcampos.vercel.app/home`,
-      failure: `https://discount-dash-53vw-lcuojigzb-ufcampos.vercel.app/home`,
-      pending: `https://discount-dash-53vw-lcuojigzb-ufcampos.vercel.app/home`,
+      success: `/home`,
+      failure: `/home`,
+      pending: `/home`,
     },
     auto_return: "approved",
   };
