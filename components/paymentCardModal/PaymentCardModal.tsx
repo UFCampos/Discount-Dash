@@ -18,7 +18,12 @@ const PaymentModal = () => {
   const {name, image, brand, price}=paymentProduct
 
   const handleCLose=()=>{
-    dispatch(productPayment({}))
+    dispatch(productPayment({
+      image:'',
+      name:'',
+      price:'',
+      brand:''
+    }))
     dispatch(productPaymentId(null))
   }
 
