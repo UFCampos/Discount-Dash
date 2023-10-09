@@ -1,4 +1,3 @@
-
 *::before,
 *::after {
   margin: 0;
@@ -14,25 +13,25 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 100%; /* 16px por defecto, equivalente a 1rem */
   scroll-behavior: smooth;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 90rem) { /* 1440px convertidos a rem */
   html {
-    zoom: 1.5;
+    zoom: 100%; /* Cambiado a porcentaje */
   }
 }
 
-@media (min-width: 2560px) {
+@media (min-width: 160rem) { /* 2560px convertidos a rem */
   html {
-    zoom: 1.7;
+    zoom: 170%; /* Cambiado a porcentaje */
   }
 }
 
-@media (min-width: 3860px) {
+@media (min-width: 241.6rem) { /* 3860px convertidos a rem */
   html {
-    zoom: 2.5;
+    zoom: 250%; /* Cambiado a porcentaje */
   }
 }
 
@@ -55,55 +54,55 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: 1.6rem; /* 16px por defecto, equivalente a 1rem */
   background: var(--bg);
 }
 
 .container {
-  max-width: 124rem;
+  max-width: 100%; /* Cambiado a porcentaje */
   padding: 1rem 1rem;
   margin: 0 auto;
 }
 
 .heading {
   padding: 4rem 0;
-  font-size: 3.5rem;
+  font-size: 3.5rem; /* Mantenido en rem para legibilidad */
   text-align: center;
 }
 
 .swiper_container {
-  max-height: 35rem;
-  margin-top: 3%;
-  width: 86.4%;
-  height: 42rem;
-  padding: 2rem;
+  max-height: 20rem; /* Mantenido en rem para legibilidad */
+  margin-top: 2%; /* Mantenido en porcentaje */
+  width: 50%; /* Cambiado a porcentaje */
+  height: 42rem; /* Mantenido en rem para legibilidad */
+  padding: 2rem; /* Mantenido en rem para legibilidad */
   position: relative;
 }
 
 .swiper-slide {
-  width: 37rem;
-  height: 42rem;
+  width: 100%; /* Mantenido en porcentaje */
+  height: 42rem; /* Mantenido en rem para legibilidad */
   position: relative;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 150rem) { /* 1500px convertidos a rem */
   .swiper_container {
-    height: 47rem;
+    height: 20rem; /* Mantenido en rem para legibilidad */
   }
   .swiper-slide {
-    width: 28rem !important;
-    height: 36rem !important; /*con este capaz se arregle el bug*/
+    width: 35% !important; /* Mantenido en porcentaje */
+    height: 14rem !important; /* Mantenido en rem para legibilidad */
   }
   .swiper-slide img {
-    width: 28rem !important;
-    height: 30rem !important;
+    width: 30rem !important; /* Mantenido en rem para legibilidad */
+    height: 20rem !important; /* Mantenido en rem para legibilidad */
   }
 }
 
 .swiper-slide img {
-  width: 35rem;
-  height: 42rem;
-  border-radius: 2rem;
+  width: 30rem; /* Mantenido en rem para legibilidad */
+  height: 30rem; /* Mantenido en rem para legibilidad */
+  border-radius: 1rem; /* Mantenido en rem para legibilidad */
   object-fit: cover;
 }
 
@@ -111,12 +110,3 @@ body {
 .swiper-slide-shadow-right {
   display: none;
 }
-
-
-
-
-
-
-
-
-
