@@ -48,7 +48,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price, stock }) => 
 
   const createPreference=async()=>{
     try {
-      const response=await axios.post("http://localhost:3000/api/products/buyProduct", {
+      const response=await axios.post(`https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}/api/products/buyProduct}`, {
         itemId:itemId,
         description: name,
         price:price,
