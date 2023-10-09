@@ -6,8 +6,7 @@ import { Image } from "@nextui-org/react";
 import PaymentModal from "../paymentCardModal/PaymentCardModal";
 
 const Cards = () => {
-
-  const paymentOrder=useSelector((state)=>state.payments.productPayment)
+  const paymentOrder = useSelector((state) => state.payments.productPayment);
 
   type Item = {
     name: string,
@@ -27,7 +26,7 @@ const Cards = () => {
       {/* Animacion de carga para el componente Cards */}
       {loading ? (
         <div className="">
-          <Image src="./loading.gif" alt="Loading" />
+          <Image src="/loading.gif" alt="Loading" />
         </div>
       ) : (
         <div className="cards-cont flex flex-wrap justify-center items-center gap-4 p-4">
@@ -35,7 +34,6 @@ const Cards = () => {
             <p>Not found</p>
           ) : (
             data?.map((item: Item, index) => {
-              console.log(item);
               {
                 return (
                   <Card
@@ -53,16 +51,7 @@ const Cards = () => {
           )}
         </div>
       )}
-      {
-        Object.keys(paymentOrder).length>0
-        
-        ?
-  
-        <PaymentModal/>
-
-        :
-        ""
-      }
+      {paymentOrder.name  !== "" ? <PaymentModal /> : null}
     </section>
   );
 };

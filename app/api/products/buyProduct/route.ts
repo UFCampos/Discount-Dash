@@ -6,6 +6,7 @@ export const POST = async (req: NextRequest) => {
     access_token:
       "TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541",
   });
+
   const { itemId, description, price, quantity } = await req.json();
 
   let preference = {
@@ -19,9 +20,9 @@ export const POST = async (req: NextRequest) => {
     ],
 
     back_urls: {
-      success: `${process.env.SUCCES_ROUTE}`,
-      failure: `${process.env.SUCCES_ROUTE}`,
-      pending: `${process.env.SUCCES_ROUTE}`,
+      success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+      failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+      pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
     },
     auto_return: "approved",
   };
