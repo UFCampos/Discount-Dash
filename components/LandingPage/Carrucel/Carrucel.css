@@ -54,7 +54,6 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
   background: var(--bg);
 }
 
@@ -66,7 +65,6 @@ body {
 
 .heading {
   padding: 4rem 0;
-  font-size: 3.5rem;
   text-align: center;
 }
 
