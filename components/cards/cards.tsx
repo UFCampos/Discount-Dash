@@ -10,12 +10,12 @@ const Cards = () => {
   const paymentOrder=useSelector((state)=>state.payments.productPayment)
 
   type Item = {
-    name: string;
-    image: string;
-    price: string;
-    brand: string;
-    id: string;
-    stock: string;
+    name: string,
+    image: string,
+    price: string,
+    brand: string,
+    id: string,
+    stock:string
   };
 
   const data = useSelector((state) => state.items.products);
