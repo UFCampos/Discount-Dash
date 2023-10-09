@@ -9,9 +9,7 @@ import {
 } from "@/lib/redux/features/paymentSlice";
 
 const PaymentModal = () => {
-  initMercadoPago(
-    "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469"
-  );
+  initMercadoPago("TEST-38478520-c489-47d5-9e53-f2333cb4ff9b");
 
   const dispatch = useDispatch();
 
@@ -22,7 +20,14 @@ const PaymentModal = () => {
   const { name, image, brand, price } = paymentProduct;
 
   const handleCLose = () => {
-    dispatch(productPayment({}));
+    dispatch(
+      productPayment({
+        image: "",
+        name: "",
+        price: "",
+        brand: "",
+      })
+    );
     dispatch(productPaymentId(null));
   };
 
