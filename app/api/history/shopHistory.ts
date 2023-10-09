@@ -4,7 +4,11 @@ import { NextResponse } from "next/server";
 
 export const shopHistory = async (shopId: string) => {
   const ordersCollectionRef = collection(db, "orders");
-  const ordersQuery = query(ordersCollectionRef, where("shopId", "==", shopId));
+  const ordersQuery = query(
+    ordersCollectionRef,
+    where("shopId", "==", shopId),
+    where("orderStatus", "==", "completed")
+  );
 
   const ordersSnapshot = await getDocs(ordersQuery);
 
@@ -17,5 +21,5 @@ export const shopHistory = async (shopId: string) => {
     });
   });
 
-  return NextResponse.json(orders);
+  return orders;
 };

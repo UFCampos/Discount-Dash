@@ -3,7 +3,12 @@ import { useSelector } from "@/lib/redux/hooks";
 import Card from "../card/Card";
 import "./cards.css";
 import { Image } from "@nextui-org/react";
+import PaymentModal from "../paymentCardModal/PaymentCardModal";
+
 const Cards = () => {
+
+  const paymentOrder=useSelector((state)=>state.payments.productPayment)
+
   type Item = {
     name: string;
     image: string;
@@ -48,6 +53,16 @@ const Cards = () => {
           )}
         </div>
       )}
+      {
+        Object.keys(paymentOrder).length>0
+        
+        ?
+  
+        <PaymentModal/>
+
+        :
+        ""
+      }
     </section>
   );
 };

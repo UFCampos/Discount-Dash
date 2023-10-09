@@ -7,7 +7,7 @@ export const POST = async (
 ) => {
   try {
     const { id } = params;
-    console.log(id);
+   
 
     await controller(id);
     return NextResponse.json({ message: "Order placed" });
