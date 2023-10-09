@@ -48,7 +48,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price, stock }) => 
 
   const createPreference=async()=>{
     try {
-      const URL = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
+      const URL = `https://discount-dash-53vw-git-dev-juanuri-ufcampos.vercel.app`
       console.log(URL);
       
       const response=await axios.post(`${URL}/api/products/buyProduct`, {
