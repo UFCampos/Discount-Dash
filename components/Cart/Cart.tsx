@@ -29,15 +29,14 @@ const Cart = () => {
 
   const [mutate1] = useDelProductCartMutation();
   const handleDelete = (productId: string) => {
-    // setProductId(productId);
     mutate1({
       cartItemId: productId,
       userId,
     }).then(() => {
       let newCart = cartItems?.filter((item) => item?.id !== productId);
+      dispatch(addCart([]));
       dispatch(addTotalCart(newCart));
     });
-    setFlag(!flag);
   };
 
   const [mutate] = usePutPrudctCartMutation();
@@ -160,6 +159,7 @@ const Cart = () => {
               (acc, item) => total + parseInt(`${item.price}`),
               0
             )}
+            
           </h1>
         </div>
 
