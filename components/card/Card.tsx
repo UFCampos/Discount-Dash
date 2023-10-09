@@ -8,6 +8,7 @@ import { addCart } from "@/lib/redux/features/cartItemsSlice";
 import { useEffect, useState } from "react";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
+import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 
 interface props {
   itemId: string;
@@ -18,10 +19,11 @@ interface props {
 }
 
 const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
-  const [flag, setFlag] = useState(false);
   const dispatch = useDispatch();
   const [mutate] = useAddProductCartMutation();
   const { id } = useSelector((state) => state.userProfile);
+  const { cartItems } = useSelector((state) => state.cartItems);
+  const { data } = useGetProductsCartQuery({ id });
 
   const { data: product, isLoading, isError } = useGetProductQuery(
     { id: itemId },
@@ -32,10 +34,9 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
       itemId,
       userId: id,
     })
-
     dispatch(addCart(product));
-
-    setFlag(!flag);
+    console.log(product);
+    
   };
 
   return (

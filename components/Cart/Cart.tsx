@@ -14,23 +14,31 @@ import { useDispatch } from "@/lib/redux/hooks";
 import { addCart, addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 const Cart = () => {
   const [productId, setProductId] = useState("");
+  const [flag, setFlag] = useState(false);
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userProfile.id);
   const { cartItems } = useSelector((state) => state.cartItems);
 
   const { data } = useGetProductsCartQuery({ id: userId });
 
-  const { data: product, isLoading, isError } = useGetProductQuery(
-    { id: productId },
-  )
+  const {
+    data: product,
+    isLoading,
+    isError,
+  } = useGetProductQuery({ id: productId });
 
   const [mutate1] = useDelProductCartMutation();
   const handleDelete = (productId: string) => {
-    setProductId(productId);
+    // setProductId(productId);
     mutate1({
       cartItemId: productId,
       userId,
-    })
+    });
+
+    let newCart = cartItems?.filter((item) => item?.id !== productId);
+    dispatch(addTotalCart(newCart));
+
+    setFlag(!flag);
   };
 
   const [mutate] = usePutPrudctCartMutation();
@@ -41,20 +49,39 @@ const Cart = () => {
       userId,
       value,
     });
+    if (value === "add") {
+      let newCart = cartItems?.map((item) => {
+        if (item?.id === productId) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
+        }
+        return item;
+      });
+      dispatch(addTotalCart(newCart));
+    } else {
+      let newCart = cartItems?.map((item) => {
+        if (item?.id === productId) {
+          return {
+            ...item,
+            quantity: item.quantity - 1,
+          };
+        }
+        return item;
+      });
+      dispatch(addTotalCart(newCart));
+    }
   };
   useEffect(() => {
-    if (data?.length) {
-      dispatch(addTotalCart(data));
-    }
-    console.log("UserId cambió a: " + userId + ", pero el length es undefined? Length:", data?.length);
-    
-  }, [data]);
+    dispatch(addTotalCart(data));
 
-  useEffect(() => {
-    if (product) {
-      dispatch(addCart(product))
-    }
-  }, [productId])
+    console.log(
+      "UserId cambió a: " + userId + ", pero el length es undefined? Length:",
+      data?.length
+    );
+    console.log(cartItems);
+  }, [data, flag]);
 
   return (
     <div className={style.homeRigthCont}>
@@ -74,7 +101,7 @@ const Cart = () => {
                     width={80}
                   />
                 </div>
-                <button onClick={() => handleDelete(product.id)}>x</button>
+                <button onClick={() => handleDelete(product?.id)}>x</button>
                 <div
                   className="ml-2 border-black
                  5"
@@ -86,7 +113,7 @@ const Cart = () => {
                   <div className="mt-1">
                     <button
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
-                      onClick={() => handleAddCart(product.id, "decrement")}
+                      onClick={() => handleAddCart(product?.id, "decrement")}
                     >
                       <Image
                         src="/menos3.png"
@@ -99,7 +126,7 @@ const Cart = () => {
                       {product?.quantity}
                     </h2>
                     <button
-                      onClick={() => handleAddCart(product.id, "add")}
+                      onClick={() => handleAddCart(product?.id, "add")}
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
                     >
                       <Image
@@ -109,12 +136,12 @@ const Cart = () => {
                         alt="image"
                       />
                     </button>
-                    <h5 className="text-black text-lg">
+                    <h2 className="text-black text-lg">
                       Total:{" "}
                       <h1 className="font-bold text-lg">
                         ${product?.quantity * product?.price}
                       </h1>
-                    </h5>
+                    </h2>
                   </div>
                 </div>
                 {index < cartItems.length - 1 && (

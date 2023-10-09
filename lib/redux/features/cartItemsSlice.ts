@@ -21,6 +21,11 @@ export const cartItemsSlice = createSlice({
             if (hasItem) {
                 hasItem.quantity = (hasItem.quantity || 0) + 1;
             } else {
+                payload = {
+                    ...payload,
+                    quantity: 1,
+                };
+                console.log(payload);
                 state.cartItems.push(payload);
             }
         },
