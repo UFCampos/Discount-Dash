@@ -102,7 +102,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
         </div>
         <div className="cart flex flex-col justify-center items-center">
           <button
-            onClick={() => handleAddCart(itemId)}
+            onClick={() => handleAddCart()}
             className="material-symbols-outlined text-center"
           >
             shopping_cart
