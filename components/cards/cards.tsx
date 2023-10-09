@@ -5,11 +5,7 @@ import "./cards.css";
 import { Image } from "@nextui-org/react";
 import PaymentModal from "../paymentCardModal/PaymentCardModal";
 
-import PaymentModal from "../paymentCardModal/PaymentCardModal";
-
 const Cards = () => {
-  const paymentOrder = useSelector((state) => state.payments.productPayment);
-
   const paymentOrder = useSelector((state) => state.payments.productPayment);
 
   type Item = {
@@ -46,6 +42,7 @@ const Cards = () => {
                     image={item.image}
                     price={item.price}
                     brand={item.brand}
+                    stock={item.stock}
                   />
                 );
               }
