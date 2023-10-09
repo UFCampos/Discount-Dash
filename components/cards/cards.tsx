@@ -51,7 +51,7 @@ const Cards = () => {
           )}
         </div>
       )}
-      {paymentOrder.name  !== "" && <PaymentModal /> }
+      {paymentOrder.name  !== "" ? <PaymentModal /> : null}
     </section>
   );
 };
