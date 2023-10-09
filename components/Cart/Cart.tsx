@@ -33,11 +33,10 @@ const Cart = () => {
     mutate1({
       cartItemId: productId,
       userId,
+    }).then(() => {
+      let newCart = cartItems?.filter((item) => item?.id !== productId);
+      dispatch(addTotalCart(newCart));
     });
-
-    let newCart = cartItems?.filter((item) => item?.id !== productId);
-    dispatch(addTotalCart(newCart));
-
     setFlag(!flag);
   };
 
@@ -73,6 +72,9 @@ const Cart = () => {
       dispatch(addTotalCart(newCart));
     }
   };
+
+  let total = 0;
+
   useEffect(() => {
     dispatch(addTotalCart(data));
 
@@ -139,7 +141,7 @@ const Cart = () => {
                     <h2 className="text-black text-lg">
                       Total:{" "}
                       <h1 className="font-bold text-lg">
-                        ${product?.quantity * product?.price}
+                        ${(total = product?.quantity * product?.price)}
                       </h1>
                     </h2>
                   </div>
@@ -151,6 +153,21 @@ const Cart = () => {
             );
           }
         })}
+        <div className="text-right mt-4">
+          <h1 className="text-lg font-bold text-gray-950">
+            Total: $
+            {cartItems?.reduce(
+              (acc, item) => total + parseInt(`${item.price}`),
+              0
+            )}
+          </h1>
+        </div>
+
+        <div className="text-center mt-4">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Buy
+          </button>
+        </div>
       </div>
     </div>
   );

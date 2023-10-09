@@ -35,8 +35,6 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
       userId: id,
     })
     dispatch(addCart(product));
-    console.log(product);
-    
   };
 
   return (

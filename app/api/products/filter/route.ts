@@ -10,7 +10,7 @@ export const GET = async (req: NextRequest) => {
   let price = req.nextUrl.searchParams.get("price") || "";
   let category = req.nextUrl.searchParams.get("category") || "";
   let order = req.nextUrl.searchParams.get("order") || "";
-  let nameSort = req.nextUrl.searchParams.get("sort") || "";
+  let nameSort = req.nextUrl.searchParams.get("order") || "";
   let storeType = req.nextUrl.searchParams.get("storeType") || "";
 
   let queryRef: CollectionReference = collection(db, "products");
