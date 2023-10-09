@@ -1,3 +1,4 @@
+
 *::before,
 *::after {
   margin: 0;
@@ -13,25 +14,24 @@
 }
 
 html {
-  font-size: 100%; /* 16px por defecto, equivalente a 1rem */
   scroll-behavior: smooth;
 }
 
-@media (min-width: 90rem) { /* 1440px convertidos a rem */
+@media (min-width: 1440px) {
   html {
-    zoom: 100%; /* Cambiado a porcentaje */
+    zoom: 1.5;
   }
 }
 
-@media (min-width: 160rem) { /* 2560px convertidos a rem */
+@media (min-width: 2560px) {
   html {
-    zoom: 170%; /* Cambiado a porcentaje */
+    zoom: 1.7;
   }
 }
 
-@media (min-width: 241.6rem) { /* 3860px convertidos a rem */
+@media (min-width: 3860px) {
   html {
-    zoom: 250%; /* Cambiado a porcentaje */
+    zoom: 2.5;
   }
 }
 
@@ -54,55 +54,55 @@ html {
 }
 
 body {
-  font-size: 1.6rem; /* 16px por defecto, equivalente a 1rem */
+  font-size: 1.6rem;
   background: var(--bg);
 }
 
 .container {
-  max-width: 100%; /* Cambiado a porcentaje */
+  max-width: 124rem;
   padding: 1rem 1rem;
   margin: 0 auto;
 }
 
 .heading {
   padding: 4rem 0;
-  font-size: 3.5rem; /* Mantenido en rem para legibilidad */
+  font-size: 3.5rem;
   text-align: center;
 }
 
 .swiper_container {
-  max-height: 20rem; /* Mantenido en rem para legibilidad */
-  margin-top: 2%; /* Mantenido en porcentaje */
-  width: 50%; /* Cambiado a porcentaje */
-  height: 42rem; /* Mantenido en rem para legibilidad */
-  padding: 2rem; /* Mantenido en rem para legibilidad */
+  max-height: 35rem;
+  margin-top: 3%;
+  width: 86.4%;
+  height: 42rem;
+  padding: 2rem;
   position: relative;
 }
 
 .swiper-slide {
-  width: 100%; /* Mantenido en porcentaje */
-  height: 42rem; /* Mantenido en rem para legibilidad */
+  width: 37rem;
+  height: 42rem;
   position: relative;
 }
 
-@media (max-width: 150rem) { /* 1500px convertidos a rem */
+@media (max-width: 1500px) {
   .swiper_container {
-    height: 20rem; /* Mantenido en rem para legibilidad */
+    height: 47rem;
   }
   .swiper-slide {
-    width: 35% !important; /* Mantenido en porcentaje */
-    height: 14rem !important; /* Mantenido en rem para legibilidad */
+    width: 28rem !important;
+    height: 36rem !important; /*con este capaz se arregle el bug*/
   }
   .swiper-slide img {
-    width: 30rem !important; /* Mantenido en rem para legibilidad */
-    height: 20rem !important; /* Mantenido en rem para legibilidad */
+    width: 28rem !important;
+    height: 30rem !important;
   }
 }
 
 .swiper-slide img {
-  width: 30rem; /* Mantenido en rem para legibilidad */
-  height: 30rem; /* Mantenido en rem para legibilidad */
-  border-radius: 1rem; /* Mantenido en rem para legibilidad */
+  width: 35rem;
+  height: 42rem;
+  border-radius: 2rem;
   object-fit: cover;
 }
 
@@ -110,3 +110,12 @@ body {
 .swiper-slide-shadow-right {
   display: none;
 }
+
+
+
+
+
+
+
+
+
