@@ -1,13 +1,18 @@
 "use client";
 import "./Card.css";
 import Link from "next/link";
+import axios from "axios"
+import axios from "axios"
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
-import { useState } from "react";
-import { useDispatch } from "@/lib/redux/hooks";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import { strict } from "assert";
-import { useSelector } from "@/lib/redux/hooks";
+import { useState } from "react";
+import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
+
+import { useState } from "react";
+import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
+
 
 interface props {
   itemId: string;
@@ -15,22 +20,18 @@ interface props {
   brand: string;
   image: string;
   price: string;
-  stock: string;
 }
 
-const Card: React.FC<props> = ({
-  itemId,
-  name,
-  brand,
-  image,
-  price,
-  stock,
-}) => {
-  const [preferenceId, setPreferenceId] = useState("");
+const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
-  initMercadoPago("TEST-6199811d-11fc-405c-928d-7b8f1a95521a");
+  const dispatch=useDispatch()
+  
+  const product=useSelector((state)=>state.payments.productPayment)
+
+  const paymentId=useSelector((state)=>state.payments.paymentId)
 
   const [mutate] = useAddProductCartMutation();
+  
   const { id } = useSelector((state) => state.userProfile);
   const handleAddCart = () => {
     mutate({
@@ -39,38 +40,38 @@ const Card: React.FC<props> = ({
     });
   };
 
-  const createPreference = async () => {
+  const createPreference=async()=>{
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/products/buyProduct",
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify([
-            {
-              itemId,
-              name,
-              price,
-              quantity: 1, // Debido a que es una compra rapida, se compra solo 1
-              stock,
-            },
-          ]),
-        }
-      );
-
-      return await response.json();
+      const response=await axios.post("http://localhost:3000/api/products/buyProduct", {
+        itemId:itemId,
+        description: name,
+        price:price,
+        quantity:1
+      })
+      const {id}=response.data
+      return id
     } catch (error) {
-      alert(error);
+      console.log(error)
     }
-  };
+  }
 
-  const handlerBuy = async () => {
-    const { id } = await createPreference();
-    setPreferenceId(id);
-  };
+  const handleBuy=async()=>{
 
+    const id=await createPreference()
+    
+    if(id){
+      dispatch(productPayment({
+        image:image,
+        name:name,
+        price:price,
+        brand:brand
+      }))
+
+      dispatch(productPaymentId(id))
+    }
+    
+
+  }
   return (
     <div className="card flex flex-col">
       <div className="card-img flex justify-center items-center">
@@ -91,9 +92,8 @@ const Card: React.FC<props> = ({
         </div>
       </div>
       <div className="card-buy flex flex-row justify-evenly items-center">
-        <div className="buy">
-          <button onClick={handlerBuy}>Buy</button>
-          {preferenceId && <Wallet initialization={{ preferenceId }} />}
+        <div className="buy" onClick={handleBuy}>
+          <p>Buy</p>
         </div>
         <div className="cart flex flex-col justify-center items-center">
           <button

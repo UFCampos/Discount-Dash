@@ -2,6 +2,7 @@
     width: 65vw;
     height: auto;
     background-color: white;
+    position: relative;
 }
 .cards-cont{
     width: 100%;

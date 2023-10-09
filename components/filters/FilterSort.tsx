@@ -1,5 +1,6 @@
 "use client";
 import { ChangeEvent } from "react";
+import style from "./Filters.module.css"
 
 type FiltersSortProps = {
   valueState: {
@@ -11,10 +12,9 @@ type FiltersSortProps = {
 const FiltersSort: React.FC<FiltersSortProps> = ({ valueState, onChange }) => {
   return (
     <div>
-      <h1>FiltersSort</h1>
-      <div>
-        <label htmlFor="order">Sort By:</label>
-        <select name="order" value={valueState.order} onChange={onChange}>
+      <div className={style.catCont}>
+        <label htmlFor="order" className={style.catTitle}>Sort By:</label>
+        <select name="order" value={valueState.order} onChange={onChange} className={style.selectCat}>
           <option value="">None</option>
           <option value="lower">Price (Low to High)</option>
           <option value="higher">Price (High to Low)</option>
