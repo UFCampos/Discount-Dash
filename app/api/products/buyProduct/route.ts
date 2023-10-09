@@ -6,17 +6,10 @@ export const POST = async (req: NextRequest) => {
     access_token:
       "TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541",
   });
-  const { itemId, description, price, quantity } = await req.json();
+  const productsReceived = await req.json();
 
   let preference = {
-    items: [
-      {
-        id: itemId,
-        title: description,
-        unit_price: Number(price),
-        quantity: Number(quantity),
-      },
-    ],
+    items: productsReceived,
 
     back_urls: {
       success: `${process.env.SUCCES_ROUTE}`,
