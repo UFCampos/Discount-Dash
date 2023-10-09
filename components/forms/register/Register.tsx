@@ -29,7 +29,6 @@ const Register = () => {
     password: "",
     confirmPassword: "",
     id: ""
-    id: ""
   });
   console.log(newUser);
 
