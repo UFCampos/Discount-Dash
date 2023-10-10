@@ -38,56 +38,28 @@ const Carrucel = ()=>{
             className="swiper_container"
             >
                 <SwiperSlide>
-                    <Image src="/images.jpg" height={300} width={200} alt="img"/>
+                    <Image src="/cap.png" height={300} width={200} alt="img"/>
                 </SwiperSlide> 
 
                 <SwiperSlide>
-                    <Image src="/helado.jpeg" height={300} width={200} alt="img"/>
+                    <Image src="/cap1.png" height={300} width={200} alt="img"/>
                 </SwiperSlide>
 
                 <SwiperSlide>
-                    <Image src="/hamburguesa.jpg" height={300} width={200} alt="img"/>
+                    <Image src="/cap2.png" height={300} width={200} alt="img"/>
                 </SwiperSlide>
 
                 <SwiperSlide>
-                    <Image src="/empanadas2.jpeg" height={300} width={200} alt="img"/>
+                    <Image src="/cap3.png" height={300} width={200} alt="img"/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src="/images.jpg" height={300} width={200} alt="img"/>
-                </SwiperSlide> 
-
-                <SwiperSlide>
-                    <Image src="/helado.jpeg" height={300} width={200} alt="img"/>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <Image src="/hamburguesa.jpg" height={300} width={200} alt="img"/>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <Image src="/empanadas2.jpeg" height={300} width={200} alt="img"/>
-                </SwiperSlide>
-                 <SwiperSlide>
-                    <Image src="/images.jpg" height={300} width={200} alt="img"/>
-                </SwiperSlide> 
-
-                <SwiperSlide>
-                    <Image src="/helado.jpeg" height={300} width={200} alt="img"/>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <Image src="/hamburguesa.jpg" height={300} width={200} alt="img"/>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <Image src="/empanadas2.jpeg" height={300} width={200} alt="img"/>
+                    <Image src="/cap4.png" height={300} width={200} alt="img"/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src="/images.jpg" height={300} width={200} alt="img"/>
-                </SwiperSlide> 
-
+                    <Image src="/cap5.png" height={300} width={200} alt="img"/>
+                </SwiperSlide>
                 <SwiperSlide>
-                    <Image src="/helado.jpeg" height={300} width={200} alt="img"/>
+                    <Image src="/cap6.png" height={300} width={200} alt="img"/>
                 </SwiperSlide>
 
              

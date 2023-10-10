@@ -1,4 +1,3 @@
-import Order from "@/components/Orders/Orders";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {

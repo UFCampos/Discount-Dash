@@ -6,8 +6,8 @@ const Hero = () => {
 
   return (
     <div>
-      <section className="text-gray-200  body-font py-1 text-center overflow-x-hidden overflow-auto">
-        <div className='-my-1 mb-10' >
+      <section className="text-gray-200  body-font py-1 text-center overflow-x-hidden">
+        <div className='-my-1 mb-0' >
          <Carrucel/>
         </div>
 
@@ -18,10 +18,9 @@ const Hero = () => {
             <div className="flex justify-center">
               <Link href="/home">
                 <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                  Client
+                  Home
                 </button>
               </Link>
-              <button className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg">Company</button>
             </div>
           </div>
         </div>
