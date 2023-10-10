@@ -72,7 +72,12 @@ const Cart = () => {
     }
   };
 
-  let total = 0;
+  let total
+
+  const totalCart = (cartItems ?? []).reduce((acc, product : any) => {
+    const subtotal = parseInt(product.price) * product.quantity;
+    return acc + subtotal;
+  }, 0);
 
   useEffect(() => {
     dispatch(addTotalCart(data));
@@ -154,12 +159,7 @@ const Cart = () => {
         })}
         <div className="text-right mt-4">
           <h1 className="text-lg font-bold text-gray-950">
-            Total: $
-            {cartItems?.reduce(
-              (acc, item) => total + parseInt(`${item.price}`),
-              0
-            )}
-            
+            Total: ${totalCart.toFixed(2)}
           </h1>
         </div>
 
