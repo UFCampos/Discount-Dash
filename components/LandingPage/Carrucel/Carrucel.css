@@ -48,7 +48,7 @@
 
 .swiper_container {
   max-height: 20rem; /* Mantenido en rem para legibilidad */
-  margin-top: 2%; /* Mantenido en porcentaje */
+  margin-top: 2.8%; /* Mantenido en porcentaje */
   width: 50%; /* Cambiado a porcentaje */
   height: 42rem; /* Mantenido en rem para legibilidad */
   padding: 2rem; /* Mantenido en rem para legibilidad */
@@ -63,7 +63,7 @@
 
 @media (max-width: 150rem) { /* 1500px convertidos a rem */
   .swiper_container {
-    height: 20rem; /* Mantenido en rem para legibilidad */
+    height: 25rem; /* Mantenido en rem para legibilidad */
   }
   .swiper-slide {
     width: 35% !important; /* Mantenido en porcentaje */

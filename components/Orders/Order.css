@@ -1,6 +1,6 @@
 .line-horizontal {
   position: relative;
-  width: 20%; /* Ancho de la línea */
+  width: 15%; /* Ancho de la línea */
   height: 6px; /* Altura de la línea */
 }
 
