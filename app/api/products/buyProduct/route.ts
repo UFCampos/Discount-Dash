@@ -20,9 +20,9 @@ export const POST = async (req: NextRequest) => {
     ],
 
     back_urls: {
-      success: `/home`,
-      failure: `/home`,
-      pending: `/home`,
+      success: `${process.env.SUCCES_ROUTE}`,
+      failure: `${process.env.SUCCES_ROUTE}`,
+      pending: `${process.env.SUCCES_ROUTE}`,
     },
     auto_return: "approved",
   };

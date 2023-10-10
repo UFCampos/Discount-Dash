@@ -29,6 +29,7 @@ const Cart = () => {
 
   const [mutate1] = useDelProductCartMutation();
   const handleDelete = (productId: string) => {
+    // setProductId(productId);
     mutate1({
       cartItemId: productId,
       userId,
@@ -37,6 +38,7 @@ const Cart = () => {
       dispatch(addCart([]));
       dispatch(addTotalCart(newCart));
     });
+    setFlag(!flag);
   };
 
   const [mutate] = usePutPrudctCartMutation();
