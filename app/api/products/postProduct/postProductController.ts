@@ -5,12 +5,15 @@ export const controller = (
   name: string,
   brand: string,
   price: string,
+  expiration: string,
   stock: string,
+  normalPrice: string,
   category: string,
   image: string,
-  shopId: string
+  shopId: string,
+  description: string
 ) => {
-  
+  const expirationTimestamp = Timestamp.fromDate(new Date(expiration));
 
   addDoc(collection(db, "products"), {
     shopId,
@@ -18,8 +21,11 @@ export const controller = (
     nameToLowerCase: name.toLowerCase(),
     brand,
     category,
+    expiration: expirationTimestamp,
+    normalPrice: parseInt(normalPrice),
     price: parseInt(price),
     stock: parseInt(stock),
     image,
+    description
   });
 };
