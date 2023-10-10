@@ -27,11 +27,9 @@ export const POST = async (req: NextRequest) => {
 
       if (status === "approved") {
         products.forEach(async (item: any) => {
-          console.log(item.id);
-
-          const reference = await doc(db, "products", item?.id);
+          const reference = doc(db, "products", item?.id);
           const productDB = await getDoc(reference);
-          const info = await productDB.data();
+          const info = productDB.data();
 
           updateDoc(reference, {
             stock: info?.stock - Number(item.quantity),
