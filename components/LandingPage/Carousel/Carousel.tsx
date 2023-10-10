@@ -1,5 +1,5 @@
 "use client"
-import Image from "next/image"
+import { Image } from "@nextui-org/react"
 import "./Carousel.css"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { useSelector } from "@/lib/redux/hooks"
@@ -48,19 +48,19 @@ const Carousel = () => {
                 <>
                     {loading ? (
                         <div className="">
-                            <Image src="./loading.gif" alt="Loading" />
+                            <Image src="/loading.gif" alt="Loading" />
                         </div>
                     ) : (
                         <div className="cards-cont flex flex-wrap justify-center items-center gap-4 p-4">
                             {error ? (
                                 <p>Not found</p>
                             ) : (
-                                data?.map((item: Item, index) => {
+                                data?.map((item: Item) => {
                                     {
                                         return (
                                             <SwiperSlide>
                                                 <Card
-                                                    key={index}
+                                                    key={item.id}
                                                     itemId={item.id}
                                                     name={item.name}
                                                     image={item.image}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Carrucel from '../Carousel/Carousel';
+import Carousel from '../Carousel/Carousel';
 
 const Hero = () => {
  
@@ -8,7 +8,7 @@ const Hero = () => {
     <div>
       <section className="text-gray-200  body-font py-1 text-center overflow-x-hidden overflow-auto">
         <div className='-my-1 mb-10' >
-         <Carrucel/>
+         <Carousel/>
         </div>
 
         <div className="container mx-auto flex px-5 py-1 items-center justify-center flex-col">

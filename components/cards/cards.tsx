@@ -25,11 +25,11 @@ const Cards = () => {
           {error ? (
             <p>Not found</p>
           ) : (
-            data?.map((item: Item, index) => {
+            data?.map((item: Item) => {
               {
                 return (
                   <Card
-                    key={index}
+                    key={item.id}
                     itemId={item.id}
                     name={item.name}
                     image={item.image}
