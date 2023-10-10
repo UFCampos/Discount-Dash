@@ -117,7 +117,7 @@ const Card: React.FC<CardProduct> = ({
           </button>
         </div>
       </div>
-      <Modal closeButton isOpen={isOpen} className="absolute">
+      <Modal closeButton isOpen={isOpen} placement="center">
         <ModalContent>
           <Detail id={itemId} />
         </ModalContent>
