@@ -8,21 +8,20 @@ export const POST = async (req: NextRequest) => {
     price,
     stock,
     image,
-    shopId,
-    normalPrice,
-    expiration,
-    description,
+    category,
+    shopId
+    
+   
   } = await req.json();
   if (
     !name ||
     !brand ||
     !price ||
+    !category ||
     !stock ||
     !image ||
-    !shopId ||
-    !normalPrice ||
-    !expiration
-  ) {
+    !shopId  )
+   {
     return NextResponse.json({ error: "Insufficient data" }, { status: 400 });
   }
   controller(
@@ -31,10 +30,8 @@ export const POST = async (req: NextRequest) => {
     price,
     stock,
     image,
+    category,
     shopId,
-    normalPrice,
-    expiration,
-    description
   );
   return NextResponse.json({ message: "Product added" });
 };
