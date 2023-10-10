@@ -24,6 +24,6 @@ export const controller = (
     stock: parseInt(stock),
     expiration: expirationTimestamp,
     image,
-    description,
+    description
   });
 };
