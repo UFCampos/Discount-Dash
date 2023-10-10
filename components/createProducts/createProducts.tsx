@@ -10,7 +10,9 @@ import Link from 'next/link';
 import './createProducts.css';
 
 const CreateProducts: React.FC = () => {
+
   const dispatch = useDispatch();
+
   const isOpen = useSelector((state) => state.menu.isOpen);
   const { data: dataCategories } = useGetCategoriesQuery(null);
   const {id : idProfile} = useSelector((state) => state.userProfile);
@@ -26,7 +28,12 @@ const CreateProducts: React.FC = () => {
   });
 
   const [file, setFile] = useState<File | null>(null);
+
   const [description, setDescription] = useState('');
+
+  const category = categories?.map(
+    ({category}, index) => <option key={index} value={category}>{category}</option>
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -104,10 +111,7 @@ const CreateProducts: React.FC = () => {
     if (isOpen) {
       dispatch(toggleMenu());
     }
-    if (dataCategories) {
-      dispatch(setCategories(dataCategories));
-    }
-  }, [dispatch, dataCategories, isOpen]);
+  }, [dispatch, isOpen]);
 
   return (
     <div className="form-product-cont flex flex-col justify-center items-center">
@@ -199,15 +203,11 @@ const CreateProducts: React.FC = () => {
                 onChange={handleChangeSelect}
               >
                 <option value="" disabled>
-                  categorias
+                  category
                 </option>
-                {dataCategories?.map(({ category }, index) => {
-                  return (
-                    <option key={index} value={category}>
-                      {category}
-                    </option>
-                  );
-                })}
+                {
+                  category
+                }
               </select>
             </div>
           </div>
