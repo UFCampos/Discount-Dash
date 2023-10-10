@@ -9,7 +9,7 @@ import {
 } from "@/lib/redux/features/paymentSlice";
 
 const PaymentModal = () => {
-  initMercadoPago("TEST-38478520-c489-47d5-9e53-f2333cb4ff9b");
+  initMercadoPago("TEST-6199811d-11fc-405c-928d-7b8f1a95521a");
 
   const dispatch = useDispatch();
 

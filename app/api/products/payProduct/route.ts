@@ -6,47 +6,62 @@ const mercadopago = require("mercadopago");
 
 mercadopago.configure({
   access_token:
-    "TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541",
+    "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469",
 });
 
 export const POST = async (req: NextRequest) => {
-  console.log(
-    "RECORDAR QUE LUEGO DE PROBAR SI FUNCIONA HAY QUE METER TODO ESTO EN UN -IF-"
-  );
-
-  const id = req.nextUrl.searchParams.get("id");
-  console.log("Mi payment id", id);
+  const { data } = await req.json();
+  const id = data?.id;
+  console.log("data.id:", id);
 
   try {
-    const paymentInfo = await fetch(
-      `https://api.mercadopago.com/v1/payments/${id}`,
-      {
-        method: "get",
-        headers: {
-          Authorization: `Bearer TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541`,
-        },
+    setTimeout(async () => {
+      if (id !== undefined) {
+        let paymentInfo = await fetch(
+          `https://api.mercadopago.com/v1/payments/${id}`,
+          {
+            method: "get",
+            headers: {
+              Authorization: `Bearer TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469`,
+            },
+          }
+        );
+
+        console.log("RESPONSE", await paymentInfo.json());
       }
-    );
-    console.log(await paymentInfo.json());
 
-    const { status, additional_info } = await paymentInfo.json();
+      /* 
+      if (status === "approved") {
+        console.log(await additional_info?.items);
+        await Promise.all(
+          additional_info?.items.forEach((item: any) => {
+            let id: string = item.id;
+            const reference = doc(collection(db, "products", id));
 
-    if (status === "approved") {
+            setDoc(reference, {
+              stock: FieldValue.increment(-1),
+            });
+          })
+        );
+      } */
+    }, 1000);
+
+    /* const { status, additional_info } = await paymentInfo.json(); */
+
+    /* if (status === "approved") {
       console.log(await additional_info?.items);
       await Promise.all(
         additional_info?.items.map(async (item) => {
           let id: string = item.id;
           const reference = doc(collection(db, "products", id));
-
+5031 7557 3453 0604
           await setDoc(reference, {
             stock: FieldValue.increment(-1),
           });
         })
       );
-
-      return NextResponse.json({ saludo: "hola" });
-    }
-    return NextResponse.json({ res: "D" });
+    } */
+    return NextResponse.json({ saludo: "hola" });
   } catch (error) {
     return NextResponse.json({ saludo: "chau" }, { status: 400 });
   }

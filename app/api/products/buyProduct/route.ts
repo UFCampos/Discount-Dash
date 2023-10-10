@@ -4,7 +4,7 @@ const mercadopago = require("mercadopago");
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
     access_token:
-      "TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541",
+      "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469",
   });
 
   const { itemId, description, price, quantity } = await req.json();
@@ -20,11 +20,13 @@ export const POST = async (req: NextRequest) => {
     ],
 
     back_urls: {
-      success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
-      failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
-      pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+      success: `https://a1a0-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app//notifications/success`,
+      failure: `https://a1a0-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app//notifications/success`,
+      pending: `https://a1a0-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app//notifications/success`,
     },
     auto_return: "approved",
+    notification_url:
+      "https://a1a0-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app/api/products/payProduct",
   };
 
   const response = await mercadopago.preferences.create(preference);
