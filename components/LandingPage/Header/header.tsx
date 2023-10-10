@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { Image } from "@nextui-org/react"
 const Header = ()=>{
   return (
 <header className="text-gray-100 body-font bg-gray-300 py-3">

@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { Image } from "@nextui-org/react"
 
 
 const Footer =()=>{
