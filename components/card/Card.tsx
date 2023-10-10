@@ -2,17 +2,14 @@
 import "./Card.css";
 import Link from "next/link";
 import axios from "axios"
-import axios from "axios"
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
-import { useDispatch, useSelector } from "@/lib/redux/hooks";
-import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
-import { useState } from "react";
+import { addCart } from "@/lib/redux/features/cartItemsSlice";
+import { useEffect, useState } from "react";
 import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
-
-import { useState } from "react";
-import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
-
+import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
+import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
+import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 
 interface props {
   itemId: string;
@@ -20,29 +17,41 @@ interface props {
   brand: string;
   image: string;
   price: string;
+  stock: string;
 }
 
-const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
+const Card: React.FC<props> = ({ itemId, name, brand, image, price, stock }) => {
 
   const dispatch=useDispatch()
   
-  const product=useSelector((state)=>state.payments.productPayment)
+  const products=useSelector((state)=>state.payments.productPayment)
 
   const paymentId=useSelector((state)=>state.payments.paymentId)
 
+
   const [mutate] = useAddProductCartMutation();
-  
   const { id } = useSelector((state) => state.userProfile);
+  const { cartItems } = useSelector((state) => state.cartItems);
+  const { data } = useGetProductsCartQuery({ id });
+
+  const { data: product, isLoading, isError } = useGetProductQuery(
+    { id: itemId },
+  )
+  
   const handleAddCart = () => {
     mutate({
       itemId,
       userId: id,
-    });
+    })
+    dispatch(addCart(product));
   };
 
   const createPreference=async()=>{
     try {
-      const response=await axios.post("http://localhost:3000/api/products/buyProduct", {
+      const URL = ``
+      console.log(URL);
+      
+      const response=await axios.post(`${URL}/api/products/buyProduct`, {
         itemId:itemId,
         description: name,
         price:price,
