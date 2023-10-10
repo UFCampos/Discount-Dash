@@ -1,18 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { FieldValue } from "firebase-admin/firestore";
 const mercadopago = require("mercadopago");
 
 mercadopago.configure({
-  access_token:
-    "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469",
+  access_token: "ACCESS_TOKEN",
 });
 
 export const POST = async (req: NextRequest) => {
   const { data } = await req.json();
   const id = data?.id;
-  console.log("data.id:", id);
 
   try {
     if (id !== undefined) {
@@ -21,32 +18,29 @@ export const POST = async (req: NextRequest) => {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469`,
+            Authorization: `Bearer ACCESS_TOKEN`,
           },
         }
       );
       const { status, additional_info } = await paymentInfo.json();
       let products = await additional_info?.items;
-      console.log("Productos comprados: ", products);
 
       if (status === "approved") {
         products.forEach(async (item: any) => {
           console.log(item.id);
 
           const reference = await doc(db, "products", item?.id);
+          const productDB = await getDoc(reference);
+          const info = await productDB.data();
 
           updateDoc(reference, {
-            stock: 99,
+            stock: info?.stock - Number(item.quantity),
           });
         });
       }
     }
-    return NextResponse.json({ saludo: "hola" });
+    return NextResponse.json({ response: "Data received" });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: "error al recibir el payment-id" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "data handling error" }, { status: 400 });
   }
 };
