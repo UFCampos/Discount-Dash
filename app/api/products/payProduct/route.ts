@@ -63,6 +63,9 @@ export const POST = async (req: NextRequest) => {
     } */
     return NextResponse.json({ saludo: "hola" });
   } catch (error) {
-    return NextResponse.json({ saludo: "chau" }, { status: 400 });
+    return NextResponse.json(
+      { error: "error al recibir el payment-id" },
+      { status: 400 }
+    );
   }
 };
