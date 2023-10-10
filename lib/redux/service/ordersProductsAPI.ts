@@ -8,7 +8,7 @@ export const orderProductAPI = createApi({
     tagTypes: ['GetOrders'],
     endpoints: (build) => ({
         getOrders: build.query({
-            query: ({id}) => `/shopOrder?id=${id}`,
+            query: ({id}) => `/shopOrder?userId=${id}`,
         }),
     }),
 })

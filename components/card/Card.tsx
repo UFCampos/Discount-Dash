@@ -1,88 +1,87 @@
 "use client";
 import "./Card.css";
 import Link from "next/link";
-import axios from "axios"
+import axios from "axios";
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { addCart } from "@/lib/redux/features/cartItemsSlice";
-import { useEffect, useState } from "react";
-import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
+import {
+  productPayment,
+  productPaymentId,
+} from "@/lib/redux/features/paymentSlice";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
-import { Item } from "@/utils/types";
+import { CardProduct } from "@/utils/types";
 
-interface props {
-  itemId: string;
-  name: string;
-  brand: string;
-  image: string;
-  price: string;
-  stock: string;
-  normalPrice: string;
-}
+const Card: React.FC<CardProduct> = ({
+  itemId,
+  name,
+  brand,
+  image,
+  price,
+  stock,
+  normalPrice,
+}) => {
+  const dispatch = useDispatch();
 
-const Card: React.FC<Item> = ({ itemId, name, brand, image, price, stock, normalPrice }) => {
+  const products = useSelector((state) => state.payments.productPayment);
 
-  const dispatch=useDispatch()
-  
-  const products=useSelector((state)=>state.payments.productPayment)
-
-  const paymentId=useSelector((state)=>state.payments.paymentId)
-
+  const paymentId = useSelector((state) => state.payments.paymentId);
 
   const [mutate] = useAddProductCartMutation();
   const { id } = useSelector((state) => state.userProfile);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { data } = useGetProductsCartQuery({ id });
 
-  const { data: product, isLoading, isError } = useGetProductQuery(
-    { id: itemId },
-  )
-  
+  const {
+    data: product,
+    isLoading,
+    isError,
+  } = useGetProductQuery({ id: itemId });
+
   const handleAddCart = () => {
     mutate({
       itemId,
       userId: id,
-    })
+    });
     dispatch(addCart(product));
   };
 
-  const createPreference=async()=>{
+  const createPreference = async () => {
     try {
-      const URL = ``
+      const URL = ``;
       console.log(URL);
-      
-      const response=await axios.post(`${URL}/api/products/buyProduct`, {
-        itemId:itemId,
+
+      const response = await axios.post(`${URL}/api/products/buyProduct`, {
+        itemId: itemId,
         description: name,
-        price:price,
-        quantity:1
-      })
-      const {id}=response.data
-      return id
+        price: price,
+        quantity: 1,
+      });
+      const { id } = response.data;
+      return id;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  const handleBuy=async()=>{
+  const handleBuy = async () => {
+    const id = await createPreference();
 
-    const id=await createPreference()
-    
-    if(id){
-      dispatch(productPayment({
-        image:image,
-        name:name,
-        price:price,
-        brand:brand
-      }))
+    if (id) {
+      dispatch(
+        productPayment({
+          image: image,
+          name: name,
+          price: price,
+          brand: brand,
+        })
+      );
 
-      dispatch(productPaymentId(id))
+      dispatch(productPaymentId(id));
     }
-    
-
-  }
+  };
   return (
     <div className="card flex flex-col">
       <div className="card-img flex justify-center items-center">

@@ -35,3 +35,13 @@ export type Item = {
   stock: string;
   normalPrice: string;
 };
+
+export type CardProduct = {
+  name: string;
+  image: string;
+  price: string;
+  brand: string;
+  itemId: string;
+  stock: string;
+  normalPrice: string;
+}
