@@ -3,7 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 export const paymentSlice=createSlice({
     name:"paymentsItems",
     initialState:{
-        productPayment:{},
+        productPayment:{
+            name: "",
+            price: "",
+            image: "",
+            brand: "",
+        },
         paymentId:null
     },
     reducers:{
