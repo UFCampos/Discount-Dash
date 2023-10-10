@@ -13,7 +13,7 @@ const CreateProducts: React.FC = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.menu.isOpen);
   const { data: dataCategories } = useGetCategoriesQuery(null);
-  const {id} = useSelector((state) => state.userProfile);
+  const {id : idProfile} = useSelector((state) => state.userProfile);
 
   const [newProduct, setNewProduct] = useState({
     name: '',
@@ -58,6 +58,8 @@ const CreateProducts: React.FC = () => {
   const handleSend = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(newProduct);
+    console.log(idProfile);
+    
     
 
     if (!file) {
@@ -76,7 +78,7 @@ const CreateProducts: React.FC = () => {
       stock: newProduct.stock,
       category: newProduct.category,
       brand: newProduct.brand,
-      shopId: id
+      shopId: idProfile
     });
     
 
@@ -96,9 +98,6 @@ const CreateProducts: React.FC = () => {
 
     alert('Product created successfully');
 
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
   };
 
   useEffect(() => {
