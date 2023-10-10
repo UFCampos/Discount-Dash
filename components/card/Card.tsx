@@ -10,6 +10,7 @@ import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSl
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
+import { Item } from "@/utils/types";
 
 interface props {
   itemId: string;
@@ -18,9 +19,10 @@ interface props {
   image: string;
   price: string;
   stock: string;
+  normalPrice: string;
 }
 
-const Card: React.FC<props> = ({ itemId, name, brand, image, price, stock }) => {
+const Card: React.FC<Item> = ({ itemId, name, brand, image, price, stock, normalPrice }) => {
 
   const dispatch=useDispatch()
   
@@ -96,7 +98,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price, stock }) => 
           <p>{brand}</p>
         </div>
         <div className="price flex flex-row justify-center items-center gap-4">
-          <p className="total">$ 5500</p>
+          <p className="total">$ {normalPrice}</p>
           <p>$ {price}</p>
         </div>
       </div>

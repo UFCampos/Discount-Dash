@@ -26,10 +26,12 @@ export interface Categories {
 }
 
 export type Item = {
+  itemId?: string;
   name: string;
   image: string;
   price: string;
   brand: string;
   id: string;
   stock: string;
+  normalPrice: string;
 };

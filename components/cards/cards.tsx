@@ -36,6 +36,7 @@ const Cards = () => {
                     price={item.price}
                     brand={item.brand}
                     stock={item.stock}
+                    normalPrice={item.normalPrice}
                   />
                 );
               }

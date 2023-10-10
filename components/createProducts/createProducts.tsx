@@ -31,7 +31,7 @@ const CreateProducts: React.FC = () => {
 
   const [description, setDescription] = useState('');
 
-  const category = categories?.map(
+  const category = dataCategories?.map(
     ({category}, index) => <option key={index} value={category}>{category}</option>
   );
 
