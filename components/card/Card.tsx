@@ -22,14 +22,7 @@ interface props {
   price: string;
 }
 
-const Card: React.FC<props> = ({
-  itemId,
-  name,
-  brand,
-  image,
-  price,
-  stock,
-}) => {
+const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.payments.productPayment);
@@ -58,7 +51,7 @@ const Card: React.FC<props> = ({
 
   const createPreference = async () => {
     try {
-      const URL = ``;
+      const URL = `https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app`;
       console.log(URL);
 
       const response = await axios.post(`${URL}/api/products/buyProduct`, {

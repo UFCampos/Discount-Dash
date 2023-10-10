@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { FieldValue } from "firebase-admin/firestore";
 const mercadopago = require("mercadopago");
@@ -20,30 +20,29 @@ export const POST = async (req: NextRequest) => {
         let paymentInfo = await fetch(
           `https://api.mercadopago.com/v1/payments/${id}`,
           {
-            method: "get",
+            method: "GET",
             headers: {
               Authorization: `Bearer TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469`,
             },
           }
         );
 
-        console.log("RESPONSE", await paymentInfo.json());
-      }
+        const { status, additional_info } = await paymentInfo.json();
+        let products = await additional_info?.items;
+        console.log("Productos comprados: ", products);
+        /* const array = []; */
+        if (status === "approved") {
+          products.forEach(async (item: any) => {
+            console.log(item.id);
 
-      /* 
-      if (status === "approved") {
-        console.log(await additional_info?.items);
-        await Promise.all(
-          additional_info?.items.forEach((item: any) => {
-            let id: string = item.id;
-            const reference = doc(collection(db, "products", id));
+            const reference = await doc(db, "products", item?.id);
 
-            setDoc(reference, {
-              stock: FieldValue.increment(-1),
+            updateDoc(reference, {
+              stock: 100,
             });
-          })
-        );
-      } */
+          });
+        }
+      }
     }, 1000);
 
     /* const { status, additional_info } = await paymentInfo.json(); */
@@ -54,7 +53,7 @@ export const POST = async (req: NextRequest) => {
         additional_info?.items.map(async (item) => {
           let id: string = item.id;
           const reference = doc(collection(db, "products", id));
-5031 7557 3453 0604
+
           await setDoc(reference, {
             stock: FieldValue.increment(-1),
           });
@@ -63,6 +62,7 @@ export const POST = async (req: NextRequest) => {
     } */
     return NextResponse.json({ saludo: "hola" });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: "error al recibir el payment-id" },
       { status: 400 }

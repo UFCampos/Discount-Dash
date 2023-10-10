@@ -20,13 +20,13 @@ export const POST = async (req: NextRequest) => {
     ],
 
     back_urls: {
-      success: `https://a1a0-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app//notifications/success`,
-      failure: `https://a1a0-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app//notifications/success`,
-      pending: `https://a1a0-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app//notifications/success`,
+      success: `https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app/notifications/success`,
+      failure: `https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app/notifications/success`,
+      pending: `https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app/notifications/success`,
     },
     auto_return: "approved",
     notification_url:
-      "https://a1a0-2803-9800-9506-8156-fd42-e4da-8601-e34c.ngrok-free.app/api/products/payProduct",
+      "https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app/api/products/payProduct",
   };
 
   const response = await mercadopago.preferences.create(preference);
