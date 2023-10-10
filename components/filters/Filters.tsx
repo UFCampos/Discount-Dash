@@ -1,5 +1,4 @@
 "use client";
-// import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { useState, ChangeEvent, useEffect } from "react";
 import { useFiltersQueryQuery } from "@/lib/redux/service/filtersAPI";
 import FiltersPrice from "./FiltersPrice";
@@ -7,7 +6,7 @@ import FiltersSort from "./FilterSort";
 import FiltersCategories from "./FiltersCategories";
 import { loadProducts, loadErrors } from "@/lib/redux/features/itemsSlice";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
-
+import style from "./Filters.module.css"
 type FiltersState = {
   category: string;
   name: string;
@@ -25,8 +24,6 @@ const Filters = () => {
     minPrice: "",
     maxPrice: ""
   });
-  console.log(valueState);
-  console.log(nameSearch);
 
   useEffect(() => {
     setValueState({
@@ -62,21 +59,13 @@ const Filters = () => {
     dispatch(loadErrors(isError));
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      dispatch(loadProducts(data));
-      dispatch(loadErrors(isError));
-    }
-  };
-
   return (
-    <div>
-      <h1>Filters</h1>
+    <div className={style.filterCont}>
       <FiltersCategories valueState={valueState} onChange={onChange} />
       <FiltersPrice valueState={valueState} onChange={onChange} />
       <FiltersSort valueState={valueState} onChange={onChange} />
-      <button onClick={handleFilters} onKeyDown={handleKeyDown}>
-        Apply filter
+      <button onClick={handleFilters} className={style.apply}>
+        Apply
       </button>
     </div>
   );

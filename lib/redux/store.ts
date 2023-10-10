@@ -13,6 +13,8 @@ import { filters } from "./service/filtersAPI";
 import { filterSlice } from "./features/filterSlice";
 import { OrderProduct } from "./features/orderProduct";
 import { orderShopApi } from "./service/orderApi";
+import { paymentSlice } from "./features/paymentSlice";
+import { cartItemsSlice } from "./features/cartItemsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +25,9 @@ export const store = configureStore({
     filter: filterSlice.reducer,
     order: OrderProduct.reducer,
     [orderShopApi.reducerPath] : orderShopApi.reducer,
+    OrderProduct:OrderProduct.reducer,
+    payments:paymentSlice.reducer,
+    cartItems: cartItemsSlice.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
     [searchProfileAPI.reducerPath]: searchProfileAPI.reducer,
     [userApi.reducerPath]: userApi.reducer,
@@ -33,6 +38,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
+      searchProfileAPI.middleware,
       productsApi.middleware,
       filters.middleware,
       userApi.middleware,

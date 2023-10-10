@@ -1,10 +1,15 @@
 "use client";
 import "./Card.css";
 import Link from "next/link";
+import axios from "axios"
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
-import { useDispatch } from "@/lib/redux/hooks";
-import { addCartProduct } from "@/lib/redux/features/addProductCartSlice";
-import { useState } from "react";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { addCart } from "@/lib/redux/features/cartItemsSlice";
+import { useEffect, useState } from "react";
+import { productPayment, productPaymentId } from "@/lib/redux/features/paymentSlice";
+import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
+import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
+import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 
 interface props {
   itemId: string;
@@ -12,17 +17,70 @@ interface props {
   brand: string;
   image: string;
   price: string;
+  stock: string;
 }
 
-const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
-    const [mutate] = useAddProductCartMutation();
-  const handleAddCart = () => {
+const Card: React.FC<props> = ({ itemId, name, brand, image, price, stock }) => {
 
+  const dispatch=useDispatch()
+  
+  const products=useSelector((state)=>state.payments.productPayment)
+
+  const paymentId=useSelector((state)=>state.payments.paymentId)
+
+
+  const [mutate] = useAddProductCartMutation();
+  const { id } = useSelector((state) => state.userProfile);
+  const { cartItems } = useSelector((state) => state.cartItems);
+  const { data } = useGetProductsCartQuery({ id });
+
+  const { data: product, isLoading, isError } = useGetProductQuery(
+    { id: itemId },
+  )
+  
+  const handleAddCart = () => {
     mutate({
       itemId,
-      userId: "6Ks3wWaq8zPnkqGZUhqK",
-    });
+      userId: id,
+    })
+    dispatch(addCart(product));
   };
+
+  const createPreference=async()=>{
+    try {
+      const URL = ``
+      console.log(URL);
+      
+      const response=await axios.post(`${URL}/api/products/buyProduct`, {
+        itemId:itemId,
+        description: name,
+        price:price,
+        quantity:1
+      })
+      const {id}=response.data
+      return id
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleBuy=async()=>{
+
+    const id=await createPreference()
+    
+    if(id){
+      dispatch(productPayment({
+        image:image,
+        name:name,
+        price:price,
+        brand:brand
+      }))
+
+      dispatch(productPaymentId(id))
+    }
+    
+
+  }
   return (
     <div className="card flex flex-col">
       <div className="card-img flex justify-center items-center">
@@ -43,7 +101,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
         </div>
       </div>
       <div className="card-buy flex flex-row justify-evenly items-center">
-        <div className="buy">
+        <div className="buy" onClick={handleBuy}>
           <p>Buy</p>
         </div>
         <div className="cart flex flex-col justify-center items-center">

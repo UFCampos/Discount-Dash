@@ -1,56 +1,109 @@
 "use client";
 import { Image } from "@nextui-org/react";
 import style from "./Carts.module.css";
+import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
-import { useDispatch, useSelector } from "@/lib/redux/hooks";
-import { useDelProductCartMutation, usePutPrudctCartMutation } from "@/lib/redux/service/cartProductsAPI";
+import {
+  useDelProductCartMutation,
+  usePutPrudctCartMutation,
+} from "@/lib/redux/service/cartProductsAPI";
+import { useSelector } from "@/lib/redux/hooks";
+import { CartProduct } from "@/utils/types";
+import { useEffect, useState } from "react";
+import { useDispatch } from "@/lib/redux/hooks";
+import { addCart, addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 const Cart = () => {
-  // const id = useSelector((state) => state.userProfile.id);
+  const [productId, setProductId] = useState("");
+  const [flag, setFlag] = useState(false);
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.userProfile.id);
+  const { cartItems } = useSelector((state) => state.cartItems);
 
-  
-  const id = "6Ks3wWaq8zPnkqGZUhqK";
-  const { data, isLoading } = useGetProductsCartQuery({ id });
+  const { data } = useGetProductsCartQuery({ id: userId });
+
+  const {
+    data: product,
+    isLoading,
+    isError,
+  } = useGetProductQuery({ id: productId });
 
   const [mutate1] = useDelProductCartMutation();
   const handleDelete = (productId: string) => {
+    // setProductId(productId);
     mutate1({
       cartItemId: productId,
-      userId: id,
+      userId,
+    }).then(() => {
+      let newCart = cartItems?.filter((item) => item?.id !== productId);
+      dispatch(addTotalCart(newCart));
     });
+    setFlag(!flag);
   };
 
   const [mutate] = usePutPrudctCartMutation();
-  const handleAddCart = (productId: string, value: string ) => {
+  const handleAddCart = (productId: string, value: string) => {
+    setProductId(productId);
     mutate({
       cartItemId: productId,
-      userId: id,
-      value
-    })
-  }
+      userId,
+      value,
+    });
+    if (value === "add") {
+      let newCart = cartItems?.map((item) => {
+        if (item?.id === productId) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
+        }
+        return item;
+      });
+      dispatch(addTotalCart(newCart));
+    } else {
+      let newCart = cartItems?.map((item) => {
+        if (item?.id === productId) {
+          return {
+            ...item,
+            quantity: item.quantity - 1,
+          };
+        }
+        return item;
+      });
+      dispatch(addTotalCart(newCart));
+    }
+  };
+
+  let total = 0;
+
+  useEffect(() => {
+    dispatch(addTotalCart(data));
+
+    console.log(
+      "UserId cambió a: " + userId + ", pero el length es undefined? Length:",
+      data?.length
+    );
+    console.log(cartItems);
+  }, [data, flag]);
 
   return (
     <div className={style.homeRigthCont}>
       <div className="max-w-md mx-auto overflow-y-auto overflow-hidden">
-        {isLoading ? (
-          <h1>Is loading...</h1>
-        ) : (
-          data?.map((product, index) => { console.log(product);
+        {cartItems?.map((product: CartProduct, index: number) => {
           {
             return (
               <div
                 key={product.id}
                 className="flex items-center p-2 mr-2 my-2 ml-2 border border-black rounded shadow backdrop-blur-md bg-gray-50 "
               >
-                
                 <div className="border border-gray-300 rounded mr-2 ">
                   <Image
-                    src={product.image}
+                    src={product?.image}
                     alt="Product Image"
                     height={80}
                     width={80}
                   />
                 </div>
-                <button onClick={() => handleDelete(product.id)}>x</button>
+                <button onClick={() => handleDelete(product?.id)}>x</button>
                 <div
                   className="ml-2 border-black
                  5"
@@ -58,11 +111,11 @@ const Cart = () => {
                   <h1 className="text-lg font-bold text-gray-950">
                     {product?.name}
                   </h1>
-                  <p className="text-gray-950">${product.price}</p>
+                  <p className="text-gray-950">${product?.price}</p>
                   <div className="mt-1">
                     <button
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
-                      onClick={() => handleAddCart(product.id, 'decrement')}
+                      onClick={() => handleAddCart(product?.id, "decrement")}
                     >
                       <Image
                         src="/menos3.png"
@@ -75,7 +128,7 @@ const Cart = () => {
                       {product?.quantity}
                     </h2>
                     <button
-                      onClick={() => handleAddCart(product.id, 'add')}
+                      onClick={() => handleAddCart(product?.id, "add")}
                       className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
                     >
                       <Image
@@ -85,21 +138,36 @@ const Cart = () => {
                         alt="image"
                       />
                     </button>
-                    <h5 className="text-black text-lg">
+                    <h2 className="text-black text-lg">
                       Total:{" "}
                       <h1 className="font-bold text-lg">
-                        ${product.quantity * product.price}
+                        ${(total = product?.quantity * product?.price)}
                       </h1>
-                    </h5>
+                    </h2>
                   </div>
                 </div>
-                {index < data.length - 1 && (
+                {index < cartItems.length - 1 && (
                   <hr className="border-gray-300 mx-2" /> // Línea divisoria
                 )}
               </div>
             );
-          }})
-        )}
+          }
+        })}
+        <div className="text-right mt-4">
+          <h1 className="text-lg font-bold text-gray-950">
+            Total: $
+            {cartItems?.reduce(
+              (acc, item) => total + parseInt(`${item.price}`),
+              0
+            )}
+          </h1>
+        </div>
+
+        <div className="text-center mt-4">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Buy
+          </button>
+        </div>
       </div>
     </div>
   );

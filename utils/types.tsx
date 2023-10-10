@@ -15,15 +15,7 @@ export interface CartProduct {
     image: string;
     category: string;
     quantity: number;   
-}
-
-export interface CartProduct {
-    name: string;
-    price: number;
-    stock: number;
-    image: string;
-    category: string;
-    quantity: number;   
+    id: string;
 }
 
 export interface Categories {

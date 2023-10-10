@@ -1,23 +1,41 @@
 import { db } from "@/firebase/config";
-import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import { NextResponse, NextRequest } from "next/server";
+import { controller } from "../update/controller";
 
-export const POST = async (req: NextRequest, {params}: {params: {id: string}}) => {
-    // Add a document to the "cart" subcollection of "user"
-    const { userId, itemId } = await req.json();
+export const POST = async (req: NextRequest) => {
+  try {
+    const { userId, cartItemId, value } = await req.json();
 
-    if (userId && itemId) {
-        const product = await getDoc(doc(db, "products", itemId));
+    const cartDoc = doc(db, "users", userId, "cart", cartItemId);
+    const cartDocSnapshot = await getDoc(cartDoc);
+    if (cartDocSnapshot.exists()) {
+      const cartData = cartDocSnapshot.data();
+      const quantity = cartData.quantity || 0;
+      if (quantity > 0) {
+        controller(userId, cartItemId, value);
+      }
+      return NextResponse.json({ message: "Product added to cart" });
+    } else {
+      const cartItemCollection = collection(db, "users", userId, "cart");
 
-        const cartItemCollection = collection(db, "users", userId, "cart")
+      const product = await getDoc(doc(db, "products", cartItemId));
+      await setDoc(doc(cartItemCollection, cartItemId), {
+        ...product.data(),
+        quantity: 1,
+      });
 
-        const item = await setDoc(doc(cartItemCollection, itemId), {
-            ...product.data(),
-            quantity: 1
-        });
-        
-        return NextResponse.json({message: "Producto añadido con éxito al carrito"},{status: 201});
+      return NextResponse.json(
+        { message: "Product added to cart" },
+        { status: 201 }
+      );
     }
-
-    return NextResponse.json({error: "Not found"}, {status: 404});
-}
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 404 });
+  }
+};

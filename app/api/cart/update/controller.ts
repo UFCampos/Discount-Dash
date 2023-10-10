@@ -1,5 +1,13 @@
-import { updateDoc, doc, increment } from "firebase/firestore";
+import {
+  updateDoc,
+  doc,
+  increment,
+  getDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "@/firebase/config";
+import { DocumentData } from "firebase-admin/firestore";
+
 
 export const controller = async (
   userId: string,
@@ -7,13 +15,33 @@ export const controller = async (
   value: string
 ) => {
   const docRef = doc(db, "users", userId, "cart", cartItemId);
-  if (value === "add")
-    await updateDoc(docRef, {
-      quantity: increment(1),
-    });
-  else {
-    await updateDoc(docRef, {
-      quantity: increment(-1),
-    });
+  const productRef = doc(db, "products", cartItemId);
+  const productStock = (await getDoc(productRef)).get("stock");
+
+  if (productStock === 0) {
+    throw new Error("Out of stock");
+  }
+
+  const productDoc = await getDoc(docRef);
+
+  if (productDoc.exists()) {
+    const productData: DocumentData | undefined = productDoc.data();
+
+    if (productData) {
+      if (value === "add") {
+        await updateDoc(docRef, {
+          quantity: increment(1),
+        });
+      } else {
+        if (productData.quantity === 1) {
+          await deleteDoc(docRef);
+        }
+        if (productData.quantity > 1) {
+          await updateDoc(docRef, {
+            quantity: increment(-1),
+          });
+        }
+      }
+    }
   }
 };

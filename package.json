@@ -6,21 +6,26 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mercadopago/sdk-react": "^0.0.15",
     "@nextui-org/react": "^2.1.13",
     "@reduxjs/toolkit": "1.9.5",
     "autoprefixer": "^10.4.16",
+    "axios": "^1.5.1",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.2",
     "firebase": "^10.4.0",
     "firebase-admin": "^11.10.1",
     "framer-motion": "^10.16.4",
-    "next": "latest",
+    "mercadopago": "^1.5.7",
+    "next": "^13.5.4",
+    "pack": "^2.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "8.1.0",
     "sass": "^1.68.0",
     "swiper": "^10.3.1",
     "tailwindcss": "3.3.3",
+    "turbo": "^1.10.15",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

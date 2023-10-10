@@ -10,7 +10,7 @@ export const GET = async (req: NextRequest) => {
   let price = req.nextUrl.searchParams.get("price") || "";
   let category = req.nextUrl.searchParams.get("category") || "";
   let order = req.nextUrl.searchParams.get("order") || "";
-  let nameSort = req.nextUrl.searchParams.get("sort") || "";
+  let nameSort = req.nextUrl.searchParams.get("order") || "";
   let storeType = req.nextUrl.searchParams.get("storeType") || "";
 
   let queryRef: CollectionReference = collection(db, "products");
@@ -34,9 +34,8 @@ export const GET = async (req: NextRequest) => {
   console.log(products);
 
   if (name !== "") {
-    let newProducts = products.filter(product => product.name.toLowerCase().startsWith(name.toLowerCase()));
+    let newProducts = products.filter(product => product.name.toLowerCase().includes(name.toLowerCase()));
     if (nameSort !== "") {
-      console.log(nameSort);
       switch (nameSort) {
 
         case "name_asc":
