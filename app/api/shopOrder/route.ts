@@ -4,13 +4,26 @@ import { NextResponse, NextRequest } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
-    const userId = req.nextUrl.searchParams.get("id");
+    const userId = req.nextUrl.searchParams.get("userId");
+    const shopId = req.nextUrl.searchParams.get("shopId");
     const ordersCollectionRef = collection(db, "orders");
-    const queryRef = query(
+   let queryRef = query(
       ordersCollectionRef,
-      where("orderStatus", "!=", "completed"),
-      where("userId", "==", userId)
+      where("orderStatus", "!=", "completed")
     );
+
+    if(userId) {
+      queryRef = query(
+        queryRef,
+        where("userId", "==", userId)
+      );
+    }
+    if(shopId) {
+      queryRef = query(
+        queryRef,
+        where("shopId", "==", shopId)
+      );
+    }
     const ordersSnapshot = await getDocs(queryRef);
 
     const orders: any = [];
