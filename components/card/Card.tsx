@@ -51,7 +51,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
   const createPreference = async () => {
     try {
-      const URL = `https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app`;
+      const URL = ``;
       console.log(URL);
 
       const response = await axios.post(`${URL}/api/products/buyProduct`, {
