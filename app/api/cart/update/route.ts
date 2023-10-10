@@ -4,7 +4,7 @@ import { updateStock } from "../../products/putProduct/updateStock/updateStock";
 export const PUT = async (req: NextRequest) => {
   try {
     const { userId, cartItemId, value } = await req.json();
-    if (!userId || !cartItemId) {
+    if (!userId || !cartItemId || !value) {
       return NextResponse.json({ error: "Insufficient data" }, { status: 400 });
     }
 
