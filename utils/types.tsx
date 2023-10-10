@@ -24,3 +24,12 @@ export interface Categories {
     price: string;
     establecimiento: string;
 }
+
+export type Item = {
+  name: string;
+  image: string;
+  price: string;
+  brand: string;
+  id: string;
+  stock: string;
+};
