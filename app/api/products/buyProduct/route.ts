@@ -25,8 +25,6 @@ export const POST = async (req: NextRequest) => {
       pending: `https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app/notifications/success`,
     },
     auto_return: "approved",
-    notification_url:
-      "https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app/api/products/payProduct",
   };
 
   const response = await mercadopago.preferences.create(preference);
