@@ -16,7 +16,9 @@ type FiltersState = {
 };
 
 const Filters = () => {
+
   const nameSearch = useSelector((state) => state.filter.name);
+  
   const [valueState, setValueState] = useState<FiltersState>({
     category: "",
     order: "",
