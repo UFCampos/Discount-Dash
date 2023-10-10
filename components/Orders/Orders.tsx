@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
-import Image from "next/image"
+import { Image } from "@nextui-org/react";
 import "./Order.css"
 import { memoryLruGarbageCollector } from "firebase/firestore";
 

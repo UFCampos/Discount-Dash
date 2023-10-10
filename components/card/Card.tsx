@@ -12,6 +12,8 @@ import {
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
+import { Modal, ModalContent, useDisclosure } from "@nextui-org/react";
+import Detail from "../product/detail/Detail";
 import { CardProduct } from "@/utils/types";
 
 const Card: React.FC<CardProduct> = ({
@@ -24,6 +26,7 @@ const Card: React.FC<CardProduct> = ({
   normalPrice,
 }) => {
   const dispatch = useDispatch();
+  const { isOpen, onOpen } = useDisclosure();
 
   const products = useSelector((state) => state.payments.productPayment);
 
@@ -89,16 +92,16 @@ const Card: React.FC<CardProduct> = ({
         <p>vence en 5 dias</p>
       </div>
       <div className="card-info flex flex-col">
-        <Link href={`home/product/${itemId}`}>
+        <div onClick={onOpen} className="cursor-pointer">
           <h3 className="text-center">{name}</h3>
-        </Link>
-        <div className="rate flex flex-row justify-center gap-4 items-center">
-          <p> ⭐ 4.5</p>
-          <p>{brand}</p>
-        </div>
-        <div className="price flex flex-row justify-center items-center gap-4">
-          <p className="total">$ {normalPrice}</p>
-          <p>$ {price}</p>
+          <div className="rate flex flex-row justify-center gap-4 items-center">
+            <p> ⭐ 4.5</p>
+            <p>{brand}</p>
+          </div>
+          <div className="price flex flex-row justify-center items-center gap-4">
+            <p className="total">$ {normalPrice}</p>
+            <p>$ {price}</p>
+          </div>
         </div>
       </div>
       <div className="card-buy flex flex-row justify-evenly items-center">
@@ -114,6 +117,11 @@ const Card: React.FC<CardProduct> = ({
           </button>
         </div>
       </div>
+      <Modal closeButton isOpen={isOpen}>
+        <ModalContent>
+          <Detail id={itemId} />
+        </ModalContent>
+      </Modal>
     </div>
   );
 };

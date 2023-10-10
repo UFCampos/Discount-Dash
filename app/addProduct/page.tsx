@@ -1,4 +1,3 @@
-import Image from "next/image"
 import CreateProducts from "@/components/createProducts/createProducts"
 import "./addProduct.css"
 
