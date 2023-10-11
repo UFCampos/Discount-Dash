@@ -1,14 +1,54 @@
 import { NextResponse, NextRequest } from "next/server";
-import { controller } from "./controller";
+import {
+  putName,
+  putBrand,
+  putPrice,
+  putExpiration,
+  putStock,
+  putNormalPrice,
+  putImage,
+  putDescription,
+  putCategory
+} from "./updateAll/productAll";
 export const PUT = async (req: NextRequest) => {
-  const { name, brand, price, stock, image, productId } = await req.json();
   try {
-    if (!name || !brand || !price || !stock || !image) {
-      return NextResponse.json({ error: "Insufficient data" }, { status: 400 });
+    let productId = req.nextUrl.searchParams.get("id") || "";
+    let name = req.nextUrl.searchParams.get("name") || "";
+    let brand = req.nextUrl.searchParams.get("brand") || "";
+    let price = req.nextUrl.searchParams.get("price") || "";
+    let expiration = req.nextUrl.searchParams.get("expiration") || "";
+    let stock = req.nextUrl.searchParams.get("stock") || "";
+    let normalPrice = req.nextUrl.searchParams.get("normalPrice") || "";
+    let category = req.nextUrl.searchParams.get("category") || "";
+    let image = req.nextUrl.searchParams.get("image") || "";
+    let description = req.nextUrl.searchParams.get("description") || "";
+    if (name) {
+      await putName(name, productId);
     }
-
-    await controller(name, brand, price, stock, image, productId);
-
+    if (brand) {
+      await putBrand(brand, productId);
+    }
+    if (price) {
+      await putPrice(price, productId);
+    }
+    if (expiration) {
+      await putExpiration(expiration, productId);
+    }
+    if (stock) {
+      await putStock(stock, productId);
+    }
+    if (normalPrice) {
+      await putNormalPrice(normalPrice, productId);
+    }
+    if (category) {
+      await putCategory(category, productId);
+    }
+    if (image) {
+      await putImage(image, productId);
+    }
+    if (description) {
+      await putDescription(description, productId);
+    }
     return NextResponse.json({ message: "Product updated" });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });

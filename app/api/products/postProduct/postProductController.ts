@@ -5,10 +5,11 @@ export const controller = (
   name: string,
   brand: string,
   price: string,
-  stock: string,
-  image: string,
-  normalPrice: string,
   expiration: string,
+  stock: string,
+  normalPrice: string,
+  category: string,
+  image: string,
   shopId: string,
   description: string
 ) => {
@@ -19,11 +20,14 @@ export const controller = (
     name,
     nameToLowerCase: name.toLowerCase(),
     brand,
+    category,
+    expiration: expirationTimestamp,
     normalPrice: parseInt(normalPrice),
     price: parseInt(price),
     stock: parseInt(stock),
-    expiration: expirationTimestamp,
     image,
-    description
+    description,
+    status:"unexpired",
+    availability: "available",
   });
 };
