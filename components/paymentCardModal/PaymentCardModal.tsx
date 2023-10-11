@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './paymentCardModal.module.css';
+import style from './paymentCardModal.module.css'
 import {Wallet} from '@mercadopago/sdk-react';
 import {useSelector, useDispatch} from '@/lib/redux/hooks';
 import {initMercadoPago} from '@mercadopago/sdk-react';

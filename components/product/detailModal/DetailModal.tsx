@@ -1,5 +1,5 @@
 import {useGetProductQuery} from '@/lib/redux/service/productsAPI';
-import style from './paymentCardModal.module.css';
+import style from '@/components/paymentCardModal/paymentCardModal.module.css'
 import {type DetailModalProps} from '@/utils/types';
 
 const DetailModal: React.FC<DetailModalProps> = ({isOpen, setIsOpen, id}) => {
