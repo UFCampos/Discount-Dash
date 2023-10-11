@@ -1,52 +1,54 @@
-import { NextResponse, NextRequest } from "next/server";
-import { collection, query, orderBy, startAfter, limit, getDocs, doc } from "firebase/firestore";
-import { db } from "@/firebase/config";
-import { productByName } from "./productByName";
-import { Product } from "@/utils/types";
+import {NextResponse, type NextRequest} from 'next/server';
+import {collection, query, orderBy, startAfter, limit, getDocs, doc} from 'firebase/firestore';
+import {db} from '@/firebase/config';
+import {productByName} from './productByName';
+import {type Product} from '@/utils/types';
 
 export const GET = async (req: NextRequest) => {
-  const name = req.nextUrl.searchParams.get("name") || "";
+	const name = req.nextUrl.searchParams.get('name') || '';
 
-  // Parsing limit query to integer
-  const pageLimitString = req.nextUrl.searchParams.get("limit") || "";
-  const pageLimit = parseInt(pageLimitString)
-  
-  //Getting last visible document--------------
-  const lastVisibleId= req.nextUrl.searchParams.get("lastVisibleId") || "";
-  
-  const productsRef = collection(db, "products");
-  
-  const lastVisibleRef = lastVisibleId ?? doc(productsRef, lastVisibleId)
-  //--------------------------------------------
-  
-  const totalProducts= req.nextUrl.searchParams.get("total") || "";
+	// Parsing limit query to integer
+	const pageLimitString = req.nextUrl.searchParams.get('limit') || '';
+	const pageLimit = parseInt(pageLimitString);
 
-  if (name !== "") {
-    const response = await productByName(name);
+	// Getting last visible document--------------
+	const lastVisibleId = req.nextUrl.searchParams.get('lastVisibleId') || '';
 
-    if ("error" in response) {
-      return NextResponse.json(
-        { error: response.error },
-        { status: response.status }
-      );
-    }
-    return NextResponse.json(response);
-  }
-  let productsQuery = query(productsRef, orderBy("name"))
-  
-    if (!isNaN(pageLimit)) {
-    productsQuery = query(productsQuery, limit(pageLimit))
-      if (lastVisibleId !== "") {
-        productsQuery = query(productsQuery, startAfter(lastVisibleRef))
-      }
-  }
+	const productsRef = collection(db, 'products');
 
-  let productsSnapshots = await getDocs(productsQuery ?? productsRef);
+	const lastVisibleRef = lastVisibleId ?? doc(productsRef, lastVisibleId);
+	//--------------------------------------------
 
-  let products: Product[] = productsSnapshots.docs.map((doc) => ({
-    id: doc.id,
-    ...(doc.data() as Product),
-  }));
+	const totalProducts = req.nextUrl.searchParams.get('total') || '';
 
-  return NextResponse.json(products);
+	if (name !== '') {
+		const response = await productByName(name);
+
+		if ('error' in response) {
+			return NextResponse.json(
+				{error: response.error},
+				{status: response.status},
+			);
+		}
+
+		return NextResponse.json(response);
+	}
+
+	let productsQuery = query(productsRef, orderBy('name'));
+
+	if (!isNaN(pageLimit)) {
+		productsQuery = query(productsQuery, limit(pageLimit));
+		if (lastVisibleId !== '') {
+			productsQuery = query(productsQuery, startAfter(lastVisibleRef));
+		}
+	}
+
+	const productsSnapshots = await getDocs(productsQuery ?? productsRef);
+
+	const products: Product[] = productsSnapshots.docs.map(doc => ({
+		id: doc.id,
+		...(doc.data() as Product),
+	}));
+
+	return NextResponse.json(products);
 };
