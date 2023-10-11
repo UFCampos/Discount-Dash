@@ -73,12 +73,12 @@ const Card: React.FC<CardProduct> = ({
   };
   return (
     <div className="card flex flex-col">
-      <div className="card-img flex justify-center items-center">
-        <img src={image} />
-        <p>vence en 5 dias</p>
-      </div>
-      <div className="card-info flex flex-col">
-        <div onClick={onOpen} className="cursor-pointer">
+      <div onClick={onOpen} className="cursor-pointer">
+        <div className="card-img flex justify-center items-center">
+          <img src={image} />
+          <p>vence en 5 dias</p>
+        </div>
+        <div className="card-info flex flex-col">
           <h3 className="text-center">{name}</h3>
           <div className="rate flex flex-row justify-center gap-4 items-center">
             <p> ⭐ 4.5</p>
@@ -103,7 +103,7 @@ const Card: React.FC<CardProduct> = ({
           </button>
         </div>
       </div>
-      <Modal closeButton isOpen={isOpen}>
+      <Modal closeButton isOpen={isOpen} placement="center">
         <ModalContent>
           <Detail id={itemId} />
         </ModalContent>
