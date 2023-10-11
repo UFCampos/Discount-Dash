@@ -28,7 +28,9 @@ const Card: React.FC<CardProduct> = ({
   const [mutate] = useAddProductCartMutation();
   const { id } = useSelector((state) => state.userProfile);
 
-  const { data: product } = useGetProductQuery({ id: itemId });
+  const {
+    data: product
+  } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
     mutate({
