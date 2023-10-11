@@ -1,5 +1,5 @@
 import React from 'react'
-import LocalInfo from '../localInfo/LocalInfo';
+import LocalInfo from '../marketInfo/marketInfo';
 
 interface locationInfo{
     valueState:{

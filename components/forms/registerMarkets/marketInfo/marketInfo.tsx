@@ -51,7 +51,7 @@ const LocalInfo: React.FC<localInfo>=({valueState, handleChange})=>{
                 </div>
                 <div>
                     <label htmlFor="phone">Phone</label>
-                    <input type="text" name="phone" onChange={handleChange} value={valueState.phone}/>
+                    <input type="phone" name="phone" onChange={handleChange} value={valueState.phone}/>
                 </div>
             </form>
         </div>

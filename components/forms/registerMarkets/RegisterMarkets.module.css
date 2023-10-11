@@ -20,3 +20,8 @@
     height: 10vh;
     background: red;
 }
+.continueButton{
+    padding: 5px;
+    background: black;
+    color:white
+}

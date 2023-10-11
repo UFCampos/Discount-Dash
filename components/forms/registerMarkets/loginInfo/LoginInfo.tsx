@@ -23,7 +23,7 @@ const LoginInfo:React.FC<loginInfo>=({valueState, handleChange})=>{
                 </div>
                 <div>
                     <label htmlFor="confirmPassword">Confirm password</label>
-                    <input type="password" name="confirmPassword" onChange={handleChange}/>
+                    <input type="password" name="confirmPassword" onChange={handleChange} value={valueState.confirmPassword}/>
                 </div>
             </form>
         </div>
