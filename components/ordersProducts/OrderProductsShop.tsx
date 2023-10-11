@@ -1,10 +1,14 @@
 "use client";
 import { useGetOrdersQuery } from "@/lib/redux/service/ordersProductsAPI";
 
-const OrdersProducts = () => {
+const OrdersProductsShop = () => {
   //   const { id } = useSelector((state) => state.userProfile);
   const id = "107892466175771536460";
   const { data, isLoading, isError } = useGetOrdersQuery({ id });
+  const handleState = () => {
+      console.log('ME CAMBIE');
+      
+  }
 
   console.log(data);
 
@@ -24,6 +28,7 @@ const OrdersProducts = () => {
                 <p>{product.price}</p>
               </div>
             ))}
+            <button onClick={handleState}>Update state</button>
           </div>
         ))
       )}
@@ -31,4 +36,4 @@ const OrdersProducts = () => {
   );
 };
 
-export default OrdersProducts;
+export default OrdersProductsShop;
