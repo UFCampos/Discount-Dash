@@ -8,9 +8,7 @@ import {
   productPayment,
   productPaymentId,
 } from "@/lib/redux/features/paymentSlice";
-import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
-import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 import { CardProduct } from "@/utils/types";
 import DetailModal from "../product/detailModal/DetailModal";
 import { useState } from "react";
@@ -34,14 +32,9 @@ const Card: React.FC<CardProduct> = ({
 
   const [mutate] = useAddProductCartMutation();
   const { id } = useSelector((state) => state.userProfile);
-  const { cartItems } = useSelector((state) => state.cartItems);
-  const { data } = useGetProductsCartQuery({ id });
 
   const {
-    data: product,
-    isLoading,
-    isError,
-    isFetching
+    data: product
   } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
@@ -82,7 +75,6 @@ const Card: React.FC<CardProduct> = ({
           brand: brand,
         })
       );
-
       dispatch(productPaymentId(id));
     }
   };
