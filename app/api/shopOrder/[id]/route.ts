@@ -1,15 +1,11 @@
 import { NextResponse, NextRequest } from "next/server";
 import { controller } from "./postOrder";
 
-export const POST = async (
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) => {
+export const POST = async (req: NextRequest) => {
   try {
-    const { id } = params;
-   
+    const data = await req.json();
+    const { arrayProducts } = data;
 
-    await controller(id);
     return NextResponse.json({ message: "Order placed" });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
