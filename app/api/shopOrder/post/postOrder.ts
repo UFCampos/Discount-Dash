@@ -10,7 +10,7 @@ export const controller = async (id: string) => {
   const cartCollectionRef = collection(db, "users", id, "cart");
   const cartQuerySnapshot = await getDocs(cartCollectionRef);
 
-  const products:any = []; // Utilizamos un array en lugar de un objeto
+  const products: any = []; 
   let shopId = "";
   let totalPrice = 0;
 
@@ -19,7 +19,7 @@ export const controller = async (id: string) => {
     totalPrice += cartItemData.quantity * cartItemData.price;
     shopId = cartItemData.shopId;
 
-    products.push({ 
+    products.push({
       productId: doc.id,
       name: cartItemData.name,
       price: cartItemData.price,
