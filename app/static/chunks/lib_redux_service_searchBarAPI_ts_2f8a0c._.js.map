@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/lib/redux/service/searchBarAPI.ts"],"sourcesContent":["import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'\r\n\r\nexport const searchBarAPI = createApi({\r\n    reducerPath: 'searchBarAPI',\r\n    baseQuery: fetchBaseQuery({\r\n        baseUrl: `/api/products`,\r\n    }),\r\n    endpoints: (builder) => ({\r\n        getResults : builder.query<any, {name : string}>({\r\n            query: ({name}) => `?name=${name}`\r\n        })\r\n    })\r\n})\r\n\r\nexport const {useGetResultsQuery} = searchBarAPI\r\n\r\n"],"names":[],"mappings":";;;;;;;AAEO,MAAM,eAAe,wLAAU;IAClC,aAAa;IACb,WAAW,6LAAe;QACtB,SAAS,CAAC,aAAa,CAAC;IAC5B;IACA,WAAW,CAAC,UAAY,CAAC;YACrB,YAAa,QAAQ,KAAK,CAAuB;gBAC7C,OAAO;wBAAC,EAAC,IAAI,EAAC;2BAAK,CAAC,MAAM,EAAE,KAAK,CAAC;gBAAD;YACrC;QACJ,CAAC;AACL;AAEO,MAAM,EAAC,kBAAkB,EAAC,GAAG"}},
+    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

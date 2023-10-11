@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/shopOrder/page.tsx"],"sourcesContent":["import Orders from \"@/components/Orders/Orders\"\r\n\r\nconst Order = ()=>{\r\n    \r\n    return(\r\n        <div>\r\n            <Orders/>\r\n        </div>\r\n    )\r\n}\r\nexport default Order"],"names":[],"mappings":";;;;;;;;AAEA,MAAM,QAAQ;IAEV,qBACI,iKAAC;kBACG,cAAA;;;;;;;;;;AAGZ;KAPM;uCAQS"}},
+    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

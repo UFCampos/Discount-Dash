@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/.env.js"],"sourcesContent":["const env = process.env = {...process.env};\n\nenv[\"NODE_ENV\"] = \"development\";\nenv[\"PORT\"] = \"3000\";\nenv[\"__NEXT_IMAGE_OPTS\"] = {\"deviceSizes\":[640,750,828,1080,1200,1920,2048,3840],\"imageSizes\":[16,32,48,64,96,128,256,384],\"path\":\"/_next/image\",\"loader\":\"default\",\"domains\":[\"i.postimg.cc\"],\"disableStaticImages\":false,\"minimumCacheTtl\":60,\"formats\":[\"image/webp\"],\"dangerouslyAllowSvg\":false,\"contentSecurityPolicy\":\"script-src 'none'; frame-src 'none'; sandbox;\",\"remotePatterns\":[],\"unoptimized\":false};\n"],"names":[],"mappings":";;;;;;AAAA,MAAM,MAAM,QAAQ,GAAG,GAAG;IAAC,GAAG,QAAQ,GAAG;AAAA;AAEzC,GAAG,CAAC,WAAW,GAAG;AAClB,GAAG,CAAC,OAAO,GAAG;AACd,GAAG,CAAC,oBAAoB,GAAG;IAAC,eAAc;QAAC;QAAI;QAAI;QAAI;QAAK;QAAK;QAAK;QAAK;KAAK;IAAC,cAAa;QAAC;QAAG;QAAG;QAAG;QAAG;QAAG;QAAI;QAAI;KAAI;IAAC,QAAO;IAAe,UAAS;IAAU,WAAU;QAAC;KAAe;IAAC,uBAAsB;IAAM,mBAAkB;IAAG,WAAU;QAAC;KAAa;IAAC,uBAAsB;IAAM,yBAAwB;IAAgD,kBAAiB,EAAE;IAAC,eAAc;AAAK"}},
+    {"offset": {"line": 51, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

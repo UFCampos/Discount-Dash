@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/lib/redux/features/orderProduct.ts"],"sourcesContent":["import { createSlice } from \"@reduxjs/toolkit\";\r\n\r\nconst initialState = {\r\n    value : \"preparation\"\r\n}\r\n\r\nexport const OrderProduct = createSlice({\r\n    name: \"order\",\r\n    initialState,\r\n    reducers:{\r\n        change: (state)=>{\r\n            if (state.value === \"preparation\"){\r\n                state.value = \"On the way\" \r\n            } else state.value = \"Delivered\"\r\n        }\r\n    }\r\n})\r\n\r\nexport const {change} = OrderProduct.actions\r\n\r\nexport default OrderProduct.reducer"],"names":[],"mappings":";;;;;;;;AAEA,MAAM,eAAe;IACjB,OAAQ;AACZ;AAEO,MAAM,eAAe,mKAAY;IACpC,MAAM;IACN;IACA,UAAS;QACL,QAAQ,CAAC;YACL,IAAI,MAAM,KAAK,KAAK,eAAc;gBAC9B,MAAM,KAAK,GAAG;YAClB,OAAO,MAAM,KAAK,GAAG;QACzB;IACJ;AACJ;AAEO,MAAM,EAAC,MAAM,EAAC,GAAG,aAAa,OAAO;uCAE7B,aAAa,OAAO"}},
+    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/components/home-rigth-section/HomeRigth.css"],"sourcesContent":[".home-rigth-cont{\r\n    width: 20vw;\r\n    height: 88vh;\r\n    border-left: 1px solid #dedede;\r\n}\r\n/*# sourceMappingURL=HomeRigth.css.map */"],"names":[],"mappings":"AAAA,CAAC,eAAe,CAAA,CAAC;EACb,KAAK,EAAE,EAAE,EAAE;EACX,MAAM,EAAE,EAAE,EAAE;EACZ,WAAW,EAAE,CAAC,EAAE,CAAC,KAAK,CAAC,OAAO;AAClC,CAAC"}},
+    {"offset": {"line": 5, "column": 1}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

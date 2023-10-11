@@ -1,13 +1,14 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from '@/lib/redux/hooks';
-import { useGetCategoriesQuery } from '@/lib/redux/service/categoriesAPI';
-import { useNewPostMutation } from '@/lib/redux/service/productsAPI';
-import { uploadFile } from '@/firebase/config';
-import { setCategories } from '@/lib/redux/features/filterSlice';
-import { toggleMenu } from '@/lib/redux/features/menuSlice';
-import Link from 'next/link';
-import './createProducts.css';
+"use client";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { categoriesAPI, useGetCategoriesQuery } from "@/lib/redux/service/categoriesAPI";
+import { useNewPostMutation } from "@/lib/redux/service/productsAPI";
+import { uploadFile } from "@/firebase/config";
+import { setCategories } from "@/lib/redux/features/filterSlice";
+import { toggleMenu } from "@/lib/redux/features/menuSlice";
+import Link from "next/link";
+import validation from "@/utils/validations";
+import "./createProducts.css";
 
 const CreateProducts: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,17 +16,28 @@ const CreateProducts: React.FC = () => {
   const { data: dataCategories } = useGetCategoriesQuery(null);
 
   const [newProduct, setNewProduct] = useState({
-    name: '',
-    normalPrice: '',
-    price: '',
-    stock: '',
-    expiration: '',
-    category: '',
-    brand: '',
+    name: "",
+    normalPrice: "",
+    price: "",
+    stock: "",
+    expiration: "",
+    category: "",
+    brand: "",
   });
+  interface ProductInput {
+    name: string;
+    brand: string;
+    price: string;
+    normalPrice: string;
+    stock: string
+    expiration:string;
+    category: string;
+    image : null;
+  }
 
   const [file, setFile] = useState<File | null>(null);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState<Partial<ProductInput>>({});
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -33,7 +45,16 @@ const CreateProducts: React.FC = () => {
       ...newProduct,
       [name]: value,
     });
+    setErrors(
+      validation({
+        ...newProduct,
+        [name]: value,
+      })
+    );
   };
+
+
+  const hasErrors = Object.keys(errors).length > 0;
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -41,7 +62,9 @@ const CreateProducts: React.FC = () => {
     }
   };
 
-  const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setDescription(event.target.value);
   };
 
@@ -50,7 +73,19 @@ const CreateProducts: React.FC = () => {
       ...newProduct,
       category: event.target.value,
     });
+    if (!dataCategories || !dataCategories.some((category) => category.category === event.target.value)) {
+      setErrors({
+        ...errors,
+        category: "Invalid category",
+      });
+    } else {
+      const updatedErrors = { ...errors };
+      delete updatedErrors.category;
+      setErrors(updatedErrors);
+    }
+  
   };
+
 
   const [mutate, { data: mutationData }] = useNewPostMutation();
 
@@ -78,16 +113,16 @@ const CreateProducts: React.FC = () => {
     setFile(null);
 
     setNewProduct({
-      name: '',
-      price: '',
-      stock: '',
-      normalPrice: '',
-      expiration: '',
-      category: '',
-      brand: '',
+      name: "",
+      price: "",
+      stock: "",
+      normalPrice: "",
+      expiration: "",
+      category: "",
+      brand: "",
     });
 
-    setDescription('');
+    setDescription("");
 
     setTimeout(() => {
       location.reload();
@@ -103,15 +138,20 @@ const CreateProducts: React.FC = () => {
     }
   }, [dispatch, dataCategories, isOpen]);
 
+  console.log("hola" + newProduct.category.length);
+  
   return (
     <div className="form-product-cont flex flex-col justify-center items-center">
       <div className="back">
-        <Link href={'/home'} className="flex items-center text-center">
+        <Link href={"/home"} className="flex items-center text-center">
           <span className="material-symbols-outlined">arrow_back </span> Home
         </Link>
       </div>
       <h1 className="text-3xl p-4">Create Product</h1>
-      <form onSubmit={handleSend} className="form flex flex-col justify-end items-center">
+      <form
+        onSubmit={handleSend}
+        className="form flex flex-col justify-end items-center"
+      >
         <div className="form-info flex flex-col items-center justify-between">
           <div className="sup flex flex-col justify-center items-center">
             <div className="sections-form">
@@ -125,6 +165,7 @@ const CreateProducts: React.FC = () => {
                   name="name"
                   onChange={handleChange}
                 />
+                {errors.name && <p style={{ color: "red" }}>{errors.name} </p>}
               </div>
               <div className="name-brand flex flex-col items-end justify-center">
                 <label htmlFor="brand">Brand</label>
@@ -136,6 +177,9 @@ const CreateProducts: React.FC = () => {
                   name="brand"
                   onChange={handleChange}
                 />
+                {errors.brand && (
+                  <p style={{ color: "red" }}>{errors.brand} </p>
+                )}
               </div>
             </div>
             <div className="sections-form">
@@ -149,6 +193,9 @@ const CreateProducts: React.FC = () => {
                   name="price"
                   onChange={handleChange}
                 />
+                {errors.price && (
+                  <p style={{ color: "red" }}>{errors.price} </p>
+                )}
               </div>
               <div className="price flex flex-col items-end justify-center">
                 <label htmlFor="normalPrice">Original price</label>
@@ -160,6 +207,9 @@ const CreateProducts: React.FC = () => {
                   name="normalPrice"
                   onChange={handleChange}
                 />
+                {errors.normalPrice && (
+                  <p style={{ color: "red" }}>{errors.normalPrice} </p>
+                 )}
               </div>
             </div>
             <div className="sections-form">
@@ -173,6 +223,9 @@ const CreateProducts: React.FC = () => {
                   name="stock"
                   onChange={handleChange}
                 />
+                 {errors.stock && (
+                  <p style={{ color: "red" }}>{errors.stock} </p>
+                 )}
               </div>
               <div className="stock-expiration flex flex-col items-end justify-center">
                 <label htmlFor="expiration">Expiration date</label>
@@ -183,6 +236,9 @@ const CreateProducts: React.FC = () => {
                   name="expiration"
                   onChange={handleChange}
                 />
+                {errors.expiration && (
+                  <p style={{ color: "red" }}>{errors.expiration} </p>
+                 )}
               </div>
             </div>
             <div className="input-file flex flex-row items-center justify-between">
@@ -190,7 +246,7 @@ const CreateProducts: React.FC = () => {
               <select
                 value={newProduct.category}
                 className="select-category"
-                onChange={handleChangeSelect}
+                onChange={(event)=>handleChangeSelect(event)}
               >
                 <option value="" disabled>
                   categorias
@@ -204,6 +260,18 @@ const CreateProducts: React.FC = () => {
                 })}
               </select>
             </div>
+            <div className="input-file flex flex-row items-center justify-between">
+              <div className="mr-2">
+            {errors.image && (
+              <p style={{ color: "red",}}>{errors.image} </p>
+              )}
+              </div>
+              <div>
+                   {errors.category && (
+                     <p style={{ color: "red",  }}>{errors.category} </p>
+                     )}
+                     </div> 
+                     </div>
           </div>
           <div className="description-cont flex flex-col items-center justify-between">
             <label htmlFor="description">Description</label>
@@ -213,8 +281,12 @@ const CreateProducts: React.FC = () => {
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
+            {errors.price && (
+                  <p style={{ color: "red" }}>{errors.price} </p>
+                 )}
           </div>
-          <button type="submit" className="send">
+
+          <button type="submit" className="send" disabled={hasErrors}>
             Send
           </button>
         </div>
