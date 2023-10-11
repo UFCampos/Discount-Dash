@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Carrucel from '../Carrucel/Carucel';
+import Carrucel from '../Carousel/Carousel';
 
 const Hero = () => {
  
