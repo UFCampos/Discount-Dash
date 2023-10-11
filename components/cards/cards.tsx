@@ -14,6 +14,7 @@ const Cards = () => {
     price: string;
     brand: string;
     id: string;
+    stock: string;
   };
 
   const data = useSelector((state) => state.items.products);

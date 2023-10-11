@@ -21,7 +21,8 @@ const NavBar = () => {
 
   // const uid = useSelector((state) => state.userProfile.id);
 
-  const { data } = useGetCategoriesQuery(null);
+  const { data:dataCategories } = useGetCategoriesQuery(null);
+
   let uid 
 
   useEffect(() => {
@@ -47,9 +48,10 @@ const NavBar = () => {
     });
   },[uid]);
 
+  console.log(dataCategories)
   useEffect(() => {
-    setCategories(data);
-  }, []);
+    dispatch(setCategories(dataCategories))
+  }, [dataCategories]);
 
   return pathname !== "/login" &&
     pathname !== "/addProduct" &&
