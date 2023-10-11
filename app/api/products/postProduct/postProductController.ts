@@ -6,7 +6,6 @@ export const controller = (
   brand: string,
   price: string,
   expiration: string,
-  expiration: string,
   stock: string,
   normalPrice: string,
   category: string,
