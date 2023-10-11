@@ -4,7 +4,6 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --fix",
     "prepare": "husky install"
   },
   "dependencies": {

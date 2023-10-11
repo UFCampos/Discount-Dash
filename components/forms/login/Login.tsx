@@ -1,14 +1,14 @@
 'use client';
-import {auth} from '@/firebase/config';
-import {toggleMenu} from '@/lib/redux/features/menuSlice';
-import {signInWithEmailAndPassword} from 'firebase/auth';
-import {useState, useEffect} from 'react';
-import {signInProvider} from '@/app/utils';
+import { auth } from '@/firebase/config';
+import { toggleMenu } from '@/lib/redux/features/menuSlice';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useState, useEffect } from 'react';
+import { signInProvider } from '@/app/utils';
 import Link from 'next/link';
 import style from './login.module.css';
-import {useDispatch, useSelector} from '@/lib/redux/hooks';
-import {setUser} from '@/lib/redux/features/userProfile';
-import {onAuthStateChanged} from 'firebase/auth';
+import { useDispatch, useSelector } from '@/lib/redux/hooks';
+import { setUser } from '@/lib/redux/features/userProfile';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Login = () => {
 	const [uid, setUid] = useState('');
