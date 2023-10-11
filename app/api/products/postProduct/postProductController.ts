@@ -15,17 +15,19 @@ export const controller = (
 ) => {
 	const expirationTimestamp = Timestamp.fromDate(new Date(expiration));
 
-	addDoc(collection(db, 'products'), {
-		shopId,
-		name,
-		nameToLowerCase: name.toLowerCase(),
-		brand,
-		category,
-		expiration: expirationTimestamp,
-		normalPrice: parseInt(normalPrice),
-		price: parseInt(price),
-		stock: parseInt(stock),
-		image,
-		description,
-	});
+  addDoc(collection(db, "products"), {
+    shopId,
+    name,
+    nameToLowerCase: name.toLowerCase(),
+    brand,
+    category,
+    expiration: expirationTimestamp,
+    normalPrice: parseInt(normalPrice),
+    price: parseInt(price),
+    stock: parseInt(stock),
+    image,
+    description,
+    status:"unexpired",
+    availability: "available",
+  });
 };
