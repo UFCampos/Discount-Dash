@@ -1,6 +1,5 @@
 "use client";
 import "./Card.css";
-import Link from "next/link";
 import axios from "axios";
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
@@ -9,9 +8,7 @@ import {
   productPayment,
   productPaymentId,
 } from "@/lib/redux/features/paymentSlice";
-import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
-import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 import { Modal, ModalContent, useDisclosure } from "@nextui-org/react";
 import Detail from "../product/detail/Detail";
 import { CardProduct } from "@/utils/types";
@@ -28,20 +25,10 @@ const Card: React.FC<CardProduct> = ({
   const dispatch = useDispatch();
   const { isOpen, onOpen } = useDisclosure();
 
-  const products = useSelector((state) => state.payments.productPayment);
-
-  const paymentId = useSelector((state) => state.payments.paymentId);
-
   const [mutate] = useAddProductCartMutation();
   const { id } = useSelector((state) => state.userProfile);
-  const { cartItems } = useSelector((state) => state.cartItems);
-  const { data } = useGetProductsCartQuery({ id });
 
-  const {
-    data: product,
-    isLoading,
-    isError,
-  } = useGetProductQuery({ id: itemId });
+  const { data: product } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
     mutate({
@@ -81,7 +68,6 @@ const Card: React.FC<CardProduct> = ({
           brand: brand,
         })
       );
-
       dispatch(productPaymentId(id));
     }
   };
