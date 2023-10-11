@@ -6,7 +6,7 @@ const OrdersProducts = () => {
   const id = "107892466175771536460";
   const { data, isLoading, isError } = useGetOrdersQuery({ id });
 
-  console.log(data);
+	console.log(data);
 
   return (
     <div className="orders-products-cont flex flex-col justify-center items-center">

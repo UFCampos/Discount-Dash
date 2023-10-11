@@ -9,7 +9,7 @@
 //       userId : id,
 //       itemId
 //     }
-        
+
 //     const { data, isLoading } = useGetProductsCartQuery({id} );
 //     return (
 //         <div>
@@ -25,7 +25,7 @@
 //             {postProductCart(body)}
 
 //         </div>
-      
+
 //     );
 // }
 
