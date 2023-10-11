@@ -10,7 +10,7 @@ export const controller = async (id: string) => {
   const cartCollectionRef = collection(db, "users", id, "cart");
   const cartQuerySnapshot = await getDocs(cartCollectionRef);
 
-  const products: any = {};
+  const products: any = []; 
   let shopId = "";
   let totalPrice = 0;
 
@@ -18,15 +18,15 @@ export const controller = async (id: string) => {
     const cartItemData = doc.data();
     totalPrice += cartItemData.quantity * cartItemData.price;
     shopId = cartItemData.shopId;
-console.log(cartItemData.shopId)
-    products[cartItemData.name] = {
+
+    products.push({
       productId: doc.id,
       name: cartItemData.name,
       price: cartItemData.price,
       image: cartItemData.image,
       quantity: cartItemData.quantity,
       total: cartItemData.quantity * cartItemData.price,
-    };
+    });
   });
 
   const ordersRef = collection(db, "orders");
