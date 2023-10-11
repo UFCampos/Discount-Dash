@@ -50,7 +50,7 @@ const SearchBar = () => {
 
   return (
     <div className={style.search}>
-      <input type="text" className={style.search__input} placeholder="Type your text" onChange={handleChange}/>
+      <input type="text" className={style.search__input} placeholder="Search product" onChange={handleChange}/>
       <button className={style.search__button} onClick={handleSearch}>
           <svg className={style.search__icon} aria-hidden="true" viewBox="0 0 24 24">
               <g>

@@ -35,10 +35,10 @@ const marketInfoValidation=(data:marketInfo)=>{
     if(phone.length!==0 && !regex.test(phone)){
         errors.invalidPhone="The field can only contain numbers"
     }
-    if(phone.length<10){
+    if(phone.length!==0 && phone.length<10 && regex.test(phone)){
         errors.shortPhone="the given phone is very short"
     }
-    if(phone.length>15){
+    if(phone.length>15 && regex.test(phone)){
         errors.longPhone="very long phone"
     }
     return errors

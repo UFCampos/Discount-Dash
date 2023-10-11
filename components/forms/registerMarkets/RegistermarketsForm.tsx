@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import style from "./RegisterMarkets.module.css"
 import LocationMarket from './locationMarket/locationMarket'
-import LocalInfo from './marketInfo/marketInfo';
+import MarketInfo from './marketInfo/marketInfo';
 import FactureInfo from './factureInfo/FactureInfo';
 import LoginInfo from './loginInfo/LoginInfo';
 import marketValidation from "./validations/marketInfoValidations"
@@ -139,6 +139,7 @@ export const RegisterMarketsForm = () => {
       [name]:value
     })
   }
+
   const handleChangeLocation=(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
     const {name, value}=event.target
     setLocationInfo({
@@ -192,7 +193,7 @@ export const RegisterMarketsForm = () => {
 
   const disabledButton=()=>{
     if(section===1){
-      const validateSection = Object.values(errorsMarket).some(value => value !== '');
+      const validateSection = Object.values(errorsMarket)?.some(value => value !== '');
       return validateSection
     }
     if(section===2){
@@ -219,18 +220,16 @@ export const RegisterMarketsForm = () => {
   return (
     <section className={style.contForm}>
       <div className={style.infoCont}>
-        {
-          section===1 ?  <LocalInfo valueState={marketInfo} handleChange={handleChange}/>  :
-          section===2 ?  <LocationMarket valueState={locationInfo} handleChange={handleChangeLocation}/> :
-          section===3 ?<FactureInfo valueState={factureInfo} handleChange={handleChangeFacture}/>
-          : <LoginInfo valueState={loginInfo} handleChange={handleChangeLogin}/>
-        }
+        {section===1 && <MarketInfo valueState={marketInfo} handleChange={handleChange} errors={errorsMarket}/>}
+        {section===2 && <LocationMarket valueState={locationInfo} handleChange={handleChangeLocation} errors={locationError}/>}
+        {section===3 && <FactureInfo valueState={factureInfo} handleChange={handleChangeFacture} errors={factureError}/>}
+        {section===4 && <LoginInfo valueState={loginInfo} handleChange={handleChangeLogin} errors={loginError}/>}
       </div>
       <div className={style.buttons}>
-        <button onClick={()=>handleSection("back")}>back</button>
-        <p>{section}/4</p>
+        <button disabled={section===1 ? true : false} onClick={()=>handleSection("back")} className={style.back}>back</button>
+        <p>{section} pasos de 4</p>
         {section!==4 && <button disabled={disabledButton()} className={style.continueButton} onClick={()=>handleSection("continue")}>Continue</button>}
-        {section===4 && <button disabled={disabledButton()} className={style.continueButton}>Register</button>}
+        {section===4 && <button disabled={disabledButton()} className={style.registerButton}>Register</button>}
       </div>
     </section>
   )
