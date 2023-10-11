@@ -1,7 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
-import { categoriesAPI, useGetCategoriesQuery } from "@/lib/redux/service/categoriesAPI";
+import {
+  categoriesAPI,
+  useGetCategoriesQuery,
+} from "@/lib/redux/service/categoriesAPI";
 import { useNewPostMutation } from "@/lib/redux/service/productsAPI";
 import { uploadFile } from "@/firebase/config";
 import { setCategories } from "@/lib/redux/features/filterSlice";
@@ -29,10 +32,10 @@ const CreateProducts: React.FC = () => {
     brand: string;
     price: string;
     normalPrice: string;
-    stock: string
-    expiration:string;
+    stock: string;
+    expiration: string;
     category: string;
-    image : null;
+    description: string;
   }
 
   const [file, setFile] = useState<File | null>(null);
@@ -49,12 +52,10 @@ const CreateProducts: React.FC = () => {
       validation({
         ...newProduct,
         [name]: value,
+        description,
       })
     );
   };
-
-
-  const hasErrors = Object.keys(errors).length > 0;
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -65,7 +66,13 @@ const CreateProducts: React.FC = () => {
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
+    const newDescription = event.target.value;
     setDescription(event.target.value);
+    const descriptionErrors = validation({
+      ...newProduct,
+      description: newDescription,
+    });
+    setErrors({ ...errors, ...descriptionErrors });
   };
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -73,7 +80,12 @@ const CreateProducts: React.FC = () => {
       ...newProduct,
       category: event.target.value,
     });
-    if (!dataCategories || !dataCategories.some((category) => category.category === event.target.value)) {
+    if (
+      !dataCategories ||
+      !dataCategories.some(
+        (category) => category.category === event.target.value
+      )
+    ) {
       setErrors({
         ...errors,
         category: "Invalid category",
@@ -83,9 +95,7 @@ const CreateProducts: React.FC = () => {
       delete updatedErrors.category;
       setErrors(updatedErrors);
     }
-  
   };
-
 
   const [mutate, { data: mutationData }] = useNewPostMutation();
 
@@ -138,8 +148,13 @@ const CreateProducts: React.FC = () => {
     }
   }, [dispatch, dataCategories, isOpen]);
 
-  console.log("hola" + newProduct.category.length);
-  
+  const allFieldsAreValid =
+    Object.values(newProduct, description).every(
+      (value) => value.trim() !== ""
+    ) && Object.keys(errors).length  > 0 
+    console.log(Object.keys(errors));
+    
+    
   return (
     <div className="form-product-cont flex flex-col justify-center items-center">
       <div className="back">
@@ -209,7 +224,7 @@ const CreateProducts: React.FC = () => {
                 />
                 {errors.normalPrice && (
                   <p style={{ color: "red" }}>{errors.normalPrice} </p>
-                 )}
+                )}
               </div>
             </div>
             <div className="sections-form">
@@ -223,9 +238,9 @@ const CreateProducts: React.FC = () => {
                   name="stock"
                   onChange={handleChange}
                 />
-                 {errors.stock && (
+                {errors.stock && (
                   <p style={{ color: "red" }}>{errors.stock} </p>
-                 )}
+                )}
               </div>
               <div className="stock-expiration flex flex-col items-end justify-center">
                 <label htmlFor="expiration">Expiration date</label>
@@ -238,7 +253,7 @@ const CreateProducts: React.FC = () => {
                 />
                 {errors.expiration && (
                   <p style={{ color: "red" }}>{errors.expiration} </p>
-                 )}
+                )}
               </div>
             </div>
             <div className="input-file flex flex-row items-center justify-between">
@@ -246,7 +261,7 @@ const CreateProducts: React.FC = () => {
               <select
                 value={newProduct.category}
                 className="select-category"
-                onChange={(event)=>handleChangeSelect(event)}
+                onChange={(event) => handleChangeSelect(event)}
               >
                 <option value="" disabled>
                   categorias
@@ -261,17 +276,13 @@ const CreateProducts: React.FC = () => {
               </select>
             </div>
             <div className="input-file flex flex-row items-center justify-between">
-              <div className="mr-2">
-            {errors.image && (
-              <p style={{ color: "red",}}>{errors.image} </p>
-              )}
-              </div>
+              <div className="mr-2"></div>
               <div>
-                   {errors.category && (
-                     <p style={{ color: "red",  }}>{errors.category} </p>
-                     )}
-                     </div> 
-                     </div>
+                {errors.category && (
+                  <p style={{ color: "red" }}>{errors.category} </p>
+                )}
+              </div>
+            </div>
           </div>
           <div className="description-cont flex flex-col items-center justify-between">
             <label htmlFor="description">Description</label>
@@ -281,12 +292,18 @@ const CreateProducts: React.FC = () => {
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
-            {errors.price && (
-                  <p style={{ color: "red" }}>{errors.price} </p>
-                 )}
+            {description.length < 20 && (
+              <p style={{ color: "red" }}>
+                Description must be at least 20 characters long
+              </p>
+            )}
+            {description.length >= 20 && description.length > 500 && (
+              <p style={{ color: "red" }}>
+                Description cannot exceed 500 characters
+              </p>
+            )}
           </div>
-
-          <button type="submit" className="send" disabled={hasErrors}>
+          <button type="submit" className="send" disabled={!allFieldsAreValid}>
             Send
           </button>
         </div>

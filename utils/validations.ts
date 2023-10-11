@@ -6,7 +6,7 @@ interface productInput {
   stock: string;
   expiration: string;
   category: string;
-  image: any
+  description: string;
 }
 
 const isFutreDate = (dateString: string) => {
@@ -15,8 +15,8 @@ const isFutreDate = (dateString: string) => {
   return expirationDate > currentDate;
 };
 
-const validation = (input: productInput) => {
-  let errors: Partial<productInput> = {};
+const validation = (input: productInput, description:string) => {
+  let errors: Partial<productInput & {description: string}> = {};
 
   if (!input.name) {
     errors.name = "Name is necessary";
@@ -53,11 +53,14 @@ const validation = (input: productInput) => {
   if (!input.category) {
     errors.category = "Choose one category";
   }
-  if (!input.image){
-    errors.image = "choose an image"
+  if (!input.description) {
+    errors.description = "Description is necessary";
+  } else if (input.description.length <= 20) {
+    errors.description = "Description must be at least 20 characters long";
+  } else if (input.description.length >= 500) {
+    errors.description = "Description cannot exceed 500 characters";
   }
-
-
+ 
   return errors;
 };
 
