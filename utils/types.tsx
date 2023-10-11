@@ -45,3 +45,9 @@ export type CardProduct = {
   stock: string;
   normalPrice: string;
 }
+
+export type DetailModalProps = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string;
+}

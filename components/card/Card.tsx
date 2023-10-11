@@ -1,6 +1,5 @@
 "use client";
 import "./Card.css";
-import Link from "next/link";
 import axios from "axios";
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
@@ -12,9 +11,9 @@ import {
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
-import { Modal, ModalContent, useDisclosure } from "@nextui-org/react";
-import Detail from "../product/detail/Detail";
 import { CardProduct } from "@/utils/types";
+import DetailModal from "../product/detailModal/DetailModal";
+import { useState } from "react";
 
 const Card: React.FC<CardProduct> = ({
   itemId,
@@ -26,7 +25,8 @@ const Card: React.FC<CardProduct> = ({
   normalPrice,
 }) => {
   const dispatch = useDispatch();
-  const { isOpen, onOpen } = useDisclosure();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const products = useSelector((state) => state.payments.productPayment);
 
@@ -41,6 +41,7 @@ const Card: React.FC<CardProduct> = ({
     data: product,
     isLoading,
     isError,
+    isFetching
   } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
@@ -72,7 +73,7 @@ const Card: React.FC<CardProduct> = ({
   const handleBuy = async () => {
     const id = await createPreference();
 
-    if (id) {
+    if(id){
       dispatch(
         productPayment({
           image: image,
@@ -87,7 +88,7 @@ const Card: React.FC<CardProduct> = ({
   };
   return (
     <div className="card flex flex-col">
-      <div onClick={onOpen} className="cursor-pointer">
+      <div onClick={setIsOpen(true)} className="cursor-pointer">
         <div className="card-img flex justify-center items-center">
           <img src={image} />
           <p>vence en 5 dias</p>
@@ -117,11 +118,7 @@ const Card: React.FC<CardProduct> = ({
           </button>
         </div>
       </div>
-      <Modal closeButton isOpen={isOpen} placement="center">
-        <ModalContent>
-          <Detail id={itemId} />
-        </ModalContent>
-      </Modal>
+      <DetailModal isOpen={isOpen} setIsOpen={setIsOpen} id={itemId}/>
     </div>
   );
 };
