@@ -27,6 +27,7 @@ export const controller = (
     stock: parseInt(stock),
     image,
     description,
-    status:"unexpired"
+    status:"unexpired",
+    availability: "available",
   });
 };
