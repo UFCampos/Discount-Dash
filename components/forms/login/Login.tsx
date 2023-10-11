@@ -35,7 +35,13 @@ const Login = () => {
 				const {user} = userCredential;
 				const {uid} = user; // Aquí obtienes el UID del usuario
 				setUid(uid);
-				dispatch(setUser(uid));
+				const mappedUser = {
+					id: uid,
+					email: user.email,
+					photoUrl: user.photoURL,
+					name: user.displayName,
+				}
+				dispatch(setUser(mappedUser));
 			})
 			.catch(error => {
 				console.error(error);
