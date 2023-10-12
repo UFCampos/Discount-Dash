@@ -14,22 +14,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
 
 
-"use client";
-import Link from "next/link";
-import SearchBar from "./searchBar/SearchBar";
-import style from "./navBar.module.css";
-import MenuButton from "./menu/Menu";
-import { useGetCategoriesQuery } from "@/lib/redux/service/categoriesAPI";
-import { setCategories } from "@/lib/redux/features/filterSlice";
-import { Image } from "@nextui-org/react";
-import { usePathname } from "next/navigation";
-import { useSelector, useDispatch } from "@/lib/redux/hooks";
-import { useEffect, useState } from "react";
-import { auth } from "@/firebase/config";
-import { onAuthStateChanged } from "firebase/auth";
-import { setUser } from "@/lib/redux/features/userProfile";
-
-
 const NavBar = () => {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
