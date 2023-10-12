@@ -11,13 +11,15 @@ import factureValidations from './validations/factureValidations';
 import LoginValidations from './validations/loginValidations';
 import { allDataMarket, marketInfo, locationInfo, factureInfo, loginInfo, marketErrors, locationErrors, factureErrors, loginError } from "@/utils/types"
 import { usePostMarketMutation } from '@/lib/redux/service/usersRegisterAPI';
-
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { auth } from '@/firebase/config';
 export const RegisterMarketsForm = () => {
 
   const [mutate] =usePostMarketMutation()
 
   //!ALL DATA
   const [dataMarket, setDataMarket]=useState<allDataMarket>({
+    id:"",
     marketName:"",
     typeMarket:"",
     category:"",
@@ -196,8 +198,19 @@ export const RegisterMarketsForm = () => {
     
   }
 
-  const handleSubmit=(data:allDataMarket)=>{
+  const handleSubmit=async (data:allDataMarket)=>{
 
+    await createUserWithEmailAndPassword(auth, data.email, data.password)
+    .then(userCredential=>{
+      const {user}=userCredential
+      const {uid}=user
+      sendEmailVerification(user)
+      setDataMarket({
+        ...dataMarket,
+        id:uid
+      })
+    })
+    console.log(dataMarket.id)
     mutate(data)
     
   }

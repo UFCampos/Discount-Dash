@@ -23,10 +23,10 @@ const Hero = () => (
               </Link>
             </div>
           </div>
-        </div>
-      </section>
+      </div>
+    </section>
     </div>
   );
-}
+
 
 export default Hero;

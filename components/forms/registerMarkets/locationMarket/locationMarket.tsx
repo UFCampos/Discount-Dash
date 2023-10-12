@@ -44,3 +44,4 @@ const LocationMarket: React.FC<locationProps>=({valueState, handleChange, errors
         </div>
     )
 }
+export default LocationMarket

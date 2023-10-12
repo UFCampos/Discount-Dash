@@ -112,6 +112,7 @@ export interface loginProps{
 }
 //?validation info interfaces
 export interface allDataMarket {
+    id:string,
     marketName:string,
     typeMarket:string,
     category:string,
@@ -217,3 +218,31 @@ export interface loginErrorStore{
     emptyPassword:string
     shortPassword:string
 }
+
+
+export type Item = {
+	itemId?: string;
+	name: string;
+	image: string;
+	price: string;
+	brand: string;
+	id: string;
+	stock: string;
+	normalPrice: string;
+};
+
+export type CardProduct = {
+	name: string;
+	image: string;
+	price: string;
+	brand: string;
+	itemId: string;
+	stock: string;
+	normalPrice: string;
+};
+
+export type DetailModalProps = {
+	isOpen: boolean;
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	id: string;
+};

@@ -76,3 +76,5 @@ const FactureInfo:React.FC<factureProps>=({valueState, handleChange, errors})=>{
         </div>
     )
 }
+
+export default FactureInfo
