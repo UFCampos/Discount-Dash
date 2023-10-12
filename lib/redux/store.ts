@@ -16,7 +16,7 @@ import {cartItemsSlice} from './features/cartItemsSlice';
 import {createProductsAPI} from './service/createProductsAPI';
 import {orderProductAPI} from './service/ordersProductsAPI';
 import { orderSlice } from './features/orderSlice';
-import { addressesAPI } from './service/AddressesAPI';
+import { addressesAPI } from './service/addressesAPI';
 
 export const store = configureStore({
 	reducer: {
