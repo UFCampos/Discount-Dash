@@ -4,7 +4,9 @@ import { controller } from "./postOrder";
 export const POST = async (req: NextRequest) => {
   try {
     const data = await req.json();
-    const { arrayProducts } = data;
+    const { userId, arrayProducts } = data;
+
+    controller(userId, arrayProducts);
 
     return NextResponse.json({ message: "Order placed" });
   } catch (error: any) {

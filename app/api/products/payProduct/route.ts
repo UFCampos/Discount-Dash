@@ -33,16 +33,20 @@ export const POST = async (req: NextRequest) => {
         for (let item of products) {
           const reference = doc(db, "products", item?.id);
           const productDB = await getDoc(reference);
-          const info = productDB.data();
-          await arrayProducts.push(productDB.data());
+          const info = await productDB.data();
+          info.id = item?.id;
+          info.quantity = Number(item?.quantity);
+          await arrayProducts.push(info);
 
           updateDoc(reference, {
             stock: info?.stock - Number(item.quantity),
           });
         }
       }
+      console.log(arrayProducts);
+
       await fetch(
-        "https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/api/shopOrder/QVfzr4yYV",
+        "https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/api/shopOrder/post",
         {
           method: "POST",
           body: JSON.stringify({
