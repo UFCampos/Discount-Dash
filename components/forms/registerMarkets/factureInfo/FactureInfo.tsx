@@ -1,5 +1,5 @@
 import React from "react"
-import {factureProps} from "../types/types"
+import {factureProps} from "@/utils/types"
 import styles from "../sections.module.css"
 
 const FactureInfo:React.FC<factureProps>=({valueState, handleChange, errors})=>{

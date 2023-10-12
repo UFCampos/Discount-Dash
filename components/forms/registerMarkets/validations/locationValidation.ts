@@ -1,4 +1,4 @@
-import {locationInfo} from "../types/types"
+import {locationInfo} from "@/utils/types"
 
 const locationValidations=(data:locationInfo)=>{
     

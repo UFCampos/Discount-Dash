@@ -1,8 +1,7 @@
 .homeRigthCont{
     width: 20vw;
-    height: 88vh;
-    overflow-y:scroll;
-    background-color: rgb(255, 255, 255);
+    height: 90vh;
+    background-color: white;
 }
 .homeRigthCont::-webkit-scrollbar {
     width: 8px;
@@ -17,3 +16,12 @@
     background-color: white; /* Color de fondo de la pista de la barra */
 }
 
+.cartCont{
+    height: 80%;
+    width: 100%;
+    background:aqua;
+    overflow-y: scroll;
+}
+.cartCont{
+    
+}

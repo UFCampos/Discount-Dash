@@ -1,4 +1,4 @@
-import {marketProps} from "../types/types"
+import {marketProps} from "@/utils/types"
 import styles from "../sections.module.css"
 
 const LocalInfo: React.FC<marketProps>=({valueState, handleChange, errors})=>{

@@ -9,9 +9,12 @@ import marketValidation from "./validations/marketInfoValidations"
 import locationValidations from './validations/locationValidation';
 import factureValidations from './validations/factureValidations';
 import LoginValidations from './validations/loginValidations';
-import { allDataMarket, marketInfo, locationInfo, factureInfo, loginInfo, marketErrors, locationErrors, factureErrors, loginError } from "./types/types"
+import { allDataMarket, marketInfo, locationInfo, factureInfo, loginInfo, marketErrors, locationErrors, factureErrors, loginError } from "@/utils/types"
+import { usePostMarketMutation } from '@/lib/redux/service/usersRegisterAPI';
 
 export const RegisterMarketsForm = () => {
+
+  const [mutate] =usePostMarketMutation()
 
   //!ALL DATA
   const [dataMarket, setDataMarket]=useState<allDataMarket>({
@@ -82,6 +85,7 @@ export const RegisterMarketsForm = () => {
     invalidPhone:"",
     shortPhone:""
   })
+
   const [locationError, setLocationError]=useState<locationErrors>({
     emptyStreet:"",
     emptyNumber:"",
@@ -191,6 +195,12 @@ export const RegisterMarketsForm = () => {
     
   }
 
+  const handleSubmit=(data:allDataMarket)=>{
+
+    mutate(data)
+    
+  }
+
   const disabledButton=()=>{
     if(section===1){
       const validateSection = Object.values(errorsMarket)?.some(value => value !== '');
@@ -228,8 +238,10 @@ export const RegisterMarketsForm = () => {
       <div className={style.buttons}>
         <button disabled={section===1 ? true : false} onClick={()=>handleSection("back")} className={style.back}>back</button>
         <p>{section} pasos de 4</p>
+
         {section!==4 && <button disabled={disabledButton()} className={style.continueButton} onClick={()=>handleSection("continue")}>Continue</button>}
-        {section===4 && <button disabled={disabledButton()} className={style.registerButton}>Register</button>}
+        {section===4 && <button disabled={disabledButton()} className={style.registerButton} onClick={()=>handleSubmit(dataMarket)}>Register</button>}
+      
       </div>
     </section>
   )

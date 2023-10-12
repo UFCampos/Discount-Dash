@@ -1,6 +1,6 @@
 import React from "react"
 import styles from "../sections.module.css"
-import {loginProps} from "../types/types"
+import {loginProps} from "@/utils/types"
 
 const LoginInfo:React.FC<loginProps>=({valueState, handleChange, errors})=>{
 

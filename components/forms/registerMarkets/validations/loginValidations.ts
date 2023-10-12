@@ -1,4 +1,4 @@
-import { loginInfo } from "../types/types";
+import { loginInfo } from "@/utils/types"
 
 const LoginValidations=(data:loginInfo)=>{
     const regex=/@.*\.com/

@@ -10,6 +10,7 @@ type Product={
   category:string,
   brand:string,
 }
+
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({

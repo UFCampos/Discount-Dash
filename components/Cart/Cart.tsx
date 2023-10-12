@@ -19,6 +19,7 @@ const Cart = () => {
   const userId = useSelector((state) => state.userProfile.id);
   const { cartItems } = useSelector((state) => state.cartItems);
 
+
   const { data } = useGetProductsCartQuery({ id: userId });
 
   const {
@@ -87,88 +88,87 @@ const Cart = () => {
 
   return (
     <div className={style.homeRigthCont}>
-      <div className="max-w-md mx-auto overflow-y-auto overflow-hidden">
-        {cartItems?.map((product: CartProduct, index: number) => {
-          {
-            return (
-              <div
-                key={product.id}
-                className="flex items-center p-2 mr-2 my-2 ml-2 border border-black rounded shadow backdrop-blur-md bg-gray-50 "
-              >
-                <div className="border border-gray-300 rounded mr-2 ">
-                  <Image
-                    src={product?.image}
-                    alt="Product Image"
-                    height={80}
-                    width={80}
-                  />
-                </div>
-                <button onClick={() => handleDelete(product?.id)}>x</button>
+        <div className={style.cartCont}>
+          {cartItems?.map((product: CartProduct, index: number) => {
+            {
+              return (
                 <div
-                  className="ml-2 border-black
-                 5"
+                  key={product.id}
+                  className="flex items-center p-2 mr-2 my-2 ml-2 border border-black rounded shadow backdrop-blur-md bg-gray-50 "
                 >
-                  <h1 className="text-lg font-bold text-gray-950">
-                    {product?.name}
-                  </h1>
-                  <p className="text-gray-950">${product?.price}</p>
-                  <div className="mt-1">
-                    <button
-                      className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
-                      onClick={() => handleAddCart(product?.id, "decrement")}
-                    >
-                      <Image
-                        src="/menos3.png"
-                        height={8}
-                        width={10}
-                        alt="image"
-                      />
-                    </button>
-                    <h2 className="inline-block bg-gray-200 rounded px-2 py-1 text-xs font-semibold text-gray-700 mr-1">
-                      {product?.quantity}
-                    </h2>
-                    <button
-                      onClick={() => handleAddCart(product?.id, "add")}
-                      className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
-                    >
-                      <Image
-                        src="/anadir.png"
-                        height={3}
-                        width={10}
-                        alt="image"
-                      />
-                    </button>
-                    <h2 className="text-black text-lg">
-                      Total:{" "}
-                      <h1 className="font-bold text-lg">
-                        ${(total = product?.quantity * product?.price)}
-                      </h1>
-                    </h2>
+                  <div className="border border-gray-300 rounded mr-2 ">
+                    <Image
+                      src={product?.image}
+                      alt="Product Image"
+                      height={80}
+                      width={80}
+                    />
                   </div>
+                  <button onClick={() => handleDelete(product?.id)}>x</button>
+                  <div
+                    className="ml-2 border-black
+                  5"
+                  >
+                    <h1 className="text-lg font-bold text-gray-950">
+                      {product?.name}
+                    </h1>
+                    <p className="text-gray-950">${product?.price}</p>
+                    <div className="mt-1">
+                      <button
+                        className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
+                        onClick={() => handleAddCart(product?.id, "decrement")}
+                      >
+                        <Image
+                          src="/menos3.png"
+                          height={8}
+                          width={10}
+                          alt="image"
+                        />
+                      </button>
+                      <h2 className="inline-block bg-gray-200 rounded px-2 py-1 text-xs font-semibold text-gray-700 mr-1">
+                        {product?.quantity}
+                      </h2>
+                      <button
+                        onClick={() => handleAddCart(product?.id, "add")}
+                        className="bg-gray-200 hover:bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 hover:text-gray-800 mr-1"
+                      >
+                        <Image
+                          src="/anadir.png"
+                          height={3}
+                          width={10}
+                          alt="image"
+                        />
+                      </button>
+                      <h2 className="text-black text-lg">
+                        Total:{" "}
+                        <h1 className="font-bold text-lg">
+                          ${(total = product?.quantity * product?.price)}
+                        </h1>
+                      </h2>
+                    </div>
+                  </div>
+                  {index < cartItems.length - 1 && (
+                    <hr className="border-gray-300 mx-2" /> // Línea divisoria
+                  )}
                 </div>
-                {index < cartItems.length - 1 && (
-                  <hr className="border-gray-300 mx-2" /> // Línea divisoria
-                )}
-              </div>
-            );
-          }
-        })}
-        <div className="text-right mt-4">
-          <h1 className="text-lg font-bold text-gray-950">
-            Total: $
-            {cartItems?.reduce(
-              (acc, item) => total + parseInt(`${item.price}`),
-              0
-            )}
-          </h1>
+              );
+            }
+          })}
+          <div className="text-right mt-4">
+            <h1 className="text-lg font-bold text-gray-950">
+              Total: $
+              {cartItems?.reduce(
+                (acc, item) => total + parseInt(`${item.price}`),
+                0
+              )}
+            </h1>
+          </div>
         </div>
 
-        <div className="text-center mt-4">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Buy
-          </button>
+        <div className={style.buybutton}>
+          <button className={style.buy}>Buy</button>
+          
         </div>
-      </div>
     </div>
   );
 };

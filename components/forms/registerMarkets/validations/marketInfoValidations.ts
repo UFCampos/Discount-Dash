@@ -1,4 +1,4 @@
-import {marketInfo} from "../types/types"
+import {marketInfo} from "@/utils/types"
 
 const marketInfoValidation=(data:marketInfo)=>{
 

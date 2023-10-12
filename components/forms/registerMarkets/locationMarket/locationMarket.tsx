@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "../sections.module.css"
-import { locationProps } from '../types/types';
+import { locationProps } from "@/utils/types"
 
 const LocationMarket: React.FC<locationProps>=({valueState, handleChange, errors})=>{
 

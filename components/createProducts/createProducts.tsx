@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from '@/lib/redux/hooks';
 import { useGetCategoriesQuery } from '@/lib/redux/service/categoriesAPI';
 import { useNewPostMutation } from '@/lib/redux/service/productsAPI';
 import { uploadFile } from '@/firebase/config';
-import { setCategories } from '@/lib/redux/features/filterSlice';
 import { toggleMenu } from '@/lib/redux/features/menuSlice';
 import Link from 'next/link';
 import './createProducts.css';

@@ -1,4 +1,4 @@
-import { factureInfo } from '../types/types';
+import { factureInfo } from "@/utils/types"
 
 const factureValidations=(data:factureInfo)=>{
 
