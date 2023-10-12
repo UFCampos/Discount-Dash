@@ -51,3 +51,10 @@ export type DetailModalProps = {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	id: string;
 };
+
+export type User = {
+	id: string;
+	name: string;
+	lastname: string;
+	image: string;
+};

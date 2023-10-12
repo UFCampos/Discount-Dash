@@ -9,9 +9,12 @@ import style from "./login.module.css";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { setUser } from "@/lib/redux/features/userProfile";
 import { onAuthStateChanged } from "firebase/auth";
+import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 
 const Login = () => {
   const [uid, setUid] = useState("");
+
+  const { data } = useGetUserQuery({ id: uid });
 
   const dispatch = useDispatch();
 

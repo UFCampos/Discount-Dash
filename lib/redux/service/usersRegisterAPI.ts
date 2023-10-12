@@ -1,11 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
+import {User} from '@/utils/types';
 
-type User = {
-	id: string;
-	name: string;
-	lastaname: string;
-	image: string;
-};
 export const userApi = createApi({
 	reducerPath: 'userApi',
 	baseQuery: fetchBaseQuery({
@@ -20,8 +15,11 @@ export const userApi = createApi({
 					body,
 				}),
 			}),
+			getUser: builder.query<User, string>({
+				query: id => `/users/${id}`,
+			})
 		}
 	),
 });
 
-export const {usePostUserMutation} = userApi;
+export const {usePostUserMutation, useGetUserQuery} = userApi;
