@@ -88,7 +88,7 @@ const CreateProducts: React.FC = () => {
       shopId: idProfile,
     });
 
-    setFile(null);
+    setFile(undefined);
 
     setNewProduct({
       name: "",
