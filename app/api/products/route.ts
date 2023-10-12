@@ -55,10 +55,10 @@ export const GET = async (req: NextRequest) =>  {
 
   let productsSnapshots = await getDocs(productsQuery ?? productsRef2);
 
-  let products: Product[] = productsSnapshots.docs.map((doc) => ({
-    id: doc.id,
-    ...(doc.data() as Product),
-  }));
+	const products: Product[] = productsSnapshots.docs.map(doc => ({
+		id: doc.id,
+		...(doc.data() as Product),
+	}));
 
-  return NextResponse.json(products);
+	return NextResponse.json(products);
 };

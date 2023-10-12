@@ -1,49 +1,40 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from '@/lib/redux/hooks';
-import { useGetCategoriesQuery } from '@/lib/redux/service/categoriesAPI';
-import { useNewPostMutation } from '@/lib/redux/service/productsAPI';
-import { uploadFile } from '@/firebase/config';
-import { setCategories } from '@/lib/redux/features/filterSlice';
-import { toggleMenu } from '@/lib/redux/features/menuSlice';
-import Link from 'next/link';
-import './createProducts.css';
-"use client"
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from '@/lib/redux/hooks';
-import { useGetCategoriesQuery } from '@/lib/redux/service/categoriesAPI';
-import { useNewPostMutation } from '@/lib/redux/service/productsAPI';
-import { uploadFile } from '@/firebase/config';
-import { setCategories } from '@/lib/redux/features/filterSlice';
-import { toggleMenu } from '@/lib/redux/features/menuSlice';
-import Link from 'next/link';
-import './createProducts.css';
+"use client";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { useGetCategoriesQuery } from "@/lib/redux/service/categoriesAPI";
+import { useNewPostMutation } from "@/lib/redux/service/productsAPI";
+import { uploadFile } from "@/firebase/config";
+import { setCategories } from "@/lib/redux/features/filterSlice";
+import { toggleMenu } from "@/lib/redux/features/menuSlice";
+import Link from "next/link";
+import "./createProducts.css";
 
 const CreateProducts: React.FC = () => {
-
   const dispatch = useDispatch();
 
   const isOpen = useSelector((state) => state.menu.isOpen);
-
-  const categories=useSelector((state)=>state.filter.categories)
+  const { data: dataCategories } = useGetCategoriesQuery(null);
+  const { id: idProfile } = useSelector((state) => state.userProfile);
 
   const [newProduct, setNewProduct] = useState({
-    name: '',
-    normalPrice: '',
-    price: '',
-    stock: '',
-    expiration: '',
-    category: '',
-    brand: '',
+    name: "",
+    normalPrice: "",
+    price: "",
+    stock: "",
+    expiration: "",
+    category: "",
+    brand: "",
   });
 
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File | undefined>(null);
 
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
 
-  const category = categories?.map(
-    ({category}, index) => <option key={index} value={category}>{category}</option>
-  );
+  const category = dataCategories?.map(({ category }, index) => (
+    <option key={index} value={category}>
+      {category}
+    </option>
+  ));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -59,7 +50,9 @@ const CreateProducts: React.FC = () => {
     }
   };
 
-  const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setDescription(event.target.value);
   };
 
@@ -74,6 +67,8 @@ const CreateProducts: React.FC = () => {
 
   const handleSend = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(newProduct);
+    console.log(idProfile);
 
     if (!file) {
       return;
@@ -85,31 +80,30 @@ const CreateProducts: React.FC = () => {
       name: newProduct.name,
       price: newProduct.price,
       normalPrice: newProduct.normalPrice,
-      description: description,
+      description,
       expiration: newProduct.expiration,
       image: urlImage,
       stock: newProduct.stock,
       category: newProduct.category,
       brand: newProduct.brand,
+      shopId: idProfile,
     });
 
     setFile(null);
 
     setNewProduct({
-      name: '',
-      price: '',
-      stock: '',
-      normalPrice: '',
-      expiration: '',
-      category: '',
-      brand: '',
+      name: "",
+      price: "",
+      stock: "",
+      normalPrice: "",
+      expiration: "",
+      category: "",
+      brand: "",
     });
 
-    setDescription('');
+    setDescription("");
 
-    setTimeout(() => {
-      location.reload();
-    }, 3000);
+    alert("Product created successfully");
   };
 
   useEffect(() => {
@@ -121,12 +115,15 @@ const CreateProducts: React.FC = () => {
   return (
     <div className="form-product-cont flex flex-col justify-center items-center">
       <div className="back">
-        <Link href={'/home'} className="flex items-center text-center">
+        <Link href={"/home"} className="flex items-center text-center">
           <span className="material-symbols-outlined">arrow_back </span> Home
         </Link>
       </div>
       <h1 className="text-3xl p-4">Create Product</h1>
-      <form onSubmit={handleSend} className="form flex flex-col justify-end items-center">
+      <form
+        onSubmit={handleSend}
+        className="form flex flex-col justify-end items-center"
+      >
         <div className="form-info flex flex-col items-center justify-between">
           <div className="sup flex flex-col justify-center items-center">
             <div className="sections-form">
@@ -210,9 +207,7 @@ const CreateProducts: React.FC = () => {
                 <option value="" disabled>
                   category
                 </option>
-                {
-                  category
-                }
+                {category}
               </select>
             </div>
           </div>

@@ -4,18 +4,10 @@ import Card from "../card/Card";
 import "./cards.css";
 import { Image } from "@nextui-org/react";
 import PaymentModal from "../paymentCardModal/PaymentCardModal";
+import { type Item } from "@/utils/types";
 
 const Cards = () => {
   const paymentOrder = useSelector((state) => state.payments.productPayment);
-
-  type Item = {
-    name: string;
-    image: string;
-    price: string;
-    brand: string;
-    id: string;
-    stock: string;
-  };
 
   const data = useSelector((state) => state.items.products);
   const error = useSelector((state) => state.items.errorsItems);
@@ -33,17 +25,18 @@ const Cards = () => {
           {error ? (
             <p>Not found</p>
           ) : (
-            data?.map((item: Item, index) => {
+            data?.map((item: Item) => {
               {
                 return (
                   <Card
-                    key={index}
+                    key={item.id}
                     itemId={item.id}
                     name={item.name}
                     image={item.image}
                     price={item.price}
                     brand={item.brand}
                     stock={item.stock}
+                    normalPrice={item.normalPrice}
                   />
                 );
               }

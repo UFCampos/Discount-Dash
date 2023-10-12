@@ -13,17 +13,9 @@ import {
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
+import { CardProduct } from "@/utils/types";
 
-interface props {
-  itemId: string;
-  name: string;
-  brand: string;
-  image: string;
-  price: string;
-}
-
-const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
-  const dispatch = useDispatch();
+const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock, normalPrice}) => {
 
   const products = useSelector((state) => state.payments.productPayment);
 
@@ -42,10 +34,13 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
   } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
+    console.log(itemId);
+    console.log(product); 
     mutate({
-      itemId,
+      cartItemId: itemId,
       userId: id,
-    });
+      value: "add",
+    })
     dispatch(addCart(product));
   };
 
@@ -98,7 +93,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
           <p>{brand}</p>
         </div>
         <div className="price flex flex-row justify-center items-center gap-4">
-          <p className="total">$ 5500</p>
+          <p className="total">$ {normalPrice}</p>
           <p>$ {price}</p>
         </div>
       </div>
