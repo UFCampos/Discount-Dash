@@ -30,6 +30,7 @@ const NavBar = () => {
         // Utiliza el uid almacenado en el estado
         let mappedUser = {};
         user.providerData.forEach((profile) => {
+          console.log(profile);
           uid = user.uid;
           mappedUser = {
             id: uid ? uid : profile.uid, // Usar el uid del estado

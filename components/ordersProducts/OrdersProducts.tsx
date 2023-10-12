@@ -9,9 +9,9 @@ const OrdersProducts = () => {
   const id = "107892466175771536460";
   
   const { data, isLoading, isError } = useGetOrdersQuery({ id });
-  useEffect(() => {
+  // useEffect(() => {
     
-  },[flag])
+  // },[flag])
 
   return (
     <div className="orders-products-cont flex flex-col justify-center items-center">

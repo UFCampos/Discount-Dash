@@ -16,6 +16,7 @@ import {cartItemsSlice} from './features/cartItemsSlice';
 import {createProductsAPI} from './service/createProductsAPI';
 import {orderProductAPI} from './service/ordersProductsAPI';
 import { orderSlice } from './features/orderSlice';
+import { addressesAPI } from './service/AddressesAPI';
 
 export const store = configureStore({
 	reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
 		payments: paymentSlice.reducer,
 		cartItems: cartItemsSlice.reducer,
 		order: orderSlice.reducer,
+		[addressesAPI.reducerPath]: addressesAPI.reducer,
 		[productsApi.reducerPath]: productsApi.reducer,
 		[searchProfileAPI.reducerPath]: searchProfileAPI.reducer,
 		[userApi.reducerPath]: userApi.reducer,
@@ -46,6 +48,7 @@ export const store = configureStore({
 			categoriesAPI.middleware,
 			createProductsAPI.middleware,
 			orderProductAPI.middleware,
+			addressesAPI.middleware,
 		),
 });
 
