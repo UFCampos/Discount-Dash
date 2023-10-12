@@ -139,12 +139,7 @@ const Cart = () => {
                           alt="image"
                         />
                       </button>
-                      <h2 className="text-black text-lg">
-                        Total:{" "}
-                        <h1 className="font-bold text-lg">
-                          ${(total = product?.quantity * product?.price)}
-                        </h1>
-                      </h2>
+                      
                     </div>
                   </div>
                   {index < cartItems.length - 1 && (
@@ -166,8 +161,8 @@ const Cart = () => {
         </div>
 
         <div className={style.buybutton}>
+          <p>{total}</p>
           <button className={style.buy}>Buy</button>
-          
         </div>
     </div>
   );
