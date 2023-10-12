@@ -35,8 +35,6 @@ const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock,
   } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
-    console.log(itemId);
-    console.log(product); 
     mutate({
       cartItemId: itemId,
       userId: id,
