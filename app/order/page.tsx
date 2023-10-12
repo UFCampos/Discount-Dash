@@ -1,10 +1,9 @@
-import Order from "@/components/Orders/Orders"
+import Order from '@/components/Orders/Orders';
 
-const Ord = ()=>{
-    return (
-        <div>
-            <Order/>
-        </div>
-    )
-}
-export default Ord
+const Ord = () => (
+	<div>
+		<Order/>
+	</div>
+);
+
+export default Ord;

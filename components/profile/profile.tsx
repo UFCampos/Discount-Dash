@@ -3,13 +3,14 @@ import { useGetProfileQuery } from "@/lib/redux/service/searchProfileAPI";
 import { Image } from "@nextui-org/react";
 import style from "./profile.module.css";
 import { useSelector } from "@/lib/redux/hooks";
+import Link from "next/link";
 
 type ProfileProps = {
   id: string;
 };
 
 const Profile: React.FC<ProfileProps> = ({ id }) => {
-  let { data, isError } = useGetProfileQuery({ id });
+  const { data, isError } = useGetProfileQuery({ id });
   const user = useSelector((state) => state.userProfile);
 
   if (isError) {
@@ -74,11 +75,15 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
             <div className="flex flex-wrap justify-center">
               <div className="w-full px-4 flex justify-center">
                 <div className="relative  items-center flex">
-                  <Image alt="img"
-                    src={data?.photoUrl ? data?.photoUrl : "/default.jpg"} width={300} height={300} className="shadow-xl rounded-full h-auto align-middle border-none w-40 -mt-20  " />
+                  <Image
+                    alt="img"
+                    src={data?.photoUrl ? data?.photoUrl : "/default.jpg"}
+                    width={300}
+                    height={300}
+                    className="shadow-xl rounded-full h-auto align-middle border-none w-40 -mt-20  "
+                  />
                 </div>
               </div>
-
             </div>
             <div className="text-center">
               <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700">
@@ -102,13 +107,14 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
                   <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
                     segurity
                   </p>
-                  <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                    pepito
-                  </p>
+                  <Link href={`/users/profile/${user.id}/updatePassword`}>
+                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                      Change password
+                    </p>
+                  </Link>
                   <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
                     pepita
                   </p>
-
                 </div>
               </div>
             </div>

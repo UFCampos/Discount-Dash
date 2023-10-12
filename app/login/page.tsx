@@ -1,12 +1,9 @@
-import Login from "@/components/forms/login/Login"
-import { useSelector, useDispatch } from "@/lib/redux/hooks"
-const pageLogin = () => {
+import Login from '@/components/forms/login/Login';
+import {useSelector, useDispatch} from '@/lib/redux/hooks';
+const pageLogin = () => (
+	<div>
+		<Login/>
+	</div>
+);
 
-    return (
-        <div>
-            <Login/>
-        </div>
-    )
-}
-
-export default pageLogin
+export default pageLogin;

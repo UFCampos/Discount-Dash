@@ -1,8 +1,8 @@
 
-import Footer from "./Footer/footer"
-import Hero from "./Hero/Hero"
+import Footer from './Footer/footer';
+import Hero from './Hero/Hero';
 
-const LandingPage = () =>{
+const LandingPage = () => {
     type Items = {
         image: string
             }

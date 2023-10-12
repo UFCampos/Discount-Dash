@@ -14,12 +14,11 @@ import validation from "@/utils/validations";
 import "./createProducts.css";
 
 const CreateProducts: React.FC = () => {
-
   const dispatch = useDispatch();
 
   const isOpen = useSelector((state) => state.menu.isOpen);
-
-  const categories=useSelector((state)=>state.filter.categories)
+  const { data: dataCategories } = useGetCategoriesQuery(null);
+  const { id: idProfile } = useSelector((state) => state.userProfile);
 
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -41,14 +40,16 @@ const CreateProducts: React.FC = () => {
     description: string;
   }
 
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<File | undefined>(undefined);
 
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState<Partial<ProductInput>>({});
 
-  const category = categories?.map(
-    ({category}, index) => <option key={index} value={category}>{category}</option>
-  );
+  const category = dataCategories?.map(({ category }, index) => (
+    <option key={index} value={category}>
+      {category}
+    </option>
+  ));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -109,6 +110,8 @@ const CreateProducts: React.FC = () => {
 
   const handleSend = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(newProduct);
+    console.log(idProfile);
 
     if (!file) {
       return;
@@ -120,12 +123,13 @@ const CreateProducts: React.FC = () => {
       name: newProduct.name,
       price: newProduct.price,
       normalPrice: newProduct.normalPrice,
-      description: description,
+      description,
       expiration: newProduct.expiration,
       image: urlImage,
       stock: newProduct.stock,
       category: newProduct.category,
       brand: newProduct.brand,
+      shopId: idProfile,
     });
 
     setFile(null);
@@ -142,9 +146,7 @@ const CreateProducts: React.FC = () => {
 
     setDescription("");
 
-    setTimeout(() => {
-      location.reload();
-    }, 3000);
+    alert("Product created successfully");
   };
 
   useEffect(() => {
@@ -274,9 +276,7 @@ const CreateProducts: React.FC = () => {
                 <option value="" disabled>
                   category
                 </option>
-                {
-                  category
-                }
+                {category}
               </select>
             </div>
             <div className="input-file flex flex-row items-center justify-between">
