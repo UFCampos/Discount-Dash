@@ -12,10 +12,10 @@ export const paymentSlice = createSlice({
     paymentId: null,
   },
   reducers: {
-    productPayment: (state, { payload }) => {
+    productPayment(state, { payload }) {
       state.productPayment = payload;
     },
-    productPaymentId: (state, { payload }) => {
+    productPaymentId(state, { payload }) {
       state.paymentId = payload;
     },
   },

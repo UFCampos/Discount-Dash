@@ -1,0 +1,22 @@
+.formCont{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.infoCont{
+    width: 50vw;
+    height: 80vh;
+    background: blue;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 50vw;
+    height: 10vh;
+    background: red;
+}

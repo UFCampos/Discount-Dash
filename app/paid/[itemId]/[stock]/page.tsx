@@ -1,19 +1,19 @@
-import { db } from "@/firebase/config";
-import { doc, updateDoc } from "firebase/firestore";
+import {db} from '@/firebase/config';
+import {doc, updateDoc} from 'firebase/firestore';
 const PaidPage = async ({
-  params,
+	params,
 }: {
-  params: { itemId: string; stock: number };
+	params: {itemId: string; stock: number};
 }) => {
-  const { itemId, stock } = params;
+	const {itemId, stock} = params;
 
-  const reference = doc(db, "products", itemId);
+	const reference = doc(db, 'products', itemId);
 
-  await updateDoc(reference, {
-    stock: stock - 1,
-  });
+	await updateDoc(reference, {
+		stock: stock - 1,
+	});
 
-  return <div></div>;
+	return <div></div>;
 };
 
 export default PaidPage;

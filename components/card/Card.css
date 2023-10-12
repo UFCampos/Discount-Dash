@@ -84,3 +84,9 @@
     cursor: pointer;
     color:black
 }
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

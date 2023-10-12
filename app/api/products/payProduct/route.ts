@@ -43,10 +43,9 @@ export const POST = async (req: NextRequest) => {
           });
         }
       }
-      console.log(arrayProducts);
 
       await fetch(
-        "https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/api/shopOrder/post",
+        "https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/shopOrder/post",
         {
           method: "POST",
           body: JSON.stringify({

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 const mercadopago = require("mercadopago");
 
 export const POST = async (req: NextRequest) => {
@@ -15,9 +15,9 @@ export const POST = async (req: NextRequest) => {
       items: data,
 
       back_urls: {
-        success: `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/notifications/success`,
-        failure: `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/notifications/success`,
-        pending: `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/notifications/success`,
+        success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+        failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+        pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
       },
       auto_return: "approved",
     };
@@ -34,9 +34,9 @@ export const POST = async (req: NextRequest) => {
       ],
       auto_return: "approved",
       back_urls: {
-        success: `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/notifications/success`,
-        failure: `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/notifications/success`,
-        pending: `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/notifications/success`,
+        success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+        failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+        pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
       },
       external_reference: userCode,
     };

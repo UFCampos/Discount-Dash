@@ -23,13 +23,10 @@
 //             dispatch(loadProductsPagination(pruductsPage));
 //         }
 //     },[pruductsPage])
-    
-
 
 //     const handlePageChange = (page : number ) => {
 //         setCurrentPage(page)
 //       };
-    
 
 //   return (
 //     <div>

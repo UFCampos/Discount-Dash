@@ -13,16 +13,17 @@ import {
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
+import { CardProduct } from "@/utils/types";
 
-interface props {
-  itemId: string;
-  name: string;
-  brand: string;
-  image: string;
-  price: string;
-}
-
-const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
+const Card: React.FC<CardProduct> = ({
+  itemId,
+  name,
+  brand,
+  image,
+  price,
+  stock,
+  normalPrice,
+}) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.payments.productPayment);
@@ -42,28 +43,28 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
   } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
+    console.log(itemId);
+    console.log(product);
     mutate({
-      itemId,
+      cartItemId: itemId,
       userId: id,
+      value: "add",
     });
     dispatch(addCart(product));
   };
 
   const createPreference = async () => {
     try {
-      const URL = `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app`;
+      const URL = ``;
       console.log(URL);
 
-      const response = await axios.post(
-        `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/api/products/buyProduct`,
-        {
-          itemId,
-          description: name,
-          price,
-          quantity: 1,
-          userCode,
-        }
-      );
+      const response = await axios.post(`${URL}/api/products/buyProduct`, {
+        itemId,
+        description: name,
+        price,
+        quantity: 1,
+        userCode,
+      });
       const { id } = response.data;
       return id;
     } catch (error) {
@@ -102,7 +103,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
           <p>{brand}</p>
         </div>
         <div className="price flex flex-row justify-center items-center gap-4">
-          <p className="total">$ 5500</p>
+          <p className="total">$ {normalPrice}</p>
           <p>$ {price}</p>
         </div>
       </div>
