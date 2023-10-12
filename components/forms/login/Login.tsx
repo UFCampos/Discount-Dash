@@ -28,19 +28,25 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    signInWithEmailAndPassword(auth, formData.email, formData.password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        const { uid } = user; // Aquí obtienes el UID del usuario
-        setUid(uid);
-        dispatch(setUser(uid));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		signInWithEmailAndPassword(auth, formData.email, formData.password)
+			.then(userCredential => {
+				const {user} = userCredential;
+				const {uid} = user; // Aquí obtienes el UID del usuario
+				setUid(uid);
+				const mappedUser = {
+					id: uid,
+					email: user.email,
+					photoUrl: user.photoURL,
+					name: user.displayName,
+				}
+				dispatch(setUser(mappedUser));
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	};
 
   const isOpen = useSelector((state) => state.menu.isOpen);
 
