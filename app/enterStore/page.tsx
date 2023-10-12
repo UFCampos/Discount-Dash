@@ -11,11 +11,11 @@ const enterStore=()=>{
             <div className={style.section}>
                 <div className={style.redirect}>
                     <Image src={log} alt="login" className={style.img}/>
-                    <Link href={"/"} className={style.link}>Log in</Link>
+                    <Link href={"/enterStore/loginStore"} className={style.link}>Log in</Link>
                 </div>
                 <div className={style.redirect}>
                     <Image src={reg} alt="register" className={style.img}/>
-                    <Link href={"/enterStore/registerMarket"} className={style.link}>Register</Link>
+                    <Link href={"/enterStore/registerStore"} className={style.link}>Register</Link>
                 </div>
             </div>
         </main>

@@ -164,6 +164,11 @@ export interface loginInfo{
     confirmPassword:string
   }
 
+export interface login{
+    email:string,
+    password:string
+}
+
   //?validation Errors interfaces
 
 export interface marketErrors {
@@ -204,4 +209,11 @@ export interface loginError{
     invalidEmail:string,
     shortPassword:string,
     diferentPassword:string
+}
+
+export interface loginErrorStore{
+    emptyEmail:string,
+    invalidEmail:string,
+    emptyPassword:string
+    shortPassword:string
 }

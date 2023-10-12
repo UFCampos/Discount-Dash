@@ -75,6 +75,7 @@ export const RegisterMarketsForm = () => {
   })
 
   //!ERROR STATES
+  
   const [errorsMarket, setErrorsMarket]=useState<marketErrors>({
     emptyName:"",
     longName:"",
