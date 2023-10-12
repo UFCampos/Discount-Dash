@@ -16,6 +16,7 @@ import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 import { CardProduct } from "@/utils/types";
 
 const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock, normalPrice}) => {
+  const dispatch = useDispatch();
 
   const products = useSelector((state) => state.payments.productPayment);
 

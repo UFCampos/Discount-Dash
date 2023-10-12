@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "@/lib/redux/hooks";
 const OrdersProductsShop = () => {
   const [orderStates, setOrderStates] = useState([]);
   const dispatch = useDispatch();
-    // const { id } = useSelector((state) => state.userProfile);
+    const { id } = useSelector((state) => state.userProfile);
   const states = ["Order placed", "In progress", "Completed"].map((state) => {
     return (
       <option value={state} key={state}>
@@ -18,7 +18,6 @@ const OrdersProductsShop = () => {
       </option>
     );
   });
-  const id = "107892466175771536460";
   const { data, isLoading, isError } = useGetOrdersQuery({ id });
   const [mutate] = useUpdateOrderMutation();
 
