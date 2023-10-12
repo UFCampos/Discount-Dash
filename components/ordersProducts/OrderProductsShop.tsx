@@ -19,7 +19,6 @@ const OrdersProductsShop = () => {
       </option>
     );
   });
-  const id = "107892466175771536460";
   const { data, isLoading, isError } = useGetOrdersQuery({ id });
   const [mutate] = useUpdateOrderMutation();
 
