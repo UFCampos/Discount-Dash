@@ -1,13 +1,12 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "@/lib/redux/hooks";
-import { useGetCategoriesQuery } from "@/lib/redux/service/categoriesAPI";
-import { useNewPostMutation } from "@/lib/redux/service/productsAPI";
-import { uploadFile } from "@/firebase/config";
-import { setCategories } from "@/lib/redux/features/filterSlice";
-import { toggleMenu } from "@/lib/redux/features/menuSlice";
-import Link from "next/link";
-import "./createProducts.css";
+"use client"
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from '@/lib/redux/hooks';
+import { useGetCategoriesQuery } from '@/lib/redux/service/categoriesAPI';
+import { useNewPostMutation } from '@/lib/redux/service/productsAPI';
+import { uploadFile } from '@/firebase/config';
+import { toggleMenu } from '@/lib/redux/features/menuSlice';
+import Link from 'next/link';
+import './createProducts.css';
 
 const CreateProducts: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,7 +25,7 @@ const CreateProducts: React.FC = () => {
     brand: "",
   });
 
-  const [file, setFile] = useState<File | undefined>(null);
+  const [file, setFile] = useState<File | undefined>(undefined);
 
   const [description, setDescription] = useState("");
 
@@ -89,7 +88,7 @@ const CreateProducts: React.FC = () => {
       shopId: idProfile,
     });
 
-    setFile(null);
+    setFile(undefined);
 
     setNewProduct({
       name: "",

@@ -1,3 +1,11 @@
+.globalCont{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .registerCont{
     width: 100vw;
     height: 90vh;
@@ -11,8 +19,12 @@
     height: 100%;
     background: black;
 }
+.img{
+    height: 90vh;
+    width: 50vw;
+}
 .formCont{
-    width: 50%;
+    width: 50vw;
     height: 100%;
     display: flex;
     flex-direction: column;

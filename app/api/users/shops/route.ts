@@ -73,6 +73,7 @@ export const POST = async (req: NextRequest) => {
       email,
       password
     );
+
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
