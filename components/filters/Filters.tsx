@@ -30,24 +30,24 @@ const Filters = () => {
     storeType:"",
   });
 
-  useEffect(() => {
-    setValueState({
-      ...valueState,
-      name: nameSearch,
-    });
-  }, [nameSearch]);
+	useEffect(() => {
+		setValueState({
+			...valueState,
+			name: nameSearch,
+		});
+	}, [nameSearch]);
 
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  const onChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-    setValueState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+	const onChange = (
+		event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+	) => {
+		const {name, value} = event.target;
+		setValueState(prevState => ({
+			...prevState,
+			[name]: value,
+		}));
+	};
 
   const { data, isError } = useFiltersQueryQuery({
     category: valueState.category,
@@ -58,12 +58,12 @@ const Filters = () => {
     storeType:valueState.storeType
   });
 
-  useEffect(() => {}, [valueState]);
+	useEffect(() => {}, [valueState]);
 
-  const handleFilters = () => {
-    dispatch(loadProducts(data));
-    dispatch(loadErrors(isError));
-  };
+	const handleFilters = () => {
+		dispatch(loadProducts(data));
+		dispatch(loadErrors(isError));
+	};
 
   return (
     <div className={style.filterCont}>
@@ -73,9 +73,9 @@ const Filters = () => {
       <FilterTypeStore valueState={valueState} onChange={onChange}/>
       <button onClick={handleFilters} className={style.apply}>
         Apply
-      </button>
-    </div>
-  );
+			</button>
+		</div>
+	);
 };
 
 export default Filters;

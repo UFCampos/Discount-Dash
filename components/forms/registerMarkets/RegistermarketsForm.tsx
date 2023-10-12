@@ -248,4 +248,4 @@ export const RegisterMarketsForm = () => {
   )
 }
 
-export default RegisterMarketsForm
+export default RegisterMarketsForm;
