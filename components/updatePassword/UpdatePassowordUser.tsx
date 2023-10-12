@@ -32,17 +32,6 @@ const UpdatePasswordUser = () => {
       // La contraseña es incorrecta o el usuario no existe.
     });
 
-  const validation = () => {
-    if (newPassword.newPassword !== newPassword.confirmPassword) {
-      alert("Las contraseñas no coinciden");
-      return false;
-    }
-    if (!signInWithEmailAndPassword) {
-      alert("Las contraseñas es incorrecta");
-      return false;
-    }
-  };
-
   const changePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setNewPassword({
@@ -53,16 +42,16 @@ const UpdatePasswordUser = () => {
 
   const handleChangePassword = () => {
     console.log("entre a la funcion");
-      updatePassword(user, newPassword.newPassword)
-        .then(() => {
-          console.log("Contraseña actualizada");
+    updatePassword(user, newPassword.newPassword)
+      .then(() => {
+        console.log("Contraseña actualizada");
 
-          // La contraseña fue actualizada
-        })
-        .catch((error) => {
-          console.log(error);
-          // Ocurrió un error
-        });
+        // La contraseña fue actualizada
+      })
+      .catch((error) => {
+        console.log(error);
+        // Ocurrió un error
+      });
   };
 
   return (

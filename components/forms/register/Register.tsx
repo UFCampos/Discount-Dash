@@ -41,7 +41,8 @@ const Register = () => {
 
 	const [mutate, {data}] = usePostProfileMutation();
 
-	const handleSubmit = () => {
+	const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
+		event?.preventDefault();
 		createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
 			.then(userCredential => {
 				const {user} = userCredential;
@@ -62,6 +63,7 @@ const Register = () => {
 			.catch(error => {
 				const errorCode = error.code;
 				const errorMessage = error.message;
+				console.error(errorCode, errorMessage);
 			});
 
 		setNewUser({
@@ -72,10 +74,6 @@ const Register = () => {
 			confirmPassword: '',
 			id: '',
 		});
-
-		setTimeout(() => {
-			router.push('/home');
-		}, 2000);
 	};
 
 	useEffect(() => {

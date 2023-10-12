@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {ReduxState} from '../hooks';
 import {type CartProduct} from '@/utils/types';
 
 type CartItems = {
