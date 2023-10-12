@@ -4,8 +4,7 @@ import { db } from "@/firebase/config";
 const mercadopago = require("mercadopago");
 
 mercadopago.configure({
-  access_token:
-    "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469",
+  access_token: "ACCESS_TOKEN",
 });
 
 export const POST = async (req: NextRequest) => {
@@ -19,14 +18,12 @@ export const POST = async (req: NextRequest) => {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469`,
+            Authorization: `Bearer ACCESS_TOKEN`,
           },
         }
       );
       const { status, additional_info, external_reference } =
         await paymentInfo.json();
-
-      /* console.log(await paymentInfo.json()); */
 
       let products = await additional_info?.items;
 
@@ -45,7 +42,7 @@ export const POST = async (req: NextRequest) => {
         }
       }
       await fetch(
-        "https://f712-2803-9800-9506-8156-6516-aac9-334-e5e9.ngrok-free.app/api/shopOrder/QVfzr4yYV",
+        "https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/api/shopOrder/QVfzr4yYV",
         {
           method: "POST",
           body: JSON.stringify({

@@ -3,8 +3,7 @@ const mercadopago = require("mercadopago");
 
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
-    access_token:
-      "TEST-5795284741045386-100410-ebf79903df691500c3fdd563b1702cf0-1498171469",
+    access_token: "ACCESS_TOKEN",
   });
 
   let preference;
