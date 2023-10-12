@@ -5,8 +5,7 @@ export const putName = async (value: string, productId: string) => {
   const docRef = doc(db, "products", productId);
 
   await updateDoc(docRef, {
-    name: value,
-    nameToLowerCase: value.toLowerCase(),
+    name: value
   });
 };
 
