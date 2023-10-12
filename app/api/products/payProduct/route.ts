@@ -23,7 +23,11 @@ export const POST = async (req: NextRequest) => {
           },
         }
       );
-      const { status, additional_info } = await paymentInfo.json();
+      const { status, additional_info, external_reference } =
+        await paymentInfo.json();
+
+      /* console.log(await paymentInfo.json()); */
+
       let products = await additional_info?.items;
 
       let arrayProducts = [];
@@ -45,6 +49,7 @@ export const POST = async (req: NextRequest) => {
         {
           method: "POST",
           body: JSON.stringify({
+            userId: external_reference,
             arrayProducts,
           }),
         }

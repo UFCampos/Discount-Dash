@@ -34,7 +34,7 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
   const { id } = useSelector((state) => state.userProfile);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { data } = useGetProductsCartQuery({ id });
-
+  const userCode = id;
   const {
     data: product,
     isLoading,
@@ -51,15 +51,19 @@ const Card: React.FC<props> = ({ itemId, name, brand, image, price }) => {
 
   const createPreference = async () => {
     try {
-      const URL = `https://e880-2803-9800-9506-8156-1808-4943-b100-6a32.ngrok-free.app`;
+      const URL = `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app`;
       console.log(URL);
 
-      const response = await axios.post(`${URL}/api/products/buyProduct`, {
-        itemId: itemId,
-        description: name,
-        price: price,
-        quantity: 1,
-      });
+      const response = await axios.post(
+        `https://e20e-2803-9800-9506-8156-8d38-d92c-c85f-f863.ngrok-free.app/api/products/buyProduct`,
+        {
+          itemId,
+          description: name,
+          price,
+          quantity: 1,
+          userCode,
+        }
+      );
       const { id } = response.data;
       return id;
     } catch (error) {
