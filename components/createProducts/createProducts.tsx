@@ -26,7 +26,7 @@ const CreateProducts: React.FC = () => {
     brand: "",
   });
 
-  const [file, setFile] = useState<File | undefined>(null);
+  const [file, setFile] = useState<File | undefined>(undefined);
 
   const [description, setDescription] = useState("");
 
