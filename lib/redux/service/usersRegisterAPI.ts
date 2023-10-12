@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import {allDataMarket} from "@/utils/types"
 
 type User={
     id:string,
@@ -19,9 +20,16 @@ export const userApi=createApi({
                     method:"POST",
                     body
                 })
+            }),
+            postMarket:builder.mutation({
+                query:(body)=>({
+                    url:"/shops",
+                    method:"POST",
+                    body
+                })
             })
         }
     )
 })
 
-export const {usePostUserMutation} =userApi
+export const {usePostUserMutation, usePostMarketMutation} =userApi

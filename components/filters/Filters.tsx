@@ -7,12 +7,14 @@ import FiltersCategories from "./FiltersCategories";
 import { loadProducts, loadErrors } from "@/lib/redux/features/itemsSlice";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import style from "./Filters.module.css"
+import FilterTypeStore from "./FilterTypeStore";
 type FiltersState = {
   category: string;
   name: string;
   minPrice: string;
   maxPrice: string;
   order: string;
+  storeType:string
 };
 
 const Filters = () => {
@@ -24,27 +26,28 @@ const Filters = () => {
     order: "",
     name: "",
     minPrice: "",
-    maxPrice: ""
+    maxPrice: "",
+    storeType:"",
   });
 
-  useEffect(() => {
-    setValueState({
-      ...valueState,
-      name: nameSearch,
-    });
-  }, [nameSearch]);
+	useEffect(() => {
+		setValueState({
+			...valueState,
+			name: nameSearch,
+		});
+	}, [nameSearch]);
 
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  const onChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-    setValueState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+	const onChange = (
+		event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+	) => {
+		const {name, value} = event.target;
+		setValueState(prevState => ({
+			...prevState,
+			[name]: value,
+		}));
+	};
 
   const { data, isError } = useFiltersQueryQuery({
     category: valueState.category,
@@ -52,25 +55,27 @@ const Filters = () => {
     maxPrice: valueState.maxPrice === "" ? "10000000" : valueState.maxPrice,
     order: valueState.order,
     name: valueState.name,
+    storeType:valueState.storeType
   });
 
-  useEffect(() => {}, [valueState]);
+	useEffect(() => {}, [valueState]);
 
-  const handleFilters = () => {
-    dispatch(loadProducts(data));
-    dispatch(loadErrors(isError));
-  };
+	const handleFilters = () => {
+		dispatch(loadProducts(data));
+		dispatch(loadErrors(isError));
+	};
 
   return (
     <div className={style.filterCont}>
       <FiltersCategories valueState={valueState} onChange={onChange} />
       <FiltersPrice valueState={valueState} onChange={onChange} />
       <FiltersSort valueState={valueState} onChange={onChange} />
+      <FilterTypeStore valueState={valueState} onChange={onChange}/>
       <button onClick={handleFilters} className={style.apply}>
         Apply
-      </button>
-    </div>
-  );
+			</button>
+		</div>
+	);
 };
 
 export default Filters;

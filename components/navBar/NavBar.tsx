@@ -13,17 +13,16 @@ import { auth } from "@/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
 
-
 const NavBar = () => {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
   const pathname = usePathname();
 
-  // const uid = useSelector((state) => state.userProfile.id);
+  // Const uid = useSelector((state) => state.userProfile.id);
 
-  const { data:dataCategories } = useGetCategoriesQuery(null);
+  const { data: dataCategories } = useGetCategoriesQuery(null);
 
-  let uid 
+  let uid;
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -31,7 +30,7 @@ const NavBar = () => {
         // Utiliza el uid almacenado en el estado
         let mappedUser = {};
         user.providerData.forEach((profile) => {
-          uid = user.uid
+          uid = user.uid;
           mappedUser = {
             id: uid ? uid : profile.uid, // Usar el uid del estado
             email: profile.email,
@@ -41,21 +40,23 @@ const NavBar = () => {
         });
         dispatch(setUser(mappedUser));
         console.log(user);
-        
       } else {
         setFlag(false);
       }
     });
-  },[uid]);
+  }, [uid]);
 
-  console.log(dataCategories)
+  console.log(dataCategories);
   useEffect(() => {
-    dispatch(setCategories(dataCategories))
+    dispatch(setCategories(dataCategories));
   }, [dataCategories]);
 
   return pathname !== "/login" &&
     pathname !== "/addProduct" &&
-    pathname !== "" ? (
+    pathname !== "" &&
+    pathname!=="/enterStore/registerStore" &&
+    pathname!=="/enterStore/loginStore"
+    ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">
         <Image src="/logopanda.svg" width={140} height={50} alt="Logo Panda" />
