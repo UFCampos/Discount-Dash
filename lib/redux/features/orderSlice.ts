@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const orderSlice = createSlice({
     name: 'order',
     initialState: {
-        currentState: '',
+        currentFlag: false,
     },
     reducers: {
-       changeState(state, {payload}) {
-           state.currentState = payload;
+       setOrderFlag(state, {payload}) {
+           state.currentFlag = payload;
        }
     },
 })
 
-export const {changeState} = orderSlice.actions
+export const {setOrderFlag} = orderSlice.actions
