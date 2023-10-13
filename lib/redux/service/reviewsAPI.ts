@@ -14,10 +14,10 @@ export const reviewsAPI = createApi({
                 body,
             }),
         }),
-        getReviews: build.query({
-            query: () => `/reviews`,
+        getAllReviews: build.query({
+            query: ({productId}) => `/reviews?productId=${productId}`,
         })
     }),
 })
 
-export const {useNewReviewMutation, useGetReviewsQuery} = reviewsAPI
+export const {useNewReviewMutation, useGetAllReviewsQuery} = reviewsAPI

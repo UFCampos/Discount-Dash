@@ -3,14 +3,15 @@ import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { Image } from "@nextui-org/react";
 import "./Detail.css";
 import Reviews from "@/components/reviews/Reviews";
+import AllReviews from "@/components/reviews/GetAllReviews";
 
 const Detail = ({ id }: { id: string }) => {
   const { data, isLoading } = useGetProductQuery({ id });
-  return (
+  return  (
     <div>
-      <section className="text-gray-600 body-font overflow-hidden">
-        <div className="container px-5 py-24 mx-auto ">
-          <div className=" lg:w-4/5 mx-auto items-center border border-gray-800 rounded-lg p-2">
+      <section className="text-gray-600 body-font overflow-auto">
+        <div className="container px-5 py-12 mx-auto">
+          <div className="lg:w-4/5 mx-auto flex items-center border border-gray-800 rounded-lg p-4 lg:p-8">
             <div className="lg:w-1/2 lg:h-auto h-64 mx-auto object-cover object-center rounded">
               <Image
                 alt={data?.name}
@@ -24,14 +25,14 @@ const Detail = ({ id }: { id: string }) => {
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
                 Food
               </h2>
-              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+              <h1 className="text-gray-900 text-3xl title-font font-medium mb-2">
                 {data?.name}
               </h1>
               <h2 className="text-sm title-font text-gray-700 tracking-widest">
                 {data?.brand}
               </h2>
-              <div className="flex mb-4">
-                <span className="flex items-center">
+              <div className="flex items-center mt-4">
+                <div className="flex space-x-2">
                   <svg
                     fill="currentColor"
                     stroke="currentColor"
@@ -76,19 +77,19 @@ const Detail = ({ id }: { id: string }) => {
                   >
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                   </svg>
-                  <span className="text-gray-600 ml-3">4 Reviews</span>
-                </span>
-                <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-300 space-x-2s text-red-300">
-                  vence en 5 dias
-                </span>
+                </div>
+                <span className="text-gray-600 ml-3">4 Reviews</span>
               </div>
-              <p className="leading-relaxed">
-                {" "}
-                hamburguesa con queso chedar, dos medallones de carne de 250g
-                salsa de la casa, cebolla, lechuga, tomate y extra papas{" "}
+              <p className="leading-relaxed mt-4">
+                Hamburguesa con queso cheddar, dos medallones de carne de 250g, salsa de la casa, cebolla, lechuga, tomate y extra papas.
               </p>
-              <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5"></div>
-              <div className="flex">
+              <div className="flex mt-6 items-center pb-5 border-b-2 border-red-100 mb-5">
+                  <Reviews productId={id} />
+                <div className="max-h-60 w-60 overflow-y-auto"> 
+                  <AllReviews productId={id} />
+                </div>
+              </div>
+              <div className="flex items-center">
                 <span className="title-font font-medium text-2xl text-gray-900">
                   ${data?.price}
                 </span>
@@ -105,7 +106,6 @@ const Detail = ({ id }: { id: string }) => {
                   />
                 </button>
               </div>
-              <Reviews productId={id} />
             </div>
           </div>
         </div>
