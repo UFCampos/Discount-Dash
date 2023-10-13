@@ -28,9 +28,7 @@ const Addresses = () => {
       address: address.address,
       nameAddress: address.nameAddress,
     });
-    console.log(address);
   };
-  console.log(data);
 
   return (
     <div>
@@ -48,17 +46,18 @@ const Addresses = () => {
       <div>
         <h1>My Addresses</h1>
         <div>
-          {data?.addresses?.map((items : any) =>  {
+          {data?.addresses?.map((items: any) => {
             return (
-            <div key={items.id}>
-              <br />
-              {items.address}
-              <br />
-              {items.nameAddress}
-              <br />
-              <br />
-            </div>
-          )})}
+              <div key={items.id}>
+                <br />
+                {items.address}
+                <br />
+                {items.nameAddress}
+                <br />
+                <br />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
