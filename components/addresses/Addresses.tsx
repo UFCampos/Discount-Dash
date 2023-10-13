@@ -1,5 +1,5 @@
 'use client'
-import { useGetAddressesMutation } from "@/lib/redux/service/AddressesAPI";
+import { useGetAddressesMutation } from "@/lib/redux/service/addressesAPI";
 import { useSelector } from "@/lib/redux/hooks";
 
 const Addresses = () => {

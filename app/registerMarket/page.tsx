@@ -1,6 +1,5 @@
-
 import RegisterMarketsForm from '@/components/forms/registerMarkets/RegistermarketsForm'
-import style from "./registerMarket.module.css"
+import style from "@/components/forms/registerMarkets/RegisterMarkets.module.css"
 
 const RegisterMarket = () => {
   return (
