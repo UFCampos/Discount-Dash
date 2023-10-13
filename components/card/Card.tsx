@@ -16,9 +16,9 @@ import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 import { CardProduct } from "@/utils/types";
 
 const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock, normalPrice}) => {
-  
-  const dispatch=useDispatch()
-  
+
+  const dispatch = useDispatch();
+
   const products = useSelector((state) => state.payments.productPayment);
 
   const paymentId = useSelector((state) => state.payments.paymentId);
@@ -36,8 +36,6 @@ const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock,
   } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
-    console.log(itemId);
-    console.log(product); 
     mutate({
       cartItemId: itemId,
       userId: id,
