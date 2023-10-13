@@ -12,7 +12,7 @@ type ProfileProps = {
 const Profile: React.FC<ProfileProps> = ({ id }) => {
   const { data, isError } = useGetProfileQuery({ id });
   const user = useSelector((state) => state.userProfile);
-
+  console.log("info de usuario",user)
   if (isError) {
     return (
       <section className="pt-16 bg-blueGray-50">
