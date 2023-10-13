@@ -203,16 +203,20 @@ const Cart = () => {
             Buy
           </button>
           {preferenceId && (
-            <Wallet
-              initialization={{
-                preferenceId,
-                redirectMode: "blank",
-              }}
-              onSubmit={() => {
-                setPreferenceId(null);
-              }}
-            />
+            <button onClick={() => setPreferenceId(null)}>
+              <Wallet
+                initialization={{
+                  preferenceId,
+                  redirectMode: "blank",
+                }}
+              />
+            </button>
           )}
+        </div>
+
+        <div className={style.buybutton}>
+          <p>{total}</p>
+          <button className={style.buy}>Buy</button>
         </div>
       </div>
     </div>

@@ -36,6 +36,7 @@ const Card: React.FC<CardProduct> = ({
   const { cartItems } = useSelector((state) => state.cartItems);
   const { data } = useGetProductsCartQuery({ id });
   const userCode = id;
+
   const {
     data: product,
     isLoading,
@@ -43,8 +44,6 @@ const Card: React.FC<CardProduct> = ({
   } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
-    console.log(itemId);
-    console.log(product);
     mutate({
       cartItemId: itemId,
       userId: id,
@@ -56,7 +55,6 @@ const Card: React.FC<CardProduct> = ({
   const createPreference = async () => {
     try {
       const URL = ``;
-
       const response = await axios.post(`${URL}/api/products/buyProduct`, {
         itemId,
         description: name,

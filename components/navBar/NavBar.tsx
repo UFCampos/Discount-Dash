@@ -16,6 +16,7 @@ import { setUser } from "@/lib/redux/features/userProfile";
 const NavBar = () => {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
+
   const pathname = usePathname();
 
   // Const uid = useSelector((state) => state.userProfile.id);
@@ -23,6 +24,9 @@ const NavBar = () => {
   const { data: dataCategories } = useGetCategoriesQuery(null);
 
   let uid;
+
+  //!esto es para que cuando el path sea de store no muestre la navbar de cliente
+  const notStore = !pathname.includes("/store/");
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -54,9 +58,7 @@ const NavBar = () => {
   return pathname !== "/login" &&
     pathname !== "/addProduct" &&
     pathname !== "" &&
-    pathname!=="/enterStore/registerStore" &&
-    pathname!=="/enterStore/loginStore"
-    ? (
+    notStore ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">
         <Image src="/logopanda.svg" width={140} height={50} alt="Logo Panda" />
