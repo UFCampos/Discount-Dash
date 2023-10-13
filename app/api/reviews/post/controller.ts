@@ -33,6 +33,6 @@ export const controller = async (
       rating: parseFloat(rating),
     });
   } else {
-    throw new Error("Review already exists");
+     throw new Error("Review already exists");
   }
 };
