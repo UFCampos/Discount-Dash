@@ -1,6 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server";
 const mercadopago = require("mercadopago");
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
     access_token: "ACCESS_TOKEN",
@@ -17,7 +24,7 @@ export const POST = async (req: NextRequest) => {
 
     const productsCart = await response.json();
 
-    const products = productsCart.map((product) => ({
+    const products = productsCart.map((product: Product) => ({
       id: product.id,
       title: product.name,
       unit_price: Number(product.price),

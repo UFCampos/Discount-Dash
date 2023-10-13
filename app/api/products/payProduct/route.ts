@@ -43,8 +43,10 @@ export const POST = async (req: NextRequest) => {
           const reference = doc(db, "products", item?.id);
           const productDB = await getDoc(reference);
           const info = await productDB.data();
-          info.id = item?.id;
-          info.quantity = Number(item?.quantity);
+          if (info) {
+            info.id = item?.id;
+            info.quantity = Number(item?.quantity);
+          }
           await arrayProducts.push(info);
 
           updateDoc(reference, {
