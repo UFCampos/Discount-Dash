@@ -11,15 +11,28 @@ export const POST = async (req: NextRequest) => {
   const data = await req.json();
 
   if (Array.isArray(data)) {
-    preference = {
-      items: data,
+    const response = await fetch(
+      `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/cart?id=${data[0]}`
+    );
 
+    const productsCart = await response.json();
+
+    const products = productsCart.map((product) => ({
+      id: product.id,
+      title: product.name,
+      unit_price: Number(product.price),
+      quantity: Number(product.quantity),
+    }));
+
+    preference = {
+      items: products,
+      auto_return: "approved",
       back_urls: {
         success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
         failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
         pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
       },
-      auto_return: "approved",
+      external_reference: data[0],
     };
   } else {
     const { itemId, description, price, quantity, userCode } = data;

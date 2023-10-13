@@ -30,6 +30,15 @@ export const POST = async (req: NextRequest) => {
       let arrayProducts = [];
 
       if (status === "approved") {
+        await fetch(
+          "https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/cart/delete",
+          {
+            method: "DELETE",
+            body: JSON.stringify({
+              userId: external_reference,
+            }),
+          }
+        );
         for (let item of products) {
           const reference = doc(db, "products", item?.id);
           const productDB = await getDoc(reference);
