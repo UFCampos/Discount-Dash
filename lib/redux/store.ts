@@ -11,7 +11,6 @@ import {categoriesAPI} from './service/categoriesAPI';
 import {userApi} from './service/usersRegisterAPI';
 import {filters} from './service/filtersAPI';
 import {filterSlice} from './features/filterSlice';
-import {OrderProduct} from './features/orderProduct';
 import {paymentSlice} from './features/paymentSlice';
 import {cartItemsSlice} from './features/cartItemsSlice';
 import {createProductsAPI} from './service/createProductsAPI';
@@ -25,7 +24,6 @@ export const store = configureStore({
 		userProfile: userProfileSlice.reducer,
 		addProductCart: addProductCartSlice.reducer,
 		filter: filterSlice.reducer,
-		OrderProduct: OrderProduct.reducer,
 		payments: paymentSlice.reducer,
 		cartItems: cartItemsSlice.reducer,
 		order: orderSlice.reducer,

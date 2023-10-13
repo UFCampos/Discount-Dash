@@ -11,7 +11,7 @@ export const categoriesAPI = createApi({
 		baseUrl: '/api',
 	}),
 	endpoints: build => ({
-		getCategories: build.query<Category[], undefined>({
+		getCategories: build.query<Category[], null>({
 			query: () => 'categories',
 		}),
 	}),

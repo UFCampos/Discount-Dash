@@ -41,15 +41,14 @@ const UpdatePasswordUser = () => {
   };
 
   const handleChangePassword = () => {
-    console.log("entre a la funcion");
+    if (!user) return null
     updatePassword(user, newPassword.newPassword)
       .then(() => {
-        console.log("Contraseña actualizada");
-
+        alert("La contraseña ha sido actualizada");
         // La contraseña fue actualizada
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
         // Ocurrió un error
       });
   };
