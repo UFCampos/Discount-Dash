@@ -8,7 +8,6 @@ import {cartProductsAPI} from './service/cartProductsAPI';
 import {addProductCartSlice} from './features/addProductCartSlice';
 import {productsApi} from './service/productsAPI';
 import {categoriesAPI} from './service/categoriesAPI';
-import {userApi} from './service/usersRegisterAPI';
 import {filters} from './service/filtersAPI';
 import {filterSlice} from './features/filterSlice';
 import {paymentSlice} from './features/paymentSlice';
@@ -16,7 +15,8 @@ import {cartItemsSlice} from './features/cartItemsSlice';
 import {createProductsAPI} from './service/createProductsAPI';
 import {orderProductAPI} from './service/ordersProductsAPI';
 import { orderSlice } from './features/orderSlice';
-import { addressesAPI } from './service/AddressesAPI';
+import { addressesAPI } from './service/addressesAPI'
+import { userApi } from './service/usersRegisterAPI';
 
 export const store = configureStore({
 	reducer: {
@@ -37,6 +37,7 @@ export const store = configureStore({
 		[categoriesAPI.reducerPath]: categoriesAPI.reducer,
 		[createProductsAPI.reducerPath]: createProductsAPI.reducer,
 		[orderProductAPI.reducerPath]: orderProductAPI.reducer,
+		[userApi.reducerPath]: userApi.reducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(
@@ -49,6 +50,7 @@ export const store = configureStore({
 			createProductsAPI.middleware,
 			orderProductAPI.middleware,
 			addressesAPI.middleware,
+			userApi.middleware
 		),
 });
 
