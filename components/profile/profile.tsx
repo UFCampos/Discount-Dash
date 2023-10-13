@@ -61,9 +61,11 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
                         Change password
                       </p>
                     </Link>
-                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      pepita
-                    </p>
+                    <Link href={`/users/profile/${user.id}/myAddress`}>
+                      <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                        My address
+                      </p>
+                    </Link>
                   </div>
                 </div>
               </div>
