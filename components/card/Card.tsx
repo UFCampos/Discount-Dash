@@ -56,7 +56,6 @@ const Card: React.FC<CardProduct> = ({
   const createPreference = async () => {
     try {
       const URL = ``;
-      console.log(URL);
 
       const response = await axios.post(`${URL}/api/products/buyProduct`, {
         itemId,
