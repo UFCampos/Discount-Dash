@@ -1,7 +1,8 @@
 .line-horizontal {
   position: relative;
-  width: 15%; /* Ancho de la línea */
-  height: 6px; /* Altura de la línea */
+  width: 100%; /* Ancho de la línea */
+  height: 10px; /* Altura de la línea */
+  border-radius: 5px;
 }
 
 .bg-line {

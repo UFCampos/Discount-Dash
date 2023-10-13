@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import "./Order.css";
 import { useSelector, useDispatch } from "@/lib/redux/hooks";
 import { change } from "@/lib/redux/features/orderProduct";
 import { useGetOrderQuery } from "@/lib/redux/service/orderApi";
-import { count } from "console";
 
 const Order = () => {
   const dispatch = useDispatch();

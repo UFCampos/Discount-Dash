@@ -15,7 +15,31 @@ import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 import { CardProduct } from "@/utils/types";
 
-const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock, normalPrice}) => {
+const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock, normalPrice, expiration}) => {
+
+  const expirationDate = new Date(expiration.seconds * 1000 + expiration.nanoseconds / 1000000);
+  const currentDate = new Date();
+  const daysUntilExpiration = Math.ceil((expiration - currentDate) / (1000 * 60 * 60 * 24));
+  console.log(currentDate);
+
+  console.log("hola" + expirationDate);
+  console.log( "puto" + currentDate);
+  
+  const rest = () =>{
+      const differenceInMilliseconds = expirationDate.getTime() - currentDate.getTime();
+      const daysDifference = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+      if (daysDifference <= 10){
+      return  daysDifference +" dias para vencer";
+    } else {
+      return(
+       expiration?.seconds ? new Date(expiration.seconds * 1000).toLocaleDateString() : "No expiration date"
+    )  }
+    }
+  
+ 
+  
+
+  const dispatch = useDispatch();
 
   const products = useSelector((state) => state.payments.productPayment);
 
@@ -34,8 +58,6 @@ const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock,
   } = useGetProductQuery({ id: itemId });
 
   const handleAddCart = () => {
-    console.log(itemId);
-    console.log(product); 
     mutate({
       cartItemId: itemId,
       userId: id,
@@ -82,8 +104,11 @@ const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock,
     <div className="card flex flex-col">
       <div className="card-img flex justify-center items-center">
         <img src={image} />
-        <p>vence en 5 dias</p>
+        {expiration && expiration.seconds ? (
+     <p> {rest()}</p>
+  ) : null}
       </div>
+
       <div className="card-info flex flex-col">
         <Link href={`home/product/${itemId}`}>
           <h3 className="text-center">{name}</h3>

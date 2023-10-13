@@ -53,7 +53,10 @@ const NavBar = () => {
 
   return pathname !== "/login" &&
     pathname !== "/addProduct" &&
-    pathname !== "" ? (
+    pathname !== "" &&
+    pathname!=="/enterStore/registerStore" &&
+    pathname!=="/enterStore/loginStore"
+    ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">
         <Image src="/logopanda.svg" width={140} height={50} alt="Logo Panda" />
