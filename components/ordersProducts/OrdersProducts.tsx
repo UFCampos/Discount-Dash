@@ -9,11 +9,9 @@ const OrdersProducts = () => {
 
   console.log(data);
 
-  const state = () =>{
-  if (data.order.orderStatus === "Order placed"){
 
-  }
-  }
+
+
   return (
     <div className="h-[100vh] overflow-y-auto ">
       <div className="orders-products-cont flex flex-col justify-center items-center">
@@ -53,7 +51,7 @@ const OrdersProducts = () => {
               <div className="flex justify-between">
  
                 <img
-                className="w-14 h-14 mr-3 rounded-full bg-green-000"
+                className="w-10 h-14 mr-3 rounded-full bg-green-000"
                 src="/canasto1.svg"
                 alt=""
                 width={300}
@@ -61,19 +59,19 @@ const OrdersProducts = () => {
          
 
                 <img 
-                className="w-14 h-14 mr-3 rounded-full bg-green-000"
+                className="w-12 h-14 mr-3 rounded-full bg-green-000"
                 src="/moto3.svg"
                 alt=""
-                width={300}
-                height={300} />
+                width={50}
+                height={50} />
 
                 
                 <img 
-                className="w-14 h-14 mr-3 rounded-full bg-green-000"
+                className="w-10 h-14 mr-3 rounded-full bg-green-000"
                 src="/completo.svg"
                 alt=""
-                width={300}
-                height={300}/>
+                width={50}
+                height={50}/>
         
               </div>
               {order.orderStatus === "In progress" ? (
