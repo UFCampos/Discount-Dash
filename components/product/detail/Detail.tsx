@@ -105,12 +105,11 @@ const Detail = ({ id }: { id: string }) => {
                   />
                 </button>
               </div>
+              <Reviews productId={id} />
             </div>
           </div>
         </div>
       </section>
-
-	  <Reviews productId={id} />
     </div>
   );
 };

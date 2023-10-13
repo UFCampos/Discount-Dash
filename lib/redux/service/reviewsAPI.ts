@@ -9,15 +9,15 @@ export const reviewsAPI = createApi({
     endpoints: build => ({
         newReview: build.mutation({
             query: body => ({
-                url: '/reviews/postReview',
+                url: '/reviews/post',
                 method: 'POST',
                 body,
             }),
         }),
         getReviews: build.query({
-            query: ({id}) => `/reviews/${id}`,
+            query: () => `/reviews`,
         })
     }),
 })
 
-export const {useNewReviewMutation} = reviewsAPI
+export const {useNewReviewMutation, useGetReviewsQuery} = reviewsAPI
