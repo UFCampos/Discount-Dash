@@ -20,7 +20,7 @@ export const controller = async (
 
   const existingReviewQuery = query(
     collectionRef,
-    where("userId", "==", userId)
+    where("userId", "==", userId), where("productId", "==", productId)
   );
   const existingReviewSnapshot = await getDocs(existingReviewQuery);
 

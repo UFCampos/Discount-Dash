@@ -1,4 +1,5 @@
-import { db } from "@/firebase/config"
+import { db } from "@/firebase/config";
+import { updateDoc } from "firebase/firestore";
 
 
 export const putComment= (itemId: string, reviewId: string, comment: string)=>{
