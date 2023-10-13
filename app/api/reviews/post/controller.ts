@@ -15,8 +15,8 @@ export const controller = async (
   comment: string,
   rating: string
 ) => {
-  const docRef = doc(db, "products", productId);
-  const collectionRef = collection(docRef, "reviews");
+  
+  const collectionRef = collection(db, "reviews");
 
   const existingReviewQuery = query(
     collectionRef,
