@@ -6,9 +6,8 @@ import Header from "@/components/headerRegisterMarket/headerRegisterMarket"
 import { useState, useEffect } from "react"
 import loginValidation from "./validations/loginValidation"
 import { loginErrorStore, login } from "@/utils/types"
-import { ChangeEvent } from "react"
 import React from "react"
-import LocalInfo from "@/components/forms/registerMarkets/marketInfo/marketInfo"
+
 const LoginStore=()=>{
 
     const [loginInfo, setLoginInfo]=useState<login>({
