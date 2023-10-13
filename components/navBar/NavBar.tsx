@@ -40,7 +40,6 @@ const NavBar = () => {
           };
         });
         dispatch(setUser(mappedUser));
-        console.log(user);
       } else {
         setFlag(false);
       }
