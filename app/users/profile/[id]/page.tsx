@@ -1,6 +1,7 @@
 import Profile from '@/components/profile/profile';
 
 const ProfilePage = ({params}: {params: {id: string}}) => {
+	
 	const {id} = params;
 
 	return (
