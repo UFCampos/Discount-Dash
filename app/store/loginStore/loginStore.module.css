@@ -50,12 +50,14 @@
     margin-bottom: 15px;
   }
   
-  label {
+  .label {
     font-size: 14px;
     margin-bottom: 5px;
     color: green;
   }
   .error{
+    font-size: 14px;
+    margin-bottom: 5px;
     color: red;
   }
   input[type="email"], input[type="password"] {
