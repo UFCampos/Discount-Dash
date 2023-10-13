@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { controller } from "./controller";
 
-export const DELETE= async(req:NextRequest)=>{
+export const DELETE= async(req: NextRequest,
+	{params}: {params: {id: string} })=>{
 try {
-const { itemId, reviewId } = await req.json();
-await controller(itemId, reviewId);
- if(!itemId || !reviewId){
+    
+const { id} = params;
+const reviewId= id;
+await controller( reviewId);
+ if(!reviewId){
     return NextResponse.json({message: 'Review not found'}, {status: 400});
  }
  return NextResponse.json({message: 'Review deleted'}, {status: 200});
