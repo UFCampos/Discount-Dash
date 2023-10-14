@@ -17,26 +17,27 @@ const AllReviews = ({ productId }: { productId: string }) => {
 
   const [flag, setFlag] = useState(false);
 
-  const [review, setReview] = useState({
+  const [reviewState, setReviewState] = useState({
     rating: 0,
     comment: "",
   });
-  
-  const handleChangeFlag = (rating : number, comment : string) => {
+
+  const handleChangeFlag = (rating: number, comment: string) => {
     setFlag(true);
-    setReview({
+    setReviewState({
       rating,
-      comment
-    })
+      comment,
+    });
   };
 
-  const handlePostUpdateReview = (reviewId : string) => {
+  const handlePostUpdateReview = (reviewId: string) => {
     mutate({
       reviewId,
-      comment: review.comment,
-      rating: review.rating,
-    })
-  }
+      comment: reviewState.comment,
+      rating: reviewState.rating,
+    });
+    setFlag(false);
+  };
 
   return (
     <div>
@@ -49,34 +50,61 @@ const AllReviews = ({ productId }: { productId: string }) => {
               <br />
               {/* Si el nombre de la review es el mismo que el usuario logeado se renderiza el boton de editar */}
               {review?.name === profile?.name || review?.name === nameUser ? (
-                <button onClick={() => handleChangeFlag(review?.rating, review?.comment)}> Edit </button>
+                <button
+                  onClick={() =>
+                    handleChangeFlag(
+                      reviewState.rating === 0
+                        ? review?.rating
+                        : reviewState.rating,
+                      reviewState.comment === ""
+                        ? review?.comment
+                        : reviewState.comment
+                    )
+                  }
+                >
+                  {" "}
+                  Edit{" "}
+                </button>
               ) : null}
               {flag ? (
                 <div>
                   <input
                     type="number"
                     placeholder="Rating (1-5)"
-                    value={review.rating}
+                    value={reviewState.rating}
                     onChange={(e) => {
-                      setReview({
-                        ...review,
+                      setReviewState({
+                        ...reviewState,
                         rating: parseInt(e.target.value),
                       });
                     }}
                   />
                   <input
                     placeholder="Comment"
-                    value={review.comment}
+                    value={reviewState.comment}
                     onChange={(e) =>
-                      setReview({ ...review, comment: e.target.value })
+                      setReviewState({
+                        ...reviewState,
+                        comment: e.target.value,
+                      })
                     }
                   />
-                  <button onClick={() => handlePostUpdateReview(review?.id)}>Update Review</button>
+                  <button onClick={() => handlePostUpdateReview(review?.id)}>
+                    Update Review
+                  </button>
                 </div>
               ) : (
                 <>
-                  <p>{review?.rating}</p>
-                  <p>{review?.comment}</p>
+                  <p>
+                    {reviewState.rating === 0
+                      ? review?.rating
+                      : reviewState.rating}
+                  </p>
+                  <p>
+                    {reviewState.comment === ""
+                      ? review?.comment
+                      : reviewState.comment}
+                  </p>
                 </>
               )}
 
