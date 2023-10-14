@@ -18,6 +18,7 @@ import { orderSlice } from './features/orderSlice';
 import { userApi } from './service/usersRegisterAPI';
 import { reviewsAPI } from './service/reviewsAPI';
 import { addressesAPI } from './service/addressesAPI';
+import { favoritesAPI } from './service/favoritesAPI';
 
 export const store = configureStore({
 	reducer: {
@@ -40,6 +41,7 @@ export const store = configureStore({
 		[orderProductAPI.reducerPath]: orderProductAPI.reducer,
 		[userApi.reducerPath]: userApi.reducer,
 		[reviewsAPI.reducerPath]: reviewsAPI.reducer,
+		[favoritesAPI.reducerPath]: favoritesAPI.reducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(
@@ -54,6 +56,7 @@ export const store = configureStore({
 			addressesAPI.middleware,
 			userApi.middleware,
 			reviewsAPI.middleware,
+			favoritesAPI.middleware
 		),
 });
 
