@@ -21,7 +21,6 @@ export const POST = async (req: NextRequest) => {
     const response = await fetch(
       `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/cart?id=${data[0]}`
     );
-
     const productsCart = await response.json();
 
     const products = productsCart.map((product: Product) => ({
@@ -39,7 +38,7 @@ export const POST = async (req: NextRequest) => {
         failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
         pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
       },
-      external_reference: data[0],
+      external_reference: `-${data[0]}`,
     };
   } else {
     const { itemId, description, price, quantity, userCode } = data;

@@ -81,8 +81,6 @@ const Cart = () => {
   const createPreference = async () => {
     try {
       const URL = ``;
-      [userId];
-
       const response = await fetch(`${URL}/api/products/buyProduct`, {
         method: "POST",
         body: JSON.stringify([userId]),
