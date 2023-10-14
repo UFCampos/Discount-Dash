@@ -6,41 +6,35 @@ import {
 import { useState } from "react";
 import { useSelector } from "@/lib/redux/hooks";
 import { useGetProfileQuery } from "@/lib/redux/service/searchProfileAPI";
+import { Review } from "@/utils/types";
 
 const AllReviews = ({ productId }: { productId: string }) => {
   const { id, name: nameUser } = useSelector((state) => state.userProfile);
-  const { data: profile, isError } = useGetProfileQuery({ id });
-  console.log(profile);
+  const { data: profile } = useGetProfileQuery({ id });
+  const { data, isLoading } = useGetAllReviewsQuery({ productId });
 
   const [mutate] = usePutReviewMutation();
-  const { data, isLoading } = useGetAllReviewsQuery({ productId });
+
   const [flag, setFlag] = useState(false);
-  console.log(data);
-  
+
   const [review, setReview] = useState({
     rating: 0,
     comment: "",
   });
-  const handleChangeFlag = (rating, comment) => {
+  
+  const handleChangeFlag = (rating : number, comment : string) => {
     setFlag(true);
     setReview({
       rating,
       comment
     })
   };
-  // const handleSetStates = (rating: number, comment: string) => {
-  //   setReview({
-  //     rating,
-  //     comment,
-  //   });
-  // };
 
-  const handlePostUpdateReview = (reviewId : string, itemId : string) => {
+  const handlePostUpdateReview = (reviewId : string) => {
     mutate({
       reviewId,
       comment: review.comment,
       rating: review.rating,
-      itemId,
     })
   }
 
@@ -48,13 +42,14 @@ const AllReviews = ({ productId }: { productId: string }) => {
     <div>
       <h1> all Reviews</h1>
       <div>
-        {data?.map((items: any) => {
+        {data?.map((review: Review) => {
           return (
-            <div key={items?.id}>
-              <p>{items?.name}</p>
+            <div key={review?.id}>
+              <p>{review?.name}</p>
               <br />
-              {items?.name === profile?.name || items?.name === nameUser ? (
-                <button onClick={() => handleChangeFlag(items?.rating, items?.comment)}> Edit </button>
+              {/* Si el nombre de la review es el mismo que el usuario logeado se renderiza el boton de editar */}
+              {review?.name === profile?.name || review?.name === nameUser ? (
+                <button onClick={() => handleChangeFlag(review?.rating, review?.comment)}> Edit </button>
               ) : null}
               {flag ? (
                 <div>
@@ -76,12 +71,12 @@ const AllReviews = ({ productId }: { productId: string }) => {
                       setReview({ ...review, comment: e.target.value })
                     }
                   />
-                  <button onClick={() => handlePostUpdateReview(items?.id, items?.productId)}>Update Review</button>
+                  <button onClick={() => handlePostUpdateReview(review?.id)}>Update Review</button>
                 </div>
               ) : (
                 <>
-                  <p>{items?.rating}</p>
-                  <p>{items?.comment}</p>
+                  <p>{review?.rating}</p>
+                  <p>{review?.comment}</p>
                 </>
               )}
 
