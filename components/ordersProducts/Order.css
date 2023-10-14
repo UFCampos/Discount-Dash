@@ -6,7 +6,7 @@
 }
 
 .bg-line {
-  background: linear-gradient(to right, green, yellow);
+  background: linear-gradient(to right, rgb(55, 149, 55) 50%, rgb(248, 248, 35) 50%);
 }
 
 .bg-green{

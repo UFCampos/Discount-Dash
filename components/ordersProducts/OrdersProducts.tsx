@@ -9,9 +9,6 @@ const OrdersProducts = () => {
 
   console.log(data);
 
-
-
-
   return (
     <div className="h-[100vh] overflow-y-auto ">
       <div className="orders-products-cont flex flex-col justify-center items-center">
@@ -48,34 +45,82 @@ const OrdersProducts = () => {
                   </div>
                 </div>
               ))}
-              <div className="flex justify-between">
- 
+              <div>
+                {order.orderStatus === "Order placed" ? (
+                  <div className="flex justify-between">
+                    <img
+                      className="w-10 h-10 mr-3 rounded-full bg-green-400"
+                      src="/canasto1.svg"
+                      alt=""
+                      width={300}
+                      height={300}
+                    />
+                    <img
+                      className="w-10 h-10 mr-3 rounded-full bg-yellow-300"
+                      src="/moto3.svg"
+                      alt=""
+                      width={50}
+                      height={50}
+                    />
+                    <img
+                      className="w-10 h-10 mr-3 rounded-full bg-yellow-300"
+                      src="/completo.svg"
+                      alt=""
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                ) : order.orderStatus === "In progress" ? (
+                  <div className="flex justify-between">
                 <img
-                className="w-10 h-14 mr-3 rounded-full bg-green-000"
-                src="/canasto1.svg"
-                alt=""
-                width={300}
-                height={300} />
-         
-
-                <img 
-                className="w-12 h-14 mr-3 rounded-full bg-green-000"
-                src="/moto3.svg"
-                alt=""
-                width={50}
-                height={50} />
-
-                
-                <img 
-                className="w-10 h-14 mr-3 rounded-full bg-green-000"
-                src="/completo.svg"
-                alt=""
-                width={50}
-                height={50}/>
-        
+                      className="w-10 h-10 mr-3 rounded-full bg-green-400"
+                      src="/canasto1.svg"
+                      alt=""
+                      width={300}
+                      height={300}
+                    />
+                    <img
+                      className="w-10 h-10 mr-3 rounded-full bg-green-400"
+                      src="/moto3.svg"
+                      alt=""
+                      width={50}
+                      height={50}
+                    />
+                    <img
+                      className="w-10 h-10 mr-3 rounded-full bg-yellow-300"
+                      src="/completo.svg"
+                      alt=""
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                ) : (
+                  <div className="flex justify-between">
+                   <img
+                      className="w-10 h-10 mr-3 rounded-full bg-green-400"
+                      src="/canasto1.svg"
+                      alt=""
+                      width={300}
+                      height={300}
+                    />
+                    <img
+                      className="w-10 h-10 mr-3 rounded-full bg-green-400"
+                      src="/moto3.svg"
+                      alt=""
+                      width={50}
+                      height={50}
+                    />
+                    <img
+                      className="w-10 h-10 mr-3 rounded-full bg-green-400"
+                      src="/completo.svg"
+                      alt=""
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                )}
               </div>
               {order.orderStatus === "In progress" ? (
-                
                 <div className="line-horizontal bg-line w-1/2 border-t-2 border-transparent my-4 mt-6 mr-1"></div>
               ) : order.orderStatus === "Completed" ? (
                 <div className="line-horizontal bg-green border-transparent w-1/2 border-t-2 border-gray-500 my-4 mt-6 mr-3"></div>

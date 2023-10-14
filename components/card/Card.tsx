@@ -22,14 +22,12 @@ const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock,
   const daysUntilExpiration = Math.ceil((expiration - currentDate) / (1000 * 60 * 60 * 24));
   console.log(currentDate);
 
-  console.log("hola" + expirationDate);
-  console.log( "puto" + currentDate);
   
   const rest = () =>{
       const differenceInMilliseconds = expirationDate.getTime() - currentDate.getTime();
       const daysDifference = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
       if (daysDifference <= 10){
-      return  daysDifference +" dias para vencer";
+      return  "vto: " + daysDifference +" dias";
     } else {
       return(
        expiration?.seconds ? new Date(expiration.seconds * 1000).toLocaleDateString() : "No expiration date"
