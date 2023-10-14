@@ -16,8 +16,15 @@ export const reviewsAPI = createApi({
         }),
         getAllReviews: build.query({
             query: ({productId}) => `/reviews?productId=${productId}`,
+        }),
+        putReview: build.mutation({
+            query: body => ({
+                url: '/reviews/update',
+                method: 'PUT',
+                body,
+            }),
         })
     }),
 })
 
-export const {useNewReviewMutation, useGetAllReviewsQuery} = reviewsAPI
+export const {useNewReviewMutation, useGetAllReviewsQuery, usePutReviewMutation} = reviewsAPI
