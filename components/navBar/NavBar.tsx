@@ -16,6 +16,7 @@ import { setUser } from "@/lib/redux/features/userProfile";
 const NavBar = () => {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
+
   const pathname = usePathname();
 
   // Const uid = useSelector((state) => state.userProfile.id);
@@ -24,6 +25,10 @@ const NavBar = () => {
 
   let uid;
 
+  //!esto es para que cuando el path sea de store no muestre la navbar de cliente
+  const notStore=!pathname.includes("/store/")
+
+  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -53,9 +58,7 @@ const NavBar = () => {
 
   return pathname !== "/login" &&
     pathname !== "/addProduct" &&
-    pathname !== "" &&
-    pathname!=="/enterStore/registerStore" &&
-    pathname!=="/enterStore/loginStore"
+    pathname !== "" && notStore
     ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">

@@ -13,19 +13,19 @@ const Header=()=>{
                 <Image src={logo} alt="logo" className={style.img}/>
             </div>
             {
-                pathname==="/enterStore/registerStore"
+                pathname==="/store/registerStore"
                 &&
                 <div className={style.nav}>
                     <p>Is your market registered?</p>
-                    <Link href="/enterStore/loginStore" className={style.redirectButton}>Sing in</Link>
+                    <Link href="/store/loginStore" className={style.redirectButton}>Sing in</Link>
                 </div>
             }
             {
-                pathname==="/enterStore/loginStore"
+                pathname==="/store/loginStore"
                 &&
                 <div className={style.nav}>
                     <p>Your business is not registered?</p>
-                    <Link href="/enterStore/registerStore" className={style.redirectButton}>Sing up</Link>
+                    <Link href="/store/registerStore" className={style.redirectButton}>Sing up</Link>
                 </div>
             }
         </header>

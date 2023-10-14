@@ -1,4 +1,4 @@
-import CreateProducts from '@/components/createProducts/createProducts';
+import CreateProducts from '@/components/dashboardStore/sectionsDashboard/createProducts/createProducts';
 import './addProduct.css';
 
 const addProduct = () => (
