@@ -74,3 +74,10 @@ export const putBrand = async (value: string, productId: string) => {
     brand: value,
   });
 };
+
+export const putRating= async(productId: string, rating: number)=>{
+  const docRef = doc(db, "products", productId);
+  await updateDoc(docRef, {
+    rating: rating
+  })
+}
