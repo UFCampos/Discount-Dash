@@ -1,12 +1,17 @@
 "use client";
 import { useGetOrdersQuery } from "@/lib/redux/service/ordersProductsAPI";
+import { useSelector } from "@/lib/redux/hooks";
+import { useEffect } from "react";
 
 const OrdersProducts = () => {
   //   const { id } = useSelector((state) => state.userProfile);
+  const flag = useSelector((state) => state.order.currentFlag);
   const id = "107892466175771536460";
-  const { data, isLoading, isError } = useGetOrdersQuery({ id });
 
-	console.log(data);
+  const { data, isLoading, isError } = useGetOrdersQuery({ id });
+  // useEffect(() => {
+
+  // },[flag])
 
   return (
     <div className="orders-products-cont flex flex-col justify-center items-center">
@@ -20,7 +25,7 @@ const OrdersProducts = () => {
             {order.products.map((product: any) => (
               <div key={product.productId} className="flex">
                 <h1>{product.name}</h1>
-                <img src={product.image} alt="img" width={100} height={100}/>
+                <img src={product.image} alt="img" width={100} height={100} />
                 <p>{product.price}</p>
               </div>
             ))}

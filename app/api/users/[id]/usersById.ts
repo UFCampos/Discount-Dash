@@ -1,12 +1,15 @@
-import {db} from '@/firebase/config';
-import {doc, getDoc} from 'firebase/firestore';
+import { db } from "@/firebase/config";
+import { doc, getDoc } from "firebase/firestore";
 
 export async function usersById(userId: string) {
-	const reference = await doc(db, `users/${userId}`);
-	const user = await getDoc(reference);
-	if (user.exists()) {
-		return user.data();
-	}
+  const userRef = await doc(db, `users/${userId}`);
+  const userDoc = await getDoc(userRef);
+  if (userDoc.exists()) {
+    return {
+      id: userDoc.id,
+      ...userDoc.data(),
+    };
+  }
 
-	return {error: 'User not found', status: 404};
+  throw new Error("User not found");
 }

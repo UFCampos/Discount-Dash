@@ -17,6 +17,8 @@ const PaymentModal = () => {
 
   const paymentProduct = useSelector((state) => state.payments.productPayment);
 
+  const paymentProduct = useSelector((state) => state.payments.productPayment);
+
   const { name, image, brand, price } = paymentProduct;
 
   const handleCLose = () => {

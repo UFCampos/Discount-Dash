@@ -14,7 +14,6 @@ export const controller = async (id: string, cartQuerySnapshot: any) => {
   cartQuerySnapshot.forEach((cartItemData) => {
     totalPrice += cartItemData.quantity * cartItemData.price;
     shopId = cartItemData.shopId;
-    console.log(cartItemData.shopId);
     products.push({
       productId: cartItemData.id,
       name: cartItemData.name,

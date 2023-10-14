@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { updateStock } from "../../products/putProduct/updateStock/updateStock";
+import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
 const mercadopago = require("mercadopago");
 

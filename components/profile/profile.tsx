@@ -12,7 +12,7 @@ type ProfileProps = {
 const Profile: React.FC<ProfileProps> = ({ id }) => {
   const { data, isError } = useGetProfileQuery({ id });
   const user = useSelector((state) => state.userProfile);
-  console.log("info de usuario",user)
+  console.log("info de usuario", user);
   if (isError) {
     return (
       <section className="pt-16 bg-blueGray-50">
@@ -61,9 +61,11 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
                         Change password
                       </p>
                     </Link>
-                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      pepita
-                    </p>
+                    <Link href={`/users/profile/${user.id}/myAddress`}>
+                      <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                        My address
+                      </p>
+                    </Link>
                   </div>
                 </div>
               </div>

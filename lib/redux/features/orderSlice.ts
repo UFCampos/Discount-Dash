@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const orderSlice = createSlice({
-    name: 'order',
-    initialState: {
-        currentState: '',
+  name: "order",
+  initialState: {
+    currentFlag: false,
+  },
+  reducers: {
+    setOrderFlag(state, { payload }) {
+      state.currentFlag = payload;
     },
-    reducers: {
-       changeState(state, {payload}) {
-           state.currentState = payload;
-       }
-    },
-})
+  },
+});
 
-export const {changeState} = orderSlice.actions
+export const { setOrderFlag } = orderSlice.actions;
