@@ -4,10 +4,8 @@ import { controller } from "./postOrder";
 export const POST = async (
   req: NextRequest) => {
   try {
-
-    let id = req.nextUrl.searchParams.get("id") || "";
     
-    console.log(id);
+    let id = req.nextUrl.searchParams.get("id") || "";
 
    
     await controller(id);

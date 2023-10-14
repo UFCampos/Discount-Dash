@@ -25,6 +25,15 @@ export interface Categories {
     establecimiento: string;
 }
 
+export type Review = {
+    id: string;
+    name: string;
+    rating: number;
+    comment: string;
+    userId: string;
+    productId: string;
+}
+
 //!interfaces of register Market
 
 //?prop interfaces
@@ -245,4 +254,12 @@ export type DetailModalProps = {
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	id: string;
+};
+
+export type User = {
+	id: string;
+	name: string;
+	lastname: string;
+	image: string;
+    role: string;
 };
