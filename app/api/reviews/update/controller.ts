@@ -1,11 +1,16 @@
 import { db } from "@/firebase/config";
-import { updateDoc } from "firebase/firestore";
-[]
+import { updateDoc, doc } from "firebase/firestore";
 
-export const putComment= (itemId: string, reviewId: string, comment: string)=>{
-
+export const putComment= async( reviewId: string, comment: string)=>{
+const docRef = doc(db,"reviews", reviewId);
+ await updateDoc(docRef, {
+    comment: comment
+ })
 }
 
-export const putRating= (itemId: string, reviewId: string, rating: string)=>{
-    
+export const putRating= async(reviewId: string, rating: string)=>{
+    const docRef = doc(db,"reviews", reviewId);
+    await updateDoc(docRef, {
+        rating: rating
+    })
 }

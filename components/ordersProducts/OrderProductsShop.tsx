@@ -4,13 +4,14 @@ import {
   useUpdateOrderMutation,
 } from "@/lib/redux/service/ordersProductsAPI";
 import { useState } from "react";
-import { changeState } from "@/lib/redux/features/orderSlice";
+import { setOrderFlag } from "@/lib/redux/features/orderSlice";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 
 const OrdersProductsShop = () => {
   const [orderStates, setOrderStates] = useState([]);
+  const flag = useSelector((state) => state.order.currentFlag);
   const dispatch = useDispatch();
-    const { id } = useSelector((state) => state.userProfile);
+  const { id } = useSelector((state) => state.userProfile);
   const states = ["Order placed", "In progress", "Completed"].map((state) => {
     return (
       <option value={state} key={state}>
@@ -30,10 +31,8 @@ const OrdersProductsShop = () => {
       orderId,
       value: state,
     });
-    dispatch(changeState(state));
+    // dispatch(setOrderFlag(!flag));
   };
-
-  console.log(data);
 
   return (
     <div className="orders-products-cont flex flex-col justify-center items-center">
@@ -56,7 +55,7 @@ const OrdersProductsShop = () => {
             <select
               name="currentState"
               id="currentState"
-              value={orderStates[order.id] || "" }
+              value={orderStates[order.id] || ""}
               onChange={(e) => handleState(order.id, e.target.value)}
             >
               <option value="">state</option>
