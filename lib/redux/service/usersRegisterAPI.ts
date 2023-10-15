@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { allDataMarket } from "@/utils/types";
-import { User } from "@/utils/types";
+import { type User } from "@/utils/types";
 export const userApi = createApi({
     reducerPath:"userApi",
     baseQuery:fetchBaseQuery({
@@ -22,8 +22,8 @@ export const userApi = createApi({
                     body
                 })
             }),
-			getUser: builder.query<User, string>({
-				query: id => `/users/${id}`,
+			getUser: builder.query<User, { id: string }>({
+				query: id => `/${id}`,
 			})
 		}
 	),

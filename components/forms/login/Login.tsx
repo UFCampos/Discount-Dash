@@ -10,8 +10,11 @@ import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { setUser } from "@/lib/redux/features/userProfile";
 import { onAuthStateChanged } from "firebase/auth";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
+
   const [uid, setUid] = useState("");
 
   const { data } = useGetUserQuery({ id: uid });
@@ -34,20 +37,23 @@ const Login = () => {
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		signInWithEmailAndPassword(auth, formData.email, formData.password)
-			.then(userCredential => {
+			.then( async (userCredential) => {
 				const {user} = userCredential;
 				const {uid} = user; // Aquí obtienes el UID del usuario
 				setUid(uid);
-				const mappedUser = {
-					id: uid,
-					email: user.email,
-					photoUrl: user.photoURL,
-					name: user.displayName,
-				}
-				dispatch(setUser(mappedUser));
+        const idToken = await user.getIdToken();
+        fetch('api/users/login', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          }
+        })
 			})
+      .then(() => {
+        router.push("/home");
+      })
 			.catch(error => {
-				console.error(error);
+				alert(error.message);
 			});
 	};
 

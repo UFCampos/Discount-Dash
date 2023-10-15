@@ -12,42 +12,35 @@ import { useEffect, useState } from "react";
 import { auth } from "@/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
+import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const [flag, setFlag] = useState(false);
   const pathname = usePathname();
-
-  // Const uid = useSelector((state) => state.userProfile.id);
+  const user = auth.currentUser;
+  
+  const id = useSelector((state) => state.userProfile.id);
+  const { data } = useGetUserQuery({ id });
 
   const { data: dataCategories } = useGetCategoriesQuery(null);
 
-  let uid;
+  let uid: string;
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // Utiliza el uid almacenado en el estado
-        let mappedUser = {};
-        user.providerData.forEach((profile) => {
-          console.log(profile);
-          uid = user.uid;
-          mappedUser = {
-            id: uid ? uid : profile.uid, // Usar el uid del estado
-            email: profile.email,
-            photoUrl: profile.photoURL,
-            name: profile.displayName,
-          };
-        });
+        let mappedUser = {
+          id: user.uid, // Usar el uid del estado
+          email: user.email,
+          photoUrl: user.photoURL,
+          name: user.displayName,
+        };
         dispatch(setUser(mappedUser));
-        console.log(user);
-      } else {
-        setFlag(false);
       }
     });
-  }, [uid]);
+  }, [user]);
 
-  console.log(dataCategories);
   useEffect(() => {
     dispatch(setCategories(dataCategories));
   }, [dataCategories]);

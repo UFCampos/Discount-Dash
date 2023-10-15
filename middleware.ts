@@ -4,6 +4,7 @@ const originAllowed = ['http://localhost:3000'];
 
 export async function middleware(request: NextRequest) {
 	// Configure CORS headers
+	console.log(request.url);
 	const origin = request.headers.get('origin');
 	if (origin && originAllowed.includes(origin)) {
 		request.headers.set('Access-Control-Allow-Origin', origin || '*');
