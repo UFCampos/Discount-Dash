@@ -35,7 +35,7 @@ export const controller = async (id: string) => {
     userId: id,
     shopId,
     totalPrice,
-    orderStatus: "order placed",
+    orderStatus: "Order placed",
   };
 
   await addDoc(ordersRef, orderData);
