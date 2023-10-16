@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import style from './succes.module.css';
+import Link from "next/link";
+import style from "./succes.module.css";
 
 const SuccessPayment = () => {
   return (

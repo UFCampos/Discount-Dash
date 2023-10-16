@@ -41,7 +41,7 @@ const UpdatePasswordUser = () => {
   };
 
   const handleChangePassword = () => {
-    if (!user) return null
+    if (!user) return null;
     updatePassword(user, newPassword.newPassword)
       .then(() => {
         alert("La contraseña ha sido actualizada");

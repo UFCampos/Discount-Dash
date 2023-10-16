@@ -7,7 +7,7 @@ import AllReviews from "@/components/reviews/GetAllReviews";
 
 const Detail = ({ id }: { id: string }) => {
   const { data, isLoading } = useGetProductQuery({ id });
-  return  (
+  return (
     <div>
       <section className="text-gray-600 body-font overflow-auto">
         <div className="container px-5 py-12 mx-auto">
@@ -84,8 +84,8 @@ const Detail = ({ id }: { id: string }) => {
                 {data?.description}
               </p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-red-100 mb-5">
-                  <Reviews productId={id} />
-                <div className="max-h-60 w-60 overflow-y-auto"> 
+                <Reviews productId={id} />
+                <div className="max-h-60 w-60 overflow-y-auto">
                   <AllReviews productId={id} />
                 </div>
               </div>

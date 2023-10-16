@@ -18,7 +18,6 @@ import {
   useDeleteFavoriteMutation,
 } from "@/lib/redux/service/favoritesAPI";
 
-
 const Card: React.FC<CardProduct> = ({
   itemId,
   name,
@@ -41,6 +40,7 @@ const Card: React.FC<CardProduct> = ({
   const { id } = useSelector((state) => state.userProfile);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { data } = useGetProductsCartQuery({ id });
+  const userCode = id;
 
   const {
     data: product,
@@ -79,13 +79,12 @@ const Card: React.FC<CardProduct> = ({
   const createPreference = async () => {
     try {
       const URL = ``;
-      console.log(URL);
-
       const response = await axios.post(`${URL}/api/products/buyProduct`, {
-        itemId: itemId,
+        itemId,
         description: name,
-        price: price,
+        price,
         quantity: 1,
+        userCode,
       });
       const { id } = response.data;
       return id;

@@ -12,7 +12,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 
 const Login = () => {
-  
   const [uid, setUid] = useState("");
 
   const { data } = useGetUserQuery({ id: uid });
