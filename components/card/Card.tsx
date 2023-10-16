@@ -12,11 +12,21 @@ import {
 } from "@/lib/redux/features/paymentSlice";
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
-import { addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 import { CardProduct } from "@/utils/types";
+import {
+  useNewFavoriteMutation,
+  useDeleteFavoriteMutation,
+} from "@/lib/redux/service/favoritesAPI";
 
-const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock, normalPrice}) => {
-
+const Card: React.FC<CardProduct> = ({
+  itemId,
+  name,
+  brand,
+  image,
+  price,
+  stock,
+  normalPrice,
+}) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.payments.productPayment);
@@ -24,6 +34,8 @@ const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock,
   const paymentId = useSelector((state) => state.payments.paymentId);
 
   const [mutate] = useAddProductCartMutation();
+
+  const [flag, setFlag] = useState(false);
 
   const { id } = useSelector((state) => state.userProfile);
   const { cartItems } = useSelector((state) => state.cartItems);
@@ -40,8 +52,27 @@ const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock,
       cartItemId: itemId,
       userId: id,
       value: "add",
-    })
+    });
     dispatch(addCart(product));
+  };
+
+  const [postFavorite] = useNewFavoriteMutation();
+  const [deleteFavorite] = useDeleteFavoriteMutation();
+
+  const handleAddFavorite = () => {
+    if (!flag) {
+      setFlag(true);
+      postFavorite({
+        userId: id,
+        productId: itemId,
+      });
+    } else {
+      setFlag(false);
+      deleteFavorite({
+        userId: id,
+        productId: itemId,
+      });
+    }
   };
 
   const createPreference = async () => {
@@ -80,10 +111,30 @@ const Card: React.FC<CardProduct> = ({ itemId, name, brand, image, price, stock,
   };
   return (
     <div className="card flex flex-col">
+      <div>
+        {!flag ? (
+          <button
+            onClick={handleAddFavorite}
+            className="material-symbols-outlined text-center"
+          >
+            favorite
+          </button>
+        ) : (
+          <button
+            onClick={handleAddFavorite}
+            className="material-symbols-outlined text-center text-red-500"
+          >
+            favorite
+          </button>
+        )}
+      </div>
       <div className="card-img flex justify-center items-center">
         <img src={image} />
-        <p>vence en 5 dias</p>
+        {expiration && expiration.seconds ? (
+     <p> {rest()}</p>
+  ) : null}
       </div>
+
       <div className="card-info flex flex-col">
         <Link href={`home/product/${itemId}`}>
           <h3 className="text-center">{name}</h3>

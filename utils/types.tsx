@@ -238,6 +238,11 @@ export type Item = {
 	id: string;
 	stock: string;
 	normalPrice: string;
+      expiration: {
+    seconds: number;
+    nanoseconds: number;
+  };
+    
 };
 
 export type CardProduct = {
@@ -248,6 +253,10 @@ export type CardProduct = {
 	itemId: string;
 	stock: string;
 	normalPrice: string;
+    expiration: {
+        seconds: number;
+        nanoseconds: number;
+      };
 };
 
 export type DetailModalProps = {
