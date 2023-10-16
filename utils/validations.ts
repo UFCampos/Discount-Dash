@@ -15,7 +15,7 @@ const isFutreDate = (dateString: string) => {
   return expirationDate > currentDate;
 };
 
-const validation = (input: productInput, description:string) => {
+const validation = (input: productInput, description?:string) => {
   let errors: Partial<productInput & {description: string}> = {};
 
   if (!input.name) {

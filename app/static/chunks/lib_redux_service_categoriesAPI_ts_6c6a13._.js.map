@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/lib/redux/service/categoriesAPI.ts"],"sourcesContent":["import { createApi, fetchBaseQuery } from \"@reduxjs/toolkit/query/react\";\r\n\r\ntype Category={\r\n    id:string,\r\n    category:string\r\n}\r\n\r\nexport const categoriesAPI=createApi({\r\n    reducerPath:\"categoriesAPI\",\r\n    baseQuery: fetchBaseQuery({\r\n        baseUrl:\"/api\"\r\n    }),\r\n    endpoints:(build)=>({\r\n        getCategories:build.query<Category[], null>({\r\n            query:()=>\"categories\"\r\n        })\r\n    })\r\n})\r\n\r\nexport const {useGetCategoriesQuery}=categoriesAPI"],"names":[],"mappings":";;;;;;;AAOO,MAAM,gBAAc,wLAAU;IACjC,aAAY;IACZ,WAAW,6LAAe;QACtB,SAAQ;IACZ;IACA,WAAU,CAAC,QAAQ,CAAC;YAChB,eAAc,MAAM,KAAK,CAAmB;gBACxC,OAAM,IAAI;YACd;QACJ,CAAC;AACL;AAEO,MAAM,EAAC,qBAAqB,EAAC,GAAC"}},
-    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

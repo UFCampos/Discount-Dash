@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
 const mercadopago = require("mercadopago");
 
@@ -22,53 +22,19 @@ export const POST = async (req: NextRequest) => {
           },
         }
       );
-      const { status, additional_info, external_reference } =
-        await paymentInfo.json();
-
-      let userId = external_reference;
-
+      const { status, additional_info } = await paymentInfo.json();
       let products = await additional_info?.items;
 
       if (status === "approved") {
-        let arrayProducts = [];
-        if (userId.charAt(0) === "-") {
-          userId = userId.slice(1);
-
-          await fetch(
-            "https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/cart/delete",
-            {
-              method: "DELETE",
-              body: JSON.stringify({
-                userId,
-              }),
-            }
-          );
-        }
-        for (let item of products) {
-          const response = await fetch(
-            `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/products/${item?.id}`
-          );
-          const info = await response.json();
-          if (info) info.quantity = Number(item?.quantity);
-
-          await arrayProducts.push(info);
-
+        products.forEach(async (item: any) => {
           const reference = doc(db, "products", item?.id);
+          const productDB = await getDoc(reference);
+          const info = productDB.data();
+
           updateDoc(reference, {
             stock: info?.stock - Number(item.quantity),
           });
-        }
-
-        await fetch(
-          "https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/shopOrder/post",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              userId,
-              arrayProducts,
-            }),
-          }
-        );
+        });
       }
     }
     return NextResponse.json({ response: "Data received" });

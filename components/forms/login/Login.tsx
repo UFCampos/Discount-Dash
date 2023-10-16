@@ -12,6 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import validationLogin from "@/utils/validationLogin";
 
 const Login = () => {
+  
   const [uid, setUid] = useState("");
 
   const { data } = useGetUserQuery({ id: uid });

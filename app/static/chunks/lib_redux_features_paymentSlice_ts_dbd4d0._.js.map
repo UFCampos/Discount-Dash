@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/lib/redux/features/paymentSlice.ts"],"sourcesContent":["import { createSlice } from \"@reduxjs/toolkit\";\r\n\r\nexport const paymentSlice=createSlice({\r\n    name:\"paymentsItems\",\r\n    initialState:{\r\n        productPayment:{\r\n            name: \"\",\r\n            price: \"\",\r\n            image: \"\",\r\n            brand: \"\",\r\n        },\r\n        paymentId:null\r\n    },\r\n    reducers:{\r\n        productPayment:(state, {payload})=>{\r\n            state.productPayment=payload\r\n        },\r\n        productPaymentId:(state, {payload})=>{\r\n            state.paymentId=payload\r\n        }\r\n    }\r\n})\r\n\r\nexport const {productPayment, productPaymentId}=paymentSlice.actions\r\nexport default paymentSlice.reducer"],"names":[],"mappings":";;;;;;;;;AAEO,MAAM,eAAa,mKAAY;IAClC,MAAK;IACL,cAAa;QACT,gBAAe;YACX,MAAM;YACN,OAAO;YACP,OAAO;YACP,OAAO;QACX;QACA,WAAU;IACd;IACA,UAAS;QACL,gBAAe,CAAC;gBAAO,EAAC,OAAO,EAAC;YAC5B,MAAM,cAAc,GAAC;QACzB;QACA,kBAAiB,CAAC;gBAAO,EAAC,OAAO,EAAC;YAC9B,MAAM,SAAS,GAAC;QACpB;IACJ;AACJ;AAEO,MAAM,EAAC,cAAc,EAAE,gBAAgB,EAAC,GAAC,aAAa,OAAO;uCACrD,aAAa,OAAO"}},
-    {"offset": {"line": 37, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

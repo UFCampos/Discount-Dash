@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/home/home.css"],"sourcesContent":[".home-cont{\r\n    height: 88vh;\r\n    width: 100vw;\r\n\r\n}\r\n/*# sourceMappingURL=home.css.map */"],"names":[],"mappings":"AAAA,CAAC,SAAS,CAAA,CAAC;EACP,MAAM,EAAE,EAAE,EAAE;EACZ,KAAK,EAAE,GAAG,EAAE;AAEhB,CAAC"}},
-    {"offset": {"line": 4, "column": 1}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

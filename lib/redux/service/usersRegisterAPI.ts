@@ -21,11 +21,10 @@ export const userApi = createApi({
         body,
       }),
     }),
-    getUser: build.query<any, { id: string }>({
-      query: ({ id }) => `/${id}`,
+    getUser: build.query<any, {id: string}>({
+        query: ({id}) => `/${id}`,
     }),
   }),
 });
 
-export const { usePostUserMutation, useGetUserQuery, usePostMarketMutation } =
-  userApi;
+export const { usePostUserMutation, useGetUserQuery, usePostMarketMutation } = userApi;

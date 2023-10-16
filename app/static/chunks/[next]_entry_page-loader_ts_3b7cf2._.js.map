@@ -1,8 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
-    {"offset": {"line": 12, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
-    {"offset": {"line": 16, "column": 0}, "map": {"version":3,"sources":["/turbopack/[next]/entry/page-loader.ts"],"sourcesContent":["const PAGE_PATH = \"/_app\";\n\n// inserted by rust code\ndeclare const PAGE_PATH: string\n\n  // Adapted from https://github.com/vercel/next.js/blob/canary/packages/next/build/webpack/loaders/next-client-pages-loader.ts\n;(window.__NEXT_P = window.__NEXT_P || []).push([\n  PAGE_PATH,\n  () => {\n    return require('PAGE')\n  },\n])\nif (module.hot) {\n  module.hot.dispose(function () {\n    window.__NEXT_P.push([PAGE_PATH])\n  })\n}\n"],"names":[],"mappings":"AAAA,MAAM,YAAY;AAMjB,CAAC,OAAO,QAAQ,GAAG,OAAO,QAAQ,IAAI,EAAE,EAAE,IAAI,CAAC;IAC9C;IACA;QACE,OAAO;IACT;CACD;AACD,IAAI,OAAO,GAAG,EAAE;IACd,OAAO,GAAG,CAAC,OAAO,CAAC;QACjB,OAAO,QAAQ,CAAC,IAAI,CAAC;YAAC;SAAU;IAClC;AACF"}},
-    {"offset": {"line": 30, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
