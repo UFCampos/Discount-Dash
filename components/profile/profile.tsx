@@ -110,20 +110,31 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
             <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full lg:w-9/12 px-4">
-                  <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                  <h1 className="mb-4 text-lg leading-relaxed text-blueGray-700">
                     configuration
-                  </p>
+                  </h1>
                   <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                    segurity
+                    Change name
                   </p>
                   <Link href={`/users/profile/${user.id}/updatePassword`}>
                     <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
                       Change password
                     </p>
                   </Link>
-                  <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                    pepita
+                  <Link href={`/users/profile/${user.id}/myAddress`}>
+                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                      My addresses
+                    </p>
+                  </Link>
+
+                  <p>
+                    My Orders
                   </p>
+                  <br />
+                  <p>
+                    Shop history
+                  </p>
+
                 </div>
               </div>
             </div>

@@ -7,7 +7,7 @@ export const userHistory = async (userId: string) => {
 	const ordersQuery = query(
 		ordersCollectionRef,
 		where('userId', '==', userId),
-		where('orderStatus', '==', 'completed'),
+		where('orderStatus', '==', 'Completed'),
 	);
 
 	const ordersSnapshot = await getDocs(ordersQuery);

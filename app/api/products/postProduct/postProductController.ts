@@ -29,5 +29,6 @@ export const controller = (
     description,
     status:"unexpired",
     availability: "available",
+    raiting:0
   });
 };
