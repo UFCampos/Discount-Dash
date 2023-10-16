@@ -15,4 +15,4 @@ export const favoriteSlice = createSlice({
     },
 })
 
-export const { addFavorite, removeFavorite, setFlagState } = favoriteSlice.actions
+export const { addFavorite, removeFavorite } = favoriteSlice.actions
