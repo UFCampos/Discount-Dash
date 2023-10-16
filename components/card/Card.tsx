@@ -17,6 +17,7 @@ import {
   useNewFavoriteMutation,
   useDeleteFavoriteMutation,
 } from "@/lib/redux/service/favoritesAPI";
+import { addFavorite } from "@/lib/redux/features/FavoriteSlice";
 
 
 const Card: React.FC<CardProduct> = ({
@@ -27,6 +28,7 @@ const Card: React.FC<CardProduct> = ({
   price,
   stock,
   normalPrice,
+  has
 }) => {
   const dispatch = useDispatch();
 
@@ -38,9 +40,23 @@ const Card: React.FC<CardProduct> = ({
 
   const [flag, setFlag] = useState(false);
 
+  
   const { id } = useSelector((state) => state.userProfile);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { data } = useGetProductsCartQuery({ id });
+  
+  const { favorites } = useSelector((state) => state.favorites);
+
+  useEffect(() => {
+    console.log(has);
+    
+    if(has){
+      setFlag(true);
+    }else{
+      setFlag(false);
+    }
+    
+  },[])
 
   const {
     data: product,
@@ -67,6 +83,7 @@ const Card: React.FC<CardProduct> = ({
         userId: id,
         productId: itemId,
       });
+      dispatch(addFavorite(product));
     } else {
       setFlag(false);
       deleteFavorite({
@@ -79,7 +96,6 @@ const Card: React.FC<CardProduct> = ({
   const createPreference = async () => {
     try {
       const URL = ``;
-      console.log(URL);
 
       const response = await axios.post(`${URL}/api/products/buyProduct`, {
         itemId: itemId,
@@ -113,7 +129,7 @@ const Card: React.FC<CardProduct> = ({
   return (
     <div className="card flex flex-col">
       <div>
-        {!flag ? (
+        {!has ? (
           <button
             onClick={handleAddFavorite}
             className="material-symbols-outlined text-center"

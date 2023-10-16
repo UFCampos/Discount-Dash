@@ -248,6 +248,7 @@ export type CardProduct = {
 	itemId: string;
 	stock: string;
 	normalPrice: string;
+    has: boolean
 };
 
 export type DetailModalProps = {
