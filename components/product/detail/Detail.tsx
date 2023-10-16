@@ -81,8 +81,7 @@ const Detail = ({ id }: { id: string }) => {
                 <span className="text-gray-600 ml-3">4 Reviews</span>
               </div>
               <p className="leading-relaxed mt-4">
-                Hamburguesa con queso cheddar, dos medallones de carne de 250g,
-                salsa de la casa, cebolla, lechuga, tomate y extra papas.
+                {data?.description}
               </p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-red-100 mb-5">
                 <Reviews productId={id} />
