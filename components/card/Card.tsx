@@ -18,6 +18,7 @@ import {
   useDeleteFavoriteMutation,
 } from "@/lib/redux/service/favoritesAPI";
 import { addFavorite } from "@/lib/redux/features/FavoriteSlice";
+import { useGetAllFavoritesQuery } from "@/lib/redux/service/favoritesAPI";
 
 
 const Card: React.FC<CardProduct> = ({
@@ -36,27 +37,39 @@ const Card: React.FC<CardProduct> = ({
 
   const paymentId = useSelector((state) => state.payments.paymentId);
 
+  
   const [mutate] = useAddProductCartMutation();
-
+  
   const [flag, setFlag] = useState(false);
-
+  
   
   const { id } = useSelector((state) => state.userProfile);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { data } = useGetProductsCartQuery({ id });
   
+  const { data : dataFavorite } = useGetAllFavoritesQuery({ id });
   const { favorites } = useSelector((state) => state.favorites);
 
+  const ids = dataFavorite?.map((favorite : any) => favorite?.productId);
+
   useEffect(() => {
-    console.log(has);
+    console.log('Esteeeee' + dataFavorite?.productId);
+    console.log(dataFavorite);
+    console.log(ids);
     
-    if(has){
+    if(ids?.includes(itemId)){
+      console.log('ENTRE AL IF');
+      setFlag(true);
+      has = true
+    }
+    
+    if(has === true ){
       setFlag(true);
     }else{
       setFlag(false);
     }
     
-  },[])
+  },[dataFavorite])
 
   const {
     data: product,
@@ -77,7 +90,10 @@ const Card: React.FC<CardProduct> = ({
   const [deleteFavorite] = useDeleteFavoriteMutation();
 
   const handleAddFavorite = () => {
-    if (!flag) {
+    console.log(has);
+    console.log(flag);
+    
+    if (flag === false || has === false) {
       setFlag(true);
       postFavorite({
         userId: id,
@@ -86,6 +102,7 @@ const Card: React.FC<CardProduct> = ({
       dispatch(addFavorite(product));
     } else {
       setFlag(false);
+      has = false;
       deleteFavorite({
         userId: id,
         productId: itemId,
@@ -129,7 +146,7 @@ const Card: React.FC<CardProduct> = ({
   return (
     <div className="card flex flex-col">
       <div>
-        {!has ? (
+        {has === false || flag === false ? (
           <button
             onClick={handleAddFavorite}
             className="material-symbols-outlined text-center"
@@ -147,9 +164,9 @@ const Card: React.FC<CardProduct> = ({
       </div>
       <div className="card-img flex justify-center items-center">
         <img src={image} />
-        {expiration && expiration.seconds ? (
+        {/* {expiration && expiration.seconds ? (
      <p> {rest()}</p>
-  ) : null}
+  ) : null} */}
       </div>
 
       <div className="card-info flex flex-col">

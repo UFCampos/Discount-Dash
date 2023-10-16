@@ -34,6 +34,7 @@ const Favorites = () => {
               stock={favorite?.stock}
               normalPrice={favorite?.normalPrice}
               has={has}
+              expiration={favorite?.expiration}
             />
           </div>
         );
