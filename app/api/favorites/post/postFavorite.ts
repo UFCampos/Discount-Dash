@@ -9,7 +9,7 @@ export const controller = async (userId: string, productId: string) => {
     const productData = productDoc.data();
 
     const favoritesRef = doc(db, "users", userId, "favorites", productId);
-    await setDoc(favoritesRef, { ...productData, userId: userId, productId: productId });
+    await setDoc(favoritesRef, { ...productData, userId, productId });
   } else {
     throw new Error("Product not found");
   }
