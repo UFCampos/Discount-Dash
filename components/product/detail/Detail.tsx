@@ -115,7 +115,7 @@ const Detail = ({ id }: { id: string }) => {
                   papas.
                 </p>
                 <div className="card-img flex justify-center items-center text-red-400">
-                  vto:{" "}
+                  vto: {" "}
                   {data?.expiration && data?.expiration.seconds ? (
                     <p> {rest()}</p>
                   ) : null}

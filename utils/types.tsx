@@ -238,7 +238,7 @@ export type Item = {
 	id: string;
 	stock: string;
 	normalPrice: string;
-      expiration: {
+    expiration: {
     seconds: number;
     nanoseconds: number;
   };
