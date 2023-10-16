@@ -147,8 +147,11 @@ const Card: React.FC<CardProduct> = ({
       </div>
       <div className="card-img flex justify-center items-center">
         <img src={image} />
-        <p>vence en 5 dias</p>
+        {expiration && expiration.seconds ? (
+     <p> {rest()}</p>
+  ) : null}
       </div>
+
       <div className="card-info flex flex-col">
         <Link href={`home/product/${itemId}`}>
           <h3 className="text-center">{name}</h3>

@@ -21,7 +21,8 @@ const Cart = () => {
   const { cartItems } = useSelector((state) => state.cartItems);
 
   const { data } = useGetProductsCartQuery({ id: userId });
-
+  console.log(data);
+  
   const {
     data: product,
     isLoading,

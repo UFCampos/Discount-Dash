@@ -89,6 +89,20 @@
   width: 100%;
   cursor: pointer;
 }
+.submitDisabled {
+  margin: 20px, 0 10px, 0;
+  background-color: #ccc;
+  border: none;
+  color: black;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 
 .p {
   text-align: center;

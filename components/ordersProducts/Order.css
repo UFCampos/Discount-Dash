@@ -1,0 +1,18 @@
+.line-horizontal {
+  position: relative;
+  width: 100%; /* Ancho de la línea */
+  height: 10px; /* Altura de la línea */
+  border-radius: 5px;
+}
+
+.bg-line {
+  background: linear-gradient(to right, rgb(55, 149, 55) 50%, rgb(248, 248, 35) 50%);
+}
+
+.bg-green{
+  background-color: green;
+}
+
+.bg-yellow{
+  background-color: yellow;
+}
