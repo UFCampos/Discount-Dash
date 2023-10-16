@@ -21,7 +21,6 @@ const Cart = () => {
   const { cartItems } = useSelector((state) => state.cartItems);
 
   const { data } = useGetProductsCartQuery({ id: userId });
-  console.log(data);
   
   const {
     data: product,
@@ -83,12 +82,6 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(addTotalCart(data));
-
-    console.log(
-      "UserId cambió a: " + userId + ", pero el length es undefined? Length:",
-      data?.length
-    );
-    console.log(cartItems);
   }, [data]);
 
   return (
