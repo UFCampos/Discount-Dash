@@ -1,4 +1,4 @@
-import { auth } from 'firebase-admin';
+import { auth } from '@/firebase/admin-config';
 import { InitApp, app } from '@/firebase/admin-config';
 import { cookies, headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
@@ -12,12 +12,12 @@ export const POST = async (req: NextRequest) => {
         if (authorization?.startsWith("Bearer ")) {
             const idToken = authorization.split("Bearer ")[1];
             console.log('TOKEN: ', idToken)
-            const decodedToken = await auth().verifyIdToken(idToken);
+            const decodedToken = await auth.verifyIdToken(idToken);
 
             if (decodedToken) {
                 //Generate session cookie
                 const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
-                const sessionCookie = await auth().createSessionCookie(idToken, {
+                const sessionCookie = await auth.createSessionCookie(idToken, {
                     expiresIn,
                 });
                 const options = {
@@ -42,19 +42,25 @@ export const POST = async (req: NextRequest) => {
 
 
 export const GET = async (req: NextRequest) => {
-    const session = cookies().get("session")?.value || "";
+    const sessionToken = cookies().get("session")?.value || "";
 
-    //Validate if the cookie exist in the request
-    if (!session) {
-        return NextResponse.json({ isLogged: false }, { status: 401 });
+    try {
+        //Verify session cookie
+        if (sessionToken) {
+            const decodedToken = await auth.verifySessionCookie(sessionToken, true);
+            console.log("DECODED TOKEN: ", decodedToken);
+
+            const user = await auth.getUser(decodedToken.uid);
+
+            const userObject = {
+                ...user,
+                claims: user.customClaims,
+            }
+
+            return NextResponse.json(userObject, { status: 200 });
+        }
+
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 400 });
     }
-
-    //Use Firebase Admin to validate the session cookie
-    const decodedClaims = await auth().verifySessionCookie(session, true);
-
-    if (!decodedClaims) {
-        return NextResponse.json({ isLogged: false }, { status: 401 });
-    }
-
-    return NextResponse.json({ isLogged: true }, { status: 200 });
 }

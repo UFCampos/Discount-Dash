@@ -19,8 +19,6 @@ const Login = () => {
 
   const { data } = useGetUserQuery({ id: uid });
 
-  const { data } = useGetUserQuery({ id: uid });
-
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
