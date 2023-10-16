@@ -18,6 +18,7 @@ import {
   useDeleteFavoriteMutation,
 } from "@/lib/redux/service/favoritesAPI";
 
+
 const Card: React.FC<CardProduct> = ({
   itemId,
   name,
@@ -60,7 +61,6 @@ const Card: React.FC<CardProduct> = ({
   const [deleteFavorite] = useDeleteFavoriteMutation();
 
   const handleAddFavorite = () => {
-    console.log(id);
     if (!flag) {
       setFlag(true);
       postFavorite({
