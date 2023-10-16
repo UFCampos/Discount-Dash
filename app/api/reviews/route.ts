@@ -6,20 +6,16 @@ export const GET = async (req: NextRequest) => {
     let userId = req.nextUrl.searchParams.get("userId") || "";
     let productId = req.nextUrl.searchParams.get("productId") || "";
 
-
     const reviewsRef = collection(db, "reviews");
     let reviewsSnapshot = await getDocs(reviewsRef);
     const queryRef = query(reviewsRef, where("userId", "==", userId));
     const queryItemRef = query(reviewsRef, where("productId", "==", productId));
-    
+
     if (!productId) {
-        console.log(userId)
       reviewsSnapshot = await getDocs(queryRef);
-    }else{
-    console.log(productId)
-    reviewsSnapshot = await getDocs(queryItemRef);
-  }
-    
+    } else {
+      reviewsSnapshot = await getDocs(queryItemRef);
+    }
 
     const reviews = reviewsSnapshot.docs.map((doc) => ({
       ...doc.data(),

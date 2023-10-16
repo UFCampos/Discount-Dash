@@ -17,14 +17,16 @@ const AllReviews = ({ productId }: { productId: string }) => {
 
   const [flag, setFlag] = useState(false);
 
-  const [review, setReview] = useState({
+  const [reviewState, setReviewState] = useState({
     rating: 0,
     comment: "",
   });
 
   const handleChangeFlag = (rating: number, comment: string) => {
+
+  const handleChangeFlag = (rating: number, comment: string) => {
     setFlag(true);
-    setReview({
+    setReviewState({
       rating,
       comment,
     });
@@ -263,21 +265,27 @@ const AllReviews = ({ productId }: { productId: string }) => {
                   <input
                     type="number"
                     placeholder="Rating (1-5)"
-                    value={review.rating}
+                    value={reviewState.rating}
                     onChange={(e) => {
-                      setReview({
-                        ...review,
+                      setReviewState({
+                        ...reviewState,
                         rating: parseInt(e.target.value),
                       });
                     }}
                   />
                   <input
                     placeholder="Comment"
-                    value={review.comment}
+                    value={reviewState.comment}
                     onChange={(e) =>
-                      setReview({ ...review, comment: e.target.value })
+                      setReviewState({
+                        ...reviewState,
+                        comment: e.target.value,
+                      })
                     }
                   />
+                  <button onClick={() => handlePostUpdateReview(review?.id)}>
+                    Update Review
+                  </button>
                   <button onClick={() => handlePostUpdateReview(review?.id)}>
                     Update Review
                   </button>
