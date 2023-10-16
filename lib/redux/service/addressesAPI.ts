@@ -9,8 +9,8 @@ export const addressesAPI = createApi({
     endpoints: build => ({
         getAddresses: build.mutation({
             query: body => ({
-                url: '/users/updateUser',
-                method: 'GET',
+                url: `/users/updateUser`,
+                method: 'PUT',
                 body,
             }),
         })

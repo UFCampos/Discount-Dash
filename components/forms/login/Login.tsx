@@ -19,6 +19,8 @@ const Login = () => {
 
   const { data } = useGetUserQuery({ id: uid });
 
+  const { data } = useGetUserQuery({ id: uid });
+
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -64,19 +66,21 @@ const Login = () => {
       if (user) {
         // Utiliza el uid almacenado en el estado
         let mappedUser = {};
-        user.providerData ? user.providerData.forEach((profile) => {
-          mappedUser = {
-            id: uid ? uid : profile.uid, // Usar el uid del estado
-            email: profile.email,
-            photoUrl: profile.photoURL,
-            name: profile.displayName,
-          };
-        }) : mappedUser = {
-          id: uid ? uid : user.uid, // Usar el uid del estado
-          email: user.email,
-          photoUrl: user.photoURL,
-          name: user.displayName,
-        };
+        user.providerData
+          ? user.providerData.forEach((profile) => {
+              mappedUser = {
+                id: uid ? uid : profile.uid, // Usar el uid del estado
+                email: profile.email,
+                photoUrl: profile.photoURL,
+                name: profile.displayName,
+              };
+            })
+          : (mappedUser = {
+              id: uid ? uid : user.uid, // Usar el uid del estado
+              email: user.email,
+              photoUrl: user.photoURL,
+              name: user.displayName,
+            });
 
         dispatch(setUser(mappedUser));
       }
