@@ -1,12 +1,5 @@
-import { type NextRequest, NextResponse } from "next/server";
-const mercadopago = require("mercadopago");
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
+import {type NextRequest, NextResponse} from 'next/server';
+const mercadopago = require('mercadopago');
 
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
@@ -16,32 +9,20 @@ export const POST = async (req: NextRequest) => {
   let preference;
 
   const data = await req.json();
-
   if (Array.isArray(data)) {
-    const response = await fetch(
-      `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/cart?id=${data[0]}`
-    );
-    const productsCart = await response.json();
-
-    const products = productsCart.map((product: Product) => ({
-      id: product.id,
-      title: product.name,
-      unit_price: Number(product.price),
-      quantity: Number(product.quantity),
-    }));
-
     preference = {
-      items: products,
-      auto_return: "approved",
+      items: data,
+
       back_urls: {
         success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
         failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
         pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
       },
-      external_reference: `-${data[0]}`,
+      auto_return: "approved",
     };
   } else {
-    const { itemId, description, price, quantity, userCode } = data;
+    const { itemId, description, price, quantity } = data;
+
     preference = {
       items: [
         {
@@ -51,18 +32,19 @@ export const POST = async (req: NextRequest) => {
           quantity: Number(quantity),
         },
       ],
-      auto_return: "approved",
+
       back_urls: {
         success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
         failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
         pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
       },
-      external_reference: userCode,
+      auto_return: "approved",
     };
   }
-  const response = await mercadopago.preferences.create(preference);
 
-  return NextResponse.json({
-    id: response.body.id,
-  });
+	const response = await mercadopago.preferences.create(preference);
+
+	return NextResponse.json({
+		id: response.body.id,
+	});
 };

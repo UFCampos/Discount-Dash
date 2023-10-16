@@ -132,7 +132,7 @@ const CreateProducts: React.FC = () => {
       shopId: idProfile,
     });
 
-    setFile(null);
+    setFile(undefined);
 
     setNewProduct({
       name: "",
@@ -159,7 +159,7 @@ const CreateProducts: React.FC = () => {
   }, [dispatch, dataCategories, isOpen]);
 
   const allFieldsAreValid =
-    Object.values(newProduct, description).every(
+    Object.values(newProduct).every(
       (value) => value.trim() !== ""
     ) && Object.keys(errors).length  > 0 
     console.log(Object.keys(errors));

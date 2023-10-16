@@ -1,5 +1,5 @@
-import { type NextRequest, NextResponse } from "next/server";
-import { controller } from "./createShop";
+import { type NextRequest, NextResponse } from 'next/server';
+import { controller } from './createShop';
 export const POST = async (req: NextRequest) => {
   try {
     const {

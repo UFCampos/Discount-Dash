@@ -6,16 +6,20 @@ import {
   getDocs,
 } from "firebase/firestore";
 
-export const controller = async (id: string, cartQuerySnapshot: any) => {
-  const products: any = [];
+export const controller = async (id: string) => {
+  const cartCollectionRef = collection(db, "users", id, "cart");
+  const cartQuerySnapshot = await getDocs(cartCollectionRef);
+
+  const products: any = []; 
   let shopId = "";
   let totalPrice = 0;
 
-  cartQuerySnapshot.forEach((cartItemData) => {
+  cartQuerySnapshot.forEach((doc) => {
+    const cartItemData = doc.data();
     totalPrice += cartItemData.quantity * cartItemData.price;
     shopId = cartItemData.shopId;
     products.push({
-      productId: cartItemData.id,
+      productId: doc.id,
       name: cartItemData.name,
       price: cartItemData.price,
       image: cartItemData.image,
