@@ -22,7 +22,6 @@ const AllReviews = ({ productId }: { productId: string }) => {
     comment: "",
   });
 
-  const handleChangeFlag = (rating: number, comment: string) => {
 
   const handleChangeFlag = (rating: number, comment: string) => {
     setFlag(true);
@@ -35,8 +34,8 @@ const AllReviews = ({ productId }: { productId: string }) => {
   const handlePostUpdateReview = (reviewId: string) => {
     mutate({
       reviewId,
-      comment: review.comment,
-      rating: review.rating,
+      comment: reviewState.comment,
+      rating: reviewState.rating,
     });
   };
 

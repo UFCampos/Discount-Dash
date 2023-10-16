@@ -9,26 +9,28 @@ const Detail = ({ id }: { id: string }) => {
   const { data, isLoading } = useGetProductQuery({ id });
 
   const expirationDate = new Date(
-    data?.expiration.seconds * 1000 + data?.expiration.nanoseconds / 1000000
+    data?.expiration?.seconds * 1000 + (data?.expiration?.nanoseconds || 0) / 1000000
   );
   const currentDate = new Date();
   const daysUntilExpiration = Math.ceil(
-    (data?.expiration - currentDate) / (1000 * 60 * 60 * 24)
+    (expirationDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
   );
   console.log(currentDate);
 
   const rest = () => {
-    const differenceInMilliseconds =
-      expirationDate.getTime() - currentDate.getTime();
-    const daysDifference = Math.ceil(
-      differenceInMilliseconds / (1000 * 60 * 60 * 24)
-    );
-    if (daysDifference <= 10) {
-      return daysDifference + " dias";
+    if (data?.expiration?.seconds) {
+      const differenceInMilliseconds =
+        expirationDate.getTime() - currentDate.getTime();
+      const daysDifference = Math.ceil(
+        differenceInMilliseconds / (1000 * 60 * 60 * 24)
+      );
+      if (daysDifference <= 10) {
+        return daysDifference + " dias";
+      } else {
+        return new Date(data.expiration.seconds * 1000).toLocaleDateString();
+      }
     } else {
-      return data?.expiration?.seconds
-        ? new Date(data?.expiration.seconds * 1000).toLocaleDateString()
-        : "No expiration date";
+      return "No expiration date";
     }
   };
 
