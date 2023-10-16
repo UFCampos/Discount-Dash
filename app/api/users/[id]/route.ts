@@ -1,17 +1,20 @@
-import {type NextRequest, NextResponse} from 'next/server';
-import {usersById} from './usersById';
+import { type NextRequest, NextResponse } from 'next/server';
+import { usersById } from './usersById';
 
 export const GET = async (
 	req: NextRequest,
-	{params}: {params: {id: string}},
+	{ params }: { params: { id: string } },
 ) => {
-	const userSearched = await usersById(params?.id);
-	if ('error' in userSearched) {
+	try {
+
+		const userSearched = await usersById(params?.id);
+
+		return NextResponse.json(userSearched);
+
+	} catch (error: any) {
 		return NextResponse.json(
-			{error: userSearched.error},
-			{status: userSearched.status},
+			{ error: error.message },
+			{ status: 404 },
 		);
 	}
-
-	return NextResponse.json(userSearched);
 };

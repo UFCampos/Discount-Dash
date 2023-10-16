@@ -3,12 +3,12 @@ import{putComment, putRating} from "./controller";
 
 export const PUT= async(req:NextRequest)=>{
 try {
-const {itemId, reviewId, comment, rating} = await req.json();
+const {reviewId, comment, rating} = await req.json();
 if(comment){
- putComment(itemId, reviewId, comment);
+ putComment( reviewId, comment);
 }
 if(rating){
-putRating(itemId, reviewId, rating);
+putRating( reviewId, rating);
 }
 return NextResponse.json({message: 'Review updated'});
 }
