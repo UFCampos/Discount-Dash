@@ -19,6 +19,7 @@ import { userApi } from './service/usersRegisterAPI';
 import { reviewsAPI } from './service/reviewsAPI';
 import { addressesAPI } from './service/addressesAPI';
 import { favoritesAPI } from './service/favoritesAPI';
+import { favoriteSlice } from './features/FavoriteSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -29,6 +30,7 @@ export const store = configureStore({
 		filter: filterSlice.reducer,
 		payments: paymentSlice.reducer,
 		cartItems: cartItemsSlice.reducer,
+		favorites: favoriteSlice.reducer,
 		order: orderSlice.reducer,
 		[addressesAPI.reducerPath]: addressesAPI.reducer,
 		[productsApi.reducerPath]: productsApi.reducer,
