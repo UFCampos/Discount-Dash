@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/utils.tsx"],"sourcesContent":["import { GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from \"firebase/auth\";\r\nimport { auth } from \"@/firebase/config\";\r\n\r\nconst googleProvider = new GoogleAuthProvider();\r\nconst facebookProvider = new FacebookAuthProvider();\r\n\r\nexport const signInProvider = (event: React.MouseEvent<HTMLButtonElement>) => {\r\n  const value: string = event.currentTarget.value;\r\n  const provider = value === \"google\" ? googleProvider : facebookProvider;\r\n  signInWithPopup(auth, provider)\r\n};\r\n"],"names":[],"mappings":";;;;;;;;AAGA,MAAM,iBAAiB;AACvB,MAAM,mBAAmB;AAElB,MAAM,iBAAiB,CAAC;IAC7B,MAAM,QAAgB,MAAM,aAAa,CAAC,KAAK;IAC/C,MAAM,WAAW,UAAU,WAAW,iBAAiB;IACvD,uQAAsB;AACxB"}},
+    {"offset": {"line": 19, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

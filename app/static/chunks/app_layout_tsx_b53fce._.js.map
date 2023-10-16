@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/layout.tsx"],"sourcesContent":["\"use client\"\r\nimport { Providers } from '@/lib/providers'\r\nimport './globals.css'\r\nimport type { Metadata } from 'next'\r\nimport NavBar from '@/components/navBar/NavBar'\r\nimport { usePathname } from 'next/navigation'\r\n\r\n\r\nexport const metadata: Metadata = {\r\n  title: 'Discount Dash',\r\n  description: 'Tu app de ofertas',\r\n}\r\n\r\nexport default function RootLayout(props: React.PropsWithChildren) {\r\n  const pathname = usePathname()\r\n  \r\n\r\n\r\n  \r\n  return (\r\n    <Providers>\r\n      <html lang=\"en\">\r\n        <body>\r\n          {\r\n          pathname === \"/\"\r\n          ?null \r\n          :<NavBar />\r\n        }\r\n          \r\n          {props.children}\r\n        </body>\r\n      </html>\r\n    </Providers>\r\n  )\r\n}"],"names":[],"mappings":";;;;;;;;;;;AAAA;;;;;AAQO,MAAM,WAAqB;IAChC,OAAO;IACP,aAAa;AACf;AAEe,SAAS,WAAW,KAA8B;;IAC/D,MAAM,WAAW;IAKjB,qBACE;kBACE,cAAA,iKAAC;YAAK,MAAK;sBACT,cAAA,iKAAC;;oBAEC,aAAa,MACZ,qBACA;;;;;oBAGA,MAAM,QAAQ;;;;;;;;;;;;;;;;;AAKzB;GArBwB;;;;;KAAA"}},
+    {"offset": {"line": 63, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

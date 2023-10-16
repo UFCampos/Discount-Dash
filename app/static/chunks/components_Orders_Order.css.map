@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 2, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/components/Orders/Order.css"],"sourcesContent":[".line-horizontal {\r\n  position: relative;\r\n  width: 15%; /* Ancho de la línea */\r\n  height: 6px; /* Altura de la línea */\r\n}\r\n\r\n.bg-line {\r\n  background: linear-gradient(to right, green, yellow);\r\n}\r\n\r\n.bg-green{\r\n  background-color: green;\r\n}\r\n\r\n.bg-yellow{\r\n  background-color: yellow;\r\n}\r\n/*# sourceMappingURL=Order.css.map */"],"names":[],"mappings":"AAAA,CAAC,eAAe,CAAC,CAAC;EAChB,QAAQ,EAAE,QAAQ;EAClB,KAAK,EAAE,EAAE,CAAC;EACV,MAAM,EAAE,CAAC,EAAE;AACb,CAAC;AAED,CAAC,OAAO,CAAC,CAAC;EACR,UAAU,EAAE,eAAe,CAAC,EAAE,CAAC,KAAK,CAAC,CAAC,KAAK,CAAC,CAAC,MAAM;AACrD,CAAC;AAED,CAAC,QAAQ,CAAA,CAAC;EACR,gBAAgB,EAAE,KAAK;AACzB,CAAC;AAED,CAAC,SAAS,CAAA,CAAC;EACT,gBAAgB,EAAE,MAAM;AAC1B,CAAC"}},
+    {"offset": {"line": 15, "column": 1}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/components/loading/Loading.tsx"],"sourcesContent":["'use client'\r\nimport { Image } from \"@nextui-org/react\"\r\n\r\nconst Loading = () => {\r\n    return(\r\n        <>\r\n            <Image src=\"../cards/loading.gif\" alt=\"Loading\"/>\r\n        </>\r\n    )\r\n}\r\n\r\nexport default Loading"],"names":[],"mappings":";;;;;;AAAA;;;AAGA,MAAM,UAAU;IACZ,qBACI;kBACI,cAAA;YAAO,KAAI;YAAuB,KAAI;;;;;;;AAGlD;KANM;uCAQS"}},
+    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

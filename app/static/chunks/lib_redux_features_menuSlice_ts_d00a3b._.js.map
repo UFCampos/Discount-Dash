@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/lib/redux/features/menuSlice.ts"],"sourcesContent":["import {createSlice} from \"@reduxjs/toolkit\"\r\n\r\nexport const menuSlice = createSlice({\r\n    name: \"menu\",\r\n    initialState: {\r\n        isOpen: false,\r\n    },\r\n    reducers: {\r\n        toggleMenu: (state) => {\r\n            state.isOpen = !state.isOpen\r\n        },\r\n    },\r\n})\r\n\r\nexport const {toggleMenu} = menuSlice.actions"],"names":[],"mappings":";;;;;;;AAEO,MAAM,YAAY,mKAAY;IACjC,MAAM;IACN,cAAc;QACV,QAAQ;IACZ;IACA,UAAU;QACN,YAAY,CAAC;YACT,MAAM,MAAM,GAAG,CAAC,MAAM,MAAM;QAChC;IACJ;AACJ;AAEO,MAAM,EAAC,UAAU,EAAC,GAAG,UAAU,OAAO"}},
+    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

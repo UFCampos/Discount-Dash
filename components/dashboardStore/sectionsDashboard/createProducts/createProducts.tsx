@@ -1,11 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
-import { useGetCategoriesQuery } from "@/lib/redux/service/categoriesAPI";
+import {
+  categoriesAPI,
+  useGetCategoriesQuery,
+} from "@/lib/redux/service/categoriesAPI";
 import { useNewPostMutation } from "@/lib/redux/service/productsAPI";
 import { uploadFile } from "@/firebase/config";
+import { setCategories } from "@/lib/redux/features/filterSlice";
 import { toggleMenu } from "@/lib/redux/features/menuSlice";
 import Link from "next/link";
+import validation from "@/utils/validations";
 import "./createProducts.css";
 
 const CreateProducts: React.FC = () => {
@@ -24,10 +29,21 @@ const CreateProducts: React.FC = () => {
     category: "",
     brand: "",
   });
+  interface ProductInput {
+    name: string;
+    brand: string;
+    price: string;
+    normalPrice: string;
+    stock: string;
+    expiration: string;
+    category: string;
+    description: string;
+  }
 
   const [file, setFile] = useState<File | undefined>(undefined);
 
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState<Partial<ProductInput>>({});
 
   const category = dataCategories?.map(({ category }, index) => (
     <option key={index} value={category}>
@@ -41,6 +57,13 @@ const CreateProducts: React.FC = () => {
       ...newProduct,
       [name]: value,
     });
+    setErrors(
+      validation({
+        ...newProduct,
+        [name]: value,
+        description,
+      })
+    );
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +75,13 @@ const CreateProducts: React.FC = () => {
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
+    const newDescription = event.target.value;
     setDescription(event.target.value);
+    const descriptionErrors = validation({
+      ...newProduct,
+      description: newDescription,
+    });
+    setErrors({ ...errors, ...descriptionErrors });
   };
 
   const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -60,6 +89,21 @@ const CreateProducts: React.FC = () => {
       ...newProduct,
       category: event.target.value,
     });
+    if (
+      !dataCategories ||
+      !dataCategories.some(
+        (category) => category.category === event.target.value
+      )
+    ) {
+      setErrors({
+        ...errors,
+        category: "Invalid category",
+      });
+    } else {
+      const updatedErrors = { ...errors };
+      delete updatedErrors.category;
+      setErrors(updatedErrors);
+    }
   };
 
   const [mutate, { data: mutationData }] = useNewPostMutation();
@@ -88,7 +132,7 @@ const CreateProducts: React.FC = () => {
       shopId: idProfile,
     });
 
-    setFile(undefined);
+    setFile(null);
 
     setNewProduct({
       name: "",
@@ -109,8 +153,18 @@ const CreateProducts: React.FC = () => {
     if (isOpen) {
       dispatch(toggleMenu());
     }
-  }, [dispatch, isOpen]);
+    if (dataCategories) {
+      dispatch(setCategories(dataCategories));
+    }
+  }, [dispatch, dataCategories, isOpen]);
 
+  const allFieldsAreValid =
+    Object.values(newProduct, description).every(
+      (value) => value.trim() !== ""
+    ) && Object.keys(errors).length  > 0 
+    console.log(Object.keys(errors));
+    
+    
   return (
     <div className="form-product-cont flex flex-col justify-center items-center">
       <div className="back">
@@ -136,6 +190,7 @@ const CreateProducts: React.FC = () => {
                   name="name"
                   onChange={handleChange}
                 />
+                {errors.name && <p style={{ color: "red" }}>{errors.name} </p>}
               </div>
               <div className="name-brand flex flex-col items-end justify-center">
                 <label htmlFor="brand">Brand</label>
@@ -147,6 +202,9 @@ const CreateProducts: React.FC = () => {
                   name="brand"
                   onChange={handleChange}
                 />
+                {errors.brand && (
+                  <p style={{ color: "red" }}>{errors.brand} </p>
+                )}
               </div>
             </div>
             <div className="sections-form">
@@ -160,6 +218,9 @@ const CreateProducts: React.FC = () => {
                   name="price"
                   onChange={handleChange}
                 />
+                {errors.price && (
+                  <p style={{ color: "red" }}>{errors.price} </p>
+                )}
               </div>
               <div className="price flex flex-col items-end justify-center">
                 <label htmlFor="normalPrice">Original price</label>
@@ -171,6 +232,9 @@ const CreateProducts: React.FC = () => {
                   name="normalPrice"
                   onChange={handleChange}
                 />
+                {errors.normalPrice && (
+                  <p style={{ color: "red" }}>{errors.normalPrice} </p>
+                )}
               </div>
             </div>
             <div className="sections-form">
@@ -184,6 +248,9 @@ const CreateProducts: React.FC = () => {
                   name="stock"
                   onChange={handleChange}
                 />
+                {errors.stock && (
+                  <p style={{ color: "red" }}>{errors.stock} </p>
+                )}
               </div>
               <div className="stock-expiration flex flex-col items-end justify-center">
                 <label htmlFor="expiration">Expiration date</label>
@@ -194,6 +261,9 @@ const CreateProducts: React.FC = () => {
                   name="expiration"
                   onChange={handleChange}
                 />
+                {errors.expiration && (
+                  <p style={{ color: "red" }}>{errors.expiration} </p>
+                )}
               </div>
             </div>
             <div className="input-file flex flex-row items-center justify-between">
@@ -201,13 +271,21 @@ const CreateProducts: React.FC = () => {
               <select
                 value={newProduct.category}
                 className="select-category"
-                onChange={handleChangeSelect}
+                onChange={(event) => handleChangeSelect(event)}
               >
                 <option value="" disabled>
                   category
                 </option>
                 {category}
               </select>
+            </div>
+            <div className="input-file flex flex-row items-center justify-between">
+              <div className="mr-2"></div>
+              <div>
+                {errors.category && (
+                  <p style={{ color: "red" }}>{errors.category} </p>
+                )}
+              </div>
             </div>
           </div>
           <div className="description-cont flex flex-col items-center justify-between">
@@ -218,8 +296,18 @@ const CreateProducts: React.FC = () => {
               value={description}
               onChange={handleDescriptionChange}
             ></textarea>
+            {description.length < 20 && (
+              <p style={{ color: "red" }}>
+                Description must be at least 20 characters long
+              </p>
+            )}
+            {description.length >= 20 && description.length > 500 && (
+              <p style={{ color: "red" }}>
+                Description cannot exceed 500 characters
+              </p>
+            )}
           </div>
-          <button type="submit" className="send">
+          <button type="submit" className="send" disabled={!allFieldsAreValid}>
             Send
           </button>
         </div>

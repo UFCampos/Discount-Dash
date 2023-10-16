@@ -1,0 +1,16 @@
+/* [project]/components/Orders/Order.css (css) */
+.line-horizontal {
+  position: relative;
+  width: 15%;
+  height: 6px;
+}
+.bg-line {
+  background: linear-gradient(to right, green, yellow);
+}
+.bg-green {
+  background-color: green;
+}
+.bg-yellow {
+  background-color: yellow;
+}
+/*# sourceMappingURL=components_Orders_Order_c9a116.css.map*/

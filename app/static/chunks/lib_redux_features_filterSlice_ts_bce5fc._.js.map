@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/lib/redux/features/filterSlice.ts"],"sourcesContent":["import { createSlice } from \"@reduxjs/toolkit\";\r\n\r\nexport const filterSlice = createSlice({\r\n    name: \"filter\",\r\n    initialState: {\r\n        name: \"\",\r\n        categories:[]\r\n    },\r\n    reducers: {\r\n        setName: (state, { payload }) => {\r\n            state.name = payload;\r\n        },\r\n        setCategories:(state, {payload})=>{\r\n            state.categories=payload\r\n        }\r\n    }\r\n})\r\n\r\nexport const { setName, setCategories } = filterSlice.actions"],"names":[],"mappings":";;;;;;;;AAEO,MAAM,cAAc,mKAAY;IACnC,MAAM;IACN,cAAc;QACV,MAAM;QACN,YAAW,EAAE;IACjB;IACA,UAAU;QACN,SAAS,CAAC;gBAAO,EAAE,OAAO,EAAE;YACxB,MAAM,IAAI,GAAG;QACjB;QACA,eAAc,CAAC;gBAAO,EAAC,OAAO,EAAC;YAC3B,MAAM,UAAU,GAAC;QACrB;IACJ;AACJ;AAEO,MAAM,EAAE,OAAO,EAAE,aAAa,EAAE,GAAG,YAAY,OAAO"}},
+    {"offset": {"line": 30, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

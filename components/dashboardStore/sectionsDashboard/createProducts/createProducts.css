@@ -61,6 +61,11 @@
     background: #7CFF7A;
     transition: 0.5s;
 }
+.send:disabled {
+    background-color: #ccc; 
+    color: #999; 
+    cursor: not-allowed; 
+  }
 
 .send:hover {
     transform: scale(1.1);

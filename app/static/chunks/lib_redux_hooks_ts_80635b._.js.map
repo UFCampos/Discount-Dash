@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/lib/redux/hooks.ts"],"sourcesContent":["// Se importan los hooks de redux con nombres diferentes de los de react.\r\nimport { type TypedUseSelectorHook, useSelector as useReduxSelector, useDispatch as useReduxDispatch } from \"react-redux\";\r\nimport { store } from \"./store\";\r\n\r\n// Se le asignas los tipos de ReduxDispatch y de ReduxState.\r\n// Es importante que de apartir de ahora siempre se importen de aca.\r\nexport const useDispatch = () => useReduxDispatch<ReduxDispatch>()\r\nexport type ReduxDispatch = typeof store.dispatch\r\nexport const useSelector : TypedUseSelectorHook<ReduxState> = useReduxSelector\r\nexport type ReduxState = ReturnType<typeof store.getState>"],"names":[],"mappings":"AAAA,yEAAyE;;;;;;;;;AAMlE,MAAM,cAAc;;IAAM,OAAA;AAAgC;GAApD;;;;;AAEN,MAAM"}},
+    {"offset": {"line": 23, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

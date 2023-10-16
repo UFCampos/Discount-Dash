@@ -236,24 +236,33 @@ export interface loginErrorStore {
 }
 
 export type Item = {
-  itemId?: string;
-  name: string;
-  image: string;
-  price: string;
-  brand: string;
-  id: string;
-  stock: string;
-  normalPrice: string;
+	itemId?: string;
+	name: string;
+	image: string;
+	price: string;
+	brand: string;
+	id: string;
+	stock: string;
+	normalPrice: string;
+      expiration: {
+    seconds: number;
+    nanoseconds: number;
+  };
+    
 };
 
 export type CardProduct = {
-  name: string;
-  image: string;
-  price: string;
-  brand: string;
-  itemId: string;
-  stock: string;
-  normalPrice: string;
+	name: string;
+	image: string;
+	price: string;
+	brand: string;
+	itemId: string;
+	stock: string;
+	normalPrice: string;
+    expiration: {
+        seconds: number;
+        nanoseconds: number;
+      };
 };
 
 export type DetailModalProps = {
