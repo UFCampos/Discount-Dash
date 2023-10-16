@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 2, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/components/navBar/searchBar/searchBar.module.css"],"sourcesContent":["\r\n.input{\r\n    width: 40vw;\r\n    border-radius: 15px;\r\n    border: none;\r\n    \r\n}\r\n/*# sourceMappingURL=searchBar.module.css.map */"],"names":[],"mappings":"AACA,CAAC,0BAAK,CAAA,CAAC;EACH,KAAK,EAAE,EAAE,EAAE;EACX,aAAa,EAAE,EAAE,EAAE;EACnB,MAAM,EAAE,IAAI;AAEhB,CAAC"}},
-    {"offset": {"line": 6, "column": 1}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/app/addProduct/addProduct.css"],"sourcesContent":[".main-create{\r\n    width: 100vw;\r\n    height: 100vh;\r\n}\r\n.form-cont{\r\n    height: 100%;\r\n    width: 100%\r\n}\r\n/*# sourceMappingURL=addProduct.css.map */"],"names":[],"mappings":"AAAA,CAAC,WAAW,CAAA,CAAC;EACT,KAAK,EAAE,GAAG,EAAE;EACZ,MAAM,EAAE,GAAG,EAAE;AACjB,CAAC;AACD,CAAC,SAAS,CAAA,CAAC;EACP,MAAM,EAAE,GAAG,CAAC;EACZ,KAAK,EAAE,GAAG,CAAC;AACf,CAAC"}},
-    {"offset": {"line": 8, "column": 1}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

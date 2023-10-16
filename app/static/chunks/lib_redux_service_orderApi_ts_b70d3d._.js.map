@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/lib/redux/service/orderApi.ts"],"sourcesContent":["\r\nimport {createApi, fetchBaseQuery } from \"@reduxjs/toolkit/query/react\"\r\n\r\ntype Product = {\r\n    id: string,\r\n    name:string,\r\n    price:string,\r\n    normalPrice:string,\r\n    description:string,\r\n    expiration:string,\r\n    image:string,\r\n    stock:string,\r\n    category:string,\r\n    brand:string,\r\n}\r\n\r\nexport const orderShopApi = createApi({\r\n    reducerPath: \"orderShopApi\",\r\n    baseQuery: fetchBaseQuery({\r\n        baseUrl: `/api`,\r\n    }),\r\n    endpoints: (build)=>({\r\n        getOrder: build.query<Product, {id: string}>({\r\n            query: ({id}) => `/shopOrder?UserId=${id}`\r\n        })\r\n    })\r\n    \r\n})\r\n\r\n\r\nexport const {useGetOrderQuery } = orderShopApi;"],"names":[],"mappings":";;;;;;;AAgBO,MAAM,eAAe,wLAAU;IAClC,aAAa;IACb,WAAW,6LAAe;QACtB,SAAS,CAAC,IAAI,CAAC;IACnB;IACA,WAAW,CAAC,QAAQ,CAAC;YACjB,UAAU,MAAM,KAAK,CAAwB;gBACzC,OAAO;wBAAC,EAAC,EAAE,EAAC;2BAAK,CAAC,kBAAkB,EAAE,GAAG,CAAC;gBAAD;YAC7C;QACJ,CAAC;AAEL;AAGO,MAAM,EAAC,gBAAgB,EAAE,GAAG"}},
-    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

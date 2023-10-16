@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/components/Cart/Carts.module.css"],"sourcesContent":[".homeRigthCont{\r\n    width: 20vw;\r\n    height: 88vh;\r\n    overflow-y:scroll;\r\n    background-color: rgb(255, 255, 255);\r\n}\r\n.homeRigthCont::-webkit-scrollbar {\r\n    width: 8px;\r\n}\r\n  \r\n.homeRigthCont::-webkit-scrollbar-thumb {\r\n    background-color: black; /* Color de fondo del \"pulgón\" de la barra */\r\n    border-radius: 6px; /* Borde redondeado del \"pulgón\" */\r\n}\r\n  \r\n.homeRigthCont::-webkit-scrollbar-track {\r\n    background-color: white; /* Color de fondo de la pista de la barra */\r\n}\r\n\r\n\r\n/*# sourceMappingURL=Carts.module.css.map */"],"names":[],"mappings":"AAAA,CAAC,8BAAa,CAAA,CAAC;EACX,KAAK,EAAE,EAAE,EAAE;EACX,MAAM,EAAE,EAAE,EAAE;EACZ,UAAU,EAAC,MAAM;EACjB,gBAAgB,EAAE,GAAG,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG;AACvC,CAAC;AACD,CAAC,8BAAa,CAAC,AAAD,CAAE,iBAAiB,CAAC,CAAC;EAC/B,KAAK,EAAE,CAAC,EAAE;AACd,CAAC;AAED,CAAC,8BAAa,CAAC,AAAD,CAAE,uBAAuB,CAAC,CAAC;EACrC,gBAAgB,EAAE,KAAK;EACvB,aAAa,EAAE,CAAC,EAAE;AACtB,CAAC;AAED,CAAC,8BAAa,CAAC,AAAD,CAAE,uBAAuB,CAAC,CAAC;EACrC,gBAAgB,EAAE,KAAK;AAC3B,CAAC"}},
-    {"offset": {"line": 16, "column": 1}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

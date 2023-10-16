@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["/turbopack/[project]/components/home-left-section/HomeLeft.tsx"],"sourcesContent":["'use client';\r\nimport \"./HomeLeft.css\";\r\nimport Filters from \"../filters/Filters\";\r\nconst HomeLeft = () => {\r\n  return (\r\n    <section className=\"home-left-cont flex flex-col justify-center items-center\">\r\n      <Filters />\r\n    </section>\r\n  );\r\n};\r\n\r\nexport default HomeLeft;\r\n"],"names":[],"mappings":";;;;;;AAAA;;;;AAGA,MAAM,WAAW;IACf,qBACE,iKAAC;QAAQ,WAAU;kBACjB,cAAA;;;;;;;;;;AAGN;KANM;uCAQS"}},
-    {"offset": {"line": 32, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
