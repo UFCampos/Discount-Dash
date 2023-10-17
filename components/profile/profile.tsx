@@ -4,6 +4,8 @@ import { Image } from "@nextui-org/react";
 import style from "./profile.module.css";
 import { useSelector } from "@/lib/redux/hooks";
 import Link from "next/link";
+import PhotoModal from "../photoModal/PhotoModal";
+import { useState } from "react";
 
 type ProfileProps = {
   id: string;
@@ -12,133 +14,33 @@ type ProfileProps = {
 const Profile: React.FC<ProfileProps> = ({ id }) => {
   const { data, isError } = useGetProfileQuery({ id });
   const user = useSelector((state) => state.userProfile);
-  console.log("info de usuario", user);
-  if (isError) {
-    return (
-      <section className="pt-16 bg-blueGray-50">
-        <div className="w-full lg:w-4/12 px-4 mx-auto">
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16 shadow-pink-400">
-            <div className="px-6">
-              <div className="flex flex-wrap justify-center">
-                <div className="w-full px-4 flex justify-center">
-                  <div className="relative  items-center flex">
-                    <Image
-                      alt="img"
-                      src={user?.photoUrl ? user?.photoUrl : "/default.jpg"}
-                      width={300}
-                      height={300}
-                      className="shadow-xl rounded-full h-auto align-middle border-none w-40 -mt-20  "
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="text-center">
-                <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700">
-                  {user?.name}
-                </h3>
-                <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                  <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                  {user?.email}
-                </div>
-                <div className="mb-2 text-blueGray-600">
-                  <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                  info
-                </div>
-              </div>
-              <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-                <div className="flex flex-wrap justify-center">
-                  <div className="w-full lg:w-9/12 px-4">
-                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      configuration
-                    </p>
-                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      Change name
-                    </p>
-                    <Link href={`/users/profile/${user.id}/updatePassword`}>
-                      <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                        Change password
-                      </p>
-                    </Link>
-                    <Link href={`/users/profile/${user.id}/myAddress`}>
-                      <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                        My addresses
-                      </p>
-                    </Link>
-
-                    <p>My Orders</p>
-                    <br />
-                    <p>Shop history</p>
-                  </div>
-                </div>
-              </div>
+  const [file, setFile]=useState("")
+    const handleChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
+        const { value}=event.target
+        setFile(value)
+    }
+  return (
+    <main className={style.cont}>
+      <section className={style.profile}>
+        <div className={style.head}>
+          <div className={style.imgCont}>
+            <Image src={user?user.photoUrl:"/default.jpg"} alt='logo discount dash' className={style.img}/>
+            <div className={style.editCont}>
+                <button className={style.editCircle}><span className="material-symbols-outlined" id={style.edit}>edit</span></button>
             </div>
           </div>
+          <h2 className={style.name}>{user && user.name}</h2>
+        </div>
+        <div className={style.separate}></div>
+        <div className={style.info}>
+          <Link href={""} className={style.link}>Change name</Link>
+          <Link href={`/users/profile/${id}/updatePassword`} className={style.link}>Change password</Link>
+          <Link href={`/users/profile/${id}/myAddress`} className={style.link}>My addresses</Link>
+          <Link href={""} className={style.link}>My Orders</Link>
+          <Link href={""} className={style.link}>Shop history</Link>
         </div>
       </section>
-    );
-  }
-
-  return (
-    <section className="pt-16 bg-blueGray-50">
-      <div className="w-full lg:w-4/12 px-4 mx-auto">
-        <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16 shadow-pink-400">
-          <div className="px-6">
-            <div className="flex flex-wrap justify-center">
-              <div className="w-full px-4 flex justify-center">
-                <div className="relative  items-center flex">
-                  <Image
-                    alt="img"
-                    src={data?.photoUrl ? data?.photoUrl : "/default.jpg"}
-                    width={300}
-                    height={300}
-                    className="shadow-xl rounded-full h-auto align-middle border-none w-40 -mt-20  "
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold leading-normal mb-2 text-blueGray-700">
-                {data?.name}
-              </h3>
-              <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                {data?.email}
-              </div>
-              <div className="mb-2 text-blueGray-600">
-                <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                info
-              </div>
-            </div>
-            <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-              <div className="flex flex-wrap justify-center">
-                <div className="w-full lg:w-9/12 px-4">
-                  <h1 className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                    configuration
-                  </h1>
-                  <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                    Change name
-                  </p>
-                  <Link href={`/users/profile/${user.id}/updatePassword`}>
-                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      Change password
-                    </p>
-                  </Link>
-                  <Link href={`/users/profile/${user.id}/myAddress`}>
-                    <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                      My addresses
-                    </p>
-                  </Link>
-
-                  <p>My Orders</p>
-                  <br />
-                  <p>Shop history</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </main>
   );
 };
 

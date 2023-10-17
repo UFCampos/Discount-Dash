@@ -1,5 +1,4 @@
 "use client";
-import "./Card.css";
 import Link from "next/link";
 import axios from "axios";
 import { useAddProductCartMutation } from "@/lib/redux/service/cartProductsAPI";
@@ -13,6 +12,7 @@ import {
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { CardProduct } from "@/utils/types";
+import style from './Card.module.css';
 import {
   useNewFavoriteMutation,
   useDeleteFavoriteMutation,
@@ -144,12 +144,13 @@ const Card: React.FC<CardProduct> = ({
     }
   };
   return (
-    <div className="card flex flex-col">
+    <div className={style.card}>
       <div>
         {has === false || flag === false ? (
           <button
             onClick={handleAddFavorite}
             className="material-symbols-outlined text-center"
+            id={style.fav}
           >
             favorite
           </button>
@@ -157,36 +158,35 @@ const Card: React.FC<CardProduct> = ({
           <button
             onClick={handleAddFavorite}
             className="material-symbols-outlined text-center text-red-500"
+            id={style.fav}
           >
             favorite
           </button>
         )}
       </div>
-      <div className="card-img flex justify-center items-center">
+      <div className={style.cardImg}>
         <img src={image} />
-        {/* {expiration && expiration.seconds ? (
-     <p> {rest()}</p>
-  ) : null} */}
+        
       </div>
 
-      <div className="card-info flex flex-col">
+      <div className={style.cardInfo}>
         <Link href={`home/product/${itemId}`}>
           <h3 className="text-center">{name}</h3>
         </Link>
-        <div className="rate flex flex-row justify-center gap-4 items-center">
+        <div className={style.rate}>
           <p> ⭐ 4.5</p>
           <p>{brand}</p>
         </div>
-        <div className="price flex flex-row justify-center items-center gap-4">
-          <p className="total">$ {normalPrice}</p>
+        <div className={style.price}>
+          <p className={style.total}>$ {normalPrice}</p>
           <p>$ {price}</p>
         </div>
       </div>
-      <div className="card-buy flex flex-row justify-evenly items-center">
-        <div className="buy" onClick={handleBuy}>
+      <div className={style.cardBuy}>
+        <div className={style.buy} onClick={handleBuy}>
           <p>Buy</p>
         </div>
-        <div className="cart flex flex-col justify-center items-center">
+        <div className={style.cart}>
           <button
             onClick={() => handleAddCart()}
             className="material-symbols-outlined text-center"

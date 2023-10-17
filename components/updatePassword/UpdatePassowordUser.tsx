@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import { useState } from "react";
 import { useSelector } from "@/lib/redux/hooks";
+import style from "./UpdatePassword.module.css"
 
 const UpdatePasswordUser = () => {
   const [newPassword, setNewPassword] = useState({
@@ -54,23 +55,16 @@ const UpdatePasswordUser = () => {
   };
 
   return (
-    <div>
-      <h1>Change your password</h1>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" onChange={changePassword} />
-        <label htmlFor="newPassword">New password</label>
-        <input type="password" name="newPassword" onChange={changePassword} />
-        <label htmlFor="confirmPassword">Confirm New password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          onChange={changePassword}
-        />
-        <button type="submit" onClick={handleChangePassword}>
-          Change password
+    <div className={style.cont}>
+      <form className={style.form} onSubmit={handleChangePassword}>
+        <h1 className={style.signup}>Change your passworld</h1>
+        <input type="password" placeholder="Passworld" className={style.formInput} onChange={changePassword}/>
+        <input type="password" placeholder="New password" className={style.formInput} onChange={changePassword}/>
+        <input type="password" placeholder="Confirm new password" className={style.formInput} onChange={changePassword}/>
+        <button className={style.formSubmmit} type="submit">
+            Change
         </button>
-      </div>
+      </form>
     </div>
   );
 };
