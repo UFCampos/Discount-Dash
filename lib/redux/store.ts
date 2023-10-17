@@ -20,6 +20,7 @@ import { reviewsAPI } from './service/reviewsAPI';
 import { addressesAPI } from './service/addressesAPI';
 import { favoritesAPI } from './service/favoritesAPI';
 import { favoriteSlice } from './features/FavoriteSlice';
+import { historyApi } from './service/historyApi';
 
 export const store = configureStore({
 	reducer: {
@@ -32,6 +33,7 @@ export const store = configureStore({
 		cartItems: cartItemsSlice.reducer,
 		favorites: favoriteSlice.reducer,
 		order: orderSlice.reducer,
+		[historyApi.reducerPath]: historyApi.reducer,
 		[addressesAPI.reducerPath]: addressesAPI.reducer,
 		[productsApi.reducerPath]: productsApi.reducer,
 		[searchProfileAPI.reducerPath]: searchProfileAPI.reducer,
@@ -58,7 +60,8 @@ export const store = configureStore({
 			addressesAPI.middleware,
 			userApi.middleware,
 			reviewsAPI.middleware,
-			favoritesAPI.middleware
+			favoritesAPI.middleware,
+			historyApi.middleware
 		),
 });
 

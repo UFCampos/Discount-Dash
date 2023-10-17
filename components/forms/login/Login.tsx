@@ -169,11 +169,11 @@ const Login = () => {
             </Link>
           </span>
         </div>
-        {canSubmit? 
-        <button className={style.buttonSubmit} type="submit"
-        disabled={!canSubmit || isSubmitting}>
-          Sign In
-        </button>
+        {canSubmit ? 
+          <button className={style.buttonSubmit} type="submit"
+          disabled={!canSubmit || isSubmitting}>
+            Sign In
+          </button>
           : 
           <button className={style.submitDisabled} type="submit"
           disabled={!canSubmit || isSubmitting}>
@@ -227,7 +227,6 @@ const Login = () => {
                   C318.115,0,375.068,22.126,419.404,58.936z"
                 style={{ fill: "#F14336" }}
               />
-
             </svg>{" "}
             Google
           </button>

@@ -33,8 +33,6 @@ const Detail = ({ id }: { id: string }) => {
       return "No expiration date";
     }
   };
-
-  console.log(data);
   
   return (
       <div className="body overflow-y-auto h-min-screen ">
@@ -110,9 +108,7 @@ const Detail = ({ id }: { id: string }) => {
                   <span className="text-gray-600 ml-3">4 Reviews</span>
                 </div>
                 <p className="leading-relaxed mt-4 border-t border-gray-300">
-                  Hamburguesa con queso cheddar, dos medallones de carne de
-                  250g, salsa de la casa, cebolla, lechuga, tomate y extra
-                  papas.
+                  {data?.description}
                 </p>
                 <div className="card-img flex justify-center items-center text-red-400">
                   vto:{" "}

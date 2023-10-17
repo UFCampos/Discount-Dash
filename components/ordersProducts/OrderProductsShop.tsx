@@ -12,7 +12,6 @@ const OrdersProductsShop = () => {
   const flag = useSelector((state) => state.order.currentFlag);
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.userProfile);
-  const { id } = useSelector((state) => state.userProfile);
   const states = ["Order placed", "In progress", "Completed"].map((state) => {
     return (
       <option value={state} key={state}>

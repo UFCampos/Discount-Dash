@@ -353,11 +353,17 @@ export type CardProduct = {
 	itemId: string;
 	stock: string;
 	normalPrice: string;
+    has?: boolean
     expiration: {
         seconds: number;
         nanoseconds: number;
       };
 };
+
+export type LoginInput = {
+    email: string;
+    password: string;
+}
 
 export type DetailModalProps = {
 	isOpen: boolean;

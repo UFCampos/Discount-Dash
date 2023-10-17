@@ -1,16 +1,10 @@
-interface userInputs {
-    name: string;
-    lastname: string;
-    password: any;
-    confirmPassword: string;
-    email: any;
-  }
+import { LoginInput } from "./types";
   
-  const validationLogin = (input: userInputs) => {
+  const validationLogin = (input: LoginInput) => {
     
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    let errors: Partial<userInputs> = {};
+    let errors: Partial<LoginInput> = {};
   
 
     if (!input.email) {
