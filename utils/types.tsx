@@ -253,7 +253,7 @@ export type CardProduct = {
 	itemId: string;
 	stock: string;
 	normalPrice: string;
-    has: boolean
+    has?: boolean
     expiration: {
         seconds: number;
         nanoseconds: number;
