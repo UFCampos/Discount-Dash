@@ -1,9 +1,12 @@
-import LandingPage from '@/components/LandingPage/LandingPage';
+import Carrousel from "@/components/carrousel/Carrousel";
+import style from "./landingCont.module.css"
+const home = () => {
+	return(
+		<main className={style.cont}>
+			<Carrousel/>
+		</main>
+	)
+}
 
-const home = () => (
-	<div>
-		<LandingPage/>
-	</div>
-);
 
 export default home;
