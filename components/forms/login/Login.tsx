@@ -12,6 +12,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import validationLogin from "@/utils/validationLogin";
 import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
+import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
+import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 const Login = () => {
   
   const [uid, setUid] = useState("");
@@ -169,11 +171,11 @@ const Login = () => {
             </Link>
           </span>
         </div>
-        {canSubmit? 
-        <button className={style.buttonSubmit} type="submit"
-        disabled={!canSubmit || isSubmitting}>
-          Sign In
-        </button>
+        {canSubmit ? 
+          <button className={style.buttonSubmit} type="submit"
+          disabled={!canSubmit || isSubmitting}>
+            Sign In
+          </button>
           : 
           <button className={style.submitDisabled} type="submit"
           disabled={!canSubmit || isSubmitting}>
