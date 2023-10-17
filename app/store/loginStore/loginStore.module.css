@@ -60,7 +60,7 @@
     margin-bottom: 5px;
     color: red;
   }
-  input[type="email"], input[type="password"] {
+  .email, .password {
     width: 100%;
     padding: 5px 10px;
     font-size: 14px;
@@ -70,7 +70,7 @@
     transition: 0.5s;
   }
   
-  input[type="submit"] {
+  .submit {
     width: 100%;
     background-color: #E077B0;
     color: white;
@@ -81,7 +81,7 @@
     cursor: pointer;
   }
   
-  input[type="submit"]:hover {
+ .submit:hover {
     box-shadow: 0 0 10px #E077B0;
   }
   

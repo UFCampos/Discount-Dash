@@ -7,7 +7,7 @@ import Profile from "@/components/dashboardStore/sectionsDashboard/ProfileStore/
 import MyProducts from "@/components/dashboardStore/sectionsDashboard/myProducts/MyProducts"
 
 const DashboardStore=({params}:{params: {id: string}})=>{
-    
+    const {id}=params
     const [section, setSection]=useState("my products")
 
     const changeSection=(newSection:string)=>{
@@ -22,7 +22,7 @@ const DashboardStore=({params}:{params: {id: string}})=>{
             <section className={style.sectionCont}>
                 {section==="my products" && <MyProducts/>}
                 {section==="orders" && <Orders/>}
-                {section==="profile" && <Profile/>}
+                {section==="profile" && <Profile id={id}/>}
             </section>
         </main>
     )
