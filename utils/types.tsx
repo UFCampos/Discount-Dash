@@ -158,6 +158,12 @@ export interface marketProps{
     handleChange:(event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void,
 }
 
+export interface FileModal{
+  update:string,
+  id:string,
+  onChange:(event: React.ChangeEvent<HTMLInputElement>)=>void,
+  close:()=>void
+}
 
 export interface locationProps{
     valueState:{

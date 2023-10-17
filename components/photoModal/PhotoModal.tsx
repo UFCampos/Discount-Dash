@@ -1,22 +1,43 @@
 "use client"
 import React from 'react'
 import { useState } from 'react'
-import style from '@/components/paymentCardModal/paymentCardModal.module.css';
+import style from './PhotoModal.module.css';
+import { FileModal } from '../../utils/types';
+import { uploadFile } from "@/firebase/config";
+import { useUpdateImageUserMutation } from '@/lib/redux/service/updateUsersAPI';
 
-const PhotoModal = () => {
-    
+const PhotoModal = ({update, onChange, close, id}:FileModal) => {
+
+  const [mutate, {data:mutation}]=useUpdateImageUserMutation()
+
+  const changeImage=async ()=>{
+
+    if(update!==""){
+      const urlImage=await uploadFile(update)
+
+      mutate({
+        id:id,
+        image:urlImage
+      })
+
+    }
+  }
   return (
-    <div>
-        <label className={style.custumFileupload} htmlFor="file">
-        <div className={style.icon}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path fill="" d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z" clip-rule="evenodd" fill-rule="evenodd"></path> </g></svg>
-        </div>
-        <div className={style.text}>
-        <span>Click to upload image</span>
-        </div>
-        <input type="file" id="file"/>
-        </label>
 
+    <div className={style.inputFile}>
+      <div className={style.container}> 
+        <div className={style.header}> 
+          <svg className={style.headerSvg} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
+            <path d="M7 10V9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9V10C19.2091 10 21 11.7909 21 14C21 15.4806 20.1956 16.8084 19 17.5M7 10C4.79086 10 3 11.7909 3 14C3 15.4806 3.8044 16.8084 5 17.5M7 10C7.43285 10 7.84965 10.0688 8.24006 10.1959M12 12V21M12 12L15 15M12 12L9 15" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> 
+            <p>{update!=="" ? `file selected` : "Browse File to upload!"}</p>
+        </div> 
+        <label htmlFor="file" className={style.footer}> 
+          <p className={style.footerP}>Select file</p> 
+        </label> 
+        <input className={style.file} id='file' type="file" onChange={onChange}/> 
+        <button className={style.closeButton} onClick={close}>X</button>
+        <button className={style.changeButton} onClick={changeImage}>Change</button>
+      </div>
     </div>
   )
 }
