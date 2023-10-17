@@ -33,8 +33,6 @@ const Detail = ({ id }: { id: string }) => {
       return "No expiration date";
     }
   };
-
-  console.log(data);
   
   return (
       <div className="body overflow-y-auto h-min-screen ">

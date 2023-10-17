@@ -260,6 +260,11 @@ export type CardProduct = {
       };
 };
 
+export type LoginInput = {
+    email: string;
+    password: string;
+}
+
 export type DetailModalProps = {
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
