@@ -8,6 +8,17 @@ export type Product = {
 	nameToLowerCase: string;
 };
 
+export type Products = {
+	id: string;
+    name: string;
+	price: number;
+	stock: number;
+	image: string;
+	brand: string;
+	category: string;
+	nameToLowerCase: string;
+};
+
 export type CartProduct = {
 	name: string;
 	price: number;
@@ -31,6 +42,44 @@ export interface ProductOrder {
     date: string;
     products: ProductOrder[];
     orderDate: {
+      seconds: number;
+      nanoseconds: number;
+    };
+    shopId: string;
+    orderStatus: string;
+    userId: string;
+    totalPrice: number;
+  }
+
+  export interface OrderHistory {
+    id: string;
+    products: ProductOrder[];
+    orderDate: {
+      seconds: number;
+      nanoseconds: number;
+    };
+    shopId: string;
+    orderStatus: string;
+    userId: string;
+    totalPrice: number;
+  }
+  export interface OrderDataHistory {
+    products: ProductOrder[];
+    orderDate: {
+      seconds: number;
+      nanoseconds: number;
+    };
+    shopId: string;
+    orderStatus: string;
+    userId: string;
+    totalPrice: number;
+  }
+
+
+  export interface OrderData{
+    products: ProductOrder[];
+    orderDate: {
+    toDate: () => Date;
       seconds: number;
       nanoseconds: number;
     };
