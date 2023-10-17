@@ -21,6 +21,7 @@ import { addressesAPI } from './service/addressesAPI';
 import { favoritesAPI } from './service/favoritesAPI';
 import { favoriteSlice } from './features/FavoriteSlice';
 import { historyApi } from './service/historyApi';
+import { changeNameAPI } from './service/changeNameAPI';
 
 export const store = configureStore({
 	reducer: {
@@ -46,6 +47,7 @@ export const store = configureStore({
 		[userApi.reducerPath]: userApi.reducer,
 		[reviewsAPI.reducerPath]: reviewsAPI.reducer,
 		[favoritesAPI.reducerPath]: favoritesAPI.reducer,
+		[changeNameAPI.reducerPath]: changeNameAPI.reducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(
@@ -61,8 +63,10 @@ export const store = configureStore({
 			userApi.middleware,
 			reviewsAPI.middleware,
 			favoritesAPI.middleware,
-			historyApi.middleware
+			historyApi.middleware,
+			changeNameAPI.middleware
 		),
 });
+
 
 setupListeners(store.dispatch);
