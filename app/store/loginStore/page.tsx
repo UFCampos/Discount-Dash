@@ -101,18 +101,18 @@ const LoginStore=()=>{
                         <form onSubmit={handleSubmit}>
                             <div className={style.formGroup}>
                                 <label htmlFor="email" className={style.label}>Email</label>
-                                <input name="email" id="username" type="email" value={loginInfo.email} onChange={handleChange}/>
+                                <input name="email" className={style.email} id="username" type="email" value={loginInfo.email} onChange={handleChange}/>
                                 {emptyEmail && <label htmlFor="email" className={style.error}>{emptyEmail}</label>}
                                 {invalidEmail && <label htmlFor="email" className={style.error}>{invalidEmail}</label>}
                             </div>
                             <div className={style.formGroup}>
                                 <label htmlFor="password" className={style.label}>Password:</label>
-                                <input name="password" id="password" type="password" value={loginInfo.password} onChange={handleChange}/>
+                                <input name="password" className={style.password} id="password" type="password" value={loginInfo.password} onChange={handleChange}/>
                                 {shortPassword && <label htmlFor="password" className={style.error}>{shortPassword}</label>}
                                 {emptyPassword && <label htmlFor="password" className={style.error}>{emptyPassword}</label>}
                             </div>
                             <div className={style.formGroup}>
-                                <input value="Login" type="submit"/>
+                                <input value="Login" type="submit" className={style.submit}/>
                             </div>
                         </form>
                     </div>
