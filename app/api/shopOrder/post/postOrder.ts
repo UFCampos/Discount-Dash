@@ -5,12 +5,13 @@ import {
   serverTimestamp,
   getDocs,
 } from "firebase/firestore";
+import { ProductOrder } from "@/utils/types";
 
 export const controller = async (id: string) => {
   const cartCollectionRef = collection(db, "users", id, "cart");
   const cartQuerySnapshot = await getDocs(cartCollectionRef);
 
-  const products: any = []; 
+  const products: ProductOrder[] = []; 
   let shopId = "";
   let totalPrice = 0;
 

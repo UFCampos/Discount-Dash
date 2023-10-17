@@ -17,6 +17,57 @@ export type CartProduct = {
 	quantity: number;
 	id: string;
 };
+export interface ProductOrder {
+    productId: string;
+    quantity: number;
+    name: string;
+    price: number;
+    total: number;
+    image: string;
+  }
+  
+  export interface Order {
+    id: string;
+    date: string;
+    products: ProductOrder[];
+    orderDate: {
+      seconds: number;
+      nanoseconds: number;
+    };
+    shopId: string;
+    orderStatus: string;
+    userId: string;
+    totalPrice: number;
+  }
+  
+  export interface OrdersList {
+    orders: Order[];
+  }
+  
+
+export interface FavoriteProduct {
+    category: string;
+    price: number;
+    normalPrice: number;
+    userId: string;
+    productId: string;
+    stock: number;
+    description: string;
+    rating: number;
+    name: string;
+    nameToLowerCase: string;
+    image: string;
+    shopId: string;
+    availability: string;
+    expiration: {
+      seconds: number;
+      nanoseconds: number;
+    };
+    brand: string;
+    status: string;
+  }
+  
+
 
 export interface Categories {
     category: string;
