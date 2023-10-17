@@ -8,7 +8,6 @@ import {cartProductsAPI} from './service/cartProductsAPI';
 import {addProductCartSlice} from './features/addProductCartSlice';
 import {productsApi} from './service/productsAPI';
 import {categoriesAPI} from './service/categoriesAPI';
-import {userApi} from './service/usersRegisterAPI';
 import {filters} from './service/filtersAPI';
 import {filterSlice} from './features/filterSlice';
 import {paymentSlice} from './features/paymentSlice';
@@ -16,6 +15,11 @@ import {cartItemsSlice} from './features/cartItemsSlice';
 import {createProductsAPI} from './service/createProductsAPI';
 import {orderProductAPI} from './service/ordersProductsAPI';
 import { orderSlice } from './features/orderSlice';
+import { userApi } from './service/usersRegisterAPI';
+import { reviewsAPI } from './service/reviewsAPI';
+import { addressesAPI } from './service/addressesAPI';
+import { favoritesAPI } from './service/favoritesAPI';
+import { favoriteSlice } from './features/FavoriteSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -26,7 +30,9 @@ export const store = configureStore({
 		filter: filterSlice.reducer,
 		payments: paymentSlice.reducer,
 		cartItems: cartItemsSlice.reducer,
+		favorites: favoriteSlice.reducer,
 		order: orderSlice.reducer,
+		[addressesAPI.reducerPath]: addressesAPI.reducer,
 		[productsApi.reducerPath]: productsApi.reducer,
 		[searchProfileAPI.reducerPath]: searchProfileAPI.reducer,
 		[userApi.reducerPath]: userApi.reducer,
@@ -35,6 +41,9 @@ export const store = configureStore({
 		[categoriesAPI.reducerPath]: categoriesAPI.reducer,
 		[createProductsAPI.reducerPath]: createProductsAPI.reducer,
 		[orderProductAPI.reducerPath]: orderProductAPI.reducer,
+		[userApi.reducerPath]: userApi.reducer,
+		[reviewsAPI.reducerPath]: reviewsAPI.reducer,
+		[favoritesAPI.reducerPath]: favoritesAPI.reducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(
@@ -46,6 +55,10 @@ export const store = configureStore({
 			categoriesAPI.middleware,
 			createProductsAPI.middleware,
 			orderProductAPI.middleware,
+			addressesAPI.middleware,
+			userApi.middleware,
+			reviewsAPI.middleware,
+			favoritesAPI.middleware
 		),
 });
 

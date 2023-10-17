@@ -11,7 +11,7 @@ export const PUT = async (
       let image = req.nextUrl.searchParams.get("image") || "";
       let email = req.nextUrl.searchParams.get("email") || "";
       
-      const { address, nameAddress } = await req.json();
+      const { address, nameAddress, userId } = await req.json();
     
   if(name){
   await updateName(id, name);
@@ -26,7 +26,7 @@ export const PUT = async (
     await updateEmail(id, email);
   }
   if(address && nameAddress){
-    await updateAddress(id, address,  nameAddress);
+    await updateAddress(userId, address,  nameAddress);
   }
   
     return NextResponse.json({ message: "User updated" });

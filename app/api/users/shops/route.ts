@@ -1,5 +1,5 @@
-import {type NextRequest, NextResponse} from 'next/server';
-import {controller} from './createShop';
+import { type NextRequest, NextResponse } from 'next/server';
+import { controller } from './createShop';
 export const POST = async (req: NextRequest) => {
   try {
     const {
@@ -25,32 +25,11 @@ export const POST = async (req: NextRequest) => {
       email,
       password,
     } = await req.json();
-    if (
-      !id ||
-      !marketName ||
-      !email ||
-      !typeMarket ||
-      !category ||
-      !onTheStreet ||
-      !phone ||
-      !street ||
-      !streetNumber ||
-      !postalCode ||
-      !province ||
-      !city ||
-      !typePerson ||
-      !cuit_cuil ||
-      !ownerName ||
-      !IVA_condition ||
-      !facture_type ||
-      !dni ||
-      !date ||
-      !nationality ||
-      !password
-    ) {
-    const {
+
+    const requiredFields = [
       id,
       marketName,
+      email,
       typeMarket,
       category,
       onTheStreet,
@@ -68,34 +47,13 @@ export const POST = async (req: NextRequest) => {
       dni,
       date,
       nationality,
-      email,
       password,
-    } = await req.json();
-    if (
-      !id ||
-      !marketName ||
-      !email ||
-      !typeMarket ||
-      !category ||
-      !onTheStreet ||
-      !phone ||
-      !street ||
-      !streetNumber ||
-      !postalCode ||
-      !province ||
-      !city ||
-      !typePerson ||
-      !cuit_cuil ||
-      !ownerName ||
-      !IVA_condition ||
-      !facture_type ||
-      !dni ||
-      !date ||
-      !nationality ||
-      !password
-    ) {
+    ];
+
+    if (requiredFields.some((field) => !field)) {
       return NextResponse.json({ error: "Insufficient data" }, { status: 400 });
     }
+
     controller(
       id,
       marketName,
@@ -119,7 +77,6 @@ export const POST = async (req: NextRequest) => {
       email,
       password
     );
-
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
