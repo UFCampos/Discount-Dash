@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { usersById } from './usersById';
 
-export const GET = async (
+export const GET = async (req: NextRequest,
 	{ params }: { params: { id: string } },
 ) => {
 	try {
