@@ -64,6 +64,8 @@ const Register = () => {
 
   const handleSubmit = () => {
     if (!canSubmit) return;
+    console.log(newUser);
+    
 
     setIsSubmiting(true);
 
@@ -98,9 +100,7 @@ const Register = () => {
       id: "",
     });
 
-    setTimeout(() => {
-      router.push("/home");
-    }, 2000);
+
   };
 
   useEffect(() => {
@@ -194,6 +194,7 @@ const Register = () => {
       <button
         className={`submit ${canSubmit ? "" : "disabled"}`}
         disabled={!canSubmit || isSubmitting}
+        onClick={handleSubmit}
       >
         {isSubmitting ? "Submitting..." : "Submit"}
       </button>
