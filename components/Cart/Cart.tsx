@@ -169,10 +169,6 @@ const Cart = () => {
           </button>
         </div>
 
-        <div className={style.buybutton}>
-          <p>{total}</p>
-          <button className={style.buy}>Buy</button>
-        </div>
       </div>
     </div>
   );
