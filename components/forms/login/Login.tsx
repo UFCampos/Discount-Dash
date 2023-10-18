@@ -145,7 +145,6 @@ const Login = () => {
             />
         </div>
             {errors.email && <p style={{ color: "red" }}>{errors.email} </p>}
-
         <div className={style.flexColumn}>
           <label>Password </label>
         </div>
@@ -182,17 +181,9 @@ const Login = () => {
             </Link>
           </span>
         </div>
-        {canSubmit ? 
-          <button className={style.buttonSubmit} type="submit"
-          disabled={!canSubmit || isSubmitting}>
+          <button className={style.buttonSubmit} type="submit" onClick={handleSubmit}>
             Sign In
           </button>
-          : 
-          <button className={style.submitDisabled} type="submit"
-          disabled={!canSubmit || isSubmitting}>
-            Sign In
-          </button>
-        }
         <p className={style.p}>
           Not acount?
           <span className={style.span}>
