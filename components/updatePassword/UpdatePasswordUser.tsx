@@ -58,9 +58,9 @@ const UpdatePasswordUser = () => {
     <div className={style.cont}>
       <form className={style.form} onSubmit={handleChangePassword}>
         <h1 className={style.signup}>Change your passworld</h1>
-        <input type="password" placeholder="Passworld" className={style.formInput} onChange={changePassword}/>
-        <input type="password" placeholder="New password" className={style.formInput} onChange={changePassword}/>
-        <input type="password" placeholder="Confirm new password" className={style.formInput} onChange={changePassword}/>
+        <input type="password" placeholder="Passworld" name="password" className={style.formInput} onChange={changePassword}/>
+        <input type="password" placeholder="New password" name="newPassword" className={style.formInput} onChange={changePassword}/>
+        <input type="password" placeholder="Confirm new password" name="confirmPassword" className={style.formInput} onChange={changePassword}/>
         <button className={style.formSubmmit} type="submit">
             Change
         </button>

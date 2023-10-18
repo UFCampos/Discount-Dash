@@ -1,4 +1,4 @@
-import UpdatePasswordUser from "@/components/updatePassword/UpdatePassowordUser";
+import UpdatePasswordUser from "@/components/updatePassword/UpdatePasswordUser";
 import style from "./UpdatePasswordCont.module.css"
 const UpdatePassword = () => {
     

@@ -12,9 +12,10 @@ const ChangeNameUser = () => {
 
 
   const sendNewName = () => {
+    console.log(id, name)
     mutate({
-      id,
-      name,
+      userId:id,
+      name:name,
     });
   };
   return(
@@ -25,7 +26,7 @@ const ChangeNameUser = () => {
         </p>
         <div className={style.cardForm}>
             <input placeholder="Your name" type="text" onChange={(e) => setName(e.target.value)}/>
-            <button className={style.changeButton}onClick={sendNewName}>Change name</button>
+            <button className={style.changeButton} onClick={sendNewName}>Change name</button>
         </div>
       </div>
     </div>
