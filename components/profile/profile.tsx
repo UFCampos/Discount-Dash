@@ -15,8 +15,7 @@ type ProfileProps = {
 const Profile: React.FC<ProfileProps> = ({ id }) => {
   const { data, isError } = useGetProfileQuery({ id });
   const user = useSelector((state) => state.userProfile);
-
-  console.log(user)
+  console.log(data)
   const [updateFile, setFile]=useState("")
 
   const [update, setUpdate]=useState(false)
