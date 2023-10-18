@@ -12,16 +12,19 @@ import { type CartProduct } from "@/utils/types";
 import { useEffect, useState } from "react";
 import { useDispatch } from "@/lib/redux/hooks";
 import { addCart, addTotalCart } from "@/lib/redux/features/cartItemsSlice";
+import { Wallet, initMercadoPago } from "@mercadopago/sdk-react";
 
 const Cart = () => {
   const [productId, setProductId] = useState("");
   const [flag, setFlag] = useState(false);
+  const [preferenceId, setPreferenceId] = useState(null);
+  initMercadoPago("PUBLIC_KEY");
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userProfile.id);
   const { cartItems } = useSelector((state) => state.cartItems);
 
   const { data } = useGetProductsCartQuery({ id: userId });
-  
+
   const {
     data: product,
     isLoading,
@@ -56,6 +59,7 @@ const Cart = () => {
             quantity: item.quantity + 1,
           };
         }
+
         return item;
       });
       dispatch(addTotalCart(newCart));
@@ -67,10 +71,30 @@ const Cart = () => {
             quantity: item.quantity - 1,
           };
         }
+
         return item;
       });
       dispatch(addTotalCart(newCart));
     }
+  };
+
+  const createPreference = async () => {
+    try {
+      const URL = ``;
+      const response = await fetch(`${URL}/api/products/buyProduct`, {
+        method: "POST",
+        body: JSON.stringify([userId]),
+      });
+      const { id } = await response.json();
+      return id;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlePay = async () => {
+    const id = await createPreference();
+    setPreferenceId(id);
   };
 
   let total;
@@ -164,15 +188,26 @@ const Cart = () => {
         </div>
 
         <div className="text-center mt-4">
-          <button className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            onClick={handlePay}
+            className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
             Buy
           </button>
+          {preferenceId && (
+            <button onClick={() => setPreferenceId(null)}>
+              <Wallet
+                initialization={{
+                  preferenceId,
+                  redirectMode: "blank",
+                }}
+              />
+            </button>
+          )}
         </div>
-
       </div>
     </div>
   );
 };
 
 export default Cart;
-

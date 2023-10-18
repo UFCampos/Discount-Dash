@@ -12,14 +12,13 @@ import {
 import { useGetProductsCartQuery } from "@/lib/redux/service/cartProductsAPI";
 import { useGetProductQuery } from "@/lib/redux/service/productsAPI";
 import { CardProduct } from "@/utils/types";
-import style from './Card.module.css';
+import style from "./Card.module.css";
 import {
   useNewFavoriteMutation,
   useDeleteFavoriteMutation,
 } from "@/lib/redux/service/favoritesAPI";
 import { addFavorite } from "@/lib/redux/features/FavoriteSlice";
 import { useGetAllFavoritesQuery } from "@/lib/redux/service/favoritesAPI";
-
 
 const Card: React.FC<CardProduct> = ({
   itemId,
@@ -29,7 +28,7 @@ const Card: React.FC<CardProduct> = ({
   price,
   stock,
   normalPrice,
-  has
+  has,
 }) => {
   const dispatch = useDispatch();
 
@@ -37,34 +36,32 @@ const Card: React.FC<CardProduct> = ({
 
   const paymentId = useSelector((state) => state.payments.paymentId);
 
-  
   const [mutate] = useAddProductCartMutation();
-  
+
   const [flag, setFlag] = useState(false);
-  
-  
+
   const { id } = useSelector((state) => state.userProfile);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { data } = useGetProductsCartQuery({ id });
-  
-  const { data : dataFavorite } = useGetAllFavoritesQuery({ id });
+  const userCode = id;
+
+  const { data: dataFavorite } = useGetAllFavoritesQuery({ id });
   const { favorites } = useSelector((state) => state.favorites);
 
-  const ids = dataFavorite?.map((favorite : any) => favorite?.productId);
+  const ids = dataFavorite?.map((favorite: any) => favorite?.productId);
 
   useEffect(() => {
-    if(ids?.includes(itemId)){
+    if (ids?.includes(itemId)) {
       setFlag(true);
-      has = true
+      has = true;
     }
-    
-    if(has === true ){
+
+    if (has === true) {
       setFlag(true);
-    }else{
+    } else {
       setFlag(false);
     }
-    
-  },[dataFavorite])
+  }, [dataFavorite]);
 
   const {
     data: product,
@@ -85,7 +82,6 @@ const Card: React.FC<CardProduct> = ({
   const [deleteFavorite] = useDeleteFavoriteMutation();
 
   const handleAddFavorite = () => {
-    
     if (flag === false || has === false) {
       setFlag(true);
       postFavorite({
@@ -108,10 +104,11 @@ const Card: React.FC<CardProduct> = ({
       const URL = ``;
 
       const response = await axios.post(`${URL}/api/products/buyProduct`, {
-        itemId: itemId,
+        itemId,
         description: name,
-        price: price,
+        price,
         quantity: 1,
+        userCode,
       });
       const { id } = response.data;
       return id;
@@ -159,7 +156,6 @@ const Card: React.FC<CardProduct> = ({
       </div>
       <div className={style.cardImg}>
         <img src={image} />
-        
       </div>
 
       <div className={style.cardInfo}>
