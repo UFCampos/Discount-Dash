@@ -1,9 +1,10 @@
 import Carrousel from "@/components/carrousel/Carrousel";
 import style from "./landingCont.module.css"
+import LandingPage from "@/components/landingPage/LandingPage";
 const home = () => {
 	return(
 		<main className={style.cont}>
-			<Carrousel/>
+			<LandingPage/>
 		</main>
 	)
 }

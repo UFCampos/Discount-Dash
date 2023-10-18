@@ -7,6 +7,7 @@ import {userProfileSlice} from './features/userProfile';
 import {cartProductsAPI} from './service/cartProductsAPI';
 import {addProductCartSlice} from './features/addProductCartSlice';
 import {productsApi} from './service/productsAPI';
+import { userUpdateApi } from './service/updateUsersAPI';
 import {categoriesAPI} from './service/categoriesAPI';
 import {filters} from './service/filtersAPI';
 import {filterSlice} from './features/filterSlice';
@@ -47,6 +48,7 @@ export const store = configureStore({
 		[userApi.reducerPath]: userApi.reducer,
 		[reviewsAPI.reducerPath]: reviewsAPI.reducer,
 		[favoritesAPI.reducerPath]: favoritesAPI.reducer,
+		[userUpdateApi.reducerPath]:userUpdateApi.reducer,
 		[changeNameAPI.reducerPath]: changeNameAPI.reducer
 	},
 	middleware: getDefaultMiddleware =>
@@ -63,6 +65,7 @@ export const store = configureStore({
 			userApi.middleware,
 			reviewsAPI.middleware,
 			favoritesAPI.middleware,
+			userUpdateApi.middleware,
 			historyApi.middleware,
 			changeNameAPI.middleware
 		),
