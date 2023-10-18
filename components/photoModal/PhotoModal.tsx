@@ -5,20 +5,27 @@ import style from './PhotoModal.module.css';
 import { FileModal } from '../../utils/types';
 import { uploadFile } from "@/firebase/config";
 import { useUpdateImageUserMutation } from '@/lib/redux/service/updateUsersAPI';
+import axios from 'axios';
 
 const PhotoModal = ({update, onChange, close, id}:FileModal) => {
 
   const [mutate, {data:mutation}]=useUpdateImageUserMutation()
-
+  
   const changeImage=async ()=>{
 
     if(update!==""){
-      const urlImage=await uploadFile(update)
+      try {
+        const urlImage=await uploadFile(update)
+        await mutate({
+          id:id,
+          image:urlImage
+        })
+        console.log("imagen actualizada con exito")
+      } catch (error) {
+        console.log("error al actualizar la imagen")
+      }
 
-      mutate({
-        id:id,
-        image:urlImage
-      })
+    
 
     }
   }

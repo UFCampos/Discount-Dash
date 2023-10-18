@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { url } from "inspector";
+
 interface updateImage{
     id:string,
     image:string
@@ -10,9 +10,9 @@ export const userUpdateApi = createApi({
     }),
     reducerPath:"userUpdateAPI",
     endpoints:(build)=>({
-        updateImageUser:build.mutation<null, updateImage>({
+        updateImageUser:build.mutation<null, updateImage >({
             query:(body)=>({
-                url:"/updateUser",
+                url:`/updateUser?id=${body.id}&image=${body.image}`,
                 method:"PUT",
                 body
             })
