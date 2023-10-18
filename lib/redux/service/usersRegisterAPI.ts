@@ -24,9 +24,15 @@ export const userApi = createApi({
             }),
 			getUser: builder.query<User, { id: string }>({
 				query: id => `/${id}`,
-			})
+			}),
+            postAdmin: builder.mutation<any, { id: string }>({
+                query: (body) => ({
+                    url: `/setAdmin/${body.id}`,
+                    method: "POST",
+                }),
+            }),
 		}
 	),
 });
 
-export const {usePostUserMutation, useGetUserQuery, usePostMarketMutation} = userApi
+export const {usePostUserMutation, useGetUserQuery, usePostMarketMutation, usePostAdminMutation} = userApi

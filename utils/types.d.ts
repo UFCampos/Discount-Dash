@@ -382,5 +382,11 @@ export type Product = {
     name: string;
     lastname: string;
     image: string;
-    role: string;
+    email: string;
+    marketName?: string;
+    uid?: string;
+    customClaims?: {
+      admin?: boolean;
+      shop?: boolean;
+    }
   };
