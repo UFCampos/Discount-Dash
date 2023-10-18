@@ -21,12 +21,6 @@ const Cart = () => {
   const { cartItems } = useSelector((state) => state.cartItems);
 
   const { data } = useGetProductsCartQuery({ id: userId });
-  
-  const {
-    data: product,
-    isLoading,
-    isError,
-  } = useGetProductQuery({ id: productId });
 
   const [mutate1] = useDelProductCartMutation();
   const handleDelete = (productId: string) => {
@@ -41,6 +35,7 @@ const Cart = () => {
   };
 
   const [mutate] = usePutPrudctCartMutation();
+
   const handleAddCart = (productId: string, value: string) => {
     setProductId(productId);
     mutate({
