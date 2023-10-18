@@ -5,7 +5,7 @@ export const getOrder = async(userId: string)=>{
     const ordersCollectionRef = collection(db, "orders");
     let queryRef = query(
       ordersCollectionRef,
-      where("orderStatus", "!=", "completed"),
+      where("orderStatus", "!=", "Completed"),
       where("userId", "==", userId)
     );
 
