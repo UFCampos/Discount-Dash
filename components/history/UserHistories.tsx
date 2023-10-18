@@ -3,8 +3,7 @@ import { useGetUserApiQuery } from "@/lib/redux/service/historyApi";
 import { useSelector } from "@/lib/redux/hooks";
 
 const UserHistories = () => {
-  // const { id } = useSelector((state) => state.userProfile);
-  const id = "jTICUPnHSlbGIN9mNj2VomrkWpK2";
+  const { id } = useSelector((state) => state.userProfile);
   const { data, isLoading } = useGetUserApiQuery({ id });
   console.log(data);
 
