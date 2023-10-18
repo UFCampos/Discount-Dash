@@ -9,6 +9,8 @@ import style from "./login.module.css";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import { setUser } from "@/lib/redux/features/userProfile";
 import { onAuthStateChanged } from "firebase/auth";
+import validationLogin from "@/utils/validationLogin";
+import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 import { useRouter } from "next/navigation";
 
@@ -21,10 +23,17 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
+  const [isSubmitting, setIsSubmiting] = useState(false)
+  const [errors, setErrors] = useState<Partial<ProductInput>>({});
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  interface ProductInput{
+    email: string,
+    password: string,
+  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -32,10 +41,25 @@ const Login = () => {
       ...formData,
       [name]: value,
     });
+    const updatedErrors = validationLogin({
+      ...formData,
+      [name]: value,
+    });
+    setErrors({
+      ...errors,
+      ...updatedErrors,
+    });
   };
+
+  const canSubmit= !Object.values(errors).some(Boolean)
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+    
+    if (!canSubmit) return;
+
+    setIsSubmiting(true);
+
 		signInWithEmailAndPassword(auth, formData.email, formData.password)
 			.then( async (userCredential) => {
 				const {user} = userCredential;
@@ -106,6 +130,7 @@ const Login = () => {
             viewBox="0 0 32 32"
             height="20"
           >
+            
             <g data-name="Layer 3" id="Layer_3">
               <path d="m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z"></path>
             </g>
@@ -117,8 +142,9 @@ const Login = () => {
             type="text"
             value={formData.email}
             onChange={handleInputChange}
-          />
+            />
         </div>
+            {errors.email && <p style={{ color: "red" }}>{errors.email} </p>}
 
         <div className={style.flexColumn}>
           <label>Password </label>
@@ -143,6 +169,7 @@ const Login = () => {
             onChange={handleInputChange}
           />
         </div>
+        {errors.password && <p style={{ color: "red" }}>{errors.password} </p>}
 
         <div className={style.flexRow}>
           <div>
@@ -155,9 +182,17 @@ const Login = () => {
             </Link>
           </span>
         </div>
-        <button className={style.buttonSubmit} type="submit">
-          Sign In
-        </button>
+        {canSubmit ? 
+          <button className={style.buttonSubmit} type="submit"
+          disabled={!canSubmit || isSubmitting}>
+            Sign In
+          </button>
+          : 
+          <button className={style.submitDisabled} type="submit"
+          disabled={!canSubmit || isSubmitting}>
+            Sign In
+          </button>
+        }
         <p className={style.p}>
           Not acount?
           <span className={style.span}>
@@ -168,9 +203,7 @@ const Login = () => {
         <div className={style.flexRow}>
           <button
             className={style.btn}
-            onClick={(e) => {
-              signInProvider(e);
-            }}
+            onClick={(e) => signInProvider(e)}
             value={"google"}
           >
             <svg
@@ -213,9 +246,7 @@ const Login = () => {
 
           <button
             className={style.btn}
-            onClick={(e) => {
-              signInProvider(e);
-            }}
+            onClick={(e) => signInProvider(e)}
             value={"facebook"}
           >
             <svg

@@ -9,15 +9,22 @@ export const favoritesAPI = createApi({
     endpoints: build => ({
         newFavorite: build.mutation({
             query: body => ({
-                url: '/postFavorite',
+                url: '/favorites/post',
                 method: 'POST',
                 body,
             }),
         }),
         getAllFavorites: build.query({
-            query: ({id}) => `/favorites/${id}`,
+            query: ({id}) => `/favorites?id=${id}`,
+        }),
+        deleteFavorite: build.mutation({
+            query: body => ({
+                url: '/favorites/delete',
+                method: 'DELETE',
+                body,
+            }),
         })
     }),
 })
 
-export const { useNewFavoriteMutation, useGetAllFavoritesQuery } = favoritesAPI
+export const { useNewFavoriteMutation, useGetAllFavoritesQuery, useDeleteFavoriteMutation } = favoritesAPI

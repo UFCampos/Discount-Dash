@@ -1,10 +1,10 @@
 import UpdatePasswordUser from "@/components/updatePassword/UpdatePassowordUser";
-
+import style from "./UpdatePasswordCont.module.css"
 const UpdatePassword = () => {
     
     return(
-        <div>
-            <UpdatePasswordUser />
+        <div className={style.cont}>
+            <UpdatePasswordUser/>
         </div>
     )
 }
