@@ -15,7 +15,7 @@ const Dashboard = () => {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    if (user?.claims?.admin) {
+    if (user?.customClaims?.admin) {
         return (
             <div className={style.adminDashCont}>
                     <Sidebar/>
