@@ -45,7 +45,6 @@ export const store = configureStore({
 		[categoriesAPI.reducerPath]: categoriesAPI.reducer,
 		[createProductsAPI.reducerPath]: createProductsAPI.reducer,
 		[orderProductAPI.reducerPath]: orderProductAPI.reducer,
-		[userApi.reducerPath]: userApi.reducer,
 		[reviewsAPI.reducerPath]: reviewsAPI.reducer,
 		[favoritesAPI.reducerPath]: favoritesAPI.reducer,
 		[userUpdateApi.reducerPath]:userUpdateApi.reducer,
