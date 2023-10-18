@@ -55,7 +55,6 @@ const Card: React.FC<CardProduct> = ({
       setFlag(true);
       has = true;
     }
-
     if (has === true) {
       setFlag(true);
     } else {
@@ -63,13 +62,21 @@ const Card: React.FC<CardProduct> = ({
     }
   }, [dataFavorite]);
 
-  const {
-    data: product,
-    isLoading,
-    isError,
-  } = useGetProductQuery({ id: itemId });
+  const getProductById = async (itemId: string) => {
+    try {
+      const product = await fetch(`/api/products/${itemId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          return data;
+        });
+      return product;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  const handleAddCart = () => {
+  const handleAddCart = async () => {
+    const product = await getProductById(itemId);
     mutate({
       cartItemId: itemId,
       userId: id,
@@ -81,7 +88,8 @@ const Card: React.FC<CardProduct> = ({
   const [postFavorite] = useNewFavoriteMutation();
   const [deleteFavorite] = useDeleteFavoriteMutation();
 
-  const handleAddFavorite = () => {
+  const handleAddFavorite = async () => {
+    const product = await getProductById(itemId);
     if (flag === false || has === false) {
       setFlag(true);
       postFavorite({
@@ -102,7 +110,6 @@ const Card: React.FC<CardProduct> = ({
   const createPreference = async () => {
     try {
       const URL = ``;
-
       const response = await axios.post(`${URL}/api/products/buyProduct`, {
         itemId,
         description: name,

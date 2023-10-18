@@ -2,6 +2,7 @@ import { useGetAllUsersQuery } from "@/lib/redux/service/searchProfileAPI";
 import { User } from "@/utils/types";
 import { useEffect, useState } from "react";
 import { usePostAdminMutation } from "@/lib/redux/service/usersRegisterAPI";
+import style from "./users.module.css"
 
 // You might import your user data or fetch it from an API here
 
@@ -17,8 +18,8 @@ const Users = () => {
     }
 
     return (
-        <div>
-            <h1 className="text-2xl font-semibold">User Management</h1>
+        <div className={style.userCont}>
+            
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-100">
                     <tr>
