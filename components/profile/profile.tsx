@@ -38,12 +38,12 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
       <section className={style.profile}>
         <div className={style.head}>
           <div className={style.imgCont}>
-            <Image src={ !user?.photoUrl ? data?.photoUrl : user.photoUrl ? user.photoUrl : "/default.jpg"} alt='img' className={style.img}/>
+            <Image src={ data?.image ? data?.image : user?.photoUrl} alt='img' className={style.img}/>
             <div className={style.editCont}>
                 <button className={style.editCircle} onClick={handleUpdate}><span className="material-symbols-outlined" id={style.edit}>edit</span></button>
             </div>
           </div>
-          <h2 className={style.name}>{user && user.name}</h2>
+          <h2 className={style.name}>{!data?.name ? user?.name : data?.name}</h2>
         </div>
         <div className={style.separate}></div>
         <div className={style.info}>

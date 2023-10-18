@@ -12,10 +12,14 @@ import { useEffect, useState } from "react";
 import { auth } from "@/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
+import { usePostUserMutation } from "@/lib/redux/service/usersRegisterAPI";
+import { useGetProfileQuery } from "@/lib/redux/service/searchProfileAPI";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const [flag, setFlag] = useState(false);
+  const [ newId, setNewId] = useState("");
+  const [ mutate ] = usePostUserMutation();
 
   const pathname = usePathname();
 
@@ -23,11 +27,16 @@ const NavBar = () => {
 
   const { data: dataCategories } = useGetCategoriesQuery(null);
 
-  let uid;
+  let uid : string;
+
+
+  const userId = newId
+  const { data, isError } = useGetProfileQuery({ id : userId });
 
   //!esto es para que cuando el path sea de store no muestre la navbar de cliente
   const notStore=!pathname.includes("/store/")
-
+  console.log(data);
+  
   
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -43,13 +52,24 @@ const NavBar = () => {
             photoUrl: profile.photoURL,
             name: profile.displayName,
           };
+          console.log(mappedUser);
         });
+        setNewId(uid);
         dispatch(setUser(mappedUser));
+        // SI TOCAS ESTO SE BORRA TODOS LOS DATOS DE LA BASE DE DATOS
+        if( data?.id !== user.uid ){
+          console.log('ya tamo');
+          
+        }else{
+          mutate({
+            mappedUser
+          });
+        }
       } else {
         setFlag(false);
       }
     });
-  }, [uid]);
+  }, []);
 
   console.log(dataCategories);
   useEffect(() => {

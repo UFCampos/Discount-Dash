@@ -1,7 +1,7 @@
-'use client';
-import {useDispatch, useSelector} from '@/lib/redux/hooks';
-import {useEffect, useState} from 'react';
-import {signInProvider} from '@/app/utils';
+"use client";
+import { useDispatch, useSelector } from "@/lib/redux/hooks";
+import { useEffect, useState } from "react";
+import { signInProvider } from "@/app/utils";
 import {
   signInWithEmailAndPassword,
   sendEmailVerification,
@@ -19,7 +19,7 @@ import validationRegister from "@/utils/validationsRegister";
 const Register = () => {
   const router = useRouter();
 
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const isOpen = useSelector((state) => state.menu.isOpen);
 
@@ -97,8 +97,6 @@ const Register = () => {
       confirmPassword: "",
       id: "",
     });
-
-
   };
 
   useEffect(() => {
@@ -120,13 +118,13 @@ const Register = () => {
             placeholder=""
             type="text"
             className="input"
-            />
+          />
           <span>Firstname</span>
-            {errors.name && (
-              <p className="mr-2" style={{ color: "red" }}>
-                {errors.name}
-              </p>
-            )}
+          {errors.name && (
+            <p className="mr-2" style={{ color: "red" }}>
+              {errors.name}
+            </p>
+          )}
         </label>
         <label>
           <input
@@ -139,11 +137,12 @@ const Register = () => {
             onChange={handleChange}
           />
           <span>Lastname</span>
-        {errors.lastname && <p style={{ color: "red" }}>{errors.lastname} </p>}
+          {errors.lastname && (
+            <p style={{ color: "red" }}>{errors.lastname} </p>
+          )}
         </label>
       </div>
-      <div className="flex">
-      </div>
+      <div className="flex"></div>
 
       <label>
         <input
