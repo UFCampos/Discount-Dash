@@ -1,30 +1,38 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { User } from "@/utils/types";
-
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { allDataMarket } from "@/utils/types";
+import { type User } from "@/utils/types";
 export const userApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: `/api/users`,
-  }),
-  reducerPath: "userApi",
-  endpoints: (build) => ({
-    postUser: build.mutation<User, any>({
-      query: (body) => ({
-        url: "/register",
-        method: "POST",
-        body,
-      }),
+    reducerPath:"userApi",
+    baseQuery:fetchBaseQuery({
+        baseUrl:`/api/users`
     }),
-    postMarket: build.mutation({
-      query: (body) => ({
-        url: "/shops",
-        method: "POST",
-        body,
-      }),
-    }),
-    getUser: build.query<any, {id: string}>({
-        query: ({id}) => `/${id}`,
-    }),
-  }),
+    endpoints:(builder)=>(
+        {
+            postUser:builder.mutation<User, null>({
+                query:(body)=>({
+                    url:"/register",
+                    method:"POST",
+                    body
+                })
+            }),
+            postMarket:builder.mutation({
+                query:(body)=>({
+                    url:"/shops",
+                    method:"POST",
+                    body
+                })
+            }),
+			getUser: builder.query<User, { id: string }>({
+				query: id => `/${id}`,
+			}),
+            postAdmin: builder.mutation<any, { id: string }>({
+                query: (body) => ({
+                    url: `/setAdmin/${body.id}`,
+                    method: "POST",
+                }),
+            }),
+		}
+	),
 });
 
-export const { usePostUserMutation, useGetUserQuery, usePostMarketMutation } = userApi;
+export const {usePostUserMutation, useGetUserQuery, usePostMarketMutation, usePostAdminMutation} = userApi
