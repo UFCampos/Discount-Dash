@@ -12,7 +12,7 @@ const ChangeNameUser = () => {
 
   const sendNewName = () => {
     mutate({
-      id,
+      userId: id,
       name,
     });
   };

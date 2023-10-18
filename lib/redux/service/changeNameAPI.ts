@@ -9,7 +9,7 @@ export const changeNameAPI = createApi({
     endpoints: build => ({
         changeName: build.mutation({
             query: body => ({
-                url: `/users/updateUser?id=${body.id}&name=${body.name}`,
+                url: `/users/updateUser`,
                 method: 'PUT',
                 body,
             }),
