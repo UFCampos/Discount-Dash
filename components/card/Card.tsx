@@ -53,12 +53,7 @@ const Card: React.FC<CardProduct> = ({
   const ids = dataFavorite?.map((favorite : any) => favorite?.productId);
 
   useEffect(() => {
-    console.log('Esteeeee' + dataFavorite?.productId);
-    console.log(dataFavorite);
-    console.log(ids);
-    
     if(ids?.includes(itemId)){
-      console.log('ENTRE AL IF');
       setFlag(true);
       has = true
     }
@@ -90,8 +85,6 @@ const Card: React.FC<CardProduct> = ({
   const [deleteFavorite] = useDeleteFavoriteMutation();
 
   const handleAddFavorite = () => {
-    console.log(has);
-    console.log(flag);
     
     if (flag === false || has === false) {
       setFlag(true);

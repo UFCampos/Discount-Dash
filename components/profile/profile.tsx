@@ -19,17 +19,18 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
         const { value}=event.target
         setFile(value)
     }
+    
   return (
     <main className={style.cont}>
       <section className={style.profile}>
         <div className={style.head}>
           <div className={style.imgCont}>
-            <Image src={ !user?.photoUrl ? data?.photoUrl : user.photoUrl ? user.photoUrl : "/default.jpg"} alt='img' className={style.img}/>
+            <Image src={ data?.image ? data?.image : user?.photoUrl} alt='img' className={style.img}/>
             <div className={style.editCont}>
                 <button className={style.editCircle}><span className="material-symbols-outlined" id={style.edit}>edit</span></button>
             </div>
           </div>
-          <h2 className={style.name}>{!user?.name ? data?.name : user?.name}</h2>
+          <h2 className={style.name}>{!data?.name ? user?.name : data?.name}</h2>
         </div>
         <div className={style.separate}></div>
         <div className={style.info}>

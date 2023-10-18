@@ -7,7 +7,7 @@ export const userApi = createApi({
   }),
   reducerPath: "userApi",
   endpoints: (build) => ({
-    postUser: build.mutation<User, null>({
+    postUser: build.mutation<User, any>({
       query: (body) => ({
         url: "/register",
         method: "POST",
