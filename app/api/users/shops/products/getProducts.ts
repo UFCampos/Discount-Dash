@@ -1,5 +1,6 @@
 import {db} from '@/firebase/config';
 import {collection, query, where, getDocs} from 'firebase/firestore';
+import { type Products, Product } from '@/utils/types';
 
 export const handler = async (shopId: string, value: string) => {
 	const productsRef = collection(db, 'products');
@@ -11,14 +12,15 @@ export const handler = async (shopId: string, value: string) => {
 
 	const productsSnapshot = await getDocs(productsQuery);
 
-	const products: any = [];
+	const products: Products[] = [];
 
 	productsSnapshot.forEach(doc => {
+		const product = doc.data() as Product; 
 		products.push({
 			id: doc.id,
-			...doc.data(),
+			...product })
 		});
-	});
+	
 
 	return products;
 };

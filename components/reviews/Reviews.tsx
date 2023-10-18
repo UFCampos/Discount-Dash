@@ -35,22 +35,32 @@ const Reviews = ({ productId }: { productId: string }) => {
   return (
     <div>
       <h1>Reviews</h1>
-      <div>
+      <div className="flex">
         <input
+          className="border p-2 w-20 text-center"
           type="number"
           placeholder="Rating (1-5)"
           value={review.rating}
-          onChange={(e) =>{
-            setReview({ ...review, rating: parseInt(e.target.value) })}
-          }
+          onChange={(e) => {
+            parseInt(e.target.value) > 5
+              ? setReview({ ...review, rating: 5 }) : parseInt(e.target.value) < 1 ? setReview({ ...review, rating: 1 })
+              : setReview({ ...review, rating: parseInt(e.target.value) });
+          }}
         />
         <input
+          className="border p-2 w-full  overflow-auto"
           placeholder="Comment"
           value={review.comment}
           onChange={(e) => setReview({ ...review, comment: e.target.value })}
         />
-        <br />
-        <button onClick={postReview}>Post</button>
+      </div>
+      <div className=" text-end">
+        <button
+          onClick={postReview}
+          className="bg-black text-white py-0 px-2 rounded hover:bg-gray-600"
+        >
+          Post
+        </button>
       </div>
     </div>
   );

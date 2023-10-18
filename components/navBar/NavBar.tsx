@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { auth } from "@/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
+import { usePostUserMutation } from "@/lib/redux/service/usersRegisterAPI";
+import { useGetProfileQuery } from "@/lib/redux/service/searchProfileAPI";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 
 const NavBar = () => {

@@ -1,5 +1,5 @@
-import {type NextRequest, NextResponse} from 'next/server';
-const mercadopago = require('mercadopago');
+import { type NextRequest, NextResponse } from "next/server";
+const mercadopago = require("mercadopago");
 
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
@@ -42,9 +42,9 @@ export const POST = async (req: NextRequest) => {
     };
   }
 
-	const response = await mercadopago.preferences.create(preference);
+  const response = await mercadopago.preferences.create(preference);
 
-	return NextResponse.json({
-		id: response.body.id,
-	});
+  return NextResponse.json({
+    id: response.body.id,
+  });
 };

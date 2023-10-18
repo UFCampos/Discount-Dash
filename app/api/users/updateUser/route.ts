@@ -1,37 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
 import { updateName, updateLastname, updateEmail, updateAddress, updateImage } from "./updateUser";
+import { user } from "@nextui-org/react";
 
 export const PUT = async (
   req: NextRequest) => {
 
     try {
-      let id = req.nextUrl.searchParams.get("id") || "";
-      let name = req.nextUrl.searchParams.get("name") || "";
-      let lastname = req.nextUrl.searchParams.get("lastname") || "";
-      let image = req.nextUrl.searchParams.get("image") || "";
-      let email = req.nextUrl.searchParams.get("email") || "";
       
-      const { address, nameAddress, userId } = await req.json();
-    
-  if(name){
-  await updateName(id, name);
-  }
-  if(lastname){
-    await updateLastname(id, lastname);
-  }
-  if(image){
-    await updateImage(id, image);
-  }
-  if(email){
-    await updateEmail(id, email);
-  }
+      
+  const { address, nameAddress, userId, name, lastname, email, image } = await req.json();
+ 
+   if(name && userId){
+   await updateName(userId, name);
+   }
+   if(lastname && userId){
+     await updateLastname(userId, lastname);
+   }
+   if(image  && userId){
+     await updateImage(userId, image);
+   }
+   if(email && userId){
+     await updateEmail(userId, email);
+   }
+  
+   
+ 
   if(address && nameAddress){
     await updateAddress(userId, address,  nameAddress);
   }
   
     return NextResponse.json({ message: "User updated" });
       
-    } catch (error) {
-      return NextResponse.json({ error: error }, { status: 400 });
+    } catch (error:any) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
     }
-};
+}

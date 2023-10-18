@@ -1,0 +1,16 @@
+.carrouselCont{
+    background: white;
+    width: 70vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiperCont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
