@@ -389,4 +389,5 @@ export type Product = {
       admin?: boolean;
       shop?: boolean;
     }
+    addresses: string[];
   };
