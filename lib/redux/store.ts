@@ -48,7 +48,7 @@ export const store = configureStore({
 		[userApi.reducerPath]: userApi.reducer,
 		[reviewsAPI.reducerPath]: reviewsAPI.reducer,
 		[favoritesAPI.reducerPath]: favoritesAPI.reducer,
-		[userUpdateApi.reducerPath]:userUpdateApi.reducer
+		[userUpdateApi.reducerPath]:userUpdateApi.reducer,
 		[changeNameAPI.reducerPath]: changeNameAPI.reducer
 	},
 	middleware: getDefaultMiddleware =>
@@ -65,7 +65,7 @@ export const store = configureStore({
 			userApi.middleware,
 			reviewsAPI.middleware,
 			favoritesAPI.middleware,
-			userUpdateApi.middleware,,
+			userUpdateApi.middleware,
 			historyApi.middleware,
 			changeNameAPI.middleware
 		),

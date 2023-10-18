@@ -12,8 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import validationLogin from "@/utils/validationLogin";
 import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
-import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
-import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
+
 const Login = () => {
   
   const [uid, setUid] = useState("");
