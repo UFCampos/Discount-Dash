@@ -23,6 +23,7 @@ import { favoritesAPI } from './service/favoritesAPI';
 import { favoriteSlice } from './features/FavoriteSlice';
 import { historyApi } from './service/historyApi';
 import { changeNameAPI } from './service/changeNameAPI';
+import { myProductsStoreAPI } from './service/myProductsStoreAPI';
 
 export const store = configureStore({
 	reducer: {
@@ -48,7 +49,8 @@ export const store = configureStore({
 		[reviewsAPI.reducerPath]: reviewsAPI.reducer,
 		[favoritesAPI.reducerPath]: favoritesAPI.reducer,
 		[userUpdateApi.reducerPath]:userUpdateApi.reducer,
-		[changeNameAPI.reducerPath]: changeNameAPI.reducer
+		[changeNameAPI.reducerPath]: changeNameAPI.reducer,
+		[myProductsStoreAPI.reducerPath]: myProductsStoreAPI.reducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware().concat(
@@ -66,7 +68,8 @@ export const store = configureStore({
 			favoritesAPI.middleware,
 			userUpdateApi.middleware,
 			historyApi.middleware,
-			changeNameAPI.middleware
+			changeNameAPI.middleware,
+			myProductsStoreAPI.middleware
 		),
 });
 

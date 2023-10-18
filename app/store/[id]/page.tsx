@@ -5,6 +5,7 @@ import Orders from "@/components/dashboardStore/sectionsDashboard/orders/Orders"
 import MenuDashboard from "@/components/dashboardStore/menuDashborad/MenuDashboard"
 import Profile from "@/components/dashboardStore/sectionsDashboard/ProfileStore/Profile"
 import MyProducts from "@/components/dashboardStore/sectionsDashboard/myProducts/MyProducts"
+import ShopHistory from "@/components/shopHistory/ShopHistory"
 
 const DashboardStore=({params}:{params: {id: string}})=>{
     const {id}=params
@@ -23,6 +24,7 @@ const DashboardStore=({params}:{params: {id: string}})=>{
                 {section==="my products" && <MyProducts/>}
                 {section==="orders" && <Orders/>}
                 {section==="profile" && <Profile id={id}/>}
+                {section==="Shop History" && <ShopHistory/>}
             </section>
         </main>
     )
