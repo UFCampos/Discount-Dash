@@ -1,12 +1,14 @@
 import Users from "./Users";
+import style from "./sidebar.module.css"
+import Link from "next/link";
 
 const Sidebar = () => {
     return (
-        <aside className="bg-gray-800 text-white w-1/5 p-4">
-            <nav>
-                <ul>
-                    <li>Dashboard</li>
-                    <li>Products</li>
+        <aside className={style.sidebarCont}>
+            <h1 className="text-2xl font-semibold text-white">User Management</h1>
+            <nav className={style.navCont}>
+                <ul className={style.navLinks}>
+                    <li className={style.links}>Dashboard</li>
                 </ul>
             </nav>
         </aside>

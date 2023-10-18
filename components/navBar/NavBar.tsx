@@ -30,6 +30,7 @@ const NavBar = () => {
 
   let uid: string;
 
+  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

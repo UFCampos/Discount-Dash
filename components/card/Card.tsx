@@ -43,6 +43,7 @@ const Card: React.FC<CardProduct> = ({
   const { id } = useSelector((state) => state.userProfile);
   const { cartItems } = useSelector((state) => state.cartItems);
   const { data } = useGetProductsCartQuery({ id });
+  const userCode = id;
 
   const { data: dataFavorite } = useGetAllFavoritesQuery({ id });
   const { favorites } = useSelector((state) => state.favorites);
@@ -110,10 +111,11 @@ const Card: React.FC<CardProduct> = ({
     try {
       const URL = ``;
       const response = await axios.post(`${URL}/api/products/buyProduct`, {
-        itemId: itemId,
+        itemId,
         description: name,
-        price: price,
+        price,
         quantity: 1,
+        userCode,
       });
       const { id } = response.data;
       return id;
