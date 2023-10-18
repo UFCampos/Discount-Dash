@@ -45,7 +45,7 @@ const MenuDropdown = () => {
                 </li>
 				
                 <li className={pathname === "/users/profile" ? "active" : ""}>
-                  <Link href={"/users/profile"}>Profile </Link>{" "}
+                  <Link href={`users/profile/${id}`}>Profile </Link>{" "}
                   <span className="material-symbols-outlined">
                     {" "}
                     account_circle
