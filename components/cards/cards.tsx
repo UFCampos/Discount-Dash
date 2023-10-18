@@ -14,7 +14,6 @@ const Cards = () => {
   const data = useSelector((state) => state.items.products);
   const error = useSelector((state) => state.items.errorsItems);
   const loading = useSelector((state) => state.items.isLoadItems);
-console.log(data);
 
   return (
     <section className="cards flex flex-col items-center justify-center">
