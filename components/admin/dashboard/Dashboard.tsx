@@ -6,11 +6,15 @@ import Sidebar from "./Sidebar";
 import Users from "./Users";
 import { useGetAuthUserQuery } from "@/lib/redux/service/searchProfileAPI";
 import style from "./Dashboard.module.css"
+import { Image } from "@nextui-org/react";
 const Dashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { data: user } = useGetAuthUserQuery(null);
+    const { data: user, isLoading } = useGetAuthUserQuery(null);
     console.log(user);
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
     if (user?.claims?.admin) {
         return (
             <div className={style.adminDashCont}>
@@ -21,7 +25,7 @@ const Dashboard = () => {
     } else {
         return (
             <div>
-                <h1>La ruta está protegida, guiño guiño</h1>
+                <Image src="/padlock.png" alt='padlock screen'/>
             </div>
         );
     }
