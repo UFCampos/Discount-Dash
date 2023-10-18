@@ -26,6 +26,8 @@ const NavBar = () => {
 
   const { data: dataCategories } = useGetCategoriesQuery(null);
 
+  const isStore=pathname.includes("/store")
+
   let uid: string;
 
   useEffect(() => {
@@ -47,11 +49,8 @@ const NavBar = () => {
     dispatch(setCategories(dataCategories));
   }, [dataCategories]);
 
-  return pathname !== "/login" &&
-  pathname !== "/addProduct" &&
-  pathname !== "" &&
-  pathname!=="/enterStore/registerStore" &&
-  pathname!=="/enterStore/loginStore"
+  return pathname !== "/login"  &&
+  pathname !== "" && !isStore
   ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">
