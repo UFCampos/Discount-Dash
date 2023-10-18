@@ -160,7 +160,7 @@ export interface marketProps{
 }
 
 export interface FileModal{
-  update:string,
+  update:File | string,
   id:string,
   onChange:(event: React.ChangeEvent<HTMLInputElement>)=>void,
   close:()=>void

@@ -5,9 +5,13 @@ import style from './PhotoModal.module.css';
 import { FileModal } from '../../utils/types';
 import { uploadFile } from "@/firebase/config";
 import { useUpdateImageUserMutation } from '@/lib/redux/service/updateUsersAPI';
-import axios from 'axios';
+import { usePathname } from 'next/navigation';
 
 const PhotoModal = ({update, onChange, close, id}:FileModal) => {
+
+  const pathname=usePathname()
+  
+  const isStore=pathname.includes("/store")
 
   const [mutate, {data}]=useUpdateImageUserMutation()
   
@@ -18,7 +22,7 @@ const PhotoModal = ({update, onChange, close, id}:FileModal) => {
         const urlImage=await uploadFile(update)
         console.log(urlImage)
         await mutate({
-          id:id,
+          userId:id,
           image:urlImage
         })
         console.log("imagen actualizada con exito")
@@ -32,7 +36,7 @@ const PhotoModal = ({update, onChange, close, id}:FileModal) => {
   }
   return (
 
-    <div className={style.inputFile}>
+    <div className={isStore ? style.inputFileStore : style.inputFile}>
       <div className={style.container}> 
         <div className={style.header}> 
           <svg className={style.headerSvg} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 

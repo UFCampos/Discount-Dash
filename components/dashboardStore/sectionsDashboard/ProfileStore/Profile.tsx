@@ -10,13 +10,16 @@ export const Profile = ({id}:{id:string}) => {
   console.log("este id recibe profile", id)
 
   const [update, setUpdate]=useState(false)
-  const [updateFile, setFile]=useState("")
+  
+  const [updateFile, setFile] = useState<File | string>("");
 
-  const handleChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
-    if (event.target.files && event.target.files.length > 0) {
-      setFile(event.target.files[0]);
-    }
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  if (event.target.files && event.target.files.length > 0) {
+    setFile(event.target.files[0]);
   }
+}
+
   const handleUpdate=()=>{
     setUpdate(true)
   }
@@ -31,7 +34,7 @@ export const Profile = ({id}:{id:string}) => {
         <div className={style.imgCont}>
           <Image src={img} alt='logo discount dash' className={style.img}/>
           <div className={style.editCont}>
-              <button className={style.editCircle}><span className="material-symbols-outlined" id={style.edit}>edit</span></button>
+              <button className={style.editCircle} onClick={handleUpdate}><span className="material-symbols-outlined" id={style.edit}>edit</span></button>
           </div>
         </div>
         <h1 className={style.marketName}>market name</h1>
