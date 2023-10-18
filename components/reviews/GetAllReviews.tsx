@@ -269,6 +269,7 @@ const AllReviews = ({ productId }: { productId: string }) => {
                     placeholder="Rating (1-5)"
                     value={reviewState.rating}
                     onChange={(e) => {
+                      parseInt(e.target.value) > 5 ? setReviewState({ ...reviewState, rating: 5 }) :
                       setReviewState({
                         ...reviewState,
                         rating: parseInt(e.target.value),
