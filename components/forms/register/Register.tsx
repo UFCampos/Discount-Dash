@@ -64,8 +64,6 @@ const Register = () => {
 
   const handleSubmit = () => {
     if (!canSubmit) return;
-    console.log(newUser);
-    
 
     setIsSubmiting(true);
 

@@ -24,7 +24,7 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
       <section className={style.profile}>
         <div className={style.head}>
           <div className={style.imgCont}>
-            <Image src={ !user?.photoUrl ? data?.photoUrl : user.photoUrl ? user.photoUrl:"/default.jpg"} alt='logo discount dash' className={style.img}/>
+            <Image src={ !user?.photoUrl ? data?.photoUrl : user.photoUrl ? user.photoUrl : "/default.jpg"} alt='img' className={style.img}/>
             <div className={style.editCont}>
                 <button className={style.editCircle}><span className="material-symbols-outlined" id={style.edit}>edit</span></button>
             </div>
@@ -36,8 +36,9 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
           <Link href={`/users/profile/${id}/changeName`} className={style.link}>Change name</Link>
           <Link href={`/users/profile/${id}/updatePassword`} className={style.link}>Change password</Link>
           <Link href={`/users/profile/${id}/myAddress`} className={style.link}>My addresses</Link>
-          <Link href={""} className={style.link}>My Orders</Link>
-          <Link href={""} className={style.link}>Shop history</Link>
+          <Link href={`/orders`} className={style.link}>My Orders</Link>
+          <Link href={`/users/profile/${id}/shopHistory`} className={style.link}>Shop history</Link>
+          <Link href={`/users/profile/${id}/favorites`} className={style.link}>My wishlist</Link>
         </div>
       </section>
     </main>
