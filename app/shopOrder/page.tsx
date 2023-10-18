@@ -1,10 +1,10 @@
-import Orders from "@/components/Orders/Orders"
+import OrdersProducts from "@/components/ordersProducts/OrdersProducts"
 
 const Order = ()=>{
     
     return(
         <div>
-            <Orders/>
+            <OrdersProducts/>
         </div>
     )
 }
