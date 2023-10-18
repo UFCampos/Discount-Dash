@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/react";
 import Sidebar from "./Sidebar";
 import Users from "./Users";
 import { useGetAuthUserQuery } from "@/lib/redux/service/searchProfileAPI";
-
+import style from "./Dashboard.module.css"
 const Dashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const { data: user } = useGetAuthUserQuery(null);
@@ -13,9 +13,8 @@ const Dashboard = () => {
 
     if (user?.claims?.admin) {
         return (
-            <div>
-                <h1>Admin Dashboard</h1>
-                    <Sidebar />
+            <div className={style.adminDashCont}>
+                    <Sidebar/>
                     <Users/>
             </div>
         );
