@@ -4,9 +4,38 @@ import { Image, divider } from "@nextui-org/react";
 import "./Detail.css";
 import Reviews from "@/components/reviews/Reviews";
 import AllReviews from "@/components/reviews/GetAllReviews";
+import { useGetUserApiQuery } from "@/lib/redux/service/historyApi";
+import { useSelector } from "@/lib/redux/hooks";
 
 const Detail = ({ id }: { id: string }) => {
   const { data, isLoading } = useGetProductQuery({ id });
+
+  const { id: userId } = useSelector((state) => state.userProfile);
+
+  const { data: history } = useGetUserApiQuery({ id: userId });
+  console.log(history);
+  
+
+  const validateReview = (itemId: string) => {
+    // Crea un array para almacenar los IDs de productos
+    const productIds = [];
+  
+    // Recorre el historial de compras
+    history?.forEach((order) => {
+      // Recorre los productos en cada orden
+      order?.products?.forEach((product) => {
+        // Agrega el ID del producto al array
+        productIds.push(product.productId);
+      });
+    });
+  
+    // Comprueba si el ID proporcionado coincide con alguno de los IDs de productos
+    const isItemValid = productIds.includes(itemId);
+    console.log(productIds);
+    
+  
+    return isItemValid;
+  };
 
   const expirationDate = new Date(
     data?.expiration?.seconds * 1000 +
@@ -16,7 +45,6 @@ const Detail = ({ id }: { id: string }) => {
   const daysUntilExpiration = Math.ceil(
     (expirationDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
   );
-  console.log(currentDate);
 
   const rest = () => {
     if (data?.expiration?.seconds) {
@@ -140,7 +168,7 @@ const Detail = ({ id }: { id: string }) => {
             </div>
           </div>
           <div className=" items-center border-t border-gray-400 lg:w-4/5 mx-auto justify-between ">
-            <Reviews productId={id} />
+            {validateReview(id) === true && <Reviews productId={id} />}
             <div className="max-h-60 w-60"></div>
             <AllReviews productId={id} />
           </div>
