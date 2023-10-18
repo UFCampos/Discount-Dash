@@ -6,7 +6,7 @@ import {initMercadoPago} from '@mercadopago/sdk-react';
 import {productPayment, productPaymentId} from '@/lib/redux/features/paymentSlice';
 
 const PaymentModal = () => {
-	initMercadoPago('TEST-38478520-c489-47d5-9e53-f2333cb4ff9b');
+	
 
 	const dispatch = useDispatch();
 

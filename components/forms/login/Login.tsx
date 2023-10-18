@@ -12,8 +12,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import validationLogin from "@/utils/validationLogin";
 import { useGetResultsQuery } from "@/lib/redux/service/productsAPI";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
+import { useRouter } from "next/navigation";
+
 const Login = () => {
-  
+  const router = useRouter();
+
   const [uid, setUid] = useState("");
 
   const { data } = useGetUserQuery({ id: uid });
@@ -50,23 +53,33 @@ const Login = () => {
 
   const canSubmit= !Object.values(errors).some(Boolean)
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+    
     if (!canSubmit) return;
 
     setIsSubmiting(true);
 
-    event.preventDefault();
-    signInWithEmailAndPassword(auth, formData.email, formData.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        const uid = user.uid; // Aquí obtienes el UID del usuario
-        setUid(uid);
-        dispatch(setUser(uid));
+		signInWithEmailAndPassword(auth, formData.email, formData.password)
+			.then( async (userCredential) => {
+				const {user} = userCredential;
+				const {uid} = user; // Aquí obtienes el UID del usuario
+				setUid(uid);
+        const idToken = await user.getIdToken();
+        fetch('api/users/login', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          }
+        })
+			})
+      .then(() => {
+        router.push("/home");
       })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+			.catch(error => {
+				alert(error.message);
+			});
+	};
 
   const isOpen = useSelector((state) => state.menu.isOpen);
 
@@ -227,6 +240,7 @@ const Login = () => {
                   C318.115,0,375.068,22.126,419.404,58.936z"
                 style={{ fill: "#F14336" }}
               />
+
             </svg>{" "}
             Google
           </button>

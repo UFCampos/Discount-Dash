@@ -3,6 +3,7 @@ import { useGetAddressesMutation } from "@/lib/redux/service/addressesAPI";
 import { useSelector } from "@/lib/redux/hooks";
 import { useState } from "react";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
+import style from "./addresses.module.css"
 
 const Addresses = () => {
   const [address, setAddress] = useState({
@@ -31,36 +32,40 @@ const Addresses = () => {
   };
 
   return (
-    <div>
-      <h1>New Addresses</h1>
-      <label htmlFor="address">Address: </label>
-      <input type="text" name="address" id="address" onChange={changeAddress} />
-      <label htmlFor="address">Name Address: </label>
-      <input
-        type="text"
-        name="nameAddress"
-        id="nameAddress"
-        onChange={changeAddress}
-      />
-      <button onClick={handleAddress}>Add Address</button>
-      <div>
-        <h1>My Addresses</h1>
-        <div>
-          {data?.addresses?.map((items: any) => {
-            return (
-              <div key={items.id}>
-                <br />
-                {items.address}
-                <br />
-                {items.nameAddress}
-                <br />
-                <br />
-              </div>
-            );
-          })}
-        </div>
+    <main className={style.cont}>
+      <div className={style.createCont}>
+
+        <form className={style.form}>
+          <p className={style.formTitle}>add your Address</p>
+            <div className={style.inputContainer}>
+              <input type="text" placeholder="Enter your address" id="address" name="address" onChange={changeAddress} className={style.input}/>
+          </div>
+          <div className={style.inputContainer}>
+              <input type="text" placeholder="add name to address" id="nameAddress" name="nameAddress" onChange={changeAddress} className={style.input}/>
+            </div>
+            <button onClick={handleAddress} className={style.submit}>
+            add
+          </button>
+      </form>
+
       </div>
-    </div>
+      <div className={style.locations}>
+        <div className={style.titleCont}>
+          <h1>Your Locations</h1>
+        </div>
+        <section className={style.address}>
+          {
+            data?.addresses.map((item:any)=>{
+              return(
+                <div key={item.id} className={style.addressItem}>
+                  <p>{item.nameAddress}: <span className={style.span}>{item.address}</span></p>
+                </div>
+              )
+            })
+          }
+        </section>
+      </div>
+    </main>
   );
 };
 
