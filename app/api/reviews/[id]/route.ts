@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { controller } from "./controller";
 
 export const DELETE= async(
+    req: NextRequest,
 	{params}: {params: {id: string} })=>{
 try {
     

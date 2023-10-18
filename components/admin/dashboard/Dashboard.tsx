@@ -3,22 +3,28 @@ import { useSelector } from "@/lib/redux/hooks";
 import { useState } from "react";
 import { Button } from "@nextui-org/react";
 import Sidebar from "./Sidebar";
+import Users from "./Users";
+import { useGetAuthUserQuery } from "@/lib/redux/service/searchProfileAPI";
 
 const Dashboard = () => {
-    const user = useSelector(state => state.userProfile);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { data: user } = useGetAuthUserQuery(null);
+    console.log(user);
 
-    if (user.role === 'admin') {
+    if (user?.claims?.admin) {
         return (
             <div>
                 <h1>Admin Dashboard</h1>
-                <Button onClick={() => setSidebarOpen(!sidebarOpen)}>
                     <Sidebar />
-                </Button>
+                    <Users/>
             </div>
         );
     } else {
-        location.replace('/home');
+        return (
+            <div>
+                <h1>La ruta está protegida, guiño guiño</h1>
+            </div>
+        );
     }
 }
 

@@ -2,6 +2,7 @@
 import {
   useGetOrdersQuery,
   useUpdateOrderMutation,
+  useGetShopOrderQuery,
 } from "@/lib/redux/service/ordersProductsAPI";
 import { useState } from "react";
 import { setOrderFlag } from "@/lib/redux/features/orderSlice";
@@ -19,7 +20,7 @@ const OrdersProductsShop = () => {
       </option>
     );
   });
-  const { data, isLoading, isError } = useGetOrdersQuery({ id });
+  const { data, isLoading, isError } = useGetShopOrderQuery({ id });
   const [mutate] = useUpdateOrderMutation();
 
   const handleState = (orderId: string, state: string) => {

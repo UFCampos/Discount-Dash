@@ -16,7 +16,13 @@ export const searchProfileAPI = createApi({
 				body,
 			}),
 		}),
+		getAuthUser: builder.query<any, null>({
+			query: () => `/users/login`,
+		}),
+		getAllUsers: builder.query<any, null>({
+			query: () => `/users`,
+		})
 	}),
 });
 
-export const {useGetProfileQuery, usePostProfileMutation} = searchProfileAPI;
+export const {useGetProfileQuery, usePostProfileMutation, useGetAuthUserQuery, useGetAllUsersQuery} = searchProfileAPI;

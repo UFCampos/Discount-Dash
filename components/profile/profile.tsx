@@ -6,6 +6,7 @@ import { useSelector } from "@/lib/redux/hooks";
 import Link from "next/link";
 import PhotoModal from "../photoModal/PhotoModal";
 import { useState } from "react";
+import { updateAddress } from '../../app/api/users/updateUser/updateUser';
 
 type ProfileProps = {
   id: string;
@@ -14,12 +15,23 @@ type ProfileProps = {
 const Profile: React.FC<ProfileProps> = ({ id }) => {
   const { data, isError } = useGetProfileQuery({ id });
   const user = useSelector((state) => state.userProfile);
-  const [file, setFile]=useState("")
+
+  const [updateFile, setFile] = useState<File | string>("");
+
+  const [update, setUpdate]=useState(false)
+
     const handleChange=(event: React.ChangeEvent<HTMLInputElement>)=>{
-        const { value}=event.target
-        setFile(value)
+      if (event.target.files && event.target.files.length > 0) {
+        setFile(event.target.files[0]);
+      }
     }
-    
+  const handleUpdate=()=>{
+    setUpdate(true)
+  }
+  const handleClose=()=>{
+    setUpdate(false)
+  }
+
   return (
     <main className={style.cont}>
       <section className={style.profile}>
@@ -27,7 +39,7 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
           <div className={style.imgCont}>
             <Image src={ data?.image ? data?.image : user?.photoUrl} alt='img' className={style.img}/>
             <div className={style.editCont}>
-                <button className={style.editCircle}><span className="material-symbols-outlined" id={style.edit}>edit</span></button>
+                <button className={style.editCircle} onClick={handleUpdate}><span className="material-symbols-outlined" id={style.edit}>edit</span></button>
             </div>
           </div>
           <h2 className={style.name}>{!data?.name ? user?.name : data?.name}</h2>
@@ -42,6 +54,12 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
           <Link href={`/users/profile/${id}/favorites`} className={style.link}>My wishlist</Link>
         </div>
       </section>
+      
+      {
+        update && <PhotoModal onChange={handleChange} update={updateFile} close={handleClose} id={id}/>
+        
+      }
+
     </main>
   );
 };

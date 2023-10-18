@@ -3,6 +3,7 @@ import { useGetAddressesMutation } from "@/lib/redux/service/addressesAPI";
 import { useSelector } from "@/lib/redux/hooks";
 import { useState } from "react";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
+import style from "./addresses.module.css"
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const Addresses = () => {
@@ -123,8 +124,19 @@ const Addresses = () => {
             );
           })}
         </div>
+        <section className={style.address}>
+          {
+            data?.addresses.map((item:any)=>{
+              return(
+                <div key={item.id} className={style.addressItem}>
+                  <p>{item.nameAddress}: <span className={style.span}>{item.address}</span></p>
+                </div>
+              )
+            })
+          }
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 
