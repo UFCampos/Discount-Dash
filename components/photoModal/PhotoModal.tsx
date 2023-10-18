@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const PhotoModal = ({update, onChange, close, id}:FileModal) => {
 
-  const [mutate, {data:mutation}]=useUpdateImageUserMutation()
+  const [mutate, {data}]=useUpdateImageUserMutation()
   
   const changeImage=async ()=>{
 

@@ -12,7 +12,7 @@ export const userUpdateApi = createApi({
     endpoints:(build)=>({
         updateImageUser:build.mutation<null, updateImage >({
             query:(body)=>({
-                url:`/updateUser?id=${body.id}&image=${body.image}`,
+                url:`/updateUser`,
                 method:"PUT",
                 body
             })
