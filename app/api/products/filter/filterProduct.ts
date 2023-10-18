@@ -6,16 +6,14 @@ export const filters = async (
   price: string,
   category: string
 ) => {
-  let filteredQuery = query(collection(db, "products"));
+  let filteredQuery = query(collection(db, "products"),where("status", "==", "unexpired"), where("availability", "==", "available"));
 
   if (category !== "") {
-    filteredQuery = query(filteredQuery, where("category", "==", category));
+    filteredQuery = query(filteredQuery, where("category", "==", category), );
   }
 
   if (storeType !== "") {
-    filteredQuery = query(filteredQuery, where("store", "==", storeType));
-  }
-
+    filteredQuery = query(filteredQuery, where("store", "==", storeType));  }
   if (price !== "") {
     const numbers = price.split("-");
     const min = parseInt(numbers[0]);
