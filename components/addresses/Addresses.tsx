@@ -31,6 +31,9 @@ const Addresses = () => {
     });
   };
 
+  console.log(data);
+  
+
   return (
     <main className={style.cont}>
       <div className={style.createCont}>

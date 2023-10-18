@@ -81,7 +81,7 @@ const Cart = () => {
 
   return (
     <div className={style.homeRigthCont}>
-      <div className="max-w-md mx-auto overflow-y-auto overflow-hidden">
+      <div className={style.cartCont}>
         {cartItems?.map((product: CartProduct, index: number) => {
           return (
             <div
@@ -152,6 +152,9 @@ const Cart = () => {
             </div>
           );
         })}
+
+
+
         <div className="text-right mt-4">
           <h1 className="text-lg font-bold text-gray-950">
             Total: ${totalCart.toFixed(2)}

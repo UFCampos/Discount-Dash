@@ -5,7 +5,6 @@ import {
   useGetShopOrderQuery,
 } from "@/lib/redux/service/ordersProductsAPI";
 import { useState } from "react";
-import { setOrderFlag } from "@/lib/redux/features/orderSlice";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 
 const OrdersProductsShop = () => {
@@ -34,6 +33,9 @@ const OrdersProductsShop = () => {
     });
     // dispatch(setOrderFlag(!flag));
   };
+
+  console.log(data)
+  
 
   return (
     <div className="h-[100vh] overflow-y-auto ">
