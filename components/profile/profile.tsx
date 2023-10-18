@@ -46,7 +46,7 @@ const Profile: React.FC<ProfileProps> = ({ id }) => {
         </div>
         <div className={style.separate}></div>
         <div className={style.info}>
-          <Link href={""} className={style.link}>Change name</Link>
+          <Link href={`/users/profile/${id}/changeName`} className={style.link}>Change name</Link>
           <Link href={`/users/profile/${id}/updatePassword`} className={style.link}>Change password</Link>
           <Link href={`/users/profile/${id}/myAddress`} className={style.link}>My addresses</Link>
           <Link href={""} className={style.link}>My Orders</Link>
