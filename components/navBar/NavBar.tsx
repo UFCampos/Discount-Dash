@@ -14,72 +14,45 @@ import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
 import { usePostUserMutation } from "@/lib/redux/service/usersRegisterAPI";
 import { useGetProfileQuery } from "@/lib/redux/service/searchProfileAPI";
+import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const [flag, setFlag] = useState(false);
-  const [ newId, setNewId] = useState("");
-  const [ mutate ] = usePostUserMutation();
-
   const pathname = usePathname();
-
-  // Const uid = useSelector((state) => state.userProfile.id);
+  const user = auth.currentUser;
+  
+  const id = useSelector((state) => state.userProfile.id);
+  const { data } = useGetUserQuery({ id });
 
   const { data: dataCategories } = useGetCategoriesQuery(null);
 
-  let uid : string;
+  let uid: string;
 
-
-  const userId = newId
-  const { data, isError } = useGetProfileQuery({ id : userId });
-
-  //!esto es para que cuando el path sea de store no muestre la navbar de cliente
-  const notStore=!pathname.includes("/store/")
-  console.log(data);
-  
-  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // Utiliza el uid almacenado en el estado
-        let mappedUser = {};
-        user.providerData.forEach((profile) => {
-          console.log(profile);
-          uid = user.uid;
-          mappedUser = {
-            id: uid ? uid : profile.uid, // Usar el uid del estado
-            email: profile.email,
-            photoUrl: profile.photoURL,
-            name: profile.displayName,
-          };
-          console.log(mappedUser);
-        });
-        setNewId(uid);
+        let mappedUser = {
+          id: user.uid, // Usar el uid del estado
+          email: user.email,
+          photoUrl: user.photoURL,
+          name: user.displayName,
+        };
         dispatch(setUser(mappedUser));
-        // SI TOCAS ESTO SE BORRA TODOS LOS DATOS DE LA BASE DE DATOS
-        if( data?.id !== user.uid ){
-          console.log('ya tamo');
-          
-        }else{
-          mutate({
-            mappedUser
-          });
-        }
-      } else {
-        setFlag(false);
       }
     });
-  }, []);
+  }, [user]);
 
-  console.log(dataCategories);
   useEffect(() => {
     dispatch(setCategories(dataCategories));
   }, [dataCategories]);
 
   return pathname !== "/login" &&
-    pathname !== "/addProduct" &&
-    pathname !== "" && notStore
-    ? (
+  pathname !== "/addProduct" &&
+  pathname !== "" &&
+  pathname!=="/enterStore/registerStore" &&
+  pathname!=="/enterStore/loginStore"
+  ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">
         <Image src="/logopanda.svg" width={140} height={50} alt="Logo Panda" />

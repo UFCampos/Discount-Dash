@@ -58,8 +58,6 @@ const Filters = () => {
     storeType:valueState.storeType
   });
 
-	useEffect(() => {}, [valueState]);
-
 	const handleFilters = () => {
 		dispatch(loadProducts(data));
 		dispatch(loadErrors(isError));

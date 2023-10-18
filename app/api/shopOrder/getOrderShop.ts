@@ -5,7 +5,7 @@ export const getOrderShop = async(shopId: string)=>{
     const ordersCollectionRef = collection(db, "orders");
     let queryRef = query(
       ordersCollectionRef,
-      where("orderStatus", "!=", "completed"),
+      where("orderStatus", "!=", "Completed"),
       where("shopId", "==", shopId)
     );
 

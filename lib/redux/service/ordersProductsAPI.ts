@@ -10,6 +10,9 @@ export const orderProductAPI = createApi({
 		getOrders: build.query({
 			query: ({id}) => `/shopOrder?userId=${id}`,
 		}),
+		getShopOrder: build.query({
+			query: ({id}) => `/shopOrder?shopId=${id}`,
+		}),
 		updateOrder: build.mutation({
 			query: body => ({
 				url: `/shopOrder/update`,
@@ -20,4 +23,4 @@ export const orderProductAPI = createApi({
 	}),
 });
 
-export const {useGetOrdersQuery, useUpdateOrderMutation} = orderProductAPI;
+export const {useGetOrdersQuery, useUpdateOrderMutation, useGetShopOrderQuery} = orderProductAPI;
