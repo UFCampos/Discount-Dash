@@ -6,7 +6,7 @@ import {
 } from "@/lib/redux/service/ordersProductsAPI";
 import { useState } from "react";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
-
+import style from "./Order.module.css"
 const OrdersProductsShop = () => {
   const [orderStates, setOrderStates] = useState([]);
   const flag = useSelector((state) => state.order.currentFlag);
@@ -38,9 +38,7 @@ const OrdersProductsShop = () => {
   
 
   return (
-    <div className="h-[100vh] overflow-y-auto ">
-      <div className="orders-products-cont flex flex-col justify-center items-center">
-        <h1 className="font-bold ">Your orders:</h1>
+      <div className={style.cont}>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
@@ -96,7 +94,6 @@ const OrdersProductsShop = () => {
           ))
         )}
       </div>
-    </div>
   );
 };
 
