@@ -4,7 +4,8 @@ import { db } from "@/firebase/config";
 const mercadopago = require("mercadopago");
 
 mercadopago.configure({
-  access_token: "ACCESS_TOKEN",
+  access_token:
+    "TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541",
 });
 
 export const POST = async (req: NextRequest) => {
@@ -18,7 +19,7 @@ export const POST = async (req: NextRequest) => {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ACCESS_TOKEN`,
+            Authorization: `Bearer TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541`,
           },
         }
       );

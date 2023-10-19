@@ -105,11 +105,11 @@ const Cart = () => {
 
   return (
     <div className={style.homeRigthCont}>
-        <div className={style.priceCont}>
-          <h1 className="text-lg font-bold text-gray-950">
-            Total: ${totalCart.toFixed(2)}
-          </h1>
-        </div>
+      <div className={style.priceCont}>
+        <h1 className="text-lg font-bold text-gray-950">
+          Total: ${totalCart.toFixed(2)}
+        </h1>
+      </div>
       <div className={style.cartCont}>
         {cartItems?.map((product: CartProduct, index: number) => {
           return (
@@ -168,7 +168,10 @@ const Cart = () => {
                     />
                   </button>
                   <h2 className="text-black text-lg">
-                    Total: <span className={style.total}>{total = product?.quantity * product?.price}</span>
+                    Total:{" "}
+                    <span className={style.total}>
+                      {(total = product?.quantity * product?.price)}
+                    </span>
                   </h2>
                 </div>
               </div>
@@ -178,25 +181,25 @@ const Cart = () => {
             </div>
           );
         })}
-
       </div>
       <div className={style.buyCont}>
         <div className={style.walletSection}>
-        {preferenceId && (
-          <button onClick={() => setPreferenceId(null)}>
+          {preferenceId && (
+            <button onClick={() => setPreferenceId(null)}>
               <Wallet
                 initialization={{
                   preferenceId,
                   redirectMode: "blank",
                 }}
               />
-          </button>
-          )
-        }
+            </button>
+          )}
         </div>
 
         <div className={style.buySection}>
-          <button onClick={handlePay} className={style.buyButton}>Buy</button>
+          <button onClick={handlePay} className={style.buyButton}>
+            Buy
+          </button>
         </div>
       </div>
     </div>
