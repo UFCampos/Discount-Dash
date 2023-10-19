@@ -12,6 +12,7 @@ export type Product = {
       nanoseconds: number;
     };
     description: string;
+    rating: number;
   };
   export type Products = {
     id: string;
@@ -397,7 +398,6 @@ export interface FileModal{
       shop?: boolean;
     }
     addresses: string[];
-    disabled: boolean;
   };
 
   export type ModalEditProduct = {
