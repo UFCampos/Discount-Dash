@@ -23,43 +23,30 @@ export const MyProducts = () => {
 
   return (
     <div className={style.myProductsCont}>
-      <h1>My products</h1>
-      <div className={openModal ? style.modal : ''}>
-        {openModal ? (
-          <ModalEditProduct
-            isOpen={openModal}
-            productId={productId}
-            onClose={() => SetopenModal(false)}
-          />
-        ) : null}
+      <div className={style.titleCont}>
+        <h1 className="text 4xl">My products</h1>
       </div>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        data?.map((item: any) => (
-          <div key={item.id} className={style.myProduct}>
-            <div>
-              <button
-                className="pencil-button"
-                onClick={() => handleEdit(item.id)}
-              >
-                ✏️ Editar
-              </button>
+      <div className={style.products}>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          data?.map((item: any) => (
+            <div key={item.id} className={style.myProduct}>
+              <Card
+                key={item.id}
+                itemId={item.id}
+                name={item.name}
+                image={item.image}
+                price={item.price}
+                brand={item.brand}
+                stock={item.stock}
+                normalPrice={item.normalPrice}
+                expiration={item.expiration || { seconds: 0, nanoseconds: 0 }}
+              />
             </div>
-            <Card
-              key={item.id}
-              itemId={item.id}
-              name={item.name}
-              image={item.image}
-              price={item.price}
-              brand={item.brand}
-              stock={item.stock}
-              normalPrice={item.normalPrice}
-              expiration={item.expiration || { seconds: 0, nanoseconds: 0 }}
-            />
-          </div>
-        ))
-      )}
+          ))
+        )}
+      </div>
     </div>
   )
 };
