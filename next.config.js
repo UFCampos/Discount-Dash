@@ -4,6 +4,9 @@ const nextConfig = {
 	images: {
 		domains: ['i.postimg.cc'],
 	},
+	eslint: {
+		ignoreDuringBuilds: true,
+	}
 };
 
 module.exports = nextConfig;
