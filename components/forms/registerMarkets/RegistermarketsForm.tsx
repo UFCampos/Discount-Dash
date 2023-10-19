@@ -13,7 +13,11 @@ import { allDataMarket, marketInfo, locationInfo, factureInfo, loginInfo, market
 import { usePostMarketMutation } from '@/lib/redux/service/usersRegisterAPI';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { auth } from '@/firebase/config';
+import { useRouter } from 'next/navigation';
+
 export const RegisterMarketsForm = () => {
+
+  const router=useRouter()
 
   const [mutate] =usePostMarketMutation()
 
@@ -199,8 +203,9 @@ export const RegisterMarketsForm = () => {
   }
 
   const handleSubmit=async (data:allDataMarket)=>{
-
     await createUserWithEmailAndPassword(auth, data.email, data.password)
+
+    
     .then(userCredential=>{
       const {user}=userCredential
       const {uid}=user
@@ -209,10 +214,9 @@ export const RegisterMarketsForm = () => {
         ...dataMarket,
         id:uid
       })
+      alert("registro exitoso")
     })
-    console.log(dataMarket.id)
-    mutate(data)
-    
+    await mutate(data)
   }
 
   const disabledButton=()=>{
