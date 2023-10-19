@@ -1,3 +1,4 @@
+import { FileMOdal } from './types';
 export type Product = {
     name: string;
     price: number;
@@ -12,7 +13,6 @@ export type Product = {
     };
     description: string;
   };
-  
   export type Products = {
     id: string;
     name: string;
@@ -33,6 +33,13 @@ export type Product = {
     quantity: number;
     id: string;
   };
+
+export interface FileModal{
+  update: File | string,
+  onChange:(event: React.ChangeEvent<HTMLInputElement>)=>void,
+  close:()=>void,
+  id:string
+}
   export interface ProductOrder {
     productId: string;
     quantity: number;

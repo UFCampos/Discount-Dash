@@ -62,7 +62,7 @@
     position: relative;
 }
 .reference{
-    color:green
+    color:black
 }
 .labelSelect{
     display: flex;
@@ -98,7 +98,7 @@
     color: gray
 }
 .error{
-    color:red;
+    color:#E077B0;
     position: absolute;
     font-size: 12px;
     top: 80%;

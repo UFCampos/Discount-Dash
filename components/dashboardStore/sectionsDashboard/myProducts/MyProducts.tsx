@@ -62,7 +62,7 @@ export const MyProducts = () => {
         ))
       )}
     </div>
-  );
+  )
 };
 
 export default MyProducts;

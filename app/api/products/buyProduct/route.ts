@@ -10,7 +10,7 @@ interface Product {
 
 export const POST = async (req: NextRequest) => {
   mercadopago.configure({
-    access_token: "ACCESS_TOKEN",
+    access_token: "TEST-4954619061793476-100604-94b7ec6da1dcee7f7e008fe698837e3a-1501138541",
   });
 
   let preference;

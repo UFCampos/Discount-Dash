@@ -53,12 +53,12 @@
   .label {
     font-size: 14px;
     margin-bottom: 5px;
-    color: green;
+    color: black;
   }
   .error{
     font-size: 14px;
     margin-bottom: 5px;
-    color: red;
+    color: #E077B0;
   }
   .email, .password {
     width: 100%;

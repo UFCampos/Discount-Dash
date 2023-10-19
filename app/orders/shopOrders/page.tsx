@@ -1,8 +1,12 @@
 import OrdersProductsShop from "@/components/ordersProducts/OrderProductsShop"
+import style from "./shopOrders.module.css"
+
 const shopOrders = () => {
 
     return (
-        <OrdersProductsShop />
+        <div className={style.cont}>
+            <OrdersProductsShop />
+        </div>
     )
 }
 

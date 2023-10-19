@@ -5,8 +5,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url("../public/local.jpeg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+}
+.title{
+    height: 10vh;
+    width: 100vw;
 }
