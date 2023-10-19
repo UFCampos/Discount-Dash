@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:ital,wght@1,100&display=swap');
+
+.formProductCont {
+    width: 80vw;
+    height: 100vh;
+    background: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    width: 50vw;
+    height: 80%;
+    border-radius: 20px;
+    border: 1px solid black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+
+.formInfo {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sectionsForm {
+    width: 80%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.formInfo input {
+    width: 100%;
+    padding: 5px;
+}
+
+.inputText {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.inputFile {
+    width: 80%;
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inputFile input, .selectCategory {
+    width: 40%;
+}
+
+.inputFile .selectCategory {
+    padding: 3px;
+    border: 1px solid gray;
+    border-radius: 1px;
+}
+
+.send {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: #7CFF7A;
+    transition: 0.5s;
+}
+.send:disabled {
+    background-color: #ccc; 
+    color: #999; 
+    cursor: not-allowed; 
+  }
+
+.send:hover {
+    transform: scale(1.1);
+}
+
+
+.descriptionCont {
+    margin: 20px;
+    width: 80%;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textArea {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.sup {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formInfo label {
+    color: #2d79f3;
+}
+.nameBrand{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+.nameBrandRigth{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+.price{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+.priceLeft{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+
+}
+.stockExpiration{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+
+}
+
+
+.stockExpirationRigth{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}

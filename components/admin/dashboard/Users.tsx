@@ -4,7 +4,6 @@ import { User } from "@/utils/types";
 import { useEffect, useState } from "react";
 import { usePostAdminMutation, useBanUserMutation, } from "@/lib/redux/service/usersRegisterAPI";
 import style from "./users.module.css"
-import { Button } from "@nextui-org/button";
 
 // You might import your user data or fetch it from an API here
 
@@ -53,6 +52,7 @@ const Users = () => {
         .finally(() => {
             location.reload();
         })
+        location.reload();
     }
 
     return (
@@ -85,7 +85,7 @@ const Users = () => {
                                 {user.customClaims?.admin ? "Admin" : "User"}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <Button color="primary">
+                                <button color="primary">
                                     {
                                         user.disabled ?
 
@@ -93,10 +93,10 @@ const Users = () => {
                                             :
                                             <span onClick={() => handleBan(user.uid)}>Ban</span>
                                     }
-                                </Button>
+                                </button>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <Button>
+                                <button>
                                     {
                                         user.customClaims?.admin ?
 
@@ -104,7 +104,7 @@ const Users = () => {
                                             :
                                             <span onClick={() => handleGiveAdmin(user.uid)}>Give Admin</span>
                                     }
-                                </Button>
+                                </button>
                             </td>
                         </tr>
                     ))}
