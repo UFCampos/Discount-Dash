@@ -18,12 +18,12 @@ const Detail = ({ id }: { id: string }) => {
 
   const validateReview = (itemId: string) => {
     // Crea un array para almacenar los IDs de productos
-    const productIds = [];
+    const productIds: string[] = [];
   
     // Recorre el historial de compras
-    history?.forEach((order) => {
+    history?.forEach((order: any) => {
       // Recorre los productos en cada orden
-      order?.products?.forEach((product) => {
+      order?.products?.forEach((product: any) => {
         // Agrega el ID del producto al array
         productIds.push(product.productId);
       });
@@ -31,7 +31,6 @@ const Detail = ({ id }: { id: string }) => {
   
     // Comprueba si el ID proporcionado coincide con alguno de los IDs de productos
     const isItemValid = productIds.includes(itemId);
-    console.log(productIds);
     
   
     return isItemValid;
