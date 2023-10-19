@@ -19,10 +19,13 @@ const Contact=() =>{
   };
 
   return (
-    <div>
+   <div>
+   <div >
+      <form onSubmit={handleSubmit} className={style.form}>
+        <div className={style.container}>
       <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
+        <div>
+        <label htmlFor="name" className={style.label}>Name:</label>
         <input
           type="text"
           id="name"
@@ -30,9 +33,11 @@ const Contact=() =>{
           value={formData.name}
           onChange={handleChange}
           required
+          className={style.inputField}
         />
-
-        <label htmlFor="email">Email:</label>
+</div>
+        <div>
+        <label htmlFor="email" className={style.label} >Email:</label>
         <input
           type="email"
           id="email"
@@ -40,19 +45,24 @@ const Contact=() =>{
           value={formData.email}
           onChange={handleChange}
           required
+          className={style.inputField}
         />
-
-        <label htmlFor="message">Message:</label>
+</div>
+      <div>
+        <label htmlFor="message" className={style.label}>Message:</label>
         <textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
           required
+          className={style.textareaField}
         />
-
-        <button type="submit">Send</button>
+</div>
+        <button className={style.submitButton} type="submit">Send</button>
+        </div>
       </form>
+    </div>
     </div>
   );
 }
