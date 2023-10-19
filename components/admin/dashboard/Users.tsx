@@ -15,7 +15,9 @@ const Users = () => {
         postAdmin({
             id: userId
         })
-        location.reload();
+        .finally(() => {
+            location.reload();
+        })
     }
 
     return (
@@ -37,7 +39,7 @@ const Users = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {data?.map((user: User) => (
-                        <tr key={user.id}>
+                        <tr key={user.uid}>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 {user.uid}
                             </td>
@@ -54,7 +56,7 @@ const Users = () => {
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 <button>
-                                    <span onClick={() => handleGiveAdmin(user.id)}>give admin</span>
+                                    <span onClick={() => handleGiveAdmin(user.uid)}>give admin</span>
                                 </button>
                             </td>
                         </tr>
