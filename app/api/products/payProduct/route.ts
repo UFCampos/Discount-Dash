@@ -35,19 +35,16 @@ export const POST = async (req: NextRequest) => {
         if (userId.charAt(0) === "-") {
           userId = userId.slice(1);
 
-          await fetch(
-            "https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/cart/delete",
-            {
-              method: "DELETE",
-              body: JSON.stringify({
-                userId,
-              }),
-            }
-          );
+          await fetch("https://discountdash.vercel.app/api/cart/delete", {
+            method: "DELETE",
+            body: JSON.stringify({
+              userId,
+            }),
+          });
         }
         for (let item of products) {
           const response = await fetch(
-            `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/products/${item?.id}`
+            `https://discountdash.vercel.app/api/products/${item?.id}`
           );
           const info = await response.json();
           if (info) info.quantity = Number(item?.quantity);
@@ -60,16 +57,13 @@ export const POST = async (req: NextRequest) => {
           });
         }
 
-        await fetch(
-          "https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/shopOrder/post",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              userId,
-              arrayProducts,
-            }),
-          }
-        );
+        await fetch("https://discountdash.vercel.app/api/shopOrder/post", {
+          method: "POST",
+          body: JSON.stringify({
+            userId,
+            arrayProducts,
+          }),
+        });
       }
     }
     return NextResponse.json({ response: "Data received" });

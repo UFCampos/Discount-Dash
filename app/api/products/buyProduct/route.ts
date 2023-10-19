@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest) => {
 
   if (Array.isArray(data)) {
     const response = await fetch(
-      `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/api/cart?id=${data[0]}`
+      `https://discountdash.vercel.app/api/cart?id=${data[0]}`
     );
     const productsCart = await response.json();
 
@@ -35,9 +35,9 @@ export const POST = async (req: NextRequest) => {
       items: products,
       auto_return: "approved",
       back_urls: {
-        success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
-        failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
-        pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+        success: `https://discountdash.vercel.app/notifications/success`,
+        failure: `https://discountdash.vercel.app/notifications/success`,
+        pending: `https://discountdash.vercel.app/notifications/success`,
       },
       external_reference: `-${data[0]}`,
     };
@@ -54,9 +54,9 @@ export const POST = async (req: NextRequest) => {
       ],
       auto_return: "approved",
       back_urls: {
-        success: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
-        failure: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
-        pending: `https://discount-dash-53vw-git-develop-ufcampos.vercel.app/notifications/success`,
+        success: `https://discountdash.vercel.app/notifications/success`,
+        failure: `https://discountdash.vercel.app/notifications/success`,
+        pending: `https://discountdash.vercel.app/notifications/success`,
       },
       external_reference: userCode,
     };
