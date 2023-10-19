@@ -7,13 +7,14 @@ import Users from "./Users";
 import { useGetAuthUserQuery } from "@/lib/redux/service/searchProfileAPI";
 import style from "./Dashboard.module.css"
 import { Image } from "@nextui-org/react";
+import LoadingComponent from "@/components/loading/Loading";
 const Dashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const { data: user, isLoading } = useGetAuthUserQuery(null);
     console.log(user);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <LoadingComponent/>;
     }
     if (user?.customClaims?.admin) {
         return (

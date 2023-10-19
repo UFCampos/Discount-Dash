@@ -384,7 +384,7 @@ export type Product = {
     image: string;
     email: string;
     marketName?: string;
-    uid?: string;
+    uid: string;
     customClaims?: {
       admin?: boolean;
       shop?: boolean;
