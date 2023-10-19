@@ -27,6 +27,14 @@ export const productsApi = createApi({
         body,
       }),
     }),
+
+	dateChange: build.mutation({
+		query: (body) => ({
+		  url: `/putProduct?expiration=${body.expiration}&id=${body.id}`,
+		  method: "PUT",
+		  body,
+		}),
+	  }),
   }),
 });
 
@@ -35,4 +43,5 @@ export const {
   useGetResultsQuery,
   useGetProductQuery,
   usePutProductsMutation,
+  useDateChangeMutation,
 } = productsApi;

@@ -3,13 +3,18 @@ import style from "./ProductsExpired.module.css";
 import { useGetStoreProductsQuery } from "@/lib/redux/service/myProductsStoreAPI";
 import { useSelector } from "@/lib/redux/hooks";
 import Card from "@/components/card/Card";
+import { useState } from "react";
+import ModalExpiredProduct from "./modalExpired";
 
 export const ProductsExpired = () => {
+    const [openModal, SetopenModal] = useState(false);
+    const [productId, setProductId] = useState("");
   const { id } = useSelector((state) => state.userProfile);
   const value = "expired";
 
-  const handleEdit = () => {
-
+  const handleEdit = (productId: string) => {
+    setProductId(productId);
+    SetopenModal(true);
   };
 
   const { data, isLoading } = useGetStoreProductsQuery({ id, value });
@@ -17,13 +22,22 @@ export const ProductsExpired = () => {
   return (
     <div className={style.myProductsCont}>
       <h1>My products Expired</h1>
+      <div className={openModal ? style.modal : ''}>
+        {openModal ? (
+          <ModalExpiredProduct
+            isOpen={openModal}
+            productId={productId}
+            onClose={() => SetopenModal(false)}
+          />
+        ) : null}
+      </div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         data?.map((item: any) => (
           <div key={item.id} className={style.myProduct}>
             <div>
-              <button className="pencil-button" onClick={() => {}}>✏️ Editar</button>
+              <button className="pencil-button" onClick={() => handleEdit(item.id)}>✏️ Editar</button>
             </div>
             <Card
               key={item.id}
