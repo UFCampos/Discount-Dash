@@ -27,6 +27,8 @@ const NavBar = () => {
   const { data: dataCategories } = useGetCategoriesQuery(null);
 
   const isStore=pathname.includes("/store")
+  
+  const isShopOrder=pathname.includes("/shopOrders")
 
   let uid: string;
 
@@ -51,7 +53,7 @@ const NavBar = () => {
   }, [dataCategories]);
 
   return pathname !== "/login"  &&
-  pathname !== "" && !isStore
+  pathname !== "" && !isStore && !isShopOrder
   ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">
