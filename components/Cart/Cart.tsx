@@ -14,7 +14,6 @@ import { useDispatch } from "@/lib/redux/hooks";
 import { addCart, addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 import { Wallet, initMercadoPago } from "@mercadopago/sdk-react";
 
-
 const Cart = () => {
   const [productId, setProductId] = useState("");
   const [flag, setFlag] = useState(false);
