@@ -70,7 +70,7 @@ const Register = () => {
 
     createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
       .then((userCredential) => {
-        toast.success("Created account");
+        toast.success("Account created and logged in");
         const user = userCredential.user;
         const uid = user.uid; // Aquí obtienes el UID del usuario
         sendEmailVerification(user); // Correo de validación del email

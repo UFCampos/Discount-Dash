@@ -178,13 +178,7 @@ const Login = () => {
             </Link>
           </span>
         </div>
-        <button
-          className={style.buttonSubmit}
-          type="submit"
-          onClick={(e) => {
-            handleSubmit;
-          }}
-        >
+        <button className={style.buttonSubmit} type="submit">
           Sign In
         </button>
         <p className={style.p}>
