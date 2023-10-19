@@ -31,7 +31,6 @@ const Detail = ({ id }: { id: string }) => {
   
     // Comprueba si el ID proporcionado coincide con alguno de los IDs de productos
     const isItemValid = productIds.includes(itemId);
-    console.log(productIds);
     
   
     return isItemValid;
