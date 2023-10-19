@@ -53,12 +53,8 @@ const Login = () => {
 
   const canSubmit= !Object.values(errors).some(Boolean)
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-    
-    if (!canSubmit) return;
-
-    setIsSubmiting(true);
 
 		signInWithEmailAndPassword(auth, formData.email, formData.password)
 			.then( async (userCredential) => {
@@ -181,7 +177,7 @@ const Login = () => {
             </Link>
           </span>
         </div>
-          <button className={style.buttonSubmit} type="submit" onClick={handleSubmit}>
+          <button className={style.buttonSubmit} type="submit" onClick={(e) =>{ handleSubmit}}>
             Sign In
           </button>
         <p className={style.p}>

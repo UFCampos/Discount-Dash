@@ -1,12 +1,12 @@
 "use client";
-import { useGetUserApiQuery } from "@/lib/redux/service/historyApi";
+import { useGetShopApiQuery } from "@/lib/redux/service/historyApi";
 import { useSelector } from "@/lib/redux/hooks";
 
-const UserHistories = () => {
+const ShopHistory = () => {
   const { id } = useSelector((state) => state.userProfile);
-  const { data, isLoading } = useGetUserApiQuery({ id });
+  const { data, isLoading } = useGetShopApiQuery({ id });
+
   console.log(data);
-  
 
   return (
     <div className="h-[100vh] overflow-y-auto ">
@@ -76,4 +76,4 @@ const UserHistories = () => {
   );
 };
 
-export default UserHistories;
+export default ShopHistory;

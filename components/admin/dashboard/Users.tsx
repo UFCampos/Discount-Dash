@@ -15,6 +15,7 @@ const Users = () => {
         postAdmin({
             id: userId
         })
+        location.reload();
     }
 
     return (
