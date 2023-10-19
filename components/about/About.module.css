@@ -1,7 +1,6 @@
 .containerAbout{
     width: 60vw;
-    height: 60vh;
-    background-color: rgba(135, 168, 135, 0.705);
+    background-color: rgba(235, 213, 233, 0.705);
     backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
@@ -13,6 +12,16 @@
     left: 20%;
     top: 90px;
     margin: 20px;
+}
+
+.mission{
+    font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.mascot{
+    font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .content{
