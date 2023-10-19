@@ -5,6 +5,7 @@ import { useSelector } from "@/lib/redux/hooks";
 import { useState, useEffect } from "react";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 import style from "./addresses.module.css";
+import { toast } from "sonner";
 
 interface locationData {
   lat: number;
@@ -56,6 +57,7 @@ const Addresses = () => {
   };
 
   const handleAddress = () => {
+    toast.success("Address was added");
     mutate({
       userId: id,
       address: address.address,
@@ -65,20 +67,13 @@ const Addresses = () => {
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            zoom: 15,
-          });
-        }
-        /* (error) => {
-          if (error.code === error.PERMISSION_DENIED) {
-            console.log("Haga click en la ubicacion a agregar");
-          }
-        } */
-      );
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          zoom: 15,
+        });
+      });
     }
   }, []);
 
@@ -88,15 +83,12 @@ const Addresses = () => {
     )
       .then((response) => response.json())
       .then(({ results }) => {
-        console.log(results);
         setAddress({
           ...address,
           address: results[0].formatted_address,
         });
       });
   }, [location]);
-
-  console.log(data);
 
   return (
     <main className={style.cont}>
