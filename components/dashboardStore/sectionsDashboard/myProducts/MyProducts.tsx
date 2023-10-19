@@ -15,7 +15,6 @@ export const MyProducts = () => {
 
   const { data, isLoading } = useGetStoreProductsQuery({ id, value });
 
-
   const handleEdit = (productId: string) => {
     setProductId(productId);
     SetopenModal(true);
@@ -26,12 +25,29 @@ export const MyProducts = () => {
       <div className={style.titleCont}>
         <h1 className="text 4xl">My products</h1>
       </div>
+      <div className={openModal ? style.modal : ""}>
+        {openModal ? (
+          <ModalEditProduct
+            isOpen={openModal}
+            productId={productId}
+            onClose={() => SetopenModal(false)}
+          />
+        ) : null}
+      </div>
       <div className={style.products}>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
           data?.map((item: any) => (
             <div key={item.id} className={style.myProduct}>
+              <div>
+                <button
+                  className="pencil-button"
+                  onClick={() => handleEdit(item.id)}
+                >
+                  ✏️ Editar
+                </button>
+              </div>
               <Card
                 key={item.id}
                 itemId={item.id}
@@ -48,7 +64,7 @@ export const MyProducts = () => {
         )}
       </div>
     </div>
-  )
+  );
 };
 
 export default MyProducts;
