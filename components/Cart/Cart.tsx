@@ -182,7 +182,6 @@ const Cart = () => {
 
       </div>
       <div className={style.buyCont}>
-
         <div className={style.walletSection}>
         {preferenceId && (
           <button onClick={() => setPreferenceId(null)}>
