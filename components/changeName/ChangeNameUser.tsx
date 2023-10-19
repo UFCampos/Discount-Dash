@@ -3,20 +3,22 @@ import { useChangeNameMutation } from "@/lib/redux/service/changeNameAPI";
 import { useSelector } from "@/lib/redux/hooks";
 import { useState } from "react";
 import style from "./ChangeName.module.css"
+import { useRouter } from "next/navigation";
 
 const ChangeNameUser = () => {
+
   const [name, setName] = useState("");
   const { id } = useSelector((state) => state.userProfile);
   const [mutate] = useChangeNameMutation();
+  const router=useRouter()
 
-
-
-  const sendNewName = () => {
+  const sendNewName = async() => {
     console.log(id, name)
-    mutate({
+    await mutate({
       userId:id,
       name:name,
     });
+    router.back()
   };
   return(
     <div className={style.cont}>

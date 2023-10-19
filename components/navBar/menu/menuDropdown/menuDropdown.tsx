@@ -28,6 +28,7 @@ const MenuDropdown = () => {
       }
     });
   }, [user]);
+  
   const pathname = usePathname();
   const { id } = useSelector((state) => state.userProfile);
 
@@ -41,11 +42,6 @@ const MenuDropdown = () => {
               
                 <li className={pathname === "/home" ? "active" : ""}>
                   <Link href={"/home"}>Products</Link>
-                </li>
-
-                <li className={pathname === "/addProduct" ? "active" : ""}>
-                  <Link href={"/addProduct"}>Create product</Link>
-                  <span className="material-symbols-outlined"> add</span>
                 </li>
 				
                 <li className={pathname === "/users/profile" ? "active" : ""}>

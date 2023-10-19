@@ -1,0 +1,12 @@
+.favoritesCont{
+    width: 70vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    gap: 15px;
+    overflow-y: scroll;
+}

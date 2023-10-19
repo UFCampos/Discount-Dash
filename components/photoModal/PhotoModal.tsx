@@ -6,8 +6,11 @@ import { FileModal } from '../../utils/types';
 import { uploadFile } from "@/firebase/config";
 import { useUpdateImageUserMutation } from '@/lib/redux/service/updateUsersAPI';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const PhotoModal = ({update, onChange, close, id}:FileModal) => {
+
+  const router=useRouter()
 
   const pathname=usePathname()
   
@@ -25,13 +28,11 @@ const PhotoModal = ({update, onChange, close, id}:FileModal) => {
           userId:id,
           image:urlImage
         })
+        location.reload()
         console.log("imagen actualizada con exito")
       } catch (error) {
         console.log("error al actualizar la imagen")
       }
-
-    
-
     }
   }
   return (
