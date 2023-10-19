@@ -1,0 +1,19 @@
+.cont{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.imgCont{
+    width: 20vw;
+    height: 20vw;
+}
+
+.img{
+    width: 20vw;
+    height: 20vw;
+}

@@ -9,8 +9,11 @@ export const historyApi = createApi({
     endpoints: build => ({
         getUserApi: build.query({
             query: ({id}) => `/history?userId=${id}`,
+        }),
+        getShopApi: build.query({
+            query: ({id}) => `/history?shopId=${id}`,
         }) 
     }),
 })
 
-export const {useGetUserApiQuery} = historyApi;
+export const {useGetUserApiQuery, useGetShopApiQuery} = historyApi;

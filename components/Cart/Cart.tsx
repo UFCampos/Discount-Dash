@@ -12,10 +12,14 @@ import { type CartProduct } from "@/utils/types";
 import { useEffect, useState } from "react";
 import { useDispatch } from "@/lib/redux/hooks";
 import { addCart, addTotalCart } from "@/lib/redux/features/cartItemsSlice";
+import { Wallet, initMercadoPago } from "@mercadopago/sdk-react";
+
 
 const Cart = () => {
   const [productId, setProductId] = useState("");
   const [flag, setFlag] = useState(false);
+  const [preferenceId, setPreferenceId] = useState(null);
+  initMercadoPago("TEST-38478520-c489-47d5-9e53-f2333cb4ff9b");
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userProfile.id);
   const { cartItems } = useSelector((state) => state.cartItems);
@@ -51,6 +55,7 @@ const Cart = () => {
             quantity: item.quantity + 1,
           };
         }
+
         return item;
       });
       dispatch(addTotalCart(newCart));
@@ -62,10 +67,30 @@ const Cart = () => {
             quantity: item.quantity - 1,
           };
         }
+
         return item;
       });
       dispatch(addTotalCart(newCart));
     }
+  };
+
+  const createPreference = async () => {
+    try {
+      const URL = ``;
+      const response = await fetch(`${URL}/api/products/buyProduct`, {
+        method: "POST",
+        body: JSON.stringify([userId]),
+      });
+      const { id } = await response.json();
+      return id;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlePay = async () => {
+    const id = await createPreference();
+    setPreferenceId(id);
   };
 
   let total;
@@ -81,7 +106,12 @@ const Cart = () => {
 
   return (
     <div className={style.homeRigthCont}>
-      <div className="max-w-md mx-auto overflow-y-auto overflow-hidden">
+        <div className={style.priceCont}>
+          <h1 className="text-lg font-bold text-gray-950">
+            Total: ${totalCart.toFixed(2)}
+          </h1>
+        </div>
+      <div className={style.cartCont}>
         {cartItems?.map((product: CartProduct, index: number) => {
           return (
             <div
@@ -139,10 +169,7 @@ const Cart = () => {
                     />
                   </button>
                   <h2 className="text-black text-lg">
-                    Total:{" "}
-                    <h1 className="font-bold text-lg">
-                      ${(total = product?.quantity * product?.price)}
-                    </h1>
+                    Total: <span className={style.total}>{total = product?.quantity * product?.price}</span>
                   </h2>
                 </div>
               </div>
@@ -152,22 +179,30 @@ const Cart = () => {
             </div>
           );
         })}
-        <div className="text-right mt-4">
-          <h1 className="text-lg font-bold text-gray-950">
-            Total: ${totalCart.toFixed(2)}
-          </h1>
-        </div>
 
-        <div className="text-center mt-4">
-          <button className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Buy
+      </div>
+      <div className={style.buyCont}>
+
+        <div className={style.walletSection}>
+        {preferenceId && (
+          <button onClick={() => setPreferenceId(null)}>
+              <Wallet
+                initialization={{
+                  preferenceId,
+                  redirectMode: "blank",
+                }}
+              />
           </button>
+          )
+        }
         </div>
 
+        <div className={style.buySection}>
+          <button onClick={handlePay} className={style.buyButton}>Buy</button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Cart;
-
