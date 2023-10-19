@@ -24,10 +24,18 @@ export const userApi = createApi({
     getUser: build.query<User, { id: string }>({
       query: ({ id }) => `/${id}`,
     }),
-    postAdmin: build.mutation<any, { id: string }>({
+    postAdmin: build.mutation<any, { id: string, admin: boolean }>({
       query: (body) => ({
         url: `/setAdmin/${body.id}`,
         method: "POST",
+        body,
+      }),
+    }),
+    banUser: build.mutation<any, { id: string, disabled: boolean }>({
+      query: (body) => ({
+        url: `/ban/${body.id}`,
+        method: "DELETE",
+        body,
       }),
     }),
   }),
@@ -38,4 +46,5 @@ export const {
   useGetUserQuery,
   usePostMarketMutation,
   usePostAdminMutation,
+  useBanUserMutation,
 } = userApi;

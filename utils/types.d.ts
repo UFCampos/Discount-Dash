@@ -390,4 +390,5 @@ export type Product = {
       shop?: boolean;
     }
     addresses: string[];
+    disabled: boolean;
   };
