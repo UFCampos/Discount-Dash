@@ -1,13 +1,13 @@
 "use client";
 import { ModalEditProduct } from "@/utils/types";
-import style from './modalExpired.module.css'
+import style from "./modalExpired.module.css";
 import {
   useGetProductQuery,
   useDateChangeMutation,
 } from "@/lib/redux/service/productsAPI";
 import { useState } from "react";
 
-const ModalExpiredProduct = ({ onClose, productId}: ModalEditProduct) => {
+const ModalExpiredProduct = ({ onClose, productId }: ModalEditProduct) => {
   const [product, setProduct] = useState<any>({
     expiration: "",
   });
@@ -15,20 +15,17 @@ const ModalExpiredProduct = ({ onClose, productId}: ModalEditProduct) => {
   const handleChangeProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
+  
   const [putProducts] = useDateChangeMutation();
 
   const { data, isLoading } = useGetProductQuery({ id: productId });
 
-  console.log(productId);
   const sendNewProduct = () => {
-    console.log(product);
-    
     putProducts({
-      id : productId,
+      id: productId,
       expiration: product.expiration,
     });
-  }
-
+  };
 
   return (
     <div className="modal">
@@ -45,10 +42,17 @@ const ModalExpiredProduct = ({ onClose, productId}: ModalEditProduct) => {
         </div>
         <div className={style.modalForm}>
           <label htmlFor="expiration">Expiration: </label>
-          <input type="date" onChange={handleChangeProduct} name="expiration" value={product.expiration}/>
+          <input
+            type="date"
+            onChange={handleChangeProduct}
+            name="expiration"
+            value={product.expiration}
+          />
         </div>
         <div>
-          <button className={style.saveButton} onClick={sendNewProduct}>Save</button>
+          <button className={style.saveButton} onClick={sendNewProduct}>
+            Save
+          </button>
         </div>
       </div>
     </div>
