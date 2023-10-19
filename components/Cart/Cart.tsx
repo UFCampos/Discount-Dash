@@ -14,6 +14,7 @@ import { useDispatch } from "@/lib/redux/hooks";
 import { addCart, addTotalCart } from "@/lib/redux/features/cartItemsSlice";
 import { Wallet, initMercadoPago } from "@mercadopago/sdk-react";
 
+
 const Cart = () => {
   const [productId, setProductId] = useState("");
   const [flag, setFlag] = useState(false);
@@ -75,13 +76,12 @@ const Cart = () => {
 
   const createPreference = async () => {
     try {
-      const URL = `http://localhost:3000`;
+      const URL = ``;
       const response = await fetch(`${URL}/api/products/buyProduct`, {
         method: "POST",
         body: JSON.stringify([userId]),
       });
       const { id } = await response.json();
-      console.log("preferencia de compra", id)
       return id;
     } catch (error) {
       console.log(error);

@@ -6,6 +6,7 @@ const UserHistories = () => {
   const { id } = useSelector((state) => state.userProfile);
   const { data, isLoading } = useGetUserApiQuery({ id });
   console.log(data);
+  
 
   return (
     <div className="h-[100vh] overflow-y-auto ">
