@@ -22,6 +22,8 @@ const MenuDashboard:React.FC<menuDashboardProps> = ({onChange}) => {
           <Link href={"/orders/shopOrders"} className={style.buttons}>Orders</Link>
           <button onClick={()=>onChange("profile")} className={style.buttons}>Profile</button>
           <button onClick={()=>onChange("Shop History")} className={style.buttons}>Shop History</button>
+          <button onClick={()=>onChange("productsExpired")} className={style.buttons}>Products Expired</button>
+
       </div>
     </div>
   )
