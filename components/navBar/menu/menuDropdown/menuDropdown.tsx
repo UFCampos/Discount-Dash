@@ -28,6 +28,7 @@ const MenuDropdown = () => {
       }
     });
   }, [user]);
+  
   const pathname = usePathname();
   const { id } = useSelector((state) => state.userProfile);
 
