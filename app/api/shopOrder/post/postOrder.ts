@@ -6,6 +6,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { ProductOrder } from "@/utils/types";
+import { orderEmail } from "./orderEmail";
 
 export const controller = async (id: string, cartQuerySnapshot: any) => {
   const products: ProductOrder[] = [];
@@ -36,4 +37,5 @@ export const controller = async (id: string, cartQuerySnapshot: any) => {
   };
 
   await addDoc(ordersRef, orderData);
+  await orderEmail(id, orderData);
 };
