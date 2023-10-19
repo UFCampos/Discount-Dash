@@ -403,5 +403,4 @@ export interface FileModal{
     isOpen: boolean;
     onClose: () => void;
     productId: string;
-    userId: string;
   }

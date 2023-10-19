@@ -29,7 +29,6 @@ export const MyProducts = () => {
           <ModalEditProduct
             isOpen={openModal}
             productId={productId}
-            userId={id}
             onClose={() => SetopenModal(false)}
           />
         ) : null}

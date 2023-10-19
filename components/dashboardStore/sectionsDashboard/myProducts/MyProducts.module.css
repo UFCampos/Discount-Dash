@@ -27,3 +27,16 @@
     border-radius: 20px;
     
 }
+.products{
+    width: 75vw;
+    padding: 50px;
+    height: 95vh;
+    gap: 15px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;    
+    align-items: center;
+    justify-content: space-evenly;
+
+}
