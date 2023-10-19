@@ -2,14 +2,7 @@
     width: 80vw;
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.titleCont{
-    width: 80vw;
-    height: 15vh;
-    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
@@ -26,17 +19,4 @@
     backdrop-filter: blur(5px);
     border-radius: 20px;
     
-}
-.products{
-    width: 75vw;
-    padding: 50px;
-    height: 95vh;
-    gap: 15px;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;    
-    align-items: center;
-    justify-content: space-evenly;
-
 }

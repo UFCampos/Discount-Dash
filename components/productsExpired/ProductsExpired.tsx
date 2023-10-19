@@ -1,32 +1,30 @@
 "use client";
-import style from "./MyProducts.module.css";
+import style from "./ProductsExpired.module.css";
 import { useGetStoreProductsQuery } from "@/lib/redux/service/myProductsStoreAPI";
 import { useSelector } from "@/lib/redux/hooks";
 import Card from "@/components/card/Card";
-import { usePutProductsMutation } from "@/lib/redux/service/productsAPI";
 import { useState } from "react";
-import ModalEditProduct from "./ModalEditProduct";
+import ModalExpiredProduct from "./modalExpired";
 
-export const MyProducts = () => {
-  const [openModal, SetopenModal] = useState(false);
-  const [productId, setProductId] = useState("");
+export const ProductsExpired = () => {
+    const [openModal, SetopenModal] = useState(false);
+    const [productId, setProductId] = useState("");
   const { id } = useSelector((state) => state.userProfile);
-  const value = "unexpired";
-
-  const { data, isLoading } = useGetStoreProductsQuery({ id, value });
-
+  const value = "expired";
 
   const handleEdit = (productId: string) => {
     setProductId(productId);
     SetopenModal(true);
   };
 
+  const { data, isLoading } = useGetStoreProductsQuery({ id, value });
+
   return (
     <div className={style.myProductsCont}>
-      <h1>My products</h1>
+      <h1>My products Expired</h1>
       <div className={openModal ? style.modal : ''}>
         {openModal ? (
-          <ModalEditProduct
+          <ModalExpiredProduct
             isOpen={openModal}
             productId={productId}
             onClose={() => SetopenModal(false)}
@@ -39,12 +37,7 @@ export const MyProducts = () => {
         data?.map((item: any) => (
           <div key={item.id} className={style.myProduct}>
             <div>
-              <button
-                className="pencil-button"
-                onClick={() => handleEdit(item.id)}
-              >
-                ✏️ Editar
-              </button>
+              <button className="pencil-button" onClick={() => handleEdit(item.id)}>✏️ Editar</button>
             </div>
             <Card
               key={item.id}
@@ -61,7 +54,7 @@ export const MyProducts = () => {
         ))
       )}
     </div>
-  )
+  );
 };
 
-export default MyProducts;
+export default ProductsExpired;

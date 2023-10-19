@@ -1,10 +1,10 @@
 'use client';
 import {Image} from '@nextui-org/react';
 
-const Loading = () => (
+const LoadingComponent = () => (
 	<>
-		<Image src='../cards/loading.gif' alt='Loading'/>
+		<Image src='/loading.gif' alt='Loading'/>
 	</>
 );
 
-export default Loading;
+export default LoadingComponent;
