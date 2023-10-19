@@ -12,6 +12,7 @@ export type Product = {
       nanoseconds: number;
     };
     description: string;
+    rating: number;
   };
   export type Products = {
     id: string;
