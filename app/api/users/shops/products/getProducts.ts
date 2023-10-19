@@ -5,8 +5,11 @@ import { logicalDelete } from '@/app/api/products/deleteProduct/logicalDelete';
 
 export const handler = async (shopId: string, value: string) => {
 	const productsRef = collection(db, 'products');
-	let productsQuery = query(productsRef, where('shopId', '==', shopId));
+	
+	
+	let productsQuery = query(productsRef, where('shopId', '==', shopId), where('status', '==', value));
     await logicalDelete();
+	
 	if (value === 'expired') {
 		productsQuery = query(productsQuery, where('status', '==', value));
 	}
