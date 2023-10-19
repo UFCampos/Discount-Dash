@@ -52,12 +52,7 @@ export const GET = async (req: NextRequest) => {
 
             const user = await auth.getUser(decodedToken.uid);
 
-            const userObject = {
-                ...user,
-                claims: user.customClaims,
-            }
-
-            return NextResponse.json(userObject, { status: 200 });
+            return NextResponse.json(user, { status: 200 });
         }
 
     } catch (error: any) {

@@ -6,13 +6,17 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { auth } from "@/firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useGetAuthUserQuery } from "@/lib/redux/service/searchProfileAPI";
 const MenuDropdown = () => {
   const [flag, setFlag] = useState(false);
-  const user = auth.currentUser;
+  const { data: user } = useGetAuthUserQuery(null);
   const logOut = () => {
-    location.reload();
     signOut(auth);
     setFlag(false);
+    fetch('/api/users/logout')
+    .finally(() => {
+      console.log("logout");
+    });
   };
 
   useEffect(() => {
@@ -60,12 +64,24 @@ const MenuDropdown = () => {
                     </span>
                   </Link>
                 </li>
+
+                {user?.customClaims?.admin && flag ? (
+                  <li className={pathname === "/admin" ? "active" : ""}>
+                    <Link href={"/users/admin/dashboard"}>Admin </Link>{" "}
+                    <span className="material-symbols-outlined">
+                      admin_panel_settings
+                    </span>
+                  </li>
+                ) : null
+                }
 				
+              {!flag ? (
                 <li className={pathname === "/register" ? "active" : ""}>
                   <Link href={"/register"}>Register </Link>{" "}
                   <span className="material-symbols-outlined"> person_add</span>
                 </li>
-
+                ) : null }
+                
               {!flag ? (
                 <li>
                   <Link href="/login">
