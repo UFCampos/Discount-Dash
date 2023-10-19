@@ -391,3 +391,9 @@ export type Product = {
     }
     addresses: string[];
   };
+
+  export type ModalEditProduct = {
+    isOpen: boolean;
+    onClose: () => void;
+    productId: string;
+  }
