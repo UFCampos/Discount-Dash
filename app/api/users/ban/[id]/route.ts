@@ -2,9 +2,9 @@ import { cookies, headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from '@/firebase/admin-config'
 
-export const POST = async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const DELETE = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const sessionToken = cookies().get("session")?.value || "";
-    const { admin } = await req.json();
+    const { disabled } = await req.json();
     try {
         if (sessionToken) { //Verify session cookie
             const decodedToken = await auth.verifySessionCookie(sessionToken, true);
@@ -13,15 +13,12 @@ export const POST = async (req: NextRequest, { params }: { params: { id: string 
 
             const isAdmin = sender.customClaims?.admin;
 
-            if (isAdmin) {//If sender is admin, then give admin to given uid
+            if (isAdmin) {//If sender is admin, then disable given uid
                 const uid = params?.id;
-                const adminAtributes = {
-                    admin,
-                }
 
-                await auth.setCustomUserClaims(uid, adminAtributes);
+                await auth.updateUser(uid, { disabled });
 
-                return NextResponse.json({ message: `User ${uid} is now admin`}, { status: 200 });
+                return NextResponse.json({ message: `User ${uid} is now banned`}, { status: 200 });
             }
         }
     } catch (error: any) {

@@ -391,10 +391,17 @@ export interface FileModal{
     image: string;
     email: string;
     marketName?: string;
-    uid?: string;
+    uid: string;
     customClaims?: {
       admin?: boolean;
       shop?: boolean;
     }
     addresses: string[];
   };
+
+  export type ModalEditProduct = {
+    isOpen: boolean;
+    onClose: () => void;
+    productId: string;
+    userId: string;
+  }
