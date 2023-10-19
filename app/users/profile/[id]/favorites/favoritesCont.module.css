@@ -1,0 +1,12 @@
+.mainCont{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    height: 10vh;
+    width: 100vw;
+}

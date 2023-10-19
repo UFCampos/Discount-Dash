@@ -12,7 +12,6 @@ export type Product = {
     };
     description: string;
   };
-  
   export type Products = {
     id: string;
     name: string;
@@ -33,6 +32,8 @@ export type Product = {
     quantity: number;
     id: string;
   };
+
+
   export interface ProductOrder {
     productId: string;
     quantity: number;
