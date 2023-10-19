@@ -9,6 +9,7 @@
   "dependencies": {
     "@mercadopago/sdk-react": "^0.0.15",
     "@nextui-org/react": "^2.1.13",
+    "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "1.9.5",
     "autoprefixer": "^10.4.16",
     "axios": "^1.5.1",
