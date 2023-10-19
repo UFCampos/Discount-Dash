@@ -396,4 +396,5 @@ export type Product = {
     isOpen: boolean;
     onClose: () => void;
     productId: string;
+    userId: string;
   }
