@@ -124,11 +124,11 @@ const Addresses = () => {
               value={address.address}
             />
           </div>
-          <div className={style.container}>
+          <div className={style.mapCont}>
             {location.lat && location.lng && (
               <LoadScript googleMapsApiKey="AIzaSyAyQi8VYe9q2NLrTrgH5696Ma5fI9vcxis">
                 <GoogleMap
-                  mapContainerStyle={{ width: "400px", height: "400px" }}
+                  mapContainerStyle={{ width: "300px", height: "200px" }}
                   center={location}
                   zoom={location.zoom}
                   onClick={handleClick}
