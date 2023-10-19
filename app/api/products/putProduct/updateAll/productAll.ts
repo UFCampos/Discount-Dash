@@ -20,17 +20,19 @@ export const putCategory = async (value: string, productId: string) => {
 
 export const putStock = async (value: string, productId: string) => {
   const docRef = doc(db, "products", productId);
-
-  await updateDoc(docRef, {
-    stock: parseInt(value),
-  });
+  if (!(value === "0")) {
+    await updateDoc(docRef, {
+      stock: parseInt(value),
+    });
+  }
 };
 export const putPrice = async (value: string, productId: string) => {
   const docRef = doc(db, "products", productId);
-
-  await updateDoc(docRef, {
-    price: parseInt(value),
-  });
+  if (!(value === "0")) {
+    await updateDoc(docRef, {
+      price: parseInt(value),
+    });
+  }
 };
 
 export const putNormalPrice = async (value: string, productId: string) => {
@@ -52,10 +54,9 @@ export const putImage = async (value: string, productId: string) => {
 export const putExpiration = async (value: string, productId: string) => {
   const docRef = doc(db, "products", productId);
   const expirationTimestamp = Timestamp.fromDate(new Date(value));
-  
+
   await updateDoc(docRef, {
     expiration: expirationTimestamp,
-    
   });
 };
 
@@ -75,9 +76,9 @@ export const putBrand = async (value: string, productId: string) => {
   });
 };
 
-export const putRating= async(productId: string, rating: number)=>{
+export const putRating = async (productId: string, rating: number) => {
   const docRef = doc(db, "products", productId);
   await updateDoc(docRef, {
-    rating: rating
-  })
-}
+    rating: rating,
+  });
+};
