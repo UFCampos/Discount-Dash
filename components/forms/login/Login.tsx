@@ -112,7 +112,6 @@ const Login = () => {
       dispatch(toggleMenu());
     }
   }, [isOpen]);
-  console.log(uid);
 
   return (
     <main className={style.mainLogin}>
