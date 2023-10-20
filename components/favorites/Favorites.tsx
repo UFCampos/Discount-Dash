@@ -4,21 +4,20 @@ import { useSelector, useDispatch } from "@/lib/redux/hooks";
 import { addFavorite } from "@/lib/redux/features/FavoriteSlice";
 import { useEffect } from "react";
 import Card from "../card/Card";
-import style from "./Favorites.module.css"
+import style from "./Favorites.module.css";
 
 const Favorites = () => {
   const { id } = useSelector((state) => state.userProfile);
   const { data } = useGetAllFavoritesQuery({ id });
-  const {favorites} = useSelector((state) => state.favorites);
+  const { favorites } = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(addFavorite(data));
   }, [data]);
-  let has = true
+  let has = true;
   const handleDelete = (favorite: any) => {
-    has = false
-  }
-  console.log(data);
+    has = false;
+  };
 
   return (
     <div className={style.favoritesCont}>
