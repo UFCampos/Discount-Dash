@@ -22,7 +22,7 @@ const PhotoModal = ({ update, onChange, close, id }: FileModal) => {
     if (update !== "") {
       try {
         const urlImage = await uploadFile(update);
-        console.log(urlImage);
+
         await mutate({
           userId: id,
           image: urlImage,
