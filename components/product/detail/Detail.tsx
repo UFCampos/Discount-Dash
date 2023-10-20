@@ -13,13 +13,11 @@ const Detail = ({ id }: { id: string }) => {
   const { id: userId } = useSelector((state) => state.userProfile);
 
   const { data: history } = useGetUserApiQuery({ id: userId });
-  console.log(history);
-  
 
   const validateReview = (itemId: string) => {
     // Crea un array para almacenar los IDs de productos
     const productIds: string[] = [];
-  
+
     // Recorre el historial de compras
     history?.forEach((order: any) => {
       // Recorre los productos en cada orden
@@ -28,11 +26,10 @@ const Detail = ({ id }: { id: string }) => {
         productIds.push(product.productId);
       });
     });
-  
+
     // Comprueba si el ID proporcionado coincide con alguno de los IDs de productos
     const isItemValid = productIds.includes(itemId);
-    
-  
+
     return isItemValid;
   };
 
