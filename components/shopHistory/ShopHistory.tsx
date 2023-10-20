@@ -6,8 +6,6 @@ const ShopHistory = () => {
   const { id } = useSelector((state) => state.userProfile);
   const { data, isLoading } = useGetShopApiQuery({ id });
 
-  console.log(data);
-
   return (
     <div className="h-[100vh] overflow-y-auto ">
       <div className="orders-products-cont flex flex-col justify-center items-center">
