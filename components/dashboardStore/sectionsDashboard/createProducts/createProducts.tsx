@@ -109,8 +109,6 @@ const CreateProducts: React.FC = () => {
 
   const handleSend = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(newProduct);
-    console.log(idProfile);
 
     if (!file) {
       return;
@@ -158,19 +156,13 @@ const CreateProducts: React.FC = () => {
   }, [dispatch, dataCategories, isOpen]);
 
   const allFieldsAreValid =
-    Object.values(newProduct).every(
-      (value) => value.trim() !== ""
-    ) && Object.keys(errors).length  > 0 
-    console.log(Object.keys(errors));
-    
-    
+    Object.values(newProduct).every((value) => value.trim() !== "") &&
+    Object.keys(errors).length > 0;
+
   return (
     <div className={style.formProductCont}>
       <h1 className="text-2xl p-4">Create Product</h1>
-      <form
-        onSubmit={handleSend}
-        className={style.form}
-      >
+      <form onSubmit={handleSend} className={style.form}>
         <div className={style.formInfo}>
           <div className={style.sup}>
             <div className={style.sectionsForm}>
@@ -298,7 +290,11 @@ const CreateProducts: React.FC = () => {
               </p>
             )}
           </div>
-          <button type="submit" className={style.send} disabled={!allFieldsAreValid}>
+          <button
+            type="submit"
+            className={style.send}
+            disabled={!allFieldsAreValid}
+          >
             Send
           </button>
         </div>
