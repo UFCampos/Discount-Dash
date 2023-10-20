@@ -34,9 +34,6 @@ const OrdersProductsShop = () => {
     // dispatch(setOrderFlag(!flag));
   };
 
-  console.log(data)
-  
-
   return (
     <div className="h-[100vh] w-[100vw] overflow-y-auto ">
       <div className="orders-products-cont flex flex-col justify-center items-center">
