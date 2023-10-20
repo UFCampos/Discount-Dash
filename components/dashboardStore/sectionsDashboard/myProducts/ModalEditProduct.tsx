@@ -21,18 +21,15 @@ const ModalEditProduct = ({ onClose, productId }: ModalEditProduct) => {
 
   const { data, isLoading } = useGetProductQuery({ id: productId });
 
-  console.log(productId);
   const sendNewProduct = () => {
-    console.log(product);
-    
     putProducts({
-      id : productId,
-      name: product.name ,
+      id: productId,
+      name: product.name,
       stock: product.stock,
       price: product.price,
       expiration: product.expiration,
     });
-  }
+  };
 
   const [putProducts] = usePutProductsMutation();
 
@@ -51,16 +48,38 @@ const ModalEditProduct = ({ onClose, productId }: ModalEditProduct) => {
         </div>
         <div className={style.modalForm}>
           <label htmlFor="name">Name: </label>
-          <input type="text" name="name" value={product.name} onChange={handleChangeProduct}/>
+          <input
+            type="text"
+            name="name"
+            value={product.name}
+            onChange={handleChangeProduct}
+          />
           <label htmlFor="stock">stock: </label>
-          <input type="number" onChange={handleChangeProduct} name="stock" value={product.stock}/>
+          <input
+            type="number"
+            onChange={handleChangeProduct}
+            name="stock"
+            value={product.stock}
+          />
           <label htmlFor="price">Price: </label>
-          <input type="number" value={product.price} name="price" onChange={handleChangeProduct}/>
+          <input
+            type="number"
+            value={product.price}
+            name="price"
+            onChange={handleChangeProduct}
+          />
           <label htmlFor="expiration">Expiration: </label>
-          <input type="date" onChange={handleChangeProduct} name="expiration" value={product.expiration}/>
+          <input
+            type="date"
+            onChange={handleChangeProduct}
+            name="expiration"
+            value={product.expiration}
+          />
         </div>
         <div>
-          <button className={style.saveButton} onClick={sendNewProduct}>Save</button>
+          <button className={style.saveButton} onClick={sendNewProduct}>
+            Save
+          </button>
         </div>
       </div>
     </div>
