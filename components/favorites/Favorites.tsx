@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "@/lib/redux/hooks";
 import { addFavorite } from "@/lib/redux/features/FavoriteSlice";
 import { useEffect } from "react";
 import Card from "../card/Card";
+import style from "./Favorites.module.css"
 
 const Favorites = () => {
   const { id } = useSelector((state) => state.userProfile);
@@ -20,8 +21,7 @@ const Favorites = () => {
   console.log(data);
 
   return (
-    <div>
-      <h1>Favorites</h1>
+    <div className={style.favoritesCont}>
       {data?.map((favorite: any) => {
         return (
           <div key={favorite?.id} className="flex flex-row ">

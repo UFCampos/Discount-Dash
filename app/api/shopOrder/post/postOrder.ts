@@ -6,21 +6,18 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { ProductOrder } from "@/utils/types";
+import { orderEmail } from "./orderEmail";
 
-export const controller = async (id: string) => {
-  const cartCollectionRef = collection(db, "users", id, "cart");
-  const cartQuerySnapshot = await getDocs(cartCollectionRef);
-
-  const products: ProductOrder[] = []; 
+export const controller = async (id: string, cartQuerySnapshot: any) => {
+  const products: ProductOrder[] = [];
   let shopId = "";
   let totalPrice = 0;
 
-  cartQuerySnapshot.forEach((doc) => {
-    const cartItemData = doc.data();
+  cartQuerySnapshot.forEach((cartItemData: any) => {
     totalPrice += cartItemData.quantity * cartItemData.price;
     shopId = cartItemData.shopId;
     products.push({
-      productId: doc.id,
+      productId: cartItemData.id,
       name: cartItemData.name,
       price: cartItemData.price,
       image: cartItemData.image,
@@ -40,4 +37,5 @@ export const controller = async (id: string) => {
   };
 
   await addDoc(ordersRef, orderData);
+  await orderEmail(id, orderData);
 };

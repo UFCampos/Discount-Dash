@@ -1,10 +1,17 @@
 "use client";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useGetAddressesMutation } from "@/lib/redux/service/addressesAPI";
 import { useSelector } from "@/lib/redux/hooks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
-import style from "./addresses.module.css"
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import style from "./addresses.module.css";
+import { toast } from "sonner";
+
+interface locationData {
+  lat: number;
+  lng: number;
+  zoom?: number;
+}
 
 const Addresses = () => {
   const MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
@@ -21,6 +28,13 @@ const Addresses = () => {
     address: "",
     nameAddress: "",
   });
+
+  const [location, setLocation] = useState<locationData>({
+    lat: -35.37004222477796,
+    lng: -64.78490402828068,
+    zoom: 5,
+  });
+
   const [mutate] = useGetAddressesMutation();
   const { id } = useSelector((state) => state.userProfile);
 
@@ -45,24 +59,15 @@ const Addresses = () => {
     }
   };
 
-  const handleClick = async (event) => {
+  const handleClick = async (event: any) => {
     setLocation({
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
     });
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${event.latLng.lat()},${event.latLng.lng()}&key=${MAPS_API_KEY}`
-    );
-    const { results } = await response.json();
-
-    setAddress({
-      ...address,
-      address: results[0].formatted_address,
-    });
   };
 
   const handleAddress = () => {
-    setNewAddress(false);
+    toast.success("Address was added");
     mutate({
       userId: id,
       address: address.address,
@@ -70,30 +75,62 @@ const Addresses = () => {
     });
   };
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          zoom: 15,
+        });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=AIzaSyAyQi8VYe9q2NLrTrgH5696Ma5fI9vcxis`
+    )
+      .then((response) => response.json())
+      .then(({ results }) => {
+        setAddress({
+          ...address,
+          address: results[0].formatted_address,
+        });
+      });
+  }, [location]);
+
   return (
-    <div>
-      <button
-        onClick={() => {
-          setNewAddress(true);
-          getAddress();
-        }}
-      >
-        New Addresses
-      </button>
-      {newAddress && (
-        <div>
-          <label htmlFor="address">Name Address: </label>
-          <input
-            type="text"
-            name="nameAddress"
-            id="nameAddress"
-            onChange={changeAddress}
-          />
-          <div>
+    <main className={style.cont}>
+      <div className={style.createCont}>
+        <form className={style.form}>
+          <p className={style.formTitle}>Add new Address</p>
+          <div className={style.inputContainer}>
+            <input
+              type="text"
+              placeholder="Add name to address"
+              id="nameAddress"
+              name="nameAddress"
+              onChange={changeAddress}
+              className={style.input}
+            />
+          </div>
+          <div className={style.inputContainer}>
+            <input
+              type="text"
+              placeholder="Enter your address"
+              id="address"
+              name="address"
+              onChange={changeAddress}
+              className={style.input}
+              value={address.address}
+            />
+          </div>
+          <div className={style.mapCont}>
             {location.lat && location.lng && (
-              <LoadScript googleMapsApiKey={MAPS_API_KEY}>
+              <LoadScript googleMapsApiKey="AIzaSyAyQi8VYe9q2NLrTrgH5696Ma5fI9vcxis">
                 <GoogleMap
-                  mapContainerStyle={{ width: "400px", height: "400px" }}
+                  mapContainerStyle={{ width: "300px", height: "200px" }}
                   center={location}
                   zoom={location.zoom}
                   onClick={handleClick}
@@ -103,37 +140,27 @@ const Addresses = () => {
               </LoadScript>
             )}
           </div>
-          <button onClick={handleAddress}>Add Address</button>
-        </div>
-      )}
-
-      {/* DIRECCIONES GUARDADAS */}
-      <div>
-        <h1>My Addresses</h1>
-        <div>
-          {data?.addresses?.map((items: any) => {
-            return (
-              <div key={items.id}>
-                <br />
-                {items.address}
-                <br />
-                {items.nameAddress}
-                <br />
-                <br />
-              </div>
-            );
-          })}
+          <button onClick={handleAddress} className={style.submit}>
+            add
+          </button>
+        </form>
+      </div>
+      <div className={style.locations}>
+        <div className={style.titleCont}>
+          <h1>Your Locations</h1>
         </div>
         <section className={style.address}>
-          {
-            data?.addresses.map((item:any)=>{
-              return(
+          {data?.addresses &&
+            data?.addresses.map((item: any) => {
+              return (
                 <div key={item.id} className={style.addressItem}>
-                  <p>{item.nameAddress}: <span className={style.span}>{item.address}</span></p>
+                  <p>
+                    {item.nameAddress}:{" "}
+                    <span className={style.span}>{item.address}</span>
+                  </p>
                 </div>
-              )
-            })
-          }
+              );
+            })}
         </section>
       </div>
     </main>

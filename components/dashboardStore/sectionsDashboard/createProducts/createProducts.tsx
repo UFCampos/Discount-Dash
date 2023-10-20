@@ -9,9 +9,8 @@ import { useNewPostMutation } from "@/lib/redux/service/productsAPI";
 import { uploadFile } from "@/firebase/config";
 import { setCategories } from "@/lib/redux/features/filterSlice";
 import { toggleMenu } from "@/lib/redux/features/menuSlice";
-import Link from "next/link";
 import validation from "@/utils/validations";
-import "./createProducts.css";
+import style from "./createProducts.module.css";
 
 const CreateProducts: React.FC = () => {
   const dispatch = useDispatch();
@@ -166,24 +165,19 @@ const CreateProducts: React.FC = () => {
     
     
   return (
-    <div className="form-product-cont flex flex-col justify-center items-center">
-      <div className="back">
-        <Link href={"/home"} className="flex items-center text-center">
-          <span className="material-symbols-outlined">arrow_back </span> Home
-        </Link>
-      </div>
-      <h1 className="text-3xl p-4">Create Product</h1>
+    <div className={style.formProductCont}>
+      <h1 className="text-2xl p-4">Create Product</h1>
       <form
         onSubmit={handleSend}
-        className="form flex flex-col justify-end items-center"
+        className={style.form}
       >
-        <div className="form-info flex flex-col items-center justify-between">
-          <div className="sup flex flex-col justify-center items-center">
-            <div className="sections-form">
-              <div className="name-brand flex flex-col items-start justify-center">
+        <div className={style.formInfo}>
+          <div className={style.sup}>
+            <div className={style.sectionsForm}>
+              <div className={style.nameBrand}>
                 <label htmlFor="name">Product name</label>
                 <input
-                  className="input-text"
+                  className={style.inputText}
                   placeholder="Product name"
                   type="text"
                   value={newProduct.name}
@@ -192,10 +186,10 @@ const CreateProducts: React.FC = () => {
                 />
                 {errors.name && <p style={{ color: "red" }}>{errors.name} </p>}
               </div>
-              <div className="name-brand flex flex-col items-end justify-center">
+              <div className={style.nameBrandRigth}>
                 <label htmlFor="brand">Brand</label>
                 <input
-                  className="input-text"
+                  className={style.inputText}
                   placeholder="Brand"
                   type="text"
                   value={newProduct.brand}
@@ -207,11 +201,11 @@ const CreateProducts: React.FC = () => {
                 )}
               </div>
             </div>
-            <div className="sections-form">
-              <div className="price flex flex-col items-start justify-center">
+            <div className={style.sectionsForm}>
+              <div className={style.price}>
                 <label htmlFor="price">Price</label>
                 <input
-                  className="input-text"
+                  className={style.inputText}
                   placeholder="price"
                   type="number"
                   value={newProduct.price}
@@ -222,10 +216,10 @@ const CreateProducts: React.FC = () => {
                   <p style={{ color: "red" }}>{errors.price} </p>
                 )}
               </div>
-              <div className="price flex flex-col items-end justify-center">
+              <div className={style.priceLeft}>
                 <label htmlFor="normalPrice">Original price</label>
                 <input
-                  className="input-text"
+                  className={style.inputText}
                   placeholder="original Price"
                   type="number"
                   value={newProduct.normalPrice}
@@ -237,25 +231,22 @@ const CreateProducts: React.FC = () => {
                 )}
               </div>
             </div>
-            <div className="sections-form">
-              <div className="stock-expiration flex flex-col items-start justify-center">
+            <div className={style.sectionsForm}>
+              <div className={style.stockExpiration}>
                 <label htmlFor="stock">Stock</label>
                 <input
-                  className="input-text"
+                  className={style.inputText}
                   placeholder="stock"
                   type="number"
                   value={newProduct.stock}
                   name="stock"
                   onChange={handleChange}
                 />
-                {errors.stock && (
-                  <p style={{ color: "red" }}>{errors.stock} </p>
-                )}
               </div>
-              <div className="stock-expiration flex flex-col items-end justify-center">
+              <div className={style.stockExpirationRigth}>
                 <label htmlFor="expiration">Expiration date</label>
                 <input
-                  className="input-text"
+                  className={style.inputText}
                   type="date"
                   value={newProduct.expiration}
                   name="expiration"
@@ -266,11 +257,11 @@ const CreateProducts: React.FC = () => {
                 )}
               </div>
             </div>
-            <div className="input-file flex flex-row items-center justify-between">
+            <div className={style.inputFile}>
               <input type="file" name="image" onChange={handleFileChange} />
               <select
                 value={newProduct.category}
-                className="select-category"
+                className={style.selectCategory}
                 onChange={(event) => handleChangeSelect(event)}
               >
                 <option value="" disabled>
@@ -279,7 +270,7 @@ const CreateProducts: React.FC = () => {
                 {category}
               </select>
             </div>
-            <div className="input-file flex flex-row items-center justify-between">
+            <div className={style.inputFile}>
               <div className="mr-2"></div>
               <div>
                 {errors.category && (
@@ -288,10 +279,10 @@ const CreateProducts: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="description-cont flex flex-col items-center justify-between">
+          <div className={style.descriptionCont}>
             <label htmlFor="description">Description</label>
             <textarea
-              className="text-area"
+              className={style.textArea}
               name="description"
               value={description}
               onChange={handleDescriptionChange}
@@ -307,7 +298,7 @@ const CreateProducts: React.FC = () => {
               </p>
             )}
           </div>
-          <button type="submit" className="send" disabled={!allFieldsAreValid}>
+          <button type="submit" className={style.send} disabled={!allFieldsAreValid}>
             Send
           </button>
         </div>

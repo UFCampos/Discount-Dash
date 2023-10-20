@@ -26,8 +26,13 @@ const NavBar = () => {
 
   const { data: dataCategories } = useGetCategoriesQuery(null);
 
+  const isStore=pathname.includes("/store")
+  
+  const isShopOrder=pathname.includes("/shopOrders")
+
   let uid: string;
 
+  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -47,11 +52,8 @@ const NavBar = () => {
     dispatch(setCategories(dataCategories));
   }, [dataCategories]);
 
-  return pathname !== "/login" &&
-  pathname !== "/addProduct" &&
-  pathname !== "" &&
-  pathname!=="/enterStore/registerStore" &&
-  pathname!=="/enterStore/loginStore"
+  return pathname !== "/login"  &&
+  pathname !== "" && !isStore && !isShopOrder
   ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">

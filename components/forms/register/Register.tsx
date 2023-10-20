@@ -7,6 +7,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { toast } from "sonner";
 import { auth } from "@/firebase/config";
 import { setUser } from "@/lib/redux/features/userProfile";
 import Link from "next/link";
@@ -32,7 +33,6 @@ const Register = () => {
     confirmPassword: "",
     id: "",
   });
-  console.log(newUser);
   const [isSubmitting, setIsSubmiting] = useState(false);
 
   interface ProductInput {
@@ -62,13 +62,15 @@ const Register = () => {
 
   const canSubmit = !Object.values(errors).some(Boolean);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!canSubmit) return;
 
     setIsSubmiting(true);
 
     createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
       .then((userCredential) => {
+        toast.success("Account created and logged in");
         const user = userCredential.user;
         const uid = user.uid; // Aquí obtienes el UID del usuario
         sendEmailVerification(user); // Correo de validación del email
@@ -85,6 +87,7 @@ const Register = () => {
         });
       })
       .catch((error) => {
+        toast.error("verify the data entered and try again");
         const errorCode = error.code;
         const errorMessage = error.message;
       });
@@ -191,7 +194,6 @@ const Register = () => {
       <button
         className={`submit ${canSubmit ? "" : "disabled"}`}
         disabled={!canSubmit || isSubmitting}
-        onClick={handleSubmit}
       >
         {isSubmitting ? "Submitting..." : "Submit"}
       </button>

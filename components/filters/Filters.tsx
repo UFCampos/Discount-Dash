@@ -7,14 +7,13 @@ import FiltersCategories from "./FiltersCategories";
 import { loadProducts, loadErrors } from "@/lib/redux/features/itemsSlice";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 import style from "./Filters.module.css"
-import FilterTypeStore from "./FilterTypeStore";
+
 type FiltersState = {
   category: string;
   name: string;
   minPrice: string;
   maxPrice: string;
   order: string;
-  storeType:string
 };
 
 const Filters = () => {
@@ -27,7 +26,7 @@ const Filters = () => {
     name: "",
     minPrice: "",
     maxPrice: "",
-    storeType:"",
+
   });
 
 	useEffect(() => {
@@ -55,7 +54,6 @@ const Filters = () => {
     maxPrice: valueState.maxPrice === "" ? "10000000" : valueState.maxPrice,
     order: valueState.order,
     name: valueState.name,
-    storeType:valueState.storeType
   });
 
 	const handleFilters = () => {
@@ -68,7 +66,7 @@ const Filters = () => {
       <FiltersCategories valueState={valueState} onChange={onChange} />
       <FiltersPrice valueState={valueState} onChange={onChange} />
       <FiltersSort valueState={valueState} onChange={onChange} />
-      <FilterTypeStore valueState={valueState} onChange={onChange}/>
+
       <button onClick={handleFilters} className={style.apply}>
         Apply
 			</button>

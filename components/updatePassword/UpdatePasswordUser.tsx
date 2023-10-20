@@ -4,9 +4,10 @@ import {
   updatePassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { toast } from "sonner";
 import { useState } from "react";
 import { useSelector } from "@/lib/redux/hooks";
-import style from "./UpdatePassword.module.css"
+import style from "./UpdatePassword.module.css";
 
 const UpdatePasswordUser = () => {
   const [newPassword, setNewPassword] = useState({
@@ -18,7 +19,6 @@ const UpdatePasswordUser = () => {
   const user = auth.currentUser;
 
   const userProfile = useSelector((state) => state.userProfile);
-  console.log(userProfile.email);
 
   signInWithEmailAndPassword(auth, userProfile.email, newPassword.password)
     .then((userCredential) => {
@@ -41,16 +41,17 @@ const UpdatePasswordUser = () => {
     });
   };
 
-  const handleChangePassword = () => {
-    if (!user) return null
+  const handleChangePassword = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!user) return null;
     updatePassword(user, newPassword.newPassword)
       .then(() => {
-        alert("La contraseña ha sido actualizada");
+        toast.success("Updated password");
         // La contraseña fue actualizada
       })
       .catch((error) => {
-        alert(error.message);
         // Ocurrió un error
+        toast.error("Check your current password");
       });
   };
 
@@ -58,11 +59,29 @@ const UpdatePasswordUser = () => {
     <div className={style.cont}>
       <form className={style.form} onSubmit={handleChangePassword}>
         <h1 className={style.signup}>Change your passworld</h1>
-        <input type="password" placeholder="Passworld" name="password" className={style.formInput} onChange={changePassword}/>
-        <input type="password" placeholder="New password" name="newPassword" className={style.formInput} onChange={changePassword}/>
-        <input type="password" placeholder="Confirm new password" name="confirmPassword" className={style.formInput} onChange={changePassword}/>
+        <input
+          type="password"
+          placeholder="Current password"
+          name="password"
+          className={style.formInput}
+          onChange={changePassword}
+        />
+        <input
+          type="password"
+          placeholder="New password"
+          name="newPassword"
+          className={style.formInput}
+          onChange={changePassword}
+        />
+        <input
+          type="password"
+          placeholder="Confirm new password"
+          name="confirmPassword"
+          className={style.formInput}
+          onChange={changePassword}
+        />
         <button className={style.formSubmmit} type="submit">
-            Change
+          Change
         </button>
       </form>
     </div>

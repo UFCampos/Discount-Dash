@@ -1,3 +1,4 @@
+import { FileMOdal } from './types';
 export type Product = {
     name: string;
     price: number;
@@ -11,8 +12,8 @@ export type Product = {
       nanoseconds: number;
     };
     description: string;
+    rating: number;
   };
-  
   export type Products = {
     id: string;
     name: string;
@@ -33,6 +34,13 @@ export type Product = {
     quantity: number;
     id: string;
   };
+
+export interface FileModal{
+  update: File | string,
+  onChange:(event: React.ChangeEvent<HTMLInputElement>)=>void,
+  close:()=>void,
+  id:string
+}
   export interface ProductOrder {
     productId: string;
     quantity: number;
@@ -384,9 +392,16 @@ export type Product = {
     image: string;
     email: string;
     marketName?: string;
-    uid?: string;
+    uid: string;
     customClaims?: {
       admin?: boolean;
       shop?: boolean;
     }
+    addresses: string[];
   };
+
+  export type ModalEditProduct = {
+    isOpen: boolean;
+    onClose: () => void;
+    productId: string;
+  }

@@ -1,7 +1,9 @@
+'use client'
 import { useGetAllUsersQuery } from "@/lib/redux/service/searchProfileAPI";
 import { User } from "@/utils/types";
 import { useEffect, useState } from "react";
-import { usePostAdminMutation } from "@/lib/redux/service/usersRegisterAPI";
+import { usePostAdminMutation, useBanUserMutation, } from "@/lib/redux/service/usersRegisterAPI";
+import style from "./users.module.css"
 
 // You might import your user data or fetch it from an API here
 
@@ -10,15 +12,52 @@ const Users = () => {
 
     const [postAdmin] = usePostAdminMutation();
 
+    const [banUser] = useBanUserMutation();
+
     const handleGiveAdmin = (userId: string) => {
         postAdmin({
-            id: userId
+            id: userId,
+            admin: true
+        })
+            .finally(() => {
+                location.reload();
+            })
+    }
+
+    const handleRemoveAdmin = (userId: string) => {
+        postAdmin({
+            id: userId,
+            admin: false
+        })
+        .finally(() => {
+            location.reload();
         })
     }
 
+    const handleBan = (userId: string) => {
+        banUser({
+            id: userId,
+            disabled: true,
+        })
+        .finally(() => {
+            location.reload();
+        })
+    }
+
+    const handleUnban = (userId: string) => {
+        banUser({
+            id: userId,
+            disabled: false,
+        })
+        .finally(() => {
+            location.reload();
+        })
+        location.reload();
+    }
+
     return (
-        <div>
-            <h1 className="text-2xl font-semibold">User Management</h1>
+        <div className={style.userCont}>
+
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-100">
                     <tr>
@@ -35,7 +74,7 @@ const Users = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {data?.map((user: User) => (
-                        <tr key={user.id}>
+                        <tr key={user.uid}>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 {user.uid}
                             </td>
@@ -46,13 +85,25 @@ const Users = () => {
                                 {user.customClaims?.admin ? "Admin" : "User"}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <button>
-                                    <span>delete</span>
+                                <button color="primary">
+                                    {
+                                        user.disabled ?
+
+                                            <span onClick={() => handleUnban(user.uid)}>Unban</span>
+                                            :
+                                            <span onClick={() => handleBan(user.uid)}>Ban</span>
+                                    }
                                 </button>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 <button>
-                                    <span onClick={() => handleGiveAdmin(user.id)}>give admin</span>
+                                    {
+                                        user.customClaims?.admin ?
+
+                                            <span onClick={() => handleRemoveAdmin(user.uid)}>Revoke Admin</span>
+                                            :
+                                            <span onClick={() => handleGiveAdmin(user.uid)}>Give Admin</span>
+                                    }
                                 </button>
                             </td>
                         </tr>

@@ -76,7 +76,6 @@
 .form{
     width: 80%;
     height: 80%;
-    background: red;
     display: flex;
     flex-direction: column;
     align-items: center;

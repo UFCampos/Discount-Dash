@@ -5,7 +5,6 @@ import {
   useGetShopOrderQuery,
 } from "@/lib/redux/service/ordersProductsAPI";
 import { useState } from "react";
-import { setOrderFlag } from "@/lib/redux/features/orderSlice";
 import { useDispatch, useSelector } from "@/lib/redux/hooks";
 
 const OrdersProductsShop = () => {
@@ -35,10 +34,13 @@ const OrdersProductsShop = () => {
     // dispatch(setOrderFlag(!flag));
   };
 
+  console.log(data)
+  
+
   return (
-    <div className="h-[100vh] overflow-y-auto ">
+    <div className="h-[100vh] w-[100vw] overflow-y-auto ">
       <div className="orders-products-cont flex flex-col justify-center items-center">
-        <h1 className="font-bold ">Your orders:</h1>
+        <h1 className="font-bold text-4xl py-4">Your orders:</h1>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
