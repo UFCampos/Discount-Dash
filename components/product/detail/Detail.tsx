@@ -13,9 +13,7 @@ const Detail = ({ id }: { id: string }) => {
   const { id: userId } = useSelector((state) => state.userProfile);
 
   const { data: history } = useGetUserApiQuery({ id: userId });
-  console.log(history);
   
-
   const validateReview = (itemId: string) => {
     // Crea un array para almacenar los IDs de productos
     const productIds: string[] = [];
@@ -133,7 +131,7 @@ const Detail = ({ id }: { id: string }) => {
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                   </svg>
                 </div>
-                <span className="text-gray-600 ml-3">4 Reviews</span>
+                <span className="text-gray-600 ml-3">{ data?.rating === 0 ? 4 : data?.rating}</span>
               </div>
               <p className="leading-relaxed mt-4 border-t border-gray-300">
                 {data?.description}
