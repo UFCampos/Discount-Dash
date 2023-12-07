@@ -1,9 +1,19 @@
-'use client';
+'use client'
+
+import { NextUIProvider } from '@nextui-org/react'
 
 /* Core */
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux'
 
 /* Instruments */
-import {store} from './redux/store';
+import { store } from '@/lib/redux/store'
 
-export const Providers = (props: React.PropsWithChildren) => <Provider store={store}>{props.children}</Provider>;
+export function Providers ({ children }: { children: React.ReactNode }): React.JSX.Element {
+	return (
+		<Provider store={store}>
+			<NextUIProvider>
+				{children}
+			</NextUIProvider>
+		</Provider>
+	)
+}

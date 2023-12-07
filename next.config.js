@@ -2,7 +2,14 @@
 const nextConfig = {
 	reactStrictMode: false,
 	images: {
-		domains: ['i.postimg.cc'],
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: 'picsum.photos',
+				port: '',
+				pathname: '/**'
+			}
+		]
 	},
 	eslint: {
 		ignoreDuringBuilds: true,

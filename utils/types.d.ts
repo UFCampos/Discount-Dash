@@ -398,6 +398,7 @@ export interface FileModal{
       shop?: boolean;
     }
     addresses: string[];
+    disabled: boolean;
   };
 
   export type ModalEditProduct = {
