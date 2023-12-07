@@ -27,7 +27,6 @@
     "react-redux": "8.1.0",
     "sass": "^1.68.0",
     "sonner": "^1.0.3",
-    "swiper": "^10.3.1",
     "tailwindcss": "3.3.3",
     "uuid": "^9.0.1"
   },
