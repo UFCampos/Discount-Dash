@@ -87,7 +87,7 @@ const Users = () => {
                             <td className="px-6 py-4 whitespace-nowrap">
                                 <button color="primary">
                                     {
-                                        user.disabled ?
+                                        user?.disabled ?
 
                                             <span onClick={() => handleUnban(user.uid)}>Unban</span>
                                             :
