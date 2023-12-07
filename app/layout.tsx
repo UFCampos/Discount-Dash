@@ -55,10 +55,8 @@ export default function RootLayout(props: React.PropsWithChildren) {
         <body>
           <Toaster position="bottom-center" richColors />
           <NavBar />
-          <div className="global-cont">
             {props.children}
             <MenuDropdown />
-          </div>
         </body>
       </html>
     </Providers>
