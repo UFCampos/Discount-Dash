@@ -12,53 +12,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
-    <Providers>
-      <html lang="en">
-        <head>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-          />
-        </head>
-        <body>
-          <Toaster position="bottom-center" richColors />
-          <NavBar />
-            {props.children}
-            <MenuDropdown />
-        </body>
-      </html>
-    </Providers>
+    <html lang="en">
+       <head>
+       </head>
+       <body>
+         <Providers>
+          <NavBar/>
+           <Toaster position="bottom-center" richColors />
+          {props.children}
+          <MenuDropdown/>
+        </Providers>
+      </body>
+    </html>
   );
 }
