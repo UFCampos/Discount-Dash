@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const cartProductsAPI = createApi({
   baseQuery: fetchBaseQuery({
@@ -13,19 +13,19 @@ export const cartProductsAPI = createApi({
         body,
       }),
     }),
-    getProductsCart: build.query<any,{ id: string}>({
-      query: ({id}) => `/cart?id=${id}`,
+    getProductsCart: build.query<any, { id: string }>({
+      query: ({ id }) => `/cart?id=${id}`,
     }),
     putPrudctCart: build.mutation({
       query: (body) => ({
-        url: `/cart/update`,
+        url: "/cart/update",
         method: "PUT",
         body,
       }),
     }),
     delProductCart: build.mutation({
       query: (body) => ({
-        url: `/cart/delete`,
+        url: "/cart/delete",
         method: "DELETE",
         body,
       }),

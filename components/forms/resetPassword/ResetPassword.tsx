@@ -1,4 +1,5 @@
 "use client";
+import { toast } from "sonner";
 import { auth } from "@/firebase/config";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
@@ -9,31 +10,35 @@ const ResetPassword = () => {
   const handlerSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     sendPasswordResetEmail(auth, email)
-      .then(() => alert("Se envio correo de reincio de contraseña"))
+      .then(() => {
+        toast.success("Password reset email sent");
+      })
       .catch((error) => {
-        alert(error.message);
+        toast.error("Error sending email, try again");
       });
   };
 
   const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
+
   return (
     <div>
-      <form onSubmit={handlerSubmit}></form>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          onChange={handlerChange}
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-        />
-      </div>
-      <div>
-        <button type="submit">Reiniciar contraseña</button>
-      </div>
+      <form onSubmit={handlerSubmit}>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            onChange={handlerChange}
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+          />
+        </div>
+        <div>
+          <button type="submit">Send email</button>
+        </div>
+      </form>
     </div>
   );
 };

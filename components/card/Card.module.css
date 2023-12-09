@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+.card{
+    height: 260px;
+    width: 200px;
+    border: 1px solid #dedede;
+    font-family: 'Montserrat', sans-serif;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+}
+
+.cardImg{
+    position: relative;
+    height: 50%;
+    width: 100%;
+    background: #dedede;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardImg img{
+    height: 90%;
+}
+.cardImg p{
+    position: absolute;
+    background: red;
+    color: white;
+    font-size: 10px;
+    padding: 1px;
+    font-weight: bold;
+    top:0;
+    right: 0;
+}
+.cardInfo{
+    position: relative;
+    height: 35%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.cardInfo h3{
+    font-size: 11px;
+}
+.rate{
+
+    font-size: 12px;
+    display: flex ;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4;
+    align-items: center;
+}
+
+.price{
+    margin-top: 10px;
+    color: green;
+    display: flex ;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
+    align-items: center;
+}
+.price .total{
+    color: gray;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+.cardBuy{
+    border-top: 1px solid #dedede;
+    height: 15%;
+    color: black ;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.cardBuy p{
+    font-size: 16px;
+    cursor: pointer;
+    color: green;
+}
+
+.cardBuy img{
+    height: 20px;
+    cursor:pointer;
+}
+.buy, .cart{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart{
+    border-left: 1px solid #dedede;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart span{
+    cursor: pointer;
+    color:black
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#fav{
+    position:absolute;
+    top: 10px;
+    z-index: 10;
+}

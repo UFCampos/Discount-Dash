@@ -1,9 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: false,
-    images:{
-        domains:["i.postimg.cc"]
-    }
-}
+	reactStrictMode: false,
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: 'picsum.photos',
+				port: '',
+				pathname: '/**'
+			}
+		]
+	},
+	eslint: {
+		ignoreDuringBuilds: true,
+	}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

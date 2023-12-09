@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.cont{
+    width: 50vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.contScroll{
+    width: 50vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    overflow-y: scroll;
+}
+.contScroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contScroll::-webkit-scrollbar-thumb {
+    background-color: gray; 
+    border-radius: 6px; 
+}
+.contScroll::-webkit-scrollbar-track {
+    background-color: white; 
+  }
+
+.presentation{
+    width: 60%;
+    height: auto;
+}
+.presentation h1{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 2% 0 2% 0;
+}
+.presentation p{
+    font-size: 10px;
+    text-align: center;
+}
+
+.form{
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    width: 60%;
+
+}
+.labelInput{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 10px;
+    font-size: 14px;
+    position: relative;
+}
+.reference{
+    color:black
+}
+.labelSelect{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 10px;
+    font-size: 14px;
+    position: relative;
+}
+
+.labelRadio{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    padding-top: 15px;
+}
+
+.radiosCont{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.radiosCont label{
+    color: gray;
+    font-size: 12px;
+}
+.labelRadio p{
+    font-size: 12px;
+    color: gray
+}
+.error{
+    color:#E077B0;
+    position: absolute;
+    font-size: 12px;
+    top: 80%;
+    
+}
+.input{
+    background: #F2F2F2;
+    border: 1px solid #dedede;
+    height: 25px;
+    color: gray;
+}
+.select{
+    background: #F2F2F2;
+    border: 1px solid #dedede;
+    height: 25px;
+    color: gray;
+}

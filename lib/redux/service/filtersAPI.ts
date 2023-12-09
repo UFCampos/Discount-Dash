@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 type Query = {
   name: string;
@@ -23,4 +23,4 @@ export const filters = createApi({
   }),
 });
 
-export const { useFiltersQueryQuery } = filters;
+export const {useFiltersQueryQuery} = filters;

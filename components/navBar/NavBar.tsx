@@ -12,46 +12,49 @@ import { useEffect, useState } from "react";
 import { auth } from "@/firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/lib/redux/features/userProfile";
-
+import { usePostUserMutation } from "@/lib/redux/service/usersRegisterAPI";
+import { useGetProfileQuery } from "@/lib/redux/service/searchProfileAPI";
+import { useGetUserQuery } from "@/lib/redux/service/usersRegisterAPI";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const [flag, setFlag] = useState(false);
   const pathname = usePathname();
+  const user = auth.currentUser;
+  
+  const id = useSelector((state) => state.userProfile.id);
+  const { data } = useGetUserQuery({ id });
 
-  // const uid = useSelector((state) => state.userProfile.id);
+  const { data: dataCategories } = useGetCategoriesQuery(null);
 
-  const { data } = useGetCategoriesQuery(null);
-  let uid 
+  const isStore=pathname.includes("/store")
+  
+  const isShopOrder=pathname.includes("/shopOrders")
 
+  let uid: string;
+
+  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setFlag(true);
-        let mappedUser = {};
-        mappedUser = {
-          id: user.uid, 
+        // Utiliza el uid almacenado en el estado
+        let mappedUser = {
+          id: user.uid, // Usar el uid del estado
           email: user.email,
           photoUrl: user.photoURL,
           name: user.displayName,
         };
-        uid = user.uid
         dispatch(setUser(mappedUser));
-        console.log(user);
-        
-      } else {
-        setFlag(false);
       }
     });
-  },[uid]);
+  }, [user]);
 
   useEffect(() => {
-    setCategories(data);
-  }, []);
+    dispatch(setCategories(dataCategories));
+  }, [dataCategories]);
 
-  return pathname !== "/login" &&
-    pathname !== "/addProduct" &&
-    pathname !== "" ? (
+  return pathname !== "/login"  &&
+  pathname !== "" && !isStore && !isShopOrder
+  ? (
     <div className={style.navBar} id="inactive">
       <Link href="/" className="text-white">
         <Image src="/logopanda.svg" width={140} height={50} alt="Logo Panda" />

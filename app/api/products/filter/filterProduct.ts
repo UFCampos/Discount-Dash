@@ -1,32 +1,27 @@
 import { db } from "@/firebase/config";
-import { collection, query, orderBy, where, getDocs } from "firebase/firestore";
-import { Categories } from "@/utils/types";
+import { collection, query, orderBy, where } from "firebase/firestore";
 export const filters = async (
-    order: string,
-    storeType: string,
-    price: string,
-    category: string
+  order: string,
+  storeType: string,
+  price: string,
+  category: string
 ) => {
-  let filteredQuery = query(collection(db, "products"));
+  let filteredQuery = query(collection(db, "products"),where("status", "==", "unexpired"), where("availability", "==", "available"));
 
   if (category !== "") {
-    filteredQuery = query(filteredQuery, where("category", "==", category));
+    filteredQuery = query(filteredQuery, where("category", "==", category), );
   }
 
   if (storeType !== "") {
-    filteredQuery = query(
-      filteredQuery,
-      where("store", "==", storeType)
-    );
-  }
+    filteredQuery = query(filteredQuery, where("store", "==", storeType));  }
   if (price !== "") {
     const numbers = price.split("-");
     const min = parseInt(numbers[0]);
     const max = parseInt(numbers[1]);
     filteredQuery = query(
       filteredQuery,
-      where("price", ">=", min-1),
-      where("price", "<=", max+1)
+      where("price", ">=", min - 1),
+      where("price", "<=", max + 1)
     );
   }
 
@@ -40,5 +35,6 @@ export const filters = async (
     default:
       filteredQuery;
   }
+
   return filteredQuery;
 };

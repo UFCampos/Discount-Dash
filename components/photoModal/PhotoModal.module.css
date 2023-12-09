@@ -1,0 +1,111 @@
+.inputFile{
+  width: 100vw;
+  height: 90vh;
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.inputFileStore{
+  width: 80vw;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 0;
+  left: 20vw;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  height: 40vh;
+  width: 20vw;
+  border-radius: 10px;
+  box-shadow: 4px 4px 30px rgba(0, 0, 0, .2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  gap: 5px;
+  background-color: white;
+  position: relative
+}
+
+.header {
+  flex: 1;
+  width: 100%;
+  border: 2px dashed royalblue;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.headerSvg {
+  height: 100px;
+}
+
+.headerP {
+  text-align: center;
+  color: black;
+  font-size: 8px;
+}
+.footer {
+  background-color: rgba(0, 110, 255, 0.075);
+  width: 100%;
+  height: 40px;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: black;
+  border: none;
+}
+
+.footerSvg {
+  height: 130%;
+  fill: royalblue;
+  background-color: rgba(70, 66, 66, 0.103);
+  border-radius: 50%;
+  padding: 2px;
+  cursor: pointer;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.205);
+}
+
+.footerP {
+  flex: 1;
+  text-align: center;
+}
+
+.file {
+  display: none;
+}
+.closeButton{
+  width: 30px;
+  height: 30px;
+  background: black;
+  border-radius: 50%;
+  color: white;
+  position: absolute;
+  top: -7vh;
+  right: -2vw;
+}
+
+.changeButton{
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: black;
+  color: white;
+  position: absolute;
+  top: 110%;
+}

@@ -1,0 +1,47 @@
+.modalContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .modalTitle {
+    font-size: 20px;
+  }
+  
+  .closeButton {
+    font-size: 30px;
+    padding: 20px;
+  }
+  
+  .containerTop {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  
+  .modalForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Tres columnas iguales */
+    gap: 10px; /* Espacio entre elementos */
+    padding: 20px;
+  }
+  
+  .saveButton {
+    background-color: #4caf78; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Relleno interno */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor al pasar el ratón */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+  }
+  
+  .saveButton:hover {
+    background-color: #45a049; /* Color de fondo al pasar el ratón */
+  }
+  
+  .saveButton:focus {
+    outline: none; /* Quita el contorno al enfocar el botón */
+  }
+  

@@ -1,29 +1,19 @@
-import { db } from "@/firebase/config";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { NextResponse, NextRequest } from "next/server";
-
+import { NextResponse, type NextRequest } from "next/server";
+import { Order} from "@/utils/types";
+import { getOrder } from "./getOrderUser";
+import { getOrderShop } from "./getOrderShop";
 export const GET = async (req: NextRequest) => {
   try {
-    const userId = req.nextUrl.searchParams.get("id");
-    const ordersCollectionRef = collection(db, "orders");
-    const queryRef = query(
-      ordersCollectionRef,
-      where("orderStatus", "!=", "completed"),
-      where("userId", "==", userId)
-    );
-    const ordersSnapshot = await getDocs(queryRef);
+    const userId = req.nextUrl.searchParams.get("userId");
+    const shopId = req.nextUrl.searchParams.get("shopId");
+    let orders: Order[] = [];
+    if (userId) {
+      orders = await getOrder(userId);
+    }
 
-    const orders: any = [];
-    ordersSnapshot.forEach((doc) => {
-      const orderData = doc.data();
-      const jsDate = orderData.orderDate.toDate();
-      const date = jsDate.toLocaleString();
-      orders.push({
-        id: doc.id,
-        date,
-        ...orderData,
-      });
-    });
+    if (shopId) {
+      orders = await getOrderShop(shopId);
+    }
 
     return NextResponse.json(orders);
   } catch (error: any) {

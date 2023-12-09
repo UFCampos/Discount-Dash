@@ -1,0 +1,34 @@
+.containerAbout{
+    width: 60vw;
+    background-color: rgba(235, 213, 233, 0.705);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    left: 20%;
+    top: 70px;
+}
+
+.mission{
+    font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.mascot{
+    font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.content{
+    font-size: 20px;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+}
